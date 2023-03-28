@@ -46,8 +46,8 @@
             filePath = "FaceDetectionIOS/User Interface/MainCameraScene/MainCameraVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "configureBottomButtonsFirstStack()"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,8 +62,8 @@
             filePath = "FaceDetectionIOS/User Interface/MainCameraScene/MainCameraVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "67"
-            endingLineNumber = "67"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "configureBottomButtonsFirstStack()"
             landmarkType = "7">
          </BreakpointContent>
