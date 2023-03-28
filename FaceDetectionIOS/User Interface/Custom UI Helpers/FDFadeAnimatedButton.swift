@@ -14,6 +14,7 @@ class FDFadeAnimatedButton: UIControl {
     init(with customView: UIView) {
         self.customView = customView
         super.init(frame: .zero)
+        configureControl()
     }
     
     required init?(coder: NSCoder) {
@@ -33,7 +34,6 @@ class FDFadeAnimatedButton: UIControl {
         customView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         
         self.isUserInteractionEnabled = true
-        
     }
     
     func addAction(_ action: @escaping ()->(), for event: UIControl.Event = .allEvents ) {
@@ -48,22 +48,22 @@ class FDFadeAnimatedButton: UIControl {
 
 extension FDFadeAnimatedButton {
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        UIView.transition(with: self, duration: 0.1, animations: {
-            self.backgroundColor = UIColor.systemGray4.withAlphaComponent(1)
+        UIView.transition(with: self, duration: 0.1, options: .curveEaseInOut, animations: {
+            self.customView.alpha = 0.3
         })
         super.touchesBegan(touches, with: event)
     }
 
     override open func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        UIView.transition(with: self, duration: 0.4, animations: {
-            self.backgroundColor = UIColor.clear
+        UIView.transition(with: self, duration: 0.3, options: .curveEaseInOut, animations: {
+            self.customView.alpha = 1
         })
         super.touchesEnded(touches, with: event)
     }
 
     override open func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        UIView.transition(with: self, duration: 0.4, animations: {
-            self.backgroundColor = UIColor.clear
+        UIView.transition(with: self, duration: 0.3, animations: {
+            self.customView.alpha = 1
         })
         super.touchesCancelled(touches, with: event)
     }

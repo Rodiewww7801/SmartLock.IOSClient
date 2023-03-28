@@ -9,7 +9,7 @@ import UIKit
 
 class MainCameraVC: UIViewController {
     private var lastPhotoButton: UIButton = UIButton()
-    private var capturePhotoView: UIView = UIView()
+    private var capturePhotoView: FDFadeAnimatedButton!
     private var changeCameraButton: UIButton = UIButton()
     private var bottomButtonsFirstStack: UIStackView = UIStackView()
     private var hideBackgroundButton: UIButton = UIButton()
@@ -50,7 +50,9 @@ class MainCameraVC: UIViewController {
         self.lastPhotoButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         //add capturePhotoButton
-        self.capturePhotoView = UIView()
+       
+        let containerViewForCapturePhotoView = UIView()
+        self.capturePhotoView = FDFadeAnimatedButton(with: containerViewForCapturePhotoView)
         capturePhotoView.widthAnchor.constraint(equalToConstant: 77).isActive = true
         capturePhotoView.heightAnchor.constraint(equalToConstant: 77).isActive = true
         self.bottomButtonsFirstStack.addArrangedSubview(capturePhotoView)
@@ -62,20 +64,20 @@ class MainCameraVC: UIViewController {
         capturePhotoCircleImageView.contentMode = .scaleAspectFit
         capturePhotoCircleImageView.tintColor = .white
         capturePhotoCircleImageView.translatesAutoresizingMaskIntoConstraints = false
-        capturePhotoView.addSubview(capturePhotoCircleImageView)
-        capturePhotoCircleImageView.topAnchor.constraint(equalTo: capturePhotoView.topAnchor).isActive = true
-        capturePhotoCircleImageView.bottomAnchor.constraint(equalTo: capturePhotoView.bottomAnchor).isActive = true
-        capturePhotoCircleImageView.leadingAnchor.constraint(equalTo: capturePhotoView.leadingAnchor).isActive = true
-        capturePhotoCircleImageView.trailingAnchor.constraint(equalTo: capturePhotoView.trailingAnchor).isActive = true
+        containerViewForCapturePhotoView.addSubview(capturePhotoCircleImageView)
+        capturePhotoCircleImageView.topAnchor.constraint(equalTo: containerViewForCapturePhotoView.topAnchor).isActive = true
+        capturePhotoCircleImageView.bottomAnchor.constraint(equalTo: containerViewForCapturePhotoView.bottomAnchor).isActive = true
+        capturePhotoCircleImageView.leadingAnchor.constraint(equalTo: containerViewForCapturePhotoView.leadingAnchor).isActive = true
+        capturePhotoCircleImageView.trailingAnchor.constraint(equalTo: containerViewForCapturePhotoView.trailingAnchor).isActive = true
         
         capturePhotoCircleFillImageView.contentMode = .scaleAspectFit
         capturePhotoCircleFillImageView.tintColor = .white
         capturePhotoCircleFillImageView.translatesAutoresizingMaskIntoConstraints = false
-        capturePhotoView.addSubview(capturePhotoCircleFillImageView)
-        capturePhotoCircleFillImageView.topAnchor.constraint(equalTo: capturePhotoView.topAnchor, constant: 9).isActive = true
-        capturePhotoCircleFillImageView.bottomAnchor.constraint(equalTo: capturePhotoView.bottomAnchor, constant: -9).isActive = true
-        capturePhotoCircleFillImageView.leadingAnchor.constraint(equalTo: capturePhotoView.leadingAnchor, constant: 9).isActive = true
-        capturePhotoCircleFillImageView.trailingAnchor.constraint(equalTo: capturePhotoView.trailingAnchor, constant: -9).isActive = true
+        containerViewForCapturePhotoView.addSubview(capturePhotoCircleFillImageView)
+        capturePhotoCircleFillImageView.topAnchor.constraint(equalTo: containerViewForCapturePhotoView.topAnchor, constant: 9).isActive = true
+        capturePhotoCircleFillImageView.bottomAnchor.constraint(equalTo: containerViewForCapturePhotoView.bottomAnchor, constant: -9).isActive = true
+        capturePhotoCircleFillImageView.leadingAnchor.constraint(equalTo: containerViewForCapturePhotoView.leadingAnchor, constant: 9).isActive = true
+        capturePhotoCircleFillImageView.trailingAnchor.constraint(equalTo: containerViewForCapturePhotoView.trailingAnchor, constant: -9).isActive = true
         
         // add lastPhotoButton
         self.changeCameraButton = UIButton(type: .system)
