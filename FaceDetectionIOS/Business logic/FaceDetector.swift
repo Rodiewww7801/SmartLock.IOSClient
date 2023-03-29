@@ -25,12 +25,12 @@ protocol FaceDectorDelegateViewModel: AnyObject {
 
 class FaceDetector: NSObject {
     weak var model: FaceDectorDelegateViewModel?
-    
     weak var viewDelegate: FaceDetectorDelegate?
     
     var sequenceHandler = VNSequenceRequestHandler()
     var currentFrameBuffer: CVImageBuffer?
     var isCapturingPhoto: Bool = false
+    var faceQuality: Float = 0
     
     private var subscriptions = Set<AnyCancellable>()
     private var imageProcessingQueue = DispatchQueue(label: "Image Processing Queue",
@@ -47,8 +47,7 @@ class FaceDetector: NSObject {
         }
         
         let convertBoundingBox = viewDelegate.convertFromMetadataToPreviewRect(rect: result.boundingBox)
-        let faceObservationModel = FaceGeometryModel(boundingBox: convertBoundingBox, roll: result.roll, pitch: result.pitch, yaw: result.yaw)
-        
+        let faceObservationModel = FaceGeometryModel(boundingBox: convertBoundingBox, roll: result.roll, pitch: result.pitch, yaw: result.yaw, quality: faceQuality)
         model?.perform(action: .faceObservationDetected(faceObservationModel))
     }
     
@@ -58,8 +57,8 @@ class FaceDetector: NSObject {
             return
         }
         
-        let faceQuality = FaceQualityModel(quality: result.faceCaptureQuality)
-        model?.perform(action: .faceQualityDetected(faceQuality))
+        let faceQuality = result.faceCaptureQuality ?? 0
+        self.faceQuality = faceQuality
     }
     
     private func detectedSegmentationRequest(request: VNRequest, error: Error?) {

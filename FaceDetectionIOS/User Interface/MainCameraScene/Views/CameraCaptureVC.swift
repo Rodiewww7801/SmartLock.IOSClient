@@ -26,6 +26,15 @@ class CameraCaptureVC: UIViewController {
     
     let videoOutputQueue = DispatchQueue(label: "Video Output Queue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
     
+    init(with detector: FaceDetector) {
+        super.init(nibName: nil, bundle: nil)
+        self.faceDetector = detector
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         faceDetector?.viewDelegate = self

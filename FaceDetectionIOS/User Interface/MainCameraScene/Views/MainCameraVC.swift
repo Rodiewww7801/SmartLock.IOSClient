@@ -18,10 +18,13 @@ class MainCameraVC: UIViewController {
     private var debugModeLabel: UILabel = UILabel()
     private var bottomButtonsSecondStack: UIStackView = UIStackView()
     private var faceDetectionStateLabel: UILabel = UILabel()
-    private var debugView: DebugView = DebugView()
+    private var debugView: DebugView!
+    
+    private var viewModel: MainCameraViewModel?
     
     override func viewDidLoad() {
         self.view.backgroundColor = .black
+        self.viewModel = MainCameraViewModel(with: self)
         configureViews()
     }
     
@@ -137,7 +140,6 @@ class MainCameraVC: UIViewController {
     
     private func configureFaceDetectionStateLabel() {
         self.faceDetectionStateLabel = UILabel()
-        self.faceDetectionStateLabel.text = "Please go fuck yourself"
         self.faceDetectionStateLabel.textColor = .white
         self.faceDetectionStateLabel.font = .systemFont(ofSize: 18, weight: .light)
         self.faceDetectionStateLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -146,7 +148,31 @@ class MainCameraVC: UIViewController {
         self.faceDetectionStateLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
     }
     
+    private func conigureTextFaceDetectionStateLabel() {
+        guard let viewModel = viewModel else { return }
+        var textForLabel = ""
+        if viewModel.hasDetectedValidFace {
+            textForLabel = "Perfect"
+        } else if viewModel.isAcceptableBounds == .detectedFaceTooSmall {
+            textForLabel = "Face is too far from the camera"
+        } else if viewModel.isAcceptableBounds == .detectedFaceTooLarge {
+            textForLabel = "Face is too close"
+        } else if viewModel.isAcceptableBounds == .detectedFaceOffCentre {
+            textForLabel = "Face is not in center"
+        } else if !viewModel.isAcceptableRoll || !viewModel.isAcceptablePitch || !viewModel.isAcceptableYaw {
+            textForLabel = "Look straight at the camera"
+        } else if !viewModel.isAcceptableQuality {
+            textForLabel = "Quality is too low "
+        } else {
+            textForLabel = "Cannot use detection"
+        }
+        
+        self.faceDetectionStateLabel.text = textForLabel
+    }
+    
     private func configureDebugView() {
+        self.debugView = DebugView()
+        self.debugView.viewModel = self.viewModel
         debugView.isHidden = true
         self.view.addSubview(debugView)
         debugView.translatesAutoresizingMaskIntoConstraints = false
@@ -157,7 +183,12 @@ class MainCameraVC: UIViewController {
     }
     
     private func configureCameraCaptureVC() {
-        let cameraCaptureVC = CameraCaptureVC()
+        let faceDetector = FaceDetector()
+        let cameraCaptureVC = CameraCaptureVC(with: faceDetector)
+        faceDetector.viewDelegate = cameraCaptureVC
+        faceDetector.model = self.viewModel
+        cameraCaptureVC.faceDetector = faceDetector
+        
         self.addChild(cameraCaptureVC)
         cameraCaptureVC.view.frame = self.view.frame
         self.view.addSubview(cameraCaptureVC.view)
@@ -166,5 +197,22 @@ class MainCameraVC: UIViewController {
     
     private func debugViewTapped() {
         debugView.isHidden.toggle()
+    }
+}
+
+extension MainCameraVC: MainCameraViewModelDelegate {
+    func updateFaceGeometry() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.debugView.setNeedsLayout()
+            self.debugView.setNeedsDisplay()
+        }
+    }
+    
+    func updateFaceState() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.conigureTextFaceDetectionStateLabel()
+        }
     }
 }

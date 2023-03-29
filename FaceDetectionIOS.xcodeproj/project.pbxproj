@@ -85,10 +85,8 @@
 		F8CFA6F729D33C1A00905F94 /* MainCameraScene */ = {
 			isa = PBXGroup;
 			children = (
-				F8CFA6FB29D3425C00905F94 /* MainCameraVC.swift */,
-				F8CFA6FF29D3437300905F94 /* MainCameraViewModel.swift */,
-				F8CFA70629D43B1400905F94 /* DebugView.swift */,
-				F8CFA70829D45E4000905F94 /* CameraCaptureVC.swift */,
+				F8CFA70D29D4792700905F94 /* ViewModels */,
+				F8CFA70C29D4792000905F94 /* Views */,
 			);
 			path = MainCameraScene;
 			sourceTree = "<group>";
@@ -120,6 +118,24 @@
 				F8CFA70429D36A5C00905F94 /* FDFadeAnimatedButton.swift */,
 			);
 			path = "Custom UI Helpers";
+			sourceTree = "<group>";
+		};
+		F8CFA70C29D4792000905F94 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F8CFA6FB29D3425C00905F94 /* MainCameraVC.swift */,
+				F8CFA70629D43B1400905F94 /* DebugView.swift */,
+				F8CFA70829D45E4000905F94 /* CameraCaptureVC.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F8CFA70D29D4792700905F94 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F8CFA6FF29D3437300905F94 /* MainCameraViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

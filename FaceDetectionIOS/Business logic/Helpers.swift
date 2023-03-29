@@ -11,10 +11,8 @@ import UIKit
 //todo segregate
 
 enum CameraViewModelAction {
-    case windowSizeDetected(CGRect)
     case noFaceDetected
     case faceObservationDetected(FaceGeometryModel)
-    case faceQualityDetected(FaceQualityModel)
     case toggleDebugMode
     case toggleHideBackground
     case takePhoto
@@ -46,19 +44,13 @@ struct FaceGeometryModel {
     let roll: NSNumber
     let pitch: NSNumber
     let yaw: NSNumber
+    let quality: Float
     
-    init(boundingBox: CGRect, roll: NSNumber?, pitch: NSNumber?, yaw: NSNumber?) {
+    init(boundingBox: CGRect, roll: NSNumber?, pitch: NSNumber?, yaw: NSNumber?, quality: Float = 0) {
         self.boundingBox = boundingBox
         self.roll = roll ?? 0
         self.pitch = pitch ?? 0
         self.yaw = yaw ?? 0
-    }
-}
-
-struct FaceQualityModel {
-    let quality: Float
-    
-    init(quality: Float?) {
-        self.quality = quality ?? 0
+        self.quality = quality
     }
 }

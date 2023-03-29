@@ -10,6 +10,7 @@ import UIKit
 class DebugView: UIView {
     private var rectView: UIView = UIView()
     private var ellipseView: UIView = UIView()
+    private var ellipseLayer: CAShapeLayer?
     private var debugLabel: UILabel = UILabel()
     private var debugAcceptableRollLabel: UILabel = UILabel()
     private var debugAcceptablePitchLabel: UILabel = UILabel()
@@ -20,6 +21,8 @@ class DebugView: UIView {
         let screenSize: CGRect = UIScreen.main.bounds
         return CGRect(x: 0, y: 0, width: ( screenSize.height * 0.4) / 1.5, height: screenSize.height * 0.4)
     }
+    
+    weak var viewModel: MainCameraViewModel?
     
     init() {
         super.init(frame: .zero)
@@ -32,7 +35,40 @@ class DebugView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-       
+        guard let viewModel = viewModel else { return }
+        switch viewModel.faceGemetryState {
+        case .faceFound(let model):
+            drawFaceRect(model.boundingBox)
+            configureDebugLabelsText(faceGemetryModel: model)
+            updateState()
+        case .faceNotFound:
+            clearFaceRect()
+            break
+        case .errored(_):
+            clearFaceRect()
+            break
+        }
+    }
+    
+    func drawFaceRect(_ rect: CGRect) {
+        guard let context = UIGraphicsGetCurrentContext() else {
+          return
+        }
+
+        context.saveGState()
+        defer {
+          context.restoreGState()
+        }
+        context.addRect(rect)
+        UIColor.yellow.setStroke()
+        context.strokePath()
+    }
+    
+    public func clearFaceRect() {
+        drawFaceRect(.zero)
+        DispatchQueue.main.async {
+            self.setNeedsDisplay()
+        }
     }
     
     private func configureViews() {
@@ -64,6 +100,7 @@ class DebugView: UIView {
         ellipseLayer.fillColor = UIColor.clear.cgColor
         ellipseLayer.position = CGPoint(x: (rectView.bounds.width - 1) / -2 , y: (rectView.bounds.height - 1) / -2)
         ellipseView.layer.addSublayer(ellipseLayer)
+        self.ellipseLayer = ellipseLayer
         
         ellipseView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(ellipseView)
@@ -88,25 +125,41 @@ class DebugView: UIView {
         debugLabelsStack.addArrangedSubview(debugAcceptableQualityLabel)
     }
     
-    private func configureDebugLabelsText() {
+    private func configureDebugLabelsText(faceGemetryModel: FaceGeometryModel? = nil) {
+        guard let faceGemetryModel = faceGemetryModel else { return }
+        let isAcceptableRoll = viewModel?.isAcceptableRoll ?? false
+        let isAcceptablePitch = viewModel?.isAcceptablePitch ?? false
+        let isAcceptableYaw = viewModel?.isAcceptableYaw ?? false
+        let isAcceptableQuality = viewModel?.isAcceptableQuality ?? false
+        
         debugLabel.text = "Debug:"
         debugLabel.textColor = .white
         debugLabel.font = .systemFont(ofSize: 12)
         
-        debugAcceptableRollLabel.text = "Roll:\(0)"
-        debugAcceptableRollLabel.textColor = .red
+        debugAcceptableRollLabel.text = "Roll:\(faceGemetryModel.roll)"
+        debugAcceptableRollLabel.textColor = isAcceptableRoll ? .green : .red
         debugAcceptableRollLabel.font = .systemFont(ofSize: 12)
         
-        debugAcceptablePitchLabel.text = "Pitch:\(0)"
-        debugAcceptablePitchLabel.textColor = .red
+        debugAcceptablePitchLabel.text = "Pitch:\(faceGemetryModel.pitch)"
+        debugAcceptablePitchLabel.textColor =  isAcceptablePitch ? .green : .red
         debugAcceptablePitchLabel.font = .systemFont(ofSize: 12)
         
-        debugAcceptableYawLabel.text = "Yaw:\(0)"
-        debugAcceptableYawLabel.textColor = .red
+        debugAcceptableYawLabel.text = "Yaw:\(faceGemetryModel.yaw)"
+        debugAcceptableYawLabel.textColor =  isAcceptableYaw ? .green : .red
         debugAcceptableYawLabel.font = .systemFont(ofSize: 12)
         
-        debugAcceptableQualityLabel.text = "Quality:\(0)"
-        debugAcceptableQualityLabel.textColor = .red
+        debugAcceptableQualityLabel.text = "Quality:\(faceGemetryModel.quality)"
+        debugAcceptableQualityLabel.textColor =  isAcceptableQuality ? .green : .red
         debugAcceptableQualityLabel.font = .systemFont(ofSize: 12)
+    }
+    
+    private func updateState() {
+        if viewModel?.hasDetectedValidFace ?? false {
+            ellipseLayer?.strokeColor = UIColor.green.cgColor
+            rectView.layer.borderColor = UIColor.green.cgColor
+        } else {
+            ellipseLayer?.strokeColor = UIColor.red.cgColor
+            rectView.layer.borderColor = UIColor.red.cgColor
+        }
     }
 }
