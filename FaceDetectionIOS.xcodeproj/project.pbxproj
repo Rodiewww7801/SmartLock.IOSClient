@@ -15,6 +15,9 @@
 		F8CFA6FE29D3433F00905F94 /* FaceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA6FD29D3433F00905F94 /* FaceDetector.swift */; };
 		F8CFA70029D3437300905F94 /* MainCameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA6FF29D3437300905F94 /* MainCameraViewModel.swift */; };
 		F8CFA70529D36A5C00905F94 /* FDFadeAnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA70429D36A5C00905F94 /* FDFadeAnimatedButton.swift */; };
+		F8CFA70729D43B1400905F94 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA70629D43B1400905F94 /* DebugView.swift */; };
+		F8CFA70929D45E4000905F94 /* CameraCaptureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA70829D45E4000905F94 /* CameraCaptureVC.swift */; };
+		F8CFA70B29D45F9900905F94 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA70A29D45F9900905F94 /* Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		F8CFA6FD29D3433F00905F94 /* FaceDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetector.swift; sourceTree = "<group>"; };
 		F8CFA6FF29D3437300905F94 /* MainCameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCameraViewModel.swift; sourceTree = "<group>"; };
 		F8CFA70429D36A5C00905F94 /* FDFadeAnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDFadeAnimatedButton.swift; sourceTree = "<group>"; };
+		F8CFA70629D43B1400905F94 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
+		F8CFA70829D45E4000905F94 /* CameraCaptureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraCaptureVC.swift; sourceTree = "<group>"; };
+		F8CFA70A29D45F9900905F94 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,7 +66,6 @@
 		F8CFA6DE29D32F5000905F94 /* FaceDetectionIOS */ = {
 			isa = PBXGroup;
 			children = (
-				F8CFA70129D369E400905F94 /* Common */,
 				F8CFA6FA29D33C6000905F94 /* Application */,
 				F8CFA6F929D33C4C00905F94 /* Business logic */,
 				F8CFA6F629D33C1200905F94 /* User Interface */,
@@ -82,6 +87,8 @@
 			children = (
 				F8CFA6FB29D3425C00905F94 /* MainCameraVC.swift */,
 				F8CFA6FF29D3437300905F94 /* MainCameraViewModel.swift */,
+				F8CFA70629D43B1400905F94 /* DebugView.swift */,
+				F8CFA70829D45E4000905F94 /* CameraCaptureVC.swift */,
 			);
 			path = MainCameraScene;
 			sourceTree = "<group>";
@@ -90,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				F8CFA6FD29D3433F00905F94 /* FaceDetector.swift */,
+				F8CFA70A29D45F9900905F94 /* Helpers.swift */,
 			);
 			path = "Business logic";
 			sourceTree = "<group>";
@@ -104,21 +112,6 @@
 				F8CFA6ED29D32F5100905F94 /* Info.plist */,
 			);
 			path = Application;
-			sourceTree = "<group>";
-		};
-		F8CFA70129D369E400905F94 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				F8CFA70229D369F700905F94 /* Helpers */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		F8CFA70229D369F700905F94 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		F8CFA70329D36A0900905F94 /* Custom UI Helpers */ = {
@@ -202,8 +195,11 @@
 				F8CFA70529D36A5C00905F94 /* FDFadeAnimatedButton.swift in Sources */,
 				F8CFA6FC29D3425C00905F94 /* MainCameraVC.swift in Sources */,
 				F8CFA6E029D32F5000905F94 /* AppDelegate.swift in Sources */,
+				F8CFA70729D43B1400905F94 /* DebugView.swift in Sources */,
+				F8CFA70B29D45F9900905F94 /* Helpers.swift in Sources */,
 				F8CFA6FE29D3433F00905F94 /* FaceDetector.swift in Sources */,
 				F8CFA6E229D32F5000905F94 /* SceneDelegate.swift in Sources */,
+				F8CFA70929D45E4000905F94 /* CameraCaptureVC.swift in Sources */,
 				F8CFA70029D3437300905F94 /* MainCameraViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -346,9 +342,10 @@
 				DEVELOPMENT_TEAM = Z9MV89M5M3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FaceDetectionIOS/Application/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please give permission to the camera for face detection";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
@@ -375,9 +372,10 @@
 				DEVELOPMENT_TEAM = Z9MV89M5M3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FaceDetectionIOS/Application/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "Please give permission to the camera for face detection";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;

@@ -18,6 +18,7 @@ class MainCameraVC: UIViewController {
     private var debugModeLabel: UILabel = UILabel()
     private var bottomButtonsSecondStack: UIStackView = UIStackView()
     private var faceDetectionStateLabel: UILabel = UILabel()
+    private var debugView: DebugView = DebugView()
     
     override func viewDidLoad() {
         self.view.backgroundColor = .black
@@ -25,9 +26,12 @@ class MainCameraVC: UIViewController {
     }
     
     private func configureViews() {
+        configureCameraCaptureVC()
+        configureDebugView()
         configureBottomButtonsFirstStack()
         configureBottomButtonsSecondStack()
         configureFaceDetectionStateLabel()
+        
     }
     
     private func configureBottomButtonsFirstStack() {
@@ -55,7 +59,6 @@ class MainCameraVC: UIViewController {
         self.lastPhotoButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         //add capturePhotoButton
-       
         self.capturePhotoView = FDFadeAnimatedButton()
         capturePhotoView.widthAnchor.constraint(equalToConstant: 77).isActive = true
         capturePhotoView.heightAnchor.constraint(equalToConstant: 77).isActive = true
@@ -103,7 +106,7 @@ class MainCameraVC: UIViewController {
         self.bottomButtonsSecondStack.spacing = 25
         self.bottomButtonsSecondStack.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(bottomButtonsSecondStack)
-        self.bottomButtonsSecondStack.bottomAnchor.constraint(equalTo: self.bottomButtonsFirstStack.topAnchor, constant: -15).isActive = true
+        self.bottomButtonsSecondStack.bottomAnchor.constraint(equalTo: self.bottomButtonsFirstStack.topAnchor, constant: -20).isActive = true
         self.bottomButtonsSecondStack.centerXAnchor.constraint(equalTo: self.bottomButtonsFirstStack.centerXAnchor).isActive = true
         
         // add hideBackgroundLabel
@@ -125,6 +128,7 @@ class MainCameraVC: UIViewController {
         self.debugModeLabel.font = .systemFont(ofSize: 14)
         self.debugModeLabel.translatesAutoresizingMaskIntoConstraints = false
         self.debugModeButton = FDFadeAnimatedButton()
+        self.debugModeButton.addAction(debugViewTapped, for: .touchDown)
         self.debugModeButton.addSubview(debugModeLabel)
         self.bottomButtonsSecondStack.addArrangedSubview(debugModeButton)
         self.debugModeButton.widthAnchor.constraint(equalTo: debugModeLabel.widthAnchor).isActive = true
@@ -140,5 +144,27 @@ class MainCameraVC: UIViewController {
         self.view.addSubview(faceDetectionStateLabel)
         self.faceDetectionStateLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         self.faceDetectionStateLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+    }
+    
+    private func configureDebugView() {
+        debugView.isHidden = true
+        self.view.addSubview(debugView)
+        debugView.translatesAutoresizingMaskIntoConstraints = false
+        debugView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        debugView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        debugView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        debugView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+    }
+    
+    private func configureCameraCaptureVC() {
+        let cameraCaptureVC = CameraCaptureVC()
+        self.addChild(cameraCaptureVC)
+        cameraCaptureVC.view.frame = self.view.frame
+        self.view.addSubview(cameraCaptureVC.view)
+        cameraCaptureVC.didMove(toParent: self)
+    }
+    
+    private func debugViewTapped() {
+        debugView.isHidden.toggle()
     }
 }
