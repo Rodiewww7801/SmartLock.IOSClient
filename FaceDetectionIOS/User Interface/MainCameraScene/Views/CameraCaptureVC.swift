@@ -29,7 +29,7 @@ class CameraCaptureVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         faceDetector?.viewDelegate = self
-        //configureMetal()
+//        configureMetal()
         configureSession()
         
         DispatchQueue.global().async { [weak self] in
@@ -52,7 +52,7 @@ class CameraCaptureVC: UIViewController {
         metalView?.delegate = self
         metalView?.framebufferOnly = false
         metalView?.frame = self.view.bounds
-        metalView?.layer.contentsGravity = .resizeAspectFill
+        metalView?.layer.contentsGravity = .resizeAspect
         if let metalView = metalView {
             view.layer.insertSublayer(metalView.layer, at: 0)
         }
@@ -80,14 +80,13 @@ class CameraCaptureVC: UIViewController {
         videoOutput.connection(with: .video)?.videoOrientation = .portrait
         
         previewLayer = AVCaptureVideoPreviewLayer(session: session)
-        previewLayer?.videoGravity = .resizeAspectFill
-        previewLayer?.frame = view.bounds
+        previewLayer?.videoGravity = .resizeAspect
+        previewLayer?.frame = self.view.bounds
         
         if let previewLayer = previewLayer, !isUsingMetal {
             view.layer.insertSublayer(previewLayer, at: 0)
         }
     }
-    
 }
 
 extension CameraCaptureVC: MTKViewDelegate {

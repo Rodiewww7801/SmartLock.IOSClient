@@ -8,7 +8,6 @@
 import UIKit
 
 class DebugView: UIView {
-    private var faceLayoutGuideFrame: CGRect = CGRect(x: 0, y: 0, width: 200, height: 300)
     private var rectView: UIView = UIView()
     private var ellipseView: UIView = UIView()
     private var debugLabel: UILabel = UILabel()
@@ -17,6 +16,10 @@ class DebugView: UIView {
     private var debugAcceptableYawLabel: UILabel = UILabel()
     private var debugAcceptableQualityLabel: UILabel = UILabel()
     private var debugLabelsStack: UIStackView = UIStackView()
+    private var faceLayoutGuideFrame: CGRect {
+        let screenSize: CGRect = UIScreen.main.bounds
+        return CGRect(x: 0, y: 0, width: ( screenSize.height * 0.4) / 1.5, height: screenSize.height * 0.4)
+    }
     
     init() {
         super.init(frame: .zero)
