@@ -17,7 +17,9 @@
 		F8CFA70529D36A5C00905F94 /* FDFadeAnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA70429D36A5C00905F94 /* FDFadeAnimatedButton.swift */; };
 		F8CFA70729D43B1400905F94 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA70629D43B1400905F94 /* DebugView.swift */; };
 		F8CFA70929D45E4000905F94 /* CameraCaptureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA70829D45E4000905F94 /* CameraCaptureVC.swift */; };
-		F8CFA70B29D45F9900905F94 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA70A29D45F9900905F94 /* Helpers.swift */; };
+		F8CFA71029D5A7E900905F94 /* FaceGeometryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA70F29D5A7E900905F94 /* FaceGeometryModel.swift */; };
+		F8CFA71229D5A80000905F94 /* CameraViewModelAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA71129D5A80000905F94 /* CameraViewModelAction.swift */; };
+		F8CFA71429D5A89E00905F94 /* FaceBoundsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA71329D5A89E00905F94 /* FaceBoundsState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,7 +35,9 @@
 		F8CFA70429D36A5C00905F94 /* FDFadeAnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDFadeAnimatedButton.swift; sourceTree = "<group>"; };
 		F8CFA70629D43B1400905F94 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		F8CFA70829D45E4000905F94 /* CameraCaptureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraCaptureVC.swift; sourceTree = "<group>"; };
-		F8CFA70A29D45F9900905F94 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		F8CFA70F29D5A7E900905F94 /* FaceGeometryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceGeometryModel.swift; sourceTree = "<group>"; };
+		F8CFA71129D5A80000905F94 /* CameraViewModelAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewModelAction.swift; sourceTree = "<group>"; };
+		F8CFA71329D5A89E00905F94 /* FaceBoundsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceBoundsState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,7 @@
 		F8CFA6DE29D32F5000905F94 /* FaceDetectionIOS */ = {
 			isa = PBXGroup;
 			children = (
+				F8CFA70E29D5A78800905F94 /* Models */,
 				F8CFA6FA29D33C6000905F94 /* Application */,
 				F8CFA6F929D33C4C00905F94 /* Business logic */,
 				F8CFA6F629D33C1200905F94 /* User Interface */,
@@ -95,7 +100,6 @@
 			isa = PBXGroup;
 			children = (
 				F8CFA6FD29D3433F00905F94 /* FaceDetector.swift */,
-				F8CFA70A29D45F9900905F94 /* Helpers.swift */,
 			);
 			path = "Business logic";
 			sourceTree = "<group>";
@@ -136,6 +140,16 @@
 				F8CFA6FF29D3437300905F94 /* MainCameraViewModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		F8CFA70E29D5A78800905F94 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F8CFA70F29D5A7E900905F94 /* FaceGeometryModel.swift */,
+				F8CFA71129D5A80000905F94 /* CameraViewModelAction.swift */,
+				F8CFA71329D5A89E00905F94 /* FaceBoundsState.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,13 +224,15 @@
 			files = (
 				F8CFA70529D36A5C00905F94 /* FDFadeAnimatedButton.swift in Sources */,
 				F8CFA6FC29D3425C00905F94 /* MainCameraVC.swift in Sources */,
+				F8CFA71029D5A7E900905F94 /* FaceGeometryModel.swift in Sources */,
 				F8CFA6E029D32F5000905F94 /* AppDelegate.swift in Sources */,
 				F8CFA70729D43B1400905F94 /* DebugView.swift in Sources */,
-				F8CFA70B29D45F9900905F94 /* Helpers.swift in Sources */,
 				F8CFA6FE29D3433F00905F94 /* FaceDetector.swift in Sources */,
+				F8CFA71229D5A80000905F94 /* CameraViewModelAction.swift in Sources */,
 				F8CFA6E229D32F5000905F94 /* SceneDelegate.swift in Sources */,
 				F8CFA70929D45E4000905F94 /* CameraCaptureVC.swift in Sources */,
 				F8CFA70029D3437300905F94 /* MainCameraViewModel.swift in Sources */,
+				F8CFA71429D5A89E00905F94 /* FaceBoundsState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

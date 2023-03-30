@@ -13,7 +13,7 @@ import CoreImage.CIFilterBuiltins
 import Combine
 import UIKit
 
-protocol FaceDetectorDelegate: AnyObject { //NSObjectProtocol
+protocol FaceDetectorDelegate: AnyObject { 
     func convertFromMetadataToPreviewRect(rect: CGRect) -> CGRect
     func draw(image: CIImage)
 }
@@ -24,8 +24,8 @@ protocol FaceDectorDelegateViewModel: AnyObject {
 }
 
 class FaceDetector: NSObject {
-    weak var model: FaceDectorDelegateViewModel?
-    weak var viewDelegate: FaceDetectorDelegate?
+    weak var modelDelegate: FaceDectorDelegateViewModel?
+    weak var presentedDelegate: FaceDetectorDelegate?
     
     var sequenceHandler = VNSequenceRequestHandler()
     var currentFrameBuffer: CVImageBuffer?
@@ -39,21 +39,21 @@ class FaceDetector: NSObject {
                                                      autoreleaseFrequency: .workItem)
     
     private func detectFaceRectangles(request: VNRequest, error: Error?) {
-        guard let viewDelegate = viewDelegate else { return }
+        guard let viewDelegate = presentedDelegate else { return }
         
         guard let result = (request.results as? [VNFaceObservation])?.first else {
-            model?.perform(action: .noFaceDetected)
+            modelDelegate?.perform(action: .noFaceDetected)
             return
         }
         
         let convertBoundingBox = viewDelegate.convertFromMetadataToPreviewRect(rect: result.boundingBox)
         let faceObservationModel = FaceGeometryModel(boundingBox: convertBoundingBox, roll: result.roll, pitch: result.pitch, yaw: result.yaw, quality: faceQuality)
-        model?.perform(action: .faceObservationDetected(faceObservationModel))
+        modelDelegate?.perform(action: .faceObservationDetected(faceObservationModel))
     }
     
     private func detectedFaceQualityRequest(request: VNRequest, error: Error?) {
         guard let result = (request.results as? [VNFaceObservation])?.first else {
-            model?.perform(action: .noFaceDetected)
+            modelDelegate?.perform(action: .noFaceDetected)
             return
         }
         
@@ -62,7 +62,7 @@ class FaceDetector: NSObject {
     }
     
     private func detectedSegmentationRequest(request: VNRequest, error: Error?) {
-        guard let model = model,
+        guard let model = modelDelegate,
               let currentFrameBuffer = currentFrameBuffer,
               let result = (request.results as? [VNPixelBufferObservation])?.first
         else {
@@ -73,10 +73,10 @@ class FaceDetector: NSObject {
             let originalImage = CIImage(cvImageBuffer: currentFrameBuffer)
             let maskPixelBuffer = result.pixelBuffer
             let outputImage = removeBackgroundFrom(image: originalImage, using: maskPixelBuffer)
-            viewDelegate?.draw(image: outputImage.oriented(.upMirrored))
+            presentedDelegate?.draw(image: outputImage.oriented(.upMirrored))
         } else {
             let originalImage = CIImage(cvImageBuffer: currentFrameBuffer).oriented(.upMirrored)
-            viewDelegate?.draw(image: originalImage)
+            presentedDelegate?.draw(image: originalImage)
         }
     }
     
@@ -110,7 +110,7 @@ class FaceDetector: NSObject {
             var outputImage = originalImage
             
             //remove background
-            if self.model?.getHideBackgroundState() ?? false {
+            if self.modelDelegate?.getHideBackgroundState() ?? false {
                 let detectSegmentationRequest = VNGeneratePersonSegmentationRequest()
                 detectSegmentationRequest.qualityLevel = .accurate
                 
@@ -132,7 +132,7 @@ class FaceDetector: NSObject {
                 let savedImage = UIImage(cgImage: cgImage, scale: 1, orientation: .upMirrored)
                 
                 DispatchQueue.main.async { [weak self] in
-                    self?.model?.perform(action: .savePhoto(savedImage))
+                    self?.modelDelegate?.perform(action: .savePhoto(savedImage))
                 }
             }
         }

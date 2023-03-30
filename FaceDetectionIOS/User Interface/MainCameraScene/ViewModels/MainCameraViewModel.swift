@@ -8,13 +8,15 @@
 import Foundation
 import UIKit
 
-protocol MainCameraViewModelDelegate: AnyObject {
+protocol MainCameraPresentedDelegate: AnyObject {
     func updateFaceGeometry()
     func updateFaceState()
 }
 
 class MainCameraViewModel {
-    private(set) var faceDetectedState: FaceDetectedState
+    private(set) var faceDetector: FaceDetector
+    
+    private(set) var faceDetectedState: FaceObservation<Void>
     private(set) var faceGemetryState: FaceObservation<FaceGeometryModel>
     private(set) var lastCapturedPhoto: UIImage?
     
@@ -32,16 +34,11 @@ class MainCameraViewModel {
         return CGRect(x: 0, y: 0, width: ( screenSize.height * 0.4) / 1.5, height: screenSize.height * 0.4)
     }()
     
-    weak var presentedDelegate: MainCameraViewModelDelegate?
+    weak var presentedDelegate: MainCameraPresentedDelegate?
     
-    convenience init(with presentedDelegate: MainCameraViewModelDelegate) {
-        self.init()
-        self.presentedDelegate = presentedDelegate
-        handleWindowSizeChanged()
-    }
-    
-    private init() {
-        faceDetectedState = .noFaceDetected
+    init() {
+        faceDetector = FaceDetector()
+        faceDetectedState = .faceNotFound
         faceGemetryState = .faceNotFound
         
         hasDetectedValidFace = false
@@ -55,12 +52,13 @@ class MainCameraViewModel {
         hideBackgroundModeEnabled = false
     }
     
-    func setDelegate(_ delegate: MainCameraViewModelDelegate) {
+    func setPresentedDelegate(_ delegate: MainCameraPresentedDelegate) {
         self.presentedDelegate = delegate
+        self.faceDetector.modelDelegate = self
+        handleWindowSizeChanged()
     }
     
     private func handleWindowSizeChanged() {
-        print("[MainCameraViewModel] handleWindowSizeChanged")
         let toRect = UIScreen.main.bounds
         faceLayoutGuideFrame = CGRect(
             x: toRect.midX - faceLayoutGuideFrame.width / 2,
@@ -69,31 +67,19 @@ class MainCameraViewModel {
     }
     
     private func publishNoFaceObserved() {
-        print("[MainCameraViewModel] publishNoFaceObserved")
-        
-        faceDetectedState = .noFaceDetected
         faceGemetryState = .faceNotFound
     }
     
     private func publishFaceObservation(_ faceGeometryModel: FaceGeometryModel) {
-        print("[MainCameraViewModel] publishFaceObservation")
-        
-        faceDetectedState = .faceDetected
         faceGemetryState = .faceFound(faceGeometryModel)
     }
     
-    private func publishDebugModeObservation() {
-        print("[MainCameraViewModel] publishDebugModeObservation")
-        
-        debugModeEnabled.toggle()
-    }
-    
     private func publishTakePhotoObservation() {
-        print("[MainCameraViewModel] publishTakePhotoObservation")
+        
     }
     
     private func publishSavePhotoObservation(_ image: UIImage) {
-        print("[MainCameraViewModel] publishSavePhotoObservation")
+        
     }
     
     private func processFaceGeometryState() {
@@ -129,7 +115,7 @@ class MainCameraViewModel {
         isAcceptableQuality
     }
     
-    func setAcceptableRollPitchYaw(using roll: Double, pitch: Double, yaw: Double) {
+    private func setAcceptableRollPitchYaw(using roll: Double, pitch: Double, yaw: Double) {
         self.isAcceptableRoll = (roll > 1.2 && roll < 1.6)
         self.isAcceptablePitch = abs(CGFloat(pitch)) < 0.2
         self.isAcceptableYaw = abs(CGFloat(yaw)) < 0.15
@@ -141,9 +127,9 @@ class MainCameraViewModel {
         } else if boundingBox.width * 1.2 < faceLayoutGuideFrame.width {
             isAcceptableBounds = .detectedFaceTooSmall
         } else {
-            if abs(boundingBox.midX - faceLayoutGuideFrame.midX) > 100 {
+            if abs(boundingBox.midX - faceLayoutGuideFrame.midX) > 50 {
                 isAcceptableBounds = .detectedFaceOffCentre
-            } else if abs(boundingBox.midY - faceLayoutGuideFrame.midY) > 100 {
+            } else if abs(boundingBox.midY - faceLayoutGuideFrame.midY) > 50 {
                 isAcceptableBounds = .detectedFaceOffCentre
             } else {
                 isAcceptableBounds = .detectedFaceAppropriateSizeAndPosition
@@ -151,7 +137,7 @@ class MainCameraViewModel {
         }
     }
     
-    func setAcceptableFaceQuality(using quality: Float) {
+    private func setAcceptableFaceQuality(using quality: Float) {
         if quality < 0.2 {
             self.isAcceptableQuality = false
         }
@@ -166,10 +152,8 @@ extension MainCameraViewModel: FaceDectorDelegateViewModel {
             publishNoFaceObserved()
         case .faceObservationDetected(let faceGeometryModel):
             publishFaceObservation(faceGeometryModel)
-        case .toggleDebugMode:
-            publishDebugModeObservation()
         case .toggleHideBackground:
-            publishDebugModeObservation()
+            break
         case .takePhoto:
             publishTakePhotoObservation()
         case .savePhoto(let image):

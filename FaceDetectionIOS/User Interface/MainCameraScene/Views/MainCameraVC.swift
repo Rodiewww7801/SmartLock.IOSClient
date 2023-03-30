@@ -22,9 +22,18 @@ class MainCameraVC: UIViewController {
     
     private var viewModel: MainCameraViewModel?
     
+    init(with viewModel: MainCameraViewModel) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
+        self.viewModel?.setPresentedDelegate(self)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         self.view.backgroundColor = .black
-        self.viewModel = MainCameraViewModel(with: self)
         configureViews()
     }
     
@@ -183,12 +192,8 @@ class MainCameraVC: UIViewController {
     }
     
     private func configureCameraCaptureVC() {
-        let faceDetector = FaceDetector()
-        let cameraCaptureVC = CameraCaptureVC(with: faceDetector)
-        faceDetector.viewDelegate = cameraCaptureVC
-        faceDetector.model = self.viewModel
-        cameraCaptureVC.faceDetector = faceDetector
-        
+        guard let viewModel = self.viewModel else { return }
+        let cameraCaptureVC = CameraCaptureVC(with: viewModel)
         self.addChild(cameraCaptureVC)
         cameraCaptureVC.view.frame = self.view.frame
         self.view.addSubview(cameraCaptureVC.view)
@@ -200,7 +205,7 @@ class MainCameraVC: UIViewController {
     }
 }
 
-extension MainCameraVC: MainCameraViewModelDelegate {
+extension MainCameraVC: MainCameraPresentedDelegate {
     func updateFaceGeometry() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }

@@ -26,9 +26,10 @@ class CameraCaptureVC: UIViewController {
     
     let videoOutputQueue = DispatchQueue(label: "Video Output Queue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
     
-    init(with detector: FaceDetector) {
+    init(with viewModel: MainCameraViewModel) {
         super.init(nibName: nil, bundle: nil)
-        self.faceDetector = detector
+        self.faceDetector = viewModel.faceDetector
+        self.faceDetector?.presentedDelegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -37,10 +38,7 @@ class CameraCaptureVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        faceDetector?.viewDelegate = self
-//        configureMetal()
         configureSession()
-        
         DispatchQueue.global().async { [weak self] in
             self?.session.startRunning()
         }
