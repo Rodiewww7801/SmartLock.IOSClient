@@ -7,9 +7,9 @@
 
 import UIKit
 
-class MainCameraVC: UIViewController {
-    private var lastPhotoButton: UIButton = UIButton()
-    private var capturePhotoView: FDFadeAnimatedButton = FDFadeAnimatedButton()
+class MainCameraInterfaceVC: UIViewController {
+    private var lastPhotoView: UIImageView = UIImageView()
+    private var capturePhotoButton: FDFadeAnimatedButton = FDFadeAnimatedButton()
     private var changeCameraButton: UIButton = UIButton()
     private var bottomButtonsFirstStack: UIStackView = UIStackView()
     private var hideBackgroundButton: FDFadeAnimatedButton = FDFadeAnimatedButton()
@@ -19,6 +19,7 @@ class MainCameraVC: UIViewController {
     private var bottomButtonsSecondStack: UIStackView = UIStackView()
     private var faceDetectionStateLabel: UILabel = UILabel()
     private var debugView: DebugView!
+    private var stateLabelIsAnimating = false
     
     private var viewModel: MainCameraViewModel?
     
@@ -43,7 +44,6 @@ class MainCameraVC: UIViewController {
         configureBottomButtonsFirstStack()
         configureBottomButtonsSecondStack()
         configureFaceDetectionStateLabel()
-        
     }
     
     private func configureBottomButtonsFirstStack() {
@@ -59,22 +59,20 @@ class MainCameraVC: UIViewController {
         
         // add lastPhotoButton
         let lightImageConiguration = UIImage.SymbolConfiguration(weight: .light)
-        self.lastPhotoButton = UIButton(type: .system)
         let photoFillRectangeImage = UIImage(systemName: "photo.fill.on.rectangle.fill", withConfiguration: lightImageConiguration)
-        self.lastPhotoButton.setImage(photoFillRectangeImage, for: .normal)
-        self.lastPhotoButton.contentHorizontalAlignment = .fill
-        self.lastPhotoButton.contentVerticalAlignment = .fill
-        self.lastPhotoButton.imageView?.contentMode = .scaleAspectFit
-        self.lastPhotoButton.tintColor = .white
-        self.bottomButtonsFirstStack.addArrangedSubview(lastPhotoButton)
-        self.lastPhotoButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        self.lastPhotoButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        self.lastPhotoView = UIImageView(image: photoFillRectangeImage)
+        self.lastPhotoView.tintColor = .white
+        self.lastPhotoView.contentMode = .scaleAspectFit
+        self.bottomButtonsFirstStack.addArrangedSubview(lastPhotoView)
+        self.lastPhotoView.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        self.lastPhotoView.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         //add capturePhotoButton
-        self.capturePhotoView = FDFadeAnimatedButton()
-        capturePhotoView.widthAnchor.constraint(equalToConstant: 77).isActive = true
-        capturePhotoView.heightAnchor.constraint(equalToConstant: 77).isActive = true
-        self.bottomButtonsFirstStack.addArrangedSubview(capturePhotoView)
+        self.capturePhotoButton = FDFadeAnimatedButton()
+        self.capturePhotoButton.addAction(capturePhotoButtonTapped, for: .touchDown)
+        capturePhotoButton.widthAnchor.constraint(equalToConstant: 77).isActive = true
+        capturePhotoButton.heightAnchor.constraint(equalToConstant: 77).isActive = true
+        self.bottomButtonsFirstStack.addArrangedSubview(capturePhotoButton)
 
         
         let capturePhotoCircleImageView = UIImageView(image: UIImage(systemName: "circle", withConfiguration: lightImageConiguration))
@@ -83,20 +81,20 @@ class MainCameraVC: UIViewController {
         capturePhotoCircleImageView.contentMode = .scaleAspectFit
         capturePhotoCircleImageView.tintColor = .white
         capturePhotoCircleImageView.translatesAutoresizingMaskIntoConstraints = false
-        capturePhotoView.addSubview(capturePhotoCircleImageView)
-        capturePhotoCircleImageView.topAnchor.constraint(equalTo: capturePhotoView.topAnchor).isActive = true
-        capturePhotoCircleImageView.bottomAnchor.constraint(equalTo: capturePhotoView.bottomAnchor).isActive = true
-        capturePhotoCircleImageView.leadingAnchor.constraint(equalTo: capturePhotoView.leadingAnchor).isActive = true
-        capturePhotoCircleImageView.trailingAnchor.constraint(equalTo: capturePhotoView.trailingAnchor).isActive = true
+        capturePhotoButton.addSubview(capturePhotoCircleImageView)
+        capturePhotoCircleImageView.topAnchor.constraint(equalTo: capturePhotoButton.topAnchor).isActive = true
+        capturePhotoCircleImageView.bottomAnchor.constraint(equalTo: capturePhotoButton.bottomAnchor).isActive = true
+        capturePhotoCircleImageView.leadingAnchor.constraint(equalTo: capturePhotoButton.leadingAnchor).isActive = true
+        capturePhotoCircleImageView.trailingAnchor.constraint(equalTo: capturePhotoButton.trailingAnchor).isActive = true
         
         capturePhotoCircleFillImageView.contentMode = .scaleAspectFit
         capturePhotoCircleFillImageView.tintColor = .white
         capturePhotoCircleFillImageView.translatesAutoresizingMaskIntoConstraints = false
-        capturePhotoView.addSubview(capturePhotoCircleFillImageView)
-        capturePhotoCircleFillImageView.topAnchor.constraint(equalTo: capturePhotoView.topAnchor, constant: 9).isActive = true
-        capturePhotoCircleFillImageView.bottomAnchor.constraint(equalTo: capturePhotoView.bottomAnchor, constant: -9).isActive = true
-        capturePhotoCircleFillImageView.leadingAnchor.constraint(equalTo: capturePhotoView.leadingAnchor, constant: 9).isActive = true
-        capturePhotoCircleFillImageView.trailingAnchor.constraint(equalTo: capturePhotoView.trailingAnchor, constant: -9).isActive = true
+        capturePhotoButton.addSubview(capturePhotoCircleFillImageView)
+        capturePhotoCircleFillImageView.topAnchor.constraint(equalTo: capturePhotoButton.topAnchor, constant: 9).isActive = true
+        capturePhotoCircleFillImageView.bottomAnchor.constraint(equalTo: capturePhotoButton.bottomAnchor, constant: -9).isActive = true
+        capturePhotoCircleFillImageView.leadingAnchor.constraint(equalTo: capturePhotoButton.leadingAnchor, constant: 9).isActive = true
+        capturePhotoCircleFillImageView.trailingAnchor.constraint(equalTo: capturePhotoButton.trailingAnchor, constant: -9).isActive = true
         
         // add lastPhotoButton
         self.changeCameraButton = UIButton(type: .system)
@@ -128,19 +126,20 @@ class MainCameraVC: UIViewController {
         self.hideBackgroundLabel.font = .systemFont(ofSize: 14)
         self.hideBackgroundLabel.translatesAutoresizingMaskIntoConstraints = false
         self.hideBackgroundButton = FDFadeAnimatedButton()
+        self.hideBackgroundButton.addAction(hideBackgroundTapped, for: .touchDown)
         self.hideBackgroundButton.addSubview(hideBackgroundLabel)
         self.bottomButtonsSecondStack.addArrangedSubview(hideBackgroundButton)
         self.hideBackgroundButton.widthAnchor.constraint(equalTo: hideBackgroundLabel.widthAnchor).isActive = true
         self.hideBackgroundButton.heightAnchor.constraint(equalTo:  hideBackgroundLabel.heightAnchor).isActive = true
         
-        // add hideBackgroundLabel
+        // add debugMode
         self.debugModeLabel = UILabel()
         self.debugModeLabel.text = "debug mode".uppercased()
         self.debugModeLabel.textColor = .white
         self.debugModeLabel.font = .systemFont(ofSize: 14)
         self.debugModeLabel.translatesAutoresizingMaskIntoConstraints = false
         self.debugModeButton = FDFadeAnimatedButton()
-        self.debugModeButton.addAction(debugViewTapped, for: .touchDown)
+        self.debugModeButton.addAction(debugModeButtonTapped, for: .touchDown)
         self.debugModeButton.addSubview(debugModeLabel)
         self.bottomButtonsSecondStack.addArrangedSubview(debugModeButton)
         self.debugModeButton.widthAnchor.constraint(equalTo: debugModeLabel.widthAnchor).isActive = true
@@ -200,12 +199,23 @@ class MainCameraVC: UIViewController {
         cameraCaptureVC.didMove(toParent: self)
     }
     
-    private func debugViewTapped() {
+    private func hideBackgroundTapped() {
+        self.viewModel?.hideBackgroundModeEnabled.toggle()
+        let state = self.viewModel?.hideBackgroundModeEnabled ?? false
+        self.hideBackgroundLabel.textColor = state ? .yellow : .white
+    }
+    
+    private func debugModeButtonTapped() {
         debugView.isHidden.toggle()
+        self.debugModeLabel.textColor = debugView.isHidden ?  .white : .yellow
+    }
+    
+    private func capturePhotoButtonTapped() {
+        self.viewModel?.perform(action: .takePhoto)
     }
 }
 
-extension MainCameraVC: MainCameraPresentedDelegate {
+extension MainCameraInterfaceVC: MainCameraPresentedDelegate {
     func updateFaceGeometry() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -216,8 +226,15 @@ extension MainCameraVC: MainCameraPresentedDelegate {
     
     func updateFaceState() {
         DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.conigureTextFaceDetectionStateLabel()
+            self?.conigureTextFaceDetectionStateLabel()
         }
+    }
+    
+    func capturePhotoObservation(image: UIImage) {
+        DispatchQueue.main.async { [weak self] in
+            self?.lastPhotoView.image = image
+            self?.lastPhotoView.tintColor = .clear
+        }
+        
     }
 }

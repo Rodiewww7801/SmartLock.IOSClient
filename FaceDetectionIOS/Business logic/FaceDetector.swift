@@ -103,7 +103,7 @@ class FaceDetector: NSObject {
         return originalImage
     }
     
-    private func savePassportPhoto(from imageBuffer: CVImageBuffer) {
+    private func captureCurrentImage(from imageBuffer: CVImageBuffer) {
         imageProcessingQueue.async { [weak self] in
             guard let self = self else { return }
             let originalImage = CIImage(cvImageBuffer: imageBuffer)
@@ -145,7 +145,7 @@ extension FaceDetector: AVCaptureVideoDataOutputSampleBufferDelegate {
         
         if isCapturingPhoto {
             isCapturingPhoto = false
-            savePassportPhoto(from: imageBuffer)
+            captureCurrentImage(from: imageBuffer)
         }
         
         let detectFaceRectanglesRequest = VNDetectFaceRectanglesRequest(completionHandler: detectFaceRectangles)

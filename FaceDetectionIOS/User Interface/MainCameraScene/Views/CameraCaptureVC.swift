@@ -38,6 +38,7 @@ class CameraCaptureVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configureMetal()
         configureSession()
         DispatchQueue.global().async { [weak self] in
             self?.session.startRunning()

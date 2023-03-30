@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     private func createRootViewController() -> UIViewController {
         let viewModel = MainCameraViewModel()
-        let viewController = MainCameraVC(with: viewModel)
+        let viewController = MainCameraInterfaceVC(with: viewModel)
         return viewController
     }
 

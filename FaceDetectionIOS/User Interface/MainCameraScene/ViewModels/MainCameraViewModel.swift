@@ -11,6 +11,7 @@ import UIKit
 protocol MainCameraPresentedDelegate: AnyObject {
     func updateFaceGeometry()
     func updateFaceState()
+    func capturePhotoObservation(image: UIImage)
 }
 
 class MainCameraViewModel {
@@ -26,6 +27,7 @@ class MainCameraViewModel {
     private(set) var isAcceptableYaw: Bool
     private(set) var isAcceptableQuality: Bool
     private(set) var isAcceptableBounds: FaceBoundsState
+    private(set) var lastSavedPhoto: UIImage?
     
     var debugModeEnabled: Bool
     var hideBackgroundModeEnabled: Bool
@@ -75,11 +77,12 @@ class MainCameraViewModel {
     }
     
     private func publishTakePhotoObservation() {
-        
+        faceDetector.isCapturingPhoto = true
     }
     
     private func publishSavePhotoObservation(_ image: UIImage) {
-        
+        self.lastSavedPhoto = image
+        self.presentedDelegate?.capturePhotoObservation(image: image)
     }
     
     private func processFaceGeometryState() {
