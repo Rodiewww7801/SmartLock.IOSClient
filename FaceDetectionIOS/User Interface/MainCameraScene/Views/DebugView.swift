@@ -18,13 +18,13 @@ class DebugView: UIView {
     private var debugAcceptableQualityLabel: UILabel = UILabel()
     private var debugLabelsStack: UIStackView = UIStackView()
     private var faceLayoutGuideFrame: CGRect {
-        let screenSize: CGRect = UIScreen.main.bounds
-        return CGRect(x: 0, y: 0, width: ( screenSize.height * 0.4) / 1.5, height: screenSize.height * 0.4)
+        return viewModel.faceLayoutGuideFrame
     }
     
-    weak var viewModel: MainCameraViewModel?
+    var viewModel: MainCameraViewModel
     
-    init() {
+    init(with viewModel: MainCameraViewModel) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
         self.backgroundColor = .clear
         configureViews()
@@ -35,7 +35,6 @@ class DebugView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        guard let viewModel = viewModel else { return }
         switch viewModel.faceGemetryState {
         case .faceFound(let model):
             drawFaceRect(model.boundingBox)
@@ -86,26 +85,6 @@ class DebugView: UIView {
         rectView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -30).isActive = true
         rectView.heightAnchor.constraint(equalToConstant: self.faceLayoutGuideFrame.height).isActive = true
         rectView.widthAnchor.constraint(equalToConstant: self.faceLayoutGuideFrame.width).isActive = true
-        
-        addEllipse()
-    }
-    
-    private func addEllipse() {
-        self.ellipseView = UIView(frame: faceLayoutGuideFrame)
-        let scaledEllipseSize = CGSize(width: faceLayoutGuideFrame.width - 1, height: faceLayoutGuideFrame.height - 1)
-        let ellipsePath = UIBezierPath(ovalIn: CGRect(origin: .zero, size: scaledEllipseSize))
-        let ellipseLayer = CAShapeLayer()
-        ellipseLayer.path = ellipsePath.cgPath
-        ellipseLayer.strokeColor = UIColor.red.cgColor
-        ellipseLayer.fillColor = UIColor.clear.cgColor
-        ellipseLayer.position = CGPoint(x: (rectView.bounds.width - 1) / -2 , y: (rectView.bounds.height - 1) / -2)
-        ellipseView.layer.addSublayer(ellipseLayer)
-        self.ellipseLayer = ellipseLayer
-        
-        ellipseView.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(ellipseView)
-        ellipseView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        ellipseView.centerYAnchor.constraint(equalTo: rectView.centerYAnchor).isActive = true
     }
     
     private func cofigureDebugLabels() {
@@ -127,10 +106,10 @@ class DebugView: UIView {
     
     private func configureDebugLabelsText(faceGemetryModel: FaceGeometryModel? = nil) {
         guard let faceGemetryModel = faceGemetryModel else { return }
-        let isAcceptableRoll = viewModel?.isAcceptableRoll ?? false
-        let isAcceptablePitch = viewModel?.isAcceptablePitch ?? false
-        let isAcceptableYaw = viewModel?.isAcceptableYaw ?? false
-        let isAcceptableQuality = viewModel?.isAcceptableQuality ?? false
+        let isAcceptableRoll = viewModel.isAcceptableRoll
+        let isAcceptablePitch = viewModel.isAcceptablePitch
+        let isAcceptableYaw = viewModel.isAcceptableYaw
+        let isAcceptableQuality = viewModel.isAcceptableQuality
         
         debugLabel.text = "Debug:"
         debugLabel.textColor = .white
@@ -154,7 +133,7 @@ class DebugView: UIView {
     }
     
     private func updateState() {
-        if viewModel?.hasDetectedValidFace ?? false {
+        if viewModel.faceValidationState {
             ellipseLayer?.strokeColor = UIColor.green.cgColor
             rectView.layer.borderColor = UIColor.green.cgColor
         } else {

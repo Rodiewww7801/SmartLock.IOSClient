@@ -21,7 +21,7 @@ class MainCameraViewModel {
     private(set) var faceGemetryState: FaceObservation<FaceGeometryModel>
     private(set) var lastCapturedPhoto: UIImage?
     
-    private(set) var hasDetectedValidFace: Bool
+    private(set) var faceValidationState: Bool
     private(set) var isAcceptableRoll: Bool
     private(set) var isAcceptablePitch: Bool
     private(set) var isAcceptableYaw: Bool
@@ -31,7 +31,7 @@ class MainCameraViewModel {
     
     var debugModeEnabled: Bool
     var hideBackgroundModeEnabled: Bool
-    private var faceLayoutGuideFrame: CGRect = {
+    var faceLayoutGuideFrame: CGRect = {
         let screenSize: CGRect = UIScreen.main.bounds
         return CGRect(x: 0, y: 0, width: ( screenSize.height * 0.4) / 1.5, height: screenSize.height * 0.4)
     }()
@@ -43,7 +43,7 @@ class MainCameraViewModel {
         faceDetectedState = .faceNotFound
         faceGemetryState = .faceNotFound
         
-        hasDetectedValidFace = false
+        faceValidationState = false
         isAcceptableRoll = false
         isAcceptablePitch = false
         isAcceptableYaw = false
@@ -53,36 +53,24 @@ class MainCameraViewModel {
         debugModeEnabled = false
         hideBackgroundModeEnabled = false
     }
-    
+    //MARK: - public func
     func setPresentedDelegate(_ delegate: MainCameraPresentedDelegate) {
         self.presentedDelegate = delegate
         self.faceDetector.modelDelegate = self
-        handleWindowSizeChanged()
+        setWindowSize()
     }
     
-    private func handleWindowSizeChanged() {
+    func publishTakePhotoObservation() {
+        faceDetector.isCapturingPhoto = true
+    }
+    
+    //MARK: - private func
+    private func setWindowSize() {
         let toRect = UIScreen.main.bounds
         faceLayoutGuideFrame = CGRect(
             x: toRect.midX - faceLayoutGuideFrame.width / 2,
             y: toRect.midY - faceLayoutGuideFrame.height / 2,
             width: faceLayoutGuideFrame.width, height: faceLayoutGuideFrame.height)
-    }
-    
-    private func publishNoFaceObserved() {
-        faceGemetryState = .faceNotFound
-    }
-    
-    private func publishFaceObservation(_ faceGeometryModel: FaceGeometryModel) {
-        faceGemetryState = .faceFound(faceGeometryModel)
-    }
-    
-    private func publishTakePhotoObservation() {
-        faceDetector.isCapturingPhoto = true
-    }
-    
-    private func publishSavePhotoObservation(_ image: UIImage) {
-        self.lastSavedPhoto = image
-        self.presentedDelegate?.capturePhotoObservation(image: image)
     }
     
     private func processFaceGeometryState() {
@@ -111,7 +99,7 @@ class MainCameraViewModel {
     }
     
     private func validateDetectedFace() {
-        self.hasDetectedValidFace = isAcceptableRoll &&
+        self.faceValidationState = isAcceptableRoll &&
         isAcceptablePitch &&
         isAcceptableYaw &&
         isAcceptableBounds == .detectedFaceAppropriateSizeAndPosition &&
@@ -146,27 +134,30 @@ class MainCameraViewModel {
         }
         self.isAcceptableQuality = true
     }
-}
-
-extension MainCameraViewModel: FaceDectorDelegateViewModel {
-    func perform(action: CameraViewModelAction) {
-        switch action {
-        case .noFaceDetected:
-            publishNoFaceObserved()
-        case .faceObservationDetected(let faceGeometryModel):
-            publishFaceObservation(faceGeometryModel)
-        case .toggleHideBackground:
-            break
-        case .takePhoto:
-            publishTakePhotoObservation()
-        case .savePhoto(let image):
-            publishSavePhotoObservation(image)
-        }
-        
+    
+    private func stateOfDetectionWasChanged() {
         processFaceGeometryState()
         validateDetectedFace()
         self.presentedDelegate?.updateFaceGeometry()
         self.presentedDelegate?.updateFaceState()
+    }
+}
+
+//MARK: - FaceDectorDelegateViewModel
+extension MainCameraViewModel: FaceDectorDelegateViewModel {
+    func publishNoFaceObserved() {
+        faceGemetryState = .faceNotFound
+        stateOfDetectionWasChanged()
+    }
+    
+    func publishFaceObservation(_ faceGeometryModel: FaceGeometryModel) {
+        faceGemetryState = .faceFound(faceGeometryModel)
+        stateOfDetectionWasChanged()
+    }
+    
+    func publishSavePhotoObservation(_ image: UIImage) {
+        self.lastSavedPhoto = image
+        self.presentedDelegate?.capturePhotoObservation(image: image)
     }
     
     func getHideBackgroundState() -> Bool {

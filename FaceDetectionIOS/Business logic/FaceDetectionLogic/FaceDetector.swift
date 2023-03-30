@@ -19,7 +19,9 @@ protocol FaceDetectorDelegate: AnyObject {
 }
 
 protocol FaceDectorDelegateViewModel: AnyObject {
-    func perform(action: CameraViewModelAction)
+    func publishNoFaceObserved()
+    func publishFaceObservation(_ faceGeometryModel: FaceGeometryModel)
+    func publishSavePhotoObservation(_ image: UIImage)
     func getHideBackgroundState() -> Bool
 }
 
@@ -32,7 +34,6 @@ class FaceDetector: NSObject {
     var isCapturingPhoto: Bool = false
     var faceQuality: Float = 0
     
-    private var subscriptions = Set<AnyCancellable>()
     private var imageProcessingQueue = DispatchQueue(label: "Image Processing Queue",
                                                      qos: .userInitiated,
                                                      attributes: [],
@@ -42,18 +43,18 @@ class FaceDetector: NSObject {
         guard let viewDelegate = presentedDelegate else { return }
         
         guard let result = (request.results as? [VNFaceObservation])?.first else {
-            modelDelegate?.perform(action: .noFaceDetected)
+            modelDelegate?.publishNoFaceObserved()
             return
         }
         
         let convertBoundingBox = viewDelegate.convertFromMetadataToPreviewRect(rect: result.boundingBox)
         let faceObservationModel = FaceGeometryModel(boundingBox: convertBoundingBox, roll: result.roll, pitch: result.pitch, yaw: result.yaw, quality: faceQuality)
-        modelDelegate?.perform(action: .faceObservationDetected(faceObservationModel))
+        modelDelegate?.publishFaceObservation(faceObservationModel)
     }
     
     private func detectedFaceQualityRequest(request: VNRequest, error: Error?) {
         guard let result = (request.results as? [VNFaceObservation])?.first else {
-            modelDelegate?.perform(action: .noFaceDetected)
+            modelDelegate?.publishNoFaceObserved()
             return
         }
         
@@ -132,7 +133,7 @@ class FaceDetector: NSObject {
                 let savedImage = UIImage(cgImage: cgImage, scale: 1, orientation: .upMirrored)
                 
                 DispatchQueue.main.async { [weak self] in
-                    self?.modelDelegate?.perform(action: .savePhoto(savedImage))
+                    self?.modelDelegate?.publishSavePhotoObservation(savedImage)
                 }
             }
         }
@@ -158,11 +159,6 @@ extension FaceDetector: AVCaptureVideoDataOutputSampleBufferDelegate {
         detectSegmentationRequest.qualityLevel = .balanced
         
         self.currentFrameBuffer = imageBuffer
-        do {
-            try sequenceHandler.perform([detectFaceRectanglesRequest, detectFaceQualityRequest, detectSegmentationRequest], on: imageBuffer, orientation: .leftMirrored)
-            
-        } catch {
-            fatalError("\(error)")
-        }
+        try? sequenceHandler.perform([detectFaceRectanglesRequest, detectFaceQualityRequest, detectSegmentationRequest], on: imageBuffer, orientation: .leftMirrored)
     }
 }

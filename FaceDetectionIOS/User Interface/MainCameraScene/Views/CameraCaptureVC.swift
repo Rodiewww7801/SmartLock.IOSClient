@@ -47,7 +47,8 @@ class CameraCaptureVC: UIViewController {
     
     private func configureMetal() {
         guard let metalDevice = MTLCreateSystemDefaultDevice() else {
-            fatalError("Could not instantiate required metal properties")
+            print("[CameraCaptureVC]: Could not instantiate required metal properties")
+            return
         }
         
         isUsingMetal = true
@@ -70,14 +71,16 @@ class CameraCaptureVC: UIViewController {
     
     private func configureSession() {
         guard let camera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front) else {
-            fatalError("No front video camera available")
+            print("[CameraCaptureVC]: No front video camera available")
+            return
         }
         
         do {
             let cameraInput = try AVCaptureDeviceInput(device: camera)
             session.addInput(cameraInput)
         } catch {
-            fatalError("\(error)")
+            print("\(error)")
+            return
         }
         
         let videoOutput = AVCaptureVideoDataOutput()

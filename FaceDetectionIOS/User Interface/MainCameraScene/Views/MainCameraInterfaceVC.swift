@@ -19,14 +19,15 @@ class MainCameraInterfaceVC: UIViewController {
     private var bottomButtonsSecondStack: UIStackView = UIStackView()
     private var faceDetectionStateLabel: UILabel = UILabel()
     private var debugView: DebugView!
+    private var ellipseLayer: CAShapeLayer = CAShapeLayer()
     private var stateLabelIsAnimating = false
     
-    private var viewModel: MainCameraViewModel?
+    private var viewModel: MainCameraViewModel
     
     init(with viewModel: MainCameraViewModel) {
-        super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
-        self.viewModel?.setPresentedDelegate(self)
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel.setPresentedDelegate(self)
     }
     
     required init?(coder: NSCoder) {
@@ -44,6 +45,7 @@ class MainCameraInterfaceVC: UIViewController {
         configureBottomButtonsFirstStack()
         configureBottomButtonsSecondStack()
         configureFaceDetectionStateLabel()
+        addEllipse()
     }
     
     private func configureBottomButtonsFirstStack() {
@@ -146,6 +148,29 @@ class MainCameraInterfaceVC: UIViewController {
         self.debugModeButton.heightAnchor.constraint(equalTo: debugModeLabel.heightAnchor).isActive = true
     }
     
+    private func addEllipse() {
+        let faceLayoutGuideFrame = viewModel.faceLayoutGuideFrame
+        let ellipseView = UIView(frame: faceLayoutGuideFrame)
+        let scaledEllipseSize = CGSize(width: faceLayoutGuideFrame.width - 1, height: faceLayoutGuideFrame.height - 1)
+        let ellipsePath = UIBezierPath(ovalIn: CGRect(origin: .zero, size: scaledEllipseSize))
+        let ellipseLayer = CAShapeLayer()
+        ellipseLayer.path = ellipsePath.cgPath
+        ellipseLayer.strokeColor = UIColor.red.cgColor
+        ellipseLayer.fillColor = UIColor.clear.cgColor
+        ellipseLayer.position = CGPoint(x: (faceLayoutGuideFrame.width - 1) / -2 , y: (faceLayoutGuideFrame.height - 1) / -2)
+        ellipseView.layer.addSublayer(ellipseLayer)
+        self.ellipseLayer = ellipseLayer
+        
+        ellipseView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(ellipseView)
+        ellipseView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        ellipseView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+    }
+    
+    private func updateEllipseState() {
+        self.ellipseLayer.strokeColor = viewModel.faceValidationState ? UIColor.green.cgColor : UIColor.red.cgColor
+    }
+    
     private func configureFaceDetectionStateLabel() {
         self.faceDetectionStateLabel = UILabel()
         self.faceDetectionStateLabel.textColor = .white
@@ -157,9 +182,9 @@ class MainCameraInterfaceVC: UIViewController {
     }
     
     private func conigureTextFaceDetectionStateLabel() {
-        guard let viewModel = viewModel else { return }
         var textForLabel = ""
-        if viewModel.hasDetectedValidFace {
+        
+        if viewModel.faceValidationState {
             textForLabel = "Perfect"
         } else if viewModel.isAcceptableBounds == .detectedFaceTooSmall {
             textForLabel = "Face is too far from the camera"
@@ -179,8 +204,7 @@ class MainCameraInterfaceVC: UIViewController {
     }
     
     private func configureDebugView() {
-        self.debugView = DebugView()
-        self.debugView.viewModel = self.viewModel
+        self.debugView = DebugView(with: self.viewModel)
         debugView.isHidden = true
         self.view.addSubview(debugView)
         debugView.translatesAutoresizingMaskIntoConstraints = false
@@ -191,7 +215,6 @@ class MainCameraInterfaceVC: UIViewController {
     }
     
     private func configureCameraCaptureVC() {
-        guard let viewModel = self.viewModel else { return }
         let cameraCaptureVC = CameraCaptureVC(with: viewModel)
         self.addChild(cameraCaptureVC)
         cameraCaptureVC.view.frame = self.view.frame
@@ -200,8 +223,8 @@ class MainCameraInterfaceVC: UIViewController {
     }
     
     private func hideBackgroundTapped() {
-        self.viewModel?.hideBackgroundModeEnabled.toggle()
-        let state = self.viewModel?.hideBackgroundModeEnabled ?? false
+        self.viewModel.hideBackgroundModeEnabled.toggle()
+        let state = self.viewModel.hideBackgroundModeEnabled
         self.hideBackgroundLabel.textColor = state ? .yellow : .white
     }
     
@@ -211,7 +234,7 @@ class MainCameraInterfaceVC: UIViewController {
     }
     
     private func capturePhotoButtonTapped() {
-        self.viewModel?.perform(action: .takePhoto)
+        self.viewModel.publishTakePhotoObservation()
     }
 }
 
@@ -227,6 +250,7 @@ extension MainCameraInterfaceVC: MainCameraPresentedDelegate {
     func updateFaceState() {
         DispatchQueue.main.async { [weak self] in
             self?.conigureTextFaceDetectionStateLabel()
+            self?.updateEllipseState()
         }
     }
     
