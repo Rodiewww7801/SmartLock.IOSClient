@@ -1,5 +1,5 @@
 //
-//  MainCameraViewModel.swift
+//  DetectionSceneViewModel.swift
 //  FaceDetectionIOS
 //
 //  Created by Rodion Hladchenko on 28.03.2023.
@@ -8,13 +8,13 @@
 import Foundation
 import UIKit
 
-protocol MainCameraPresentedDelegate: AnyObject {
+protocol DetectionScenePresentedDelegate: AnyObject {
     func updateFaceGeometry()
     func updateFaceState()
     func capturePhotoObservation(image: UIImage)
 }
 
-class MainCameraViewModel {
+class DetectionSceneViewModel {
     private(set) var faceDetector: FaceDetector
     
     private(set) var faceDetectedState: FaceObservation<Void>
@@ -36,7 +36,7 @@ class MainCameraViewModel {
         return CGRect(x: 0, y: 0, width: ( screenSize.height * 0.4) / 1.5, height: screenSize.height * 0.4)
     }()
     
-    weak var presentedDelegate: MainCameraPresentedDelegate?
+    weak var presentedDelegate: DetectionScenePresentedDelegate?
     
     init() {
         faceDetector = FaceDetector()
@@ -54,7 +54,7 @@ class MainCameraViewModel {
         hideBackgroundModeEnabled = false
     }
     //MARK: - public func
-    func setPresentedDelegate(_ delegate: MainCameraPresentedDelegate) {
+    func setPresentedDelegate(_ delegate: DetectionScenePresentedDelegate) {
         self.presentedDelegate = delegate
         self.faceDetector.modelDelegate = self
         setWindowSize()
@@ -144,7 +144,7 @@ class MainCameraViewModel {
 }
 
 //MARK: - FaceDectorDelegateViewModel
-extension MainCameraViewModel: FaceDectorDelegateViewModel {
+extension DetectionSceneViewModel: FaceDectorDelegateViewModel {
     func publishNoFaceObserved() {
         faceGemetryState = .faceNotFound
         stateOfDetectionWasChanged()

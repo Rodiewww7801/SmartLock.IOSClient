@@ -8,21 +8,22 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    let baseNavigationController: UINavigationController = UINavigationController()
+    var applicationCoordinator: Coordinator?
     var window: UIWindow?
-
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         self.window = UIWindow(windowScene: windowScene)
-        self.window?.rootViewController = createRootViewController()
+        self.window?.rootViewController = baseNavigationController
+        self.makeAppliactionCoordinator()
+        self.applicationCoordinator?.start()
         self.window?.makeKeyAndVisible()
     }
     
-    private func createRootViewController() -> UIViewController {
-        let viewModel = MainCameraViewModel()
-        let viewController = MainCameraInterfaceVC(with: viewModel)
-        return viewController
+    private func makeAppliactionCoordinator() {
+        let router = Router(rootController: baseNavigationController)
+        self.applicationCoordinator = ApplicationCoordinator(router: router)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

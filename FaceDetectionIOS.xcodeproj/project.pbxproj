@@ -11,14 +11,20 @@
 		F8CFA6E229D32F5000905F94 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA6E129D32F5000905F94 /* SceneDelegate.swift */; };
 		F8CFA6E929D32F5100905F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8CFA6E829D32F5100905F94 /* Assets.xcassets */; };
 		F8CFA6EC29D32F5100905F94 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F8CFA6EA29D32F5100905F94 /* LaunchScreen.storyboard */; };
-		F8CFA6FC29D3425C00905F94 /* MainCameraInterfaceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA6FB29D3425C00905F94 /* MainCameraInterfaceVC.swift */; };
+		F8CFA6FC29D3425C00905F94 /* DetectionSceneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA6FB29D3425C00905F94 /* DetectionSceneVC.swift */; };
 		F8CFA6FE29D3433F00905F94 /* FaceDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA6FD29D3433F00905F94 /* FaceDetector.swift */; };
-		F8CFA70029D3437300905F94 /* MainCameraViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA6FF29D3437300905F94 /* MainCameraViewModel.swift */; };
+		F8CFA70029D3437300905F94 /* DetectionSceneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA6FF29D3437300905F94 /* DetectionSceneViewModel.swift */; };
 		F8CFA70529D36A5C00905F94 /* FDFadeAnimatedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA70429D36A5C00905F94 /* FDFadeAnimatedButton.swift */; };
 		F8CFA70729D43B1400905F94 /* DebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA70629D43B1400905F94 /* DebugView.swift */; };
 		F8CFA70929D45E4000905F94 /* CameraCaptureVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA70829D45E4000905F94 /* CameraCaptureVC.swift */; };
 		F8CFA71029D5A7E900905F94 /* FaceGeometryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA70F29D5A7E900905F94 /* FaceGeometryModel.swift */; };
 		F8CFA71429D5A89E00905F94 /* FaceBoundsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA71329D5A89E00905F94 /* FaceBoundsState.swift */; };
+		F8E4D47A29D8985E00B6F0BB /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E4D47929D8985E00B6F0BB /* Router.swift */; };
+		F8E4D47C29D898DE00B6F0BB /* Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E4D47B29D898DE00B6F0BB /* Presentable.swift */; };
+		F8E4D47E29D89A1B00B6F0BB /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E4D47D29D89A1B00B6F0BB /* Coordinator.swift */; };
+		F8E4D48129D8AA6400B6F0BB /* ApplicationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E4D48029D8AA6400B6F0BB /* ApplicationCoordinator.swift */; };
+		F8E4D48329D8AAE900B6F0BB /* ApplicationCoordinatorFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E4D48229D8AAE900B6F0BB /* ApplicationCoordinatorFactory.swift */; };
+		F8E4D48929D8AE1900B6F0BB /* DetectionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E4D48829D8AE1900B6F0BB /* DetectionCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,14 +34,20 @@
 		F8CFA6E829D32F5100905F94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F8CFA6EB29D32F5100905F94 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F8CFA6ED29D32F5100905F94 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F8CFA6FB29D3425C00905F94 /* MainCameraInterfaceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCameraInterfaceVC.swift; sourceTree = "<group>"; };
+		F8CFA6FB29D3425C00905F94 /* DetectionSceneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionSceneVC.swift; sourceTree = "<group>"; };
 		F8CFA6FD29D3433F00905F94 /* FaceDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceDetector.swift; sourceTree = "<group>"; };
-		F8CFA6FF29D3437300905F94 /* MainCameraViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCameraViewModel.swift; sourceTree = "<group>"; };
+		F8CFA6FF29D3437300905F94 /* DetectionSceneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionSceneViewModel.swift; sourceTree = "<group>"; };
 		F8CFA70429D36A5C00905F94 /* FDFadeAnimatedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDFadeAnimatedButton.swift; sourceTree = "<group>"; };
 		F8CFA70629D43B1400905F94 /* DebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugView.swift; sourceTree = "<group>"; };
 		F8CFA70829D45E4000905F94 /* CameraCaptureVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraCaptureVC.swift; sourceTree = "<group>"; };
 		F8CFA70F29D5A7E900905F94 /* FaceGeometryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceGeometryModel.swift; sourceTree = "<group>"; };
 		F8CFA71329D5A89E00905F94 /* FaceBoundsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceBoundsState.swift; sourceTree = "<group>"; };
+		F8E4D47929D8985E00B6F0BB /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		F8E4D47B29D898DE00B6F0BB /* Presentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentable.swift; sourceTree = "<group>"; };
+		F8E4D47D29D89A1B00B6F0BB /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		F8E4D48029D8AA6400B6F0BB /* ApplicationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinator.swift; sourceTree = "<group>"; };
+		F8E4D48229D8AAE900B6F0BB /* ApplicationCoordinatorFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationCoordinatorFactory.swift; sourceTree = "<group>"; };
+		F8E4D48829D8AE1900B6F0BB /* DetectionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,25 +91,28 @@
 		F8CFA6F629D33C1200905F94 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				F8E4D47829D897E300B6F0BB /* Base Navigation logic */,
+				F8E4D47F29D8AA5200B6F0BB /* ApplicationCoordinator */,
+				F8E4D48429D8AB2400B6F0BB /* DetectionFlow */,
 				F8CFA70329D36A0900905F94 /* Custom UI Helpers */,
-				F8CFA6F729D33C1A00905F94 /* MainCameraScene */,
 			);
 			path = "User Interface";
 			sourceTree = "<group>";
 		};
-		F8CFA6F729D33C1A00905F94 /* MainCameraScene */ = {
+		F8CFA6F729D33C1A00905F94 /* DetectionScene */ = {
 			isa = PBXGroup;
 			children = (
 				F8CFA70D29D4792700905F94 /* ViewModels */,
 				F8CFA70C29D4792000905F94 /* Views */,
 			);
-			path = MainCameraScene;
+			path = DetectionScene;
 			sourceTree = "<group>";
 		};
 		F8CFA6F929D33C4C00905F94 /* Business logic */ = {
 			isa = PBXGroup;
 			children = (
-				F8FBB24F29D62CE8009E3680 /* FaceDetectionLogic */,
+				F8E4D47429D8968300B6F0BB /* True Depth */,
+				F8FBB24F29D62CE8009E3680 /* Face Detection */,
 			);
 			path = "Business logic";
 			sourceTree = "<group>";
@@ -125,7 +140,7 @@
 		F8CFA70C29D4792000905F94 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F8CFA6FB29D3425C00905F94 /* MainCameraInterfaceVC.swift */,
+				F8CFA6FB29D3425C00905F94 /* DetectionSceneVC.swift */,
 				F8CFA70629D43B1400905F94 /* DebugView.swift */,
 				F8CFA70829D45E4000905F94 /* CameraCaptureVC.swift */,
 			);
@@ -135,7 +150,7 @@
 		F8CFA70D29D4792700905F94 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				F8CFA6FF29D3437300905F94 /* MainCameraViewModel.swift */,
+				F8CFA6FF29D3437300905F94 /* DetectionSceneViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -148,6 +163,49 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		F8E4D47429D8968300B6F0BB /* True Depth */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "True Depth";
+			sourceTree = "<group>";
+		};
+		F8E4D47829D897E300B6F0BB /* Base Navigation logic */ = {
+			isa = PBXGroup;
+			children = (
+				F8E4D47B29D898DE00B6F0BB /* Presentable.swift */,
+				F8E4D47929D8985E00B6F0BB /* Router.swift */,
+				F8E4D47D29D89A1B00B6F0BB /* Coordinator.swift */,
+			);
+			path = "Base Navigation logic";
+			sourceTree = "<group>";
+		};
+		F8E4D47F29D8AA5200B6F0BB /* ApplicationCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				F8E4D48029D8AA6400B6F0BB /* ApplicationCoordinator.swift */,
+				F8E4D48229D8AAE900B6F0BB /* ApplicationCoordinatorFactory.swift */,
+			);
+			path = ApplicationCoordinator;
+			sourceTree = "<group>";
+		};
+		F8E4D48429D8AB2400B6F0BB /* DetectionFlow */ = {
+			isa = PBXGroup;
+			children = (
+				F8E4D48529D8AB5700B6F0BB /* DetectionCoordinator */,
+				F8CFA6F729D33C1A00905F94 /* DetectionScene */,
+			);
+			path = DetectionFlow;
+			sourceTree = "<group>";
+		};
+		F8E4D48529D8AB5700B6F0BB /* DetectionCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				F8E4D48829D8AE1900B6F0BB /* DetectionCoordinator.swift */,
+			);
+			path = DetectionCoordinator;
+			sourceTree = "<group>";
+		};
 		F8FBB24E29D62CD9009E3680 /* FaceDetectionModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,12 +215,12 @@
 			path = FaceDetectionModels;
 			sourceTree = "<group>";
 		};
-		F8FBB24F29D62CE8009E3680 /* FaceDetectionLogic */ = {
+		F8FBB24F29D62CE8009E3680 /* Face Detection */ = {
 			isa = PBXGroup;
 			children = (
 				F8CFA6FD29D3433F00905F94 /* FaceDetector.swift */,
 			);
-			path = FaceDetectionLogic;
+			path = "Face Detection";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,15 +294,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				F8CFA70529D36A5C00905F94 /* FDFadeAnimatedButton.swift in Sources */,
-				F8CFA6FC29D3425C00905F94 /* MainCameraInterfaceVC.swift in Sources */,
+				F8CFA6FC29D3425C00905F94 /* DetectionSceneVC.swift in Sources */,
 				F8CFA71029D5A7E900905F94 /* FaceGeometryModel.swift in Sources */,
 				F8CFA6E029D32F5000905F94 /* AppDelegate.swift in Sources */,
+				F8E4D48329D8AAE900B6F0BB /* ApplicationCoordinatorFactory.swift in Sources */,
+				F8E4D47A29D8985E00B6F0BB /* Router.swift in Sources */,
 				F8CFA70729D43B1400905F94 /* DebugView.swift in Sources */,
+				F8E4D47E29D89A1B00B6F0BB /* Coordinator.swift in Sources */,
+				F8E4D48929D8AE1900B6F0BB /* DetectionCoordinator.swift in Sources */,
 				F8CFA6FE29D3433F00905F94 /* FaceDetector.swift in Sources */,
 				F8CFA6E229D32F5000905F94 /* SceneDelegate.swift in Sources */,
 				F8CFA70929D45E4000905F94 /* CameraCaptureVC.swift in Sources */,
-				F8CFA70029D3437300905F94 /* MainCameraViewModel.swift in Sources */,
+				F8E4D47C29D898DE00B6F0BB /* Presentable.swift in Sources */,
+				F8CFA70029D3437300905F94 /* DetectionSceneViewModel.swift in Sources */,
 				F8CFA71429D5A89E00905F94 /* FaceBoundsState.swift in Sources */,
+				F8E4D48129D8AA6400B6F0BB /* ApplicationCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

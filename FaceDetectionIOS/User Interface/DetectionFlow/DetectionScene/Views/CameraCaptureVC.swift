@@ -26,7 +26,7 @@ class CameraCaptureVC: UIViewController {
     
     let videoOutputQueue = DispatchQueue(label: "Video Output Queue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
     
-    init(with viewModel: MainCameraViewModel) {
+    init(with viewModel: DetectionSceneViewModel) {
         super.init(nibName: nil, bundle: nil)
         self.faceDetector = viewModel.faceDetector
         self.faceDetector?.presentedDelegate = self

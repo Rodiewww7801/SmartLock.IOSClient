@@ -1,5 +1,5 @@
 //
-//  MainCameraVC.swift
+//  DetectionSceneVC.swift
 //  FaceDetectionIOS
 //
 //  Created by Rodion Hladchenko on 28.03.2023.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainCameraInterfaceVC: UIViewController {
+class DetectionSceneVC: UIViewController {
     private var lastPhotoView: UIImageView = UIImageView()
     private var capturePhotoButton: FDFadeAnimatedButton = FDFadeAnimatedButton()
     private var changeCameraButton: UIButton = UIButton()
@@ -22,9 +22,9 @@ class MainCameraInterfaceVC: UIViewController {
     private var ellipseLayer: CAShapeLayer = CAShapeLayer()
     private var stateLabelIsAnimating = false
     
-    private var viewModel: MainCameraViewModel
+    private var viewModel: DetectionSceneViewModel
     
-    init(with viewModel: MainCameraViewModel) {
+    init(with viewModel: DetectionSceneViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         self.viewModel.setPresentedDelegate(self)
@@ -238,7 +238,7 @@ class MainCameraInterfaceVC: UIViewController {
     }
 }
 
-extension MainCameraInterfaceVC: MainCameraPresentedDelegate {
+extension DetectionSceneVC: DetectionScenePresentedDelegate {
     func updateFaceGeometry() {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }

@@ -21,9 +21,9 @@ class DebugView: UIView {
         return viewModel.faceLayoutGuideFrame
     }
     
-    var viewModel: MainCameraViewModel
+    var viewModel: DetectionSceneViewModel
     
-    init(with viewModel: MainCameraViewModel) {
+    init(with viewModel: DetectionSceneViewModel) {
         self.viewModel = viewModel
         super.init(frame: .zero)
         self.backgroundColor = .clear
