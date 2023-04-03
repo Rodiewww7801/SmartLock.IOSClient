@@ -14,6 +14,7 @@ class CameraCaptureVC: UIViewController {
     private var metalCommandQueue: MTLCommandQueue?
     private var metalView: MTKView?
     private var ciContext: CIContext?
+    private var alert: FDAlert = FDAlert()
     private var currentCIImage: CIImage?  {
         didSet {
         metalView?.draw()
@@ -47,7 +48,11 @@ class CameraCaptureVC: UIViewController {
     
     private func configureMetal() {
         guard let metalDevice = MTLCreateSystemDefaultDevice() else {
-            print("[CameraCaptureVC]: Could not instantiate required metal properties")
+            FDAlert()
+                .createWith(title: "Error", message: "Could not instantiate required metal properties MTLCreateSystemDefaultDevice")
+                .addAction(title: "Close", style: .destructive, handler: {
+                    
+                }).present(on: self)
             return
         }
         
@@ -61,7 +66,7 @@ class CameraCaptureVC: UIViewController {
         metalView?.delegate = self
         metalView?.framebufferOnly = false
         metalView?.frame = self.view.bounds
-        metalView?.layer.contentsGravity = .resizeAspect
+        metalView?.layer.contentsGravity = .resizeAspectFill
         if let metalView = metalView {
             view.layer.insertSublayer(metalView.layer, at: 0)
         }
@@ -71,7 +76,11 @@ class CameraCaptureVC: UIViewController {
     
     private func configureSession() {
         guard let camera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front) else {
-            print("[CameraCaptureVC]: No front video camera available")
+            FDAlert()
+                .createWith(title: "Error", message: "No front video camera available")
+                .addAction(title: "Close", style: .destructive, handler: {
+                    
+                }).present(on: self)
             return
         }
         
@@ -91,7 +100,7 @@ class CameraCaptureVC: UIViewController {
         videoOutput.connection(with: .video)?.videoOrientation = .portrait
         
         previewLayer = AVCaptureVideoPreviewLayer(session: session)
-        previewLayer?.videoGravity = .resizeAspect
+        previewLayer?.videoGravity = .resizeAspectFill
         previewLayer?.frame = self.view.bounds
         
         if let previewLayer = previewLayer, !isUsingMetal {
