@@ -11,10 +11,6 @@ import UIKit
 class FDAlert {
     var alert: UIAlertController = UIAlertController()
     
-    deinit {
-        print("FDAlert deinit")
-    }
-    
     @discardableResult
     func createWith(title: String, message: String? = nil) -> FDAlert {
         self.alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
