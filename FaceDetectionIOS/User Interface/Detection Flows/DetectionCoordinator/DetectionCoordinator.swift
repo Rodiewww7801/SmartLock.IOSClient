@@ -20,7 +20,8 @@ final class DetectionCoordinator: Coordinator {
     override func start() {
         switch AVCaptureDevice.authorizationStatus(for: .video) {
         case .authorized:
-            showDetectionScene()
+            //showDetectionScene()
+            showTrueDepthScene()
          default:
             showAlert()
         }
@@ -43,6 +44,11 @@ final class DetectionCoordinator: Coordinator {
     private func showDetectionScene() {
         let viewModel = DetectionSceneViewModel()
         let vc = DetectionSceneVC(with: viewModel)
+        router.setToRootModule(vc, animated: true)
+    }
+    
+    private func showTrueDepthScene() {
+        let vc = DepthDataViewController()
         router.setToRootModule(vc, animated: true)
     }
 }

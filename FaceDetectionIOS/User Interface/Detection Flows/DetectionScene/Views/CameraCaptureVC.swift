@@ -25,7 +25,7 @@ class CameraCaptureVC: UIViewController {
     var previewLayer: AVCaptureVideoPreviewLayer?
     var session: AVCaptureSession = AVCaptureSession()
     
-    let videoOutputQueue = DispatchQueue(label: "Video Output Queue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
+    let videoOutputQueue = DispatchQueue(label: "camera_capture_output_queue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
     
     init(with viewModel: DetectionSceneViewModel) {
         super.init(nibName: nil, bundle: nil)

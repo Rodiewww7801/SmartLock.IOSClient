@@ -7,7 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F8301C532A117CD900455964 /* DepthDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8301C522A117CD900455964 /* DepthDataViewController.swift */; };
+		F8301C582A1184A300455964 /* SessionSetupResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8301C572A1184A300455964 /* SessionSetupResult.swift */; };
 		F8348CB529DB56BD00AF14F2 /* FDAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8348CB429DB56BD00AF14F2 /* FDAlert.swift */; };
+		F849F28E2A1F757600672D34 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = F849F28D2A1F757600672D34 /* Transform.swift */; };
+		F849F2902A1F946600672D34 /* AcrballCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = F849F28F2A1F946600672D34 /* AcrballCamera.swift */; };
+		F849F2962A1FA14900672D34 /* GestureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F849F2952A1FA14900672D34 /* GestureController.swift */; };
+		F85439C62A142EEF00D78E8A /* PointCloud.metal in Sources */ = {isa = PBXBuildFile; fileRef = F85439C52A142EEF00D78E8A /* PointCloud.metal */; };
+		F85AE9652A1EA202001E565F /* MathLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85AE9642A1EA201001E565F /* MathLibrary.swift */; };
+		F8B2DEAF2A196E9F003F7544 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2DEAE2A196E9F003F7544 /* Renderer.swift */; };
 		F8CFA6E029D32F5000905F94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA6DF29D32F5000905F94 /* AppDelegate.swift */; };
 		F8CFA6E229D32F5000905F94 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA6E129D32F5000905F94 /* SceneDelegate.swift */; };
 		F8CFA6E929D32F5100905F94 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F8CFA6E829D32F5100905F94 /* Assets.xcassets */; };
@@ -29,7 +37,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F8301C522A117CD900455964 /* DepthDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepthDataViewController.swift; sourceTree = "<group>"; };
+		F8301C572A1184A300455964 /* SessionSetupResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSetupResult.swift; sourceTree = "<group>"; };
 		F8348CB429DB56BD00AF14F2 /* FDAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDAlert.swift; sourceTree = "<group>"; };
+		F849F28D2A1F757600672D34 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
+		F849F28F2A1F946600672D34 /* AcrballCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcrballCamera.swift; sourceTree = "<group>"; };
+		F849F2952A1FA14900672D34 /* GestureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureController.swift; sourceTree = "<group>"; };
+		F85439C52A142EEF00D78E8A /* PointCloud.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = PointCloud.metal; sourceTree = "<group>"; };
+		F85AE9642A1EA201001E565F /* MathLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathLibrary.swift; sourceTree = "<group>"; };
+		F8B2DEAE2A196E9F003F7544 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
+		F8B2DEB92A1996CB003F7544 /* FaceDetectionIOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FaceDetectionIOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		F8CFA6DC29D32F5000905F94 /* FaceDetectionIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceDetectionIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8CFA6DF29D32F5000905F94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8CFA6E129D32F5000905F94 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +80,96 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F8301C512A117CAF00455964 /* TrueDepthScene */ = {
+			isa = PBXGroup;
+			children = (
+				F85AE9602A1E9D33001E565F /* ViewControllers */,
+			);
+			path = TrueDepthScene;
+			sourceTree = "<group>";
+		};
+		F8301C552A11846700455964 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F8301C562A11847700455964 /* AVFoundation */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F8301C562A11847700455964 /* AVFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				F8301C572A1184A300455964 /* SessionSetupResult.swift */,
+			);
+			path = AVFoundation;
+			sourceTree = "<group>";
+		};
+		F849F28B2A1F73A800672D34 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F849F28C2A1F73B400672D34 /* Interfaces */,
+				F849F28F2A1F946600672D34 /* AcrballCamera.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F849F28C2A1F73B400672D34 /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				F849F28D2A1F757600672D34 /* Transform.swift */,
+			);
+			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		F849F2942A1FA13C00672D34 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F849F2952A1FA14900672D34 /* GestureController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		F85439C42A12F7CB00D78E8A /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				F85439C52A142EEF00D78E8A /* PointCloud.metal */,
+			);
+			path = Shaders;
+			sourceTree = "<group>";
+		};
+		F85AE9602A1E9D33001E565F /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F8301C522A117CD900455964 /* DepthDataViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F8B2DEA92A190013003F7544 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				F8B2DEAA2A190077003F7544 /* Utility */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		F8B2DEAA2A190077003F7544 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				F8B2DEB92A1996CB003F7544 /* FaceDetectionIOS-Bridging-Header.h */,
+				F85AE9642A1EA201001E565F /* MathLibrary.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		F8B2DEAD2A19635D003F7544 /* Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				F8B2DEAE2A196E9F003F7544 /* Renderer.swift */,
+			);
+			path = Renderer;
+			sourceTree = "<group>";
+		};
 		F8CFA6D329D32F5000905F94 = {
 			isa = PBXGroup;
 			children = (
@@ -82,9 +189,8 @@
 		F8CFA6DE29D32F5000905F94 /* FaceDetectionIOS */ = {
 			isa = PBXGroup;
 			children = (
-				F8CFA70E29D5A78800905F94 /* Models */,
 				F8CFA6FA29D33C6000905F94 /* Application */,
-				F8CFA6F929D33C4C00905F94 /* Business logic */,
+				F8CFA6F929D33C4C00905F94 /* Common */,
 				F8CFA6F629D33C1200905F94 /* User Interface */,
 			);
 			path = FaceDetectionIOS;
@@ -93,9 +199,10 @@
 		F8CFA6F629D33C1200905F94 /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				F8301C552A11846700455964 /* Helpers */,
 				F8E4D47829D897E300B6F0BB /* Base Navigation logic */,
 				F8E4D47F29D8AA5200B6F0BB /* ApplicationCoordinator */,
-				F8E4D48429D8AB2400B6F0BB /* DetectionFlow */,
+				F8E4D48429D8AB2400B6F0BB /* Detection Flows */,
 				F8CFA70329D36A0900905F94 /* Custom UI Helpers */,
 			);
 			path = "User Interface";
@@ -110,13 +217,16 @@
 			path = DetectionScene;
 			sourceTree = "<group>";
 		};
-		F8CFA6F929D33C4C00905F94 /* Business logic */ = {
+		F8CFA6F929D33C4C00905F94 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				F8E4D47429D8968300B6F0BB /* True Depth */,
+				F849F2942A1FA13C00672D34 /* Controllers */,
+				F8B2DEA92A190013003F7544 /* Helpers */,
+				F8CFA70E29D5A78800905F94 /* Models */,
+				F8E4D47429D8968300B6F0BB /* MetalCore */,
 				F8FBB24F29D62CE8009E3680 /* Face Detection */,
 			);
-			path = "Business logic";
+			path = Common;
 			sourceTree = "<group>";
 		};
 		F8CFA6FA29D33C6000905F94 /* Application */ = {
@@ -166,11 +276,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		F8E4D47429D8968300B6F0BB /* True Depth */ = {
+		F8E4D47429D8968300B6F0BB /* MetalCore */ = {
 			isa = PBXGroup;
 			children = (
+				F849F28B2A1F73A800672D34 /* Models */,
+				F8B2DEAD2A19635D003F7544 /* Renderer */,
+				F85439C42A12F7CB00D78E8A /* Shaders */,
 			);
-			path = "True Depth";
+			path = MetalCore;
 			sourceTree = "<group>";
 		};
 		F8E4D47829D897E300B6F0BB /* Base Navigation logic */ = {
@@ -192,13 +305,14 @@
 			path = ApplicationCoordinator;
 			sourceTree = "<group>";
 		};
-		F8E4D48429D8AB2400B6F0BB /* DetectionFlow */ = {
+		F8E4D48429D8AB2400B6F0BB /* Detection Flows */ = {
 			isa = PBXGroup;
 			children = (
 				F8E4D48529D8AB5700B6F0BB /* DetectionCoordinator */,
 				F8CFA6F729D33C1A00905F94 /* DetectionScene */,
+				F8301C512A117CAF00455964 /* TrueDepthScene */,
 			);
-			path = DetectionFlow;
+			path = "Detection Flows";
 			sourceTree = "<group>";
 		};
 		F8E4D48529D8AB5700B6F0BB /* DetectionCoordinator */ = {
@@ -258,6 +372,7 @@
 				TargetAttributes = {
 					F8CFA6DB29D32F5000905F94 = {
 						CreatedOnToolsVersion = 14.2;
+						LastSwiftMigration = 1420;
 					};
 				};
 			};
@@ -298,17 +413,25 @@
 			files = (
 				F8CFA70529D36A5C00905F94 /* FDFadeAnimatedButton.swift in Sources */,
 				F8CFA6FC29D3425C00905F94 /* DetectionSceneVC.swift in Sources */,
+				F85439C62A142EEF00D78E8A /* PointCloud.metal in Sources */,
 				F8CFA71029D5A7E900905F94 /* FaceGeometryModel.swift in Sources */,
 				F8CFA6E029D32F5000905F94 /* AppDelegate.swift in Sources */,
+				F849F2962A1FA14900672D34 /* GestureController.swift in Sources */,
 				F8E4D48329D8AAE900B6F0BB /* ApplicationCoordinatorFactory.swift in Sources */,
 				F8E4D47A29D8985E00B6F0BB /* Router.swift in Sources */,
+				F8301C532A117CD900455964 /* DepthDataViewController.swift in Sources */,
+				F849F2902A1F946600672D34 /* AcrballCamera.swift in Sources */,
 				F8CFA70729D43B1400905F94 /* DebugView.swift in Sources */,
 				F8E4D47E29D89A1B00B6F0BB /* Coordinator.swift in Sources */,
 				F8E4D48929D8AE1900B6F0BB /* DetectionCoordinator.swift in Sources */,
 				F8CFA6FE29D3433F00905F94 /* FaceDetector.swift in Sources */,
 				F8CFA6E229D32F5000905F94 /* SceneDelegate.swift in Sources */,
 				F8CFA70929D45E4000905F94 /* CameraCaptureVC.swift in Sources */,
+				F8301C582A1184A300455964 /* SessionSetupResult.swift in Sources */,
 				F8E4D47C29D898DE00B6F0BB /* Presentable.swift in Sources */,
+				F8B2DEAF2A196E9F003F7544 /* Renderer.swift in Sources */,
+				F849F28E2A1F757600672D34 /* Transform.swift in Sources */,
+				F85AE9652A1EA202001E565F /* MathLibrary.swift in Sources */,
 				F8CFA70029D3437300905F94 /* DetectionSceneViewModel.swift in Sources */,
 				F8CFA71429D5A89E00905F94 /* FaceBoundsState.swift in Sources */,
 				F8E4D48129D8AA6400B6F0BB /* ApplicationCoordinator.swift in Sources */,
@@ -449,6 +572,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z9MV89M5M3;
@@ -469,6 +593,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = rodia.FaceDetectionIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "FaceDetectionIOS/Common/Helpers/Utility/FaceDetectionIOS-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -479,6 +605,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z9MV89M5M3;
@@ -499,6 +626,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = rodia.FaceDetectionIOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "FaceDetectionIOS/Common/Helpers/Utility/FaceDetectionIOS-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

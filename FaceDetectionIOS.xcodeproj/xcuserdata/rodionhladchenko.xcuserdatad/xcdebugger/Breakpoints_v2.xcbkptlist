@@ -7,176 +7,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0C47ADB0-20D1-42DB-AF12-E18A39A0CE07"
+            uuid = "D763970B-C0E2-4CB6-84C1-90985FA405D7"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FaceDetectionIOS/User Interface/MainCameraScene/Views/MainCameraInterfaceVC.swift"
+            filePath = "FaceDetectionIOS/Common/MetalCore/Models/AcrballCamera.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
-            landmarkName = "capturePhotoObservation(image:)"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "getViewMatrix()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "0C47ADB0-20D1-42DB-AF12-E18A39A0CE07 - 53678f555f50d108"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FaceDetectionIOS.MainCameraInterfaceVC.capturePhotoObservation(image: __C.UIImage) -&gt; ()"
-                  moduleName = "FaceDetectionIOS"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rodionhladchenko/Documents/my%20repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/MainCameraScene/Views/MainCameraInterfaceVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "234"
-                  endingLineNumber = "234"
-                  offsetFromSymbolStart = "204">
-               </Location>
-               <Location
-                  uuid = "0C47ADB0-20D1-42DB-AF12-E18A39A0CE07 - a421a12e78cb2565"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in FaceDetectionIOS.MainCameraInterfaceVC.capturePhotoObservation(image: __C.UIImage) -&gt; ()"
-                  moduleName = "FaceDetectionIOS"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rodionhladchenko/Documents/my%20repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/MainCameraScene/Views/MainCameraInterfaceVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "234"
-                  endingLineNumber = "234"
-                  offsetFromSymbolStart = "28">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2874EE72-737E-4603-B492-486B87757B68"
+            uuid = "70CD8047-8F9D-46F8-9A01-8E085F1403D2"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FaceDetectionIOS/Business logic/FaceDetector.swift"
+            filePath = "FaceDetectionIOS/Common/MetalCore/Models/AcrballCamera.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
-            landmarkName = "captureOutput(_:didOutput:from:)"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "update()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "70853019-5646-4379-AB82-0983FFCCF37A"
+            uuid = "8FCD7F10-D741-495B-8B59-83366855F783"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FaceDetectionIOS/Business logic/FaceDetector.swift"
+            filePath = "FaceDetectionIOS/User Interface/Detection Flows/TrueDepthScene/ViewControllers/DepthDataViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
-            landmarkName = "captureCurrentImage(from:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9EC51858-AE04-4727-AA51-4340F7A65B56"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FaceDetectionIOS/Business logic/FaceDetector.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
-            landmarkName = "captureCurrentImage(from:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "3B3F42FB-8C0F-45AC-9098-F1A7602054E1"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FaceDetectionIOS/Business logic/FaceDetector.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
-            landmarkName = "captureCurrentImage(from:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5BC0A43F-5B05-4593-B2F7-8F9F3D9996C7"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FaceDetectionIOS/Business logic/FaceDetector.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "removeBackgroundFrom(image:using:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1BD658F9-C12F-46C4-9CFE-15A26CF8CD45"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FaceDetectionIOS/User Interface/MainCameraScene/Views/CameraCaptureVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "configureMetal()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "BD65D081-B8AC-401F-A1D4-BE8B5E46075D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FaceDetectionIOS/User Interface/DetectionFlow/DetectionCoordinator/DetectionCoordinator.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "start()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B732FA7A-C384-487D-A0BA-0B4FC847D105"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FaceDetectionIOS/User Interface/DetectionFlow/DetectionCoordinator/DetectionCoordinator.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "showAlert()"
+            startingLineNumber = "266"
+            endingLineNumber = "266"
+            landmarkName = "pinchGestureHandler(gesture:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
