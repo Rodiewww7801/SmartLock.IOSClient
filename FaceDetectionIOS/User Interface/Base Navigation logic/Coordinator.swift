@@ -16,7 +16,7 @@ class Coordinator {
     }
     
     func addChild(_ coordinator: Coordinator) {
-        guard self.childCoordinators.contains(where: { $0 === coordinator }) else { return } //check if same references
+        guard !self.childCoordinators.contains(where: { $0 === coordinator }) else { return } //check if same references
         self.childCoordinators.append(coordinator)
     }
     

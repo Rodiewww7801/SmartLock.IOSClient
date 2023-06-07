@@ -17,7 +17,7 @@ class CameraCaptureVC: UIViewController {
     private var alert: FDAlert = FDAlert()
     private var currentCIImage: CIImage?  {
         didSet {
-        metalView?.draw()
+        //metalView?.draw()
       }
     }
     
@@ -25,7 +25,7 @@ class CameraCaptureVC: UIViewController {
     var previewLayer: AVCaptureVideoPreviewLayer?
     var session: AVCaptureSession = AVCaptureSession()
     
-    let videoOutputQueue = DispatchQueue(label: "Video Output Queue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
+    let videoOutputQueue = DispatchQueue(label: "camera_capture_output_queue", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
     
     init(with viewModel: DetectionSceneViewModel) {
         super.init(nibName: nil, bundle: nil)
@@ -142,11 +142,17 @@ extension CameraCaptureVC: MTKViewDelegate {
 extension CameraCaptureVC: FaceDetectorDelegate {
     func draw(image: CIImage) {
         currentCIImage = image
+        metalView?.draw()
     }
     
     func convertFromMetadataToPreviewRect(rect: CGRect) -> CGRect {
         guard let previewLayer = previewLayer else { return CGRect.zero }
-        return previewLayer.layerRectConverted(fromMetadataOutputRect: rect)
+        let boundingBox = rect
+        let size = CGSize(width: boundingBox.height * previewLayer.bounds.width,
+                          height: boundingBox.width * previewLayer.bounds.height)
+        let origin = CGPoint(x: boundingBox.minY * previewLayer.bounds.width,
+                             y: boundingBox.minX * previewLayer.bounds.height )
+        return CGRect(origin: origin, size: size)//previewLayer.layerRectConverted(fromMetadataOutputRect: rect)
     }
 }
 

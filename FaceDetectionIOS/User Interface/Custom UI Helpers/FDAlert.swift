@@ -42,7 +42,7 @@ class FDAlert {
     }
 }
 
-extension FDAlert: Presentable{
+extension FDAlert: Presentable {
     func toPresent() -> UIViewController {
         return alert
     }
