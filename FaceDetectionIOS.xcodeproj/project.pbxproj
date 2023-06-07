@@ -15,6 +15,9 @@
 		F849F2962A1FA14900672D34 /* GestureController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F849F2952A1FA14900672D34 /* GestureController.swift */; };
 		F85439C62A142EEF00D78E8A /* PointCloud.metal in Sources */ = {isa = PBXBuildFile; fileRef = F85439C52A142EEF00D78E8A /* PointCloud.metal */; };
 		F85AE9652A1EA202001E565F /* MathLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F85AE9642A1EA201001E565F /* MathLibrary.swift */; };
+		F8607F592A22644A0006A369 /* CenterPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8607F582A22644A0006A369 /* CenterPanelViewController.swift */; };
+		F8897ACB2A2FDABB0057D7A7 /* MainListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8897ACA2A2FDABB0057D7A7 /* MainListViewController.swift */; };
+		F8897ACD2A2FE0CF0057D7A7 /* MainListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8897ACC2A2FE0CF0057D7A7 /* MainListViewModel.swift */; };
 		F8B2DEAF2A196E9F003F7544 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8B2DEAE2A196E9F003F7544 /* Renderer.swift */; };
 		F8CFA6E029D32F5000905F94 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA6DF29D32F5000905F94 /* AppDelegate.swift */; };
 		F8CFA6E229D32F5000905F94 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA6E129D32F5000905F94 /* SceneDelegate.swift */; };
@@ -45,6 +48,9 @@
 		F849F2952A1FA14900672D34 /* GestureController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureController.swift; sourceTree = "<group>"; };
 		F85439C52A142EEF00D78E8A /* PointCloud.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = PointCloud.metal; sourceTree = "<group>"; };
 		F85AE9642A1EA201001E565F /* MathLibrary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathLibrary.swift; sourceTree = "<group>"; };
+		F8607F582A22644A0006A369 /* CenterPanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterPanelViewController.swift; sourceTree = "<group>"; };
+		F8897ACA2A2FDABB0057D7A7 /* MainListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListViewController.swift; sourceTree = "<group>"; };
+		F8897ACC2A2FE0CF0057D7A7 /* MainListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListViewModel.swift; sourceTree = "<group>"; };
 		F8B2DEAE2A196E9F003F7544 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		F8B2DEB92A1996CB003F7544 /* FaceDetectionIOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FaceDetectionIOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		F8CFA6DC29D32F5000905F94 /* FaceDetectionIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceDetectionIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -143,6 +149,15 @@
 				F8301C522A117CD900455964 /* DepthDataViewController.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F8897AC92A2FDA950057D7A7 /* MainListScene */ = {
+			isa = PBXGroup;
+			children = (
+				F8897ACA2A2FDABB0057D7A7 /* MainListViewController.swift */,
+				F8897ACC2A2FE0CF0057D7A7 /* MainListViewModel.swift */,
+			);
+			path = MainListScene;
 			sourceTree = "<group>";
 		};
 		F8B2DEA92A190013003F7544 /* Helpers */ = {
@@ -309,6 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				F8E4D48529D8AB5700B6F0BB /* DetectionCoordinator */,
+				F8897AC92A2FDA950057D7A7 /* MainListScene */,
 				F8CFA6F729D33C1A00905F94 /* DetectionScene */,
 				F8301C512A117CAF00455964 /* TrueDepthScene */,
 			);
@@ -318,6 +334,7 @@
 		F8E4D48529D8AB5700B6F0BB /* DetectionCoordinator */ = {
 			isa = PBXGroup;
 			children = (
+				F8607F582A22644A0006A369 /* CenterPanelViewController.swift */,
 				F8E4D48829D8AE1900B6F0BB /* DetectionCoordinator.swift */,
 			);
 			path = DetectionCoordinator;
@@ -414,16 +431,19 @@
 				F8CFA70529D36A5C00905F94 /* FDFadeAnimatedButton.swift in Sources */,
 				F8CFA6FC29D3425C00905F94 /* DetectionSceneVC.swift in Sources */,
 				F85439C62A142EEF00D78E8A /* PointCloud.metal in Sources */,
+				F8897ACD2A2FE0CF0057D7A7 /* MainListViewModel.swift in Sources */,
 				F8CFA71029D5A7E900905F94 /* FaceGeometryModel.swift in Sources */,
 				F8CFA6E029D32F5000905F94 /* AppDelegate.swift in Sources */,
 				F849F2962A1FA14900672D34 /* GestureController.swift in Sources */,
 				F8E4D48329D8AAE900B6F0BB /* ApplicationCoordinatorFactory.swift in Sources */,
 				F8E4D47A29D8985E00B6F0BB /* Router.swift in Sources */,
 				F8301C532A117CD900455964 /* DepthDataViewController.swift in Sources */,
+				F8607F592A22644A0006A369 /* CenterPanelViewController.swift in Sources */,
 				F849F2902A1F946600672D34 /* AcrballCamera.swift in Sources */,
 				F8CFA70729D43B1400905F94 /* DebugView.swift in Sources */,
 				F8E4D47E29D89A1B00B6F0BB /* Coordinator.swift in Sources */,
 				F8E4D48929D8AE1900B6F0BB /* DetectionCoordinator.swift in Sources */,
+				F8897ACB2A2FDABB0057D7A7 /* MainListViewController.swift in Sources */,
 				F8CFA6FE29D3433F00905F94 /* FaceDetector.swift in Sources */,
 				F8CFA6E229D32F5000905F94 /* SceneDelegate.swift in Sources */,
 				F8CFA70929D45E4000905F94 /* CameraCaptureVC.swift in Sources */,

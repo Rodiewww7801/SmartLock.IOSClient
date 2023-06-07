@@ -14,7 +14,6 @@ class DepthDataViewController: UIViewController {
     private var metalView: MTKView!
     private var renderer: Renderer!
     
-    
     //AVFoundation
     private var sessionQueue: DispatchQueue
     private var captureSession: AVCaptureSession
@@ -41,6 +40,11 @@ class DepthDataViewController: UIViewController {
         self.outputSynchronizerQueue = DispatchQueue(label: "video_data_queue_synchronized", qos: .userInitiated, attributes: [], autoreleaseFrequency: .workItem)
         self.videDeviceDiscoverySession = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInTrueDepthCamera], mediaType: .video, position: .front)
         super.init(nibName: nil, bundle: nil)
+        print("[DepthDataViewController]: init")
+    }
+    
+    deinit {
+        print("[DepthDataViewController]: deinit")
     }
     
     required init?(coder: NSCoder) {
@@ -67,8 +71,6 @@ class DepthDataViewController: UIViewController {
         
         let window = UIApplication.shared.connectedScenes.first as? UIWindowScene
         self.uiOrientation = window?.interfaceOrientation ?? .portrait
-
-        //todo: thermalState
         
         sessionQueue.async { [weak self] in
             self?.startSession()
@@ -180,7 +182,6 @@ extension DepthDataViewController {
     private func startSession() {
         switch self.sessionSetupResult {
         case .success:
-            self.addObservers()
             
             // todo: add rotation camera for metal preview
             
@@ -205,41 +206,67 @@ extension DepthDataViewController {
             break
         }
     }
-    
-    private func addObservers() {
-        // todo: add observers
-    }
 }
 
 // MARK: - AVCaptureDataOutputSynchronizerDelegate
 
 extension DepthDataViewController: AVCaptureDataOutputSynchronizerDelegate {
     func dataOutputSynchronizer(_ synchronizer: AVCaptureDataOutputSynchronizer, didOutput synchronizedDataCollection: AVCaptureSynchronizedDataCollection) {
-        guard renderingEnabled else { return }
+//        guard renderingEnabled else { return }
+//
+//        //read all outputs
+//        guard
+//            let syncedDepthData: AVCaptureSynchronizedDepthData = synchronizedDataCollection.synchronizedData(for: depthDataOutput) as? AVCaptureSynchronizedDepthData,
+//            let syncedVideoData: AVCaptureSynchronizedSampleBufferData = synchronizedDataCollection.synchronizedData(for: videoDataOutput) as? AVCaptureSynchronizedSampleBufferData
+//        else {
+//            return
+//        }
+//
+//        guard !syncedDepthData.depthDataWasDropped || !syncedVideoData.sampleBufferWasDropped else { return }
+//
+//        let depthData = syncedDepthData.depthData
+//        let depthPixelBuffer = depthData.depthDataMap
+//        let sampleBuffer = syncedVideoData.sampleBuffer
+//
+//        guard
+//            let videoPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer),
+//            let formatDiscription = CMSampleBufferGetFormatDescription(sampleBuffer)
+//        else {
+//            return
+//        }
+//
+//        //todo: cloud point index
+//        self.renderer.setDepthFrame(depth: depthData, withTexture: videoPixelBuffer)
         
-        //read all outputs
-        guard
-            let syncedDepthData: AVCaptureSynchronizedDepthData = synchronizedDataCollection.synchronizedData(for: depthDataOutput) as? AVCaptureSynchronizedDepthData,
-            let syncedVideoData: AVCaptureSynchronizedSampleBufferData = synchronizedDataCollection.synchronizedData(for: videoDataOutput) as? AVCaptureSynchronizedSampleBufferData
-        else {
+        
+        if !renderingEnabled {
             return
         }
         
-        guard !syncedDepthData.depthDataWasDropped || !syncedVideoData.sampleBufferWasDropped else { return }
+        // Read all outputs
+        guard renderingEnabled,
+            let syncedDepthData: AVCaptureSynchronizedDepthData =
+            synchronizedDataCollection.synchronizedData(for: depthDataOutput) as? AVCaptureSynchronizedDepthData,
+            let syncedVideoData: AVCaptureSynchronizedSampleBufferData =
+            synchronizedDataCollection.synchronizedData(for: videoDataOutput) as? AVCaptureSynchronizedSampleBufferData else {
+                // only work on synced pairs
+                return
+        }
+        
+        if syncedDepthData.depthDataWasDropped || syncedVideoData.sampleBufferWasDropped {
+            return
+        }
         
         let depthData = syncedDepthData.depthData
         let depthPixelBuffer = depthData.depthDataMap
         let sampleBuffer = syncedVideoData.sampleBuffer
-        
-        guard
-            let videoPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer),
-            let formatDiscription = CMSampleBufferGetFormatDescription(sampleBuffer)
-        else {
-            return
+        guard let videoPixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer),
+            let formatDescription = CMSampleBufferGetFormatDescription(sampleBuffer) else {
+                return
         }
         
-        //todo: cloud point index
-        self.renderer.setDepthFrame(depth: depthData, withTexture: videoPixelBuffer)
+        
+        self.renderer?.setDepthFrame(depth: depthData, withTexture: videoPixelBuffer)
     }
     
     private func subscribeOnPinchGesture(_ gestureObserver: GestureController?) {

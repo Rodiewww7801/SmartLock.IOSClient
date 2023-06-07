@@ -18,13 +18,7 @@ final class DetectionCoordinator: Coordinator {
     }
     
     override func start() {
-        switch AVCaptureDevice.authorizationStatus(for: .video) {
-        case .authorized:
-            //showDetectionScene()
-            showTrueDepthScene()
-         default:
-            showAlert()
-        }
+        self.showNavigationTest()
     }
     
     private func showAlert() {
@@ -42,13 +36,35 @@ final class DetectionCoordinator: Coordinator {
     }
     
     private func showDetectionScene() {
-        let viewModel = DetectionSceneViewModel()
-        let vc = DetectionSceneVC(with: viewModel)
-        router.setToRootModule(vc, animated: true)
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            let viewModel = DetectionSceneViewModel()
+            let vc = DetectionSceneVC(with: viewModel)
+            router.push(vc, animated: true)
+        default:
+            showAlert()
+        }
     }
     
     private func showTrueDepthScene() {
-        let vc = DepthDataViewController()
-        router.setToRootModule(vc, animated: true)
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            let vc = DepthDataViewController()
+            router.push(vc, animated: true)
+        default:
+            showAlert()
+        }
+    }
+    
+    private func showNavigationTest() {
+        let viewModel = MainListViewModel()
+        viewModel.mainListDataSource.append(NavigationItem(name: "Face detection scene", link: { [weak self] in
+            self?.showDetectionScene()
+        }))
+        viewModel.mainListDataSource.append(NavigationItem(name: "Point to cloud scene", link: { [weak self] in
+            self?.showTrueDepthScene()
+        }))
+        let main = MainListViewController(with: viewModel)
+        router.setToRootModule(main, animated: true)
     }
 }

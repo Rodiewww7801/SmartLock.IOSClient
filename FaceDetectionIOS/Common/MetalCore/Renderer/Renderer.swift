@@ -183,8 +183,7 @@ extension Renderer: MTKViewDelegate {
         }
         
         guard let commandBuffer = commandQueue.makeCommandBuffer(),
-              let renderPassDiscriptor = self.metalView.currentRenderPassDescriptor,
-              let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDiscriptor)
+              let renderPassDiscriptor = view.currentRenderPassDescriptor
         else {
             print("[Renderer]: Failed to create render command encoder")
             return
@@ -198,18 +197,19 @@ extension Renderer: MTKViewDelegate {
         intrinsics?[2][0] /= ratio
         intrinsics?[2][1] /= ratio
         
+        let depthTextureDescriptor = MTLTextureDescriptor()
+        depthTextureDescriptor.width = Int(view.drawableSize.width)
+        depthTextureDescriptor.height = Int(view.drawableSize.height)
+        depthTextureDescriptor.pixelFormat = .depth32Float
+        depthTextureDescriptor.usage = .renderTarget
+
+        let depthTestTexture = device.makeTexture(descriptor: depthTextureDescriptor)
+        renderPassDiscriptor.depthAttachment.loadAction = .clear
+        renderPassDiscriptor.depthAttachment.storeAction = .store
+        renderPassDiscriptor.depthAttachment.clearDepth = 1.0
+        renderPassDiscriptor.depthAttachment.texture = depthTestTexture
         
-//        let depthTextureDescriptor = MTLTextureDescriptor()
-//        depthTextureDescriptor.width = Int(view.drawableSize.width)
-//        depthTextureDescriptor.height = Int(view.drawableSize.height)
-//        depthTextureDescriptor.pixelFormat = .depth32Float
-//        depthTextureDescriptor.usage = .renderTarget
-        
-//        let depthTestTexture = device.makeTexture(descriptor: depthTextureDescriptor)
-//        renderPassDiscriptor.depthAttachment.loadAction = .clear
-//        renderPassDiscriptor.depthAttachment.storeAction = .store
-//        renderPassDiscriptor.depthAttachment.clearDepth = 1.0
-//        renderPassDiscriptor.depthAttachment.texture = depthTestTexture
+        guard let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDiscriptor) else { return }
         
         renderEncoder.setDepthStencilState(self.depthStencilState)
         renderEncoder.setRenderPipelineState(self.renderPipelineState)
@@ -222,6 +222,7 @@ extension Renderer: MTKViewDelegate {
         renderEncoder.setFragmentTexture(colorTexture, index: 0)
         renderEncoder.drawPrimitives(type: .point, vertexStart: 0,
                                      vertexCount: CVPixelBufferGetWidth(depthPixelBuffer) * CVPixelBufferGetHeight(depthPixelBuffer))
+        
         renderEncoder.endEncoding()
         
         guard let currentDrawable = view.currentDrawable else {

@@ -17,7 +17,7 @@ class CameraCaptureVC: UIViewController {
     private var alert: FDAlert = FDAlert()
     private var currentCIImage: CIImage?  {
         didSet {
-        metalView?.draw()
+        //metalView?.draw()
       }
     }
     
@@ -142,11 +142,17 @@ extension CameraCaptureVC: MTKViewDelegate {
 extension CameraCaptureVC: FaceDetectorDelegate {
     func draw(image: CIImage) {
         currentCIImage = image
+        metalView?.draw()
     }
     
     func convertFromMetadataToPreviewRect(rect: CGRect) -> CGRect {
         guard let previewLayer = previewLayer else { return CGRect.zero }
-        return previewLayer.layerRectConverted(fromMetadataOutputRect: rect)
+        let boundingBox = rect
+        let size = CGSize(width: boundingBox.height * previewLayer.bounds.width,
+                          height: boundingBox.width * previewLayer.bounds.height)
+        let origin = CGPoint(x: boundingBox.minY * previewLayer.bounds.width,
+                             y: boundingBox.minX * previewLayer.bounds.height )
+        return CGRect(origin: origin, size: size)//previewLayer.layerRectConverted(fromMetadataOutputRect: rect)
     }
 }
 

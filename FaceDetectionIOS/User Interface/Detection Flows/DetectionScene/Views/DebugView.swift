@@ -82,7 +82,7 @@ class DebugView: UIView {
         rectView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(rectView)
         rectView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        rectView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -30).isActive = true
+        rectView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
         rectView.heightAnchor.constraint(equalToConstant: self.faceLayoutGuideFrame.height).isActive = true
         rectView.widthAnchor.constraint(equalToConstant: self.faceLayoutGuideFrame.width).isActive = true
     }

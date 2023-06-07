@@ -27,7 +27,12 @@ class DetectionSceneVC: UIViewController {
     init(with viewModel: DetectionSceneViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        print("[DetectionSceneVC]: init")
         self.viewModel.setPresentedDelegate(self)
+    }
+    
+    deinit {
+        print("[DetectionSceneVC]: deinit")
     }
     
     required init?(coder: NSCoder) {
@@ -71,7 +76,9 @@ class DetectionSceneVC: UIViewController {
         
         //add capturePhotoButton
         self.capturePhotoButton = FDFadeAnimatedButton()
-        self.capturePhotoButton.addAction(capturePhotoButtonTapped, for: .touchDown)
+        self.capturePhotoButton.addAction({ [weak self] in
+            self?.capturePhotoButtonTapped()
+        }, for: .touchDown)
         capturePhotoButton.widthAnchor.constraint(equalToConstant: 77).isActive = true
         capturePhotoButton.heightAnchor.constraint(equalToConstant: 77).isActive = true
         self.bottomButtonsFirstStack.addArrangedSubview(capturePhotoButton)
@@ -128,7 +135,9 @@ class DetectionSceneVC: UIViewController {
         self.hideBackgroundLabel.font = .systemFont(ofSize: 14)
         self.hideBackgroundLabel.translatesAutoresizingMaskIntoConstraints = false
         self.hideBackgroundButton = FDFadeAnimatedButton()
-        self.hideBackgroundButton.addAction(hideBackgroundTapped, for: .touchDown)
+        self.hideBackgroundButton.addAction( { [weak self] in
+            self?.hideBackgroundTapped()
+        }, for: .touchDown)
         self.hideBackgroundButton.addSubview(hideBackgroundLabel)
         self.bottomButtonsSecondStack.addArrangedSubview(hideBackgroundButton)
         self.hideBackgroundButton.widthAnchor.constraint(equalTo: hideBackgroundLabel.widthAnchor).isActive = true
@@ -141,7 +150,9 @@ class DetectionSceneVC: UIViewController {
         self.debugModeLabel.font = .systemFont(ofSize: 14)
         self.debugModeLabel.translatesAutoresizingMaskIntoConstraints = false
         self.debugModeButton = FDFadeAnimatedButton()
-        self.debugModeButton.addAction(debugModeButtonTapped, for: .touchDown)
+        self.debugModeButton.addAction({ [weak self] in
+            self?.debugModeButtonTapped()
+        }, for: .touchDown)
         self.debugModeButton.addSubview(debugModeLabel)
         self.bottomButtonsSecondStack.addArrangedSubview(debugModeButton)
         self.debugModeButton.widthAnchor.constraint(equalTo: debugModeLabel.widthAnchor).isActive = true
