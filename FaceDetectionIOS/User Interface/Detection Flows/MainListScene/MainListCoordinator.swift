@@ -1,5 +1,5 @@
 //
-//  DetectionCoordinator.swift
+//  MainListCoordinator.swift
 //  FaceDetectionIOS
 //
 //  Created by Rodion Hladchenko on 01.04.2023.
@@ -9,12 +9,17 @@ import Foundation
 import AVFoundation
 import UIKit
 
-final class DetectionCoordinator: Coordinator {
+final class MainListCoordinator: Coordinator {
     let router: Router
     var alert: FDAlert?
     
     init(router: Router) {
         self.router = router
+        print("[MainListCoordinator]: init")
+    }
+    
+    deinit {
+        print("[MainListCoordinator]: deinit")
     }
     
     override func start() {
@@ -36,24 +41,23 @@ final class DetectionCoordinator: Coordinator {
     }
     
     private func showDetectionScene() {
-        switch AVCaptureDevice.authorizationStatus(for: .video) {
-        case .authorized:
-            let viewModel = DetectionSceneViewModel()
-            let vc = DetectionSceneVC(with: viewModel)
-            router.push(vc, animated: true)
-        default:
-            showAlert()
+        let detectionSceneCoordinator = DetectionSceneCoordinator(router: self.router)
+        detectionSceneCoordinator.removeCoordinator = { [weak self, weak detectionSceneCoordinator] in
+            guard let detectionSceneCoordinator = detectionSceneCoordinator else { return }
+            self?.removeChild(detectionSceneCoordinator)
         }
+        self.addChild(detectionSceneCoordinator)
+        detectionSceneCoordinator.start()
     }
     
     private func showTrueDepthScene() {
-        switch AVCaptureDevice.authorizationStatus(for: .video) {
-        case .authorized:
-            let vc = DepthDataViewController()
-            router.push(vc, animated: true)
-        default:
-            showAlert()
+        let pointCloudCor = PointCloudSceneCoordinator(router: self.router)
+        pointCloudCor.removeCoordinator = { [weak self, weak pointCloudCor] in
+            guard let pointCloudCor = pointCloudCor else { return }
+            self?.removeChild(pointCloudCor)
         }
+        self.addChild(pointCloudCor)
+        pointCloudCor.start()
     }
     
     private func showNavigationTest() {
@@ -61,7 +65,7 @@ final class DetectionCoordinator: Coordinator {
         viewModel.mainListDataSource.append(NavigationItem(name: "Face detection scene", link: { [weak self] in
             self?.showDetectionScene()
         }))
-        viewModel.mainListDataSource.append(NavigationItem(name: "Point to cloud scene", link: { [weak self] in
+        viewModel.mainListDataSource.append(NavigationItem(name: "Point cloud scene", link: { [weak self] in
             self?.showTrueDepthScene()
         }))
         let main = MainListViewController(with: viewModel)

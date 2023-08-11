@@ -52,16 +52,23 @@ class DetectionSceneViewModel {
         
         debugModeEnabled = false
         hideBackgroundModeEnabled = false
+        
+        print("[DetectionSceneViewModel]: init")
     }
+    
+    deinit {
+        print("[DetectionSceneViewModel]: deinit")
+    }
+    
     //MARK: - public func
     func setPresentedDelegate(_ delegate: DetectionScenePresentedDelegate) {
         self.presentedDelegate = delegate
-        self.faceDetector.modelDelegate = self
+        self.faceDetector.viewModelDelegate = self
         setWindowSize()
     }
     
     func publishTakePhotoObservation() {
-        faceDetector.isCapturingPhoto = true
+        faceDetector.captureCurrentImage()
     }
     
     //MARK: - private func
@@ -144,7 +151,7 @@ class DetectionSceneViewModel {
 }
 
 //MARK: - FaceDectorDelegateViewModel
-extension DetectionSceneViewModel: FaceDectorDelegateViewModel {
+extension DetectionSceneViewModel: FaceDetectorViewModelDelegate {
     func publishNoFaceObserved() {
         faceGemetryState = .faceNotFound
         stateOfDetectionWasChanged()

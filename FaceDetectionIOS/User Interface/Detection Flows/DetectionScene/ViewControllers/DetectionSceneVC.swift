@@ -23,6 +23,8 @@ class DetectionSceneVC: UIViewController {
     private var stateLabelIsAnimating = false
     
     private var viewModel: DetectionSceneViewModel
+    var showSettings: (()->())?
+    var onBackTapped: (()->())?
     
     init(with viewModel: DetectionSceneViewModel) {
         self.viewModel = viewModel
@@ -39,18 +41,35 @@ class DetectionSceneVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        if parent == nil {
+            self.onBackTapped?()
+        }
+    }
+    
     override func viewDidLoad() {
-        self.view.backgroundColor = .black
+        self.view.backgroundColor = .white
         configureViews()
     }
     
     private func configureViews() {
+        addSettingsNavigationItem()
         configureCameraCaptureVC()
         configureDebugView()
         configureBottomButtonsFirstStack()
-        configureBottomButtonsSecondStack()
+        //configureBottomButtonsSecondStack()
         configureFaceDetectionStateLabel()
         addEllipse()
+    }
+    
+    private func addSettingsNavigationItem() {
+        let settingsNavigationItem = UIBarButtonItem(title: "Settings", style: .plain, target: self, action: #selector(onSettingsTapped))
+        self.navigationItem.rightBarButtonItem = settingsNavigationItem
+    }
+    
+    @objc private func onSettingsTapped() {
+        self.showSettings?()
     }
     
     private func configureBottomButtonsFirstStack() {
@@ -174,8 +193,8 @@ class DetectionSceneVC: UIViewController {
         
         ellipseView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(ellipseView)
-        ellipseView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        ellipseView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
+        ellipseView.centerXAnchor.constraint(equalTo: self.debugView.centerXAnchor).isActive = true
+        ellipseView.centerYAnchor.constraint(equalTo: self.debugView.centerYAnchor).isActive = true
     }
     
     private func updateEllipseState() {
@@ -189,7 +208,7 @@ class DetectionSceneVC: UIViewController {
         self.faceDetectionStateLabel.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(faceDetectionStateLabel)
         self.faceDetectionStateLabel.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        self.faceDetectionStateLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+        self.faceDetectionStateLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 25).isActive = true
     }
     
     private func conigureTextFaceDetectionStateLabel() {
@@ -219,7 +238,7 @@ class DetectionSceneVC: UIViewController {
         debugView.isHidden = true
         self.view.addSubview(debugView)
         debugView.translatesAutoresizingMaskIntoConstraints = false
-        debugView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        debugView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         debugView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         debugView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         debugView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
@@ -228,9 +247,14 @@ class DetectionSceneVC: UIViewController {
     private func configureCameraCaptureVC() {
         let cameraCaptureVC = CameraCaptureVC(with: viewModel)
         self.addChild(cameraCaptureVC)
-        cameraCaptureVC.view.frame = self.view.frame
-        self.view.addSubview(cameraCaptureVC.view)
         cameraCaptureVC.didMove(toParent: self)
+
+        self.view.addSubview(cameraCaptureVC.view)
+        cameraCaptureVC.view.translatesAutoresizingMaskIntoConstraints = false
+        cameraCaptureVC.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+        cameraCaptureVC.view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        cameraCaptureVC.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        cameraCaptureVC.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
     }
     
     private func hideBackgroundTapped() {
@@ -241,6 +265,7 @@ class DetectionSceneVC: UIViewController {
     
     private func debugModeButtonTapped() {
         debugView.isHidden.toggle()
+        viewModel.debugModeEnabled = !debugView.isHidden
         self.debugModeLabel.textColor = debugView.isHidden ?  .white : .yellow
     }
     
@@ -248,6 +273,8 @@ class DetectionSceneVC: UIViewController {
         self.viewModel.publishTakePhotoObservation()
     }
 }
+
+// MARK: - DetectionScenePresentedDelegate
 
 extension DetectionSceneVC: DetectionScenePresentedDelegate {
     func updateFaceGeometry() {
@@ -270,6 +297,17 @@ extension DetectionSceneVC: DetectionScenePresentedDelegate {
             self?.lastPhotoView.image = image
             self?.lastPhotoView.tintColor = .clear
         }
-        
+    }
+}
+
+// MARK: - DetectionSceneSettingsDelegate
+
+extension DetectionSceneVC: DetectionSceneSettingsDelegate {
+    func hideBackground() {
+        hideBackgroundTapped()
+    }
+    
+    func debugMode() {
+        debugModeButtonTapped()
     }
 }

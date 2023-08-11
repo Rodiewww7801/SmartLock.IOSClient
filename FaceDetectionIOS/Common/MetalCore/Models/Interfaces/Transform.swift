@@ -18,10 +18,10 @@ struct Transform {
 }
 
 extension Transform {
-    var transformTransform: float4x4 {
-        var positionMatrix = float4x4(translation: self.position)
-        var rotationMatrix = float4x4(rotation: self.rotation)
-        var scaleMatrix = float4x4(scaling: self.scale)
+    var transformMatrix: float4x4 {
+        let positionMatrix = float4x4(translation: self.position)
+        let rotationMatrix = float4x4(rotation: self.rotation)
+        let scaleMatrix = float4x4(scaling: self.scale)
         let modelMatrix = positionMatrix * rotationMatrix * scaleMatrix
        return modelMatrix
     }

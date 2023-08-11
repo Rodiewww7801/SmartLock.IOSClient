@@ -51,7 +51,9 @@ extension MainListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
         var configuration = UIListContentConfiguration.cell()
-        configuration.text = viewModel.mainListDataSource[indexPath.row].name
+        let title = self.viewModel.mainListDataSource[indexPath.row].name
+        let attrString = NSAttributedString(string: title, attributes: [.foregroundColor: UIColor.black])
+        configuration.attributedText = attrString
         cell.contentConfiguration = configuration
         return cell
     }

@@ -8,6 +8,7 @@
 import Foundation
 import MetalKit
 import AVFoundation
+import ARKit
 
 class Renderer: NSObject {
     // Static
@@ -20,16 +21,11 @@ class Renderer: NSObject {
     private var renderPipelineState: MTLRenderPipelineState!
     private var depthStencilState: MTLDepthStencilState!
     
-    // AVFoundation
-    private var depthData: AVDepthData?
-    
-    // Core video
-    private var pixelBuffer: CVPixelBuffer?
-    private var depthTextureCache: CVMetalTextureCache?
-    private var colorTextureCache: CVMetalTextureCache?
-    
     //helper variable
     private var timer: Float = 0
+    private var faceMeshModel: FaceMeshModel?
+    private var pointCloudModel: PointCloudModel?
+    private var uniform: Uniform = Uniform()
     var camera: ArcballCamera?
     
     init(mtkView: MTKView) {
@@ -48,12 +44,9 @@ class Renderer: NSObject {
         self.metalView.device = self.device
         
         setup()
-        setupCamera()
     }
     
     private func setup() {
-        CVMetalTextureCacheCreate(nil, nil, self.device, nil, &self.depthTextureCache)
-        CVMetalTextureCacheCreate(nil, nil, self.device, nil, &self.colorTextureCache)
         metalView.colorPixelFormat = .bgra8Unorm
         
         createLibrary()
@@ -61,6 +54,9 @@ class Renderer: NSObject {
         let depthStencilState = createDepthStencilState()
         self.renderPipelineState = renderPipelineState
         self.depthStencilState = depthStencilState
+        
+        setupCamera()
+        setupModels()
     }
     
     private func createLibrary() {
@@ -92,18 +88,28 @@ class Renderer: NSObject {
         return depthStencilState
     }
     
-    func setDepthFrame(depth: AVDepthData, withTexture unormTexture: CVPixelBuffer) {
-        self.depthData = depth
-        self.pixelBuffer = unormTexture
-    }
-    
-    func setupCamera() {
+    private func setupCamera() {
         self.camera = ArcballCamera()
         guard let camera = self.camera else { return }
-        camera.transform.rotation = [0,0,0]
-        camera.transform.position = [0,0,-350]
-        camera.distance = length(camera.transform.position)
+        camera.distance = 350
         camera.target = [0,0,350]
+    }
+    
+    private func setupModels() {
+        self.pointCloudModel = PointCloudModel(device: self.device)
+        self.faceMeshModel = FaceMeshModel(device: self.device)
+    }
+    
+    // MARK: - public methods
+    
+    func setDepthFrame(depth: AVDepthData, withTexture unormTexture: CVPixelBuffer) {
+        pointCloudModel?.depthData = depth
+        pointCloudModel?.capturedImage = unormTexture
+    }
+    
+    func setFaceMeshModel(_ vertices: [vector_float3], _ transform: float4x4) {
+        self.faceMeshModel = FaceMeshModel(device: self.device)
+        self.faceMeshModel?.setFaceMeshData(vertices: vertices, transform: transform)
     }
 }
 
@@ -111,91 +117,27 @@ class Renderer: NSObject {
 
 extension Renderer: MTKViewDelegate {
     
-    private func getViewMatrix() -> float4x4 {
-        guard let camera = self.camera else { return .identity }
-
-        
+    private func updateCamera() {
+        guard let camera = self.camera else { return }
         camera.update(size: metalView.drawableSize)
         camera.update()
         
-        return camera.projectionMatrix * camera.viewMatrix * float4x4(rotation: [0,0,Float(-90).degreesToRadians])
+        self.uniform.projectionMatrix = camera.projectionMatrix
+        self.uniform.viewMatrix = camera.viewMatrix
     }
     
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        //
+        updateCamera()
     }
     
     func draw(in view: MTKView) {
-        timer += 0.01
-        renderPointToCloud(in: view)
-    }
-    
-    private func renderPointToCloud(in view: MTKView) {
-        guard let depthData = self.depthData,
-              let pixelBuffer = self.pixelBuffer,
-              let depthTextureCache = self.depthTextureCache,
-              let colorTextureCache = self.colorTextureCache
-        else {
-            return
-        }
-        
-        //create texture from depth data
-        let depthPixelBuffer: CVPixelBuffer = depthData.depthDataMap
-        var cvDepthTexture: CVMetalTexture?
-        let depthTextureFromImage = CVMetalTextureCacheCreateTextureFromImage(
-            kCFAllocatorDefault,
-            depthTextureCache,
-            depthPixelBuffer,
-            nil,
-            .r16Float,
-            CVPixelBufferGetWidth(depthPixelBuffer),
-            CVPixelBufferGetHeight(depthPixelBuffer),
-            0,
-            &cvDepthTexture)
-        
-        guard kCVReturnSuccess == depthTextureFromImage,
-              let cvDepthTexture = cvDepthTexture,
-              let depthTexture: MTLTexture = CVMetalTextureGetTexture(cvDepthTexture)
-        else {
-            print("[Renderer]: Failed to create depth texture")
-            return
-        }
-        
-        //create texture from color from pixel buffer
-        var cvColorTexture: CVMetalTexture?
-        let colorTextureFromImage = CVMetalTextureCacheCreateTextureFromImage(
-            kCFAllocatorDefault,
-            colorTextureCache,
-            pixelBuffer,
-            nil,
-            .bgra8Unorm,
-            CVPixelBufferGetWidth(pixelBuffer),
-            CVPixelBufferGetHeight(pixelBuffer),
-            0,
-            &cvColorTexture)
-        
-        guard kCVReturnSuccess == colorTextureFromImage,
-              let cvColorTexture = cvColorTexture,
-              let colorTexture: MTLTexture = CVMetalTextureGetTexture(cvColorTexture)
-        else {
-            print("[Renderer]: Failed to create color texture")
-            return
-        }
-        
         guard let commandBuffer = commandQueue.makeCommandBuffer(),
-              let renderPassDiscriptor = view.currentRenderPassDescriptor
+              let renderPassDescriptor = view.currentRenderPassDescriptor
         else {
-            print("[Renderer]: Failed to create render command encoder")
             return
         }
         
-        var intrinsics = depthData.cameraCalibrationData?.intrinsicMatrix
-        let referenceDimensions = depthData.cameraCalibrationData?.intrinsicMatrixReferenceDimensions ?? .zero
-        let ratio = Float(referenceDimensions.width) / Float(CVPixelBufferGetWidth(depthPixelBuffer))
-        intrinsics?[0][0] /= ratio
-        intrinsics?[1][1] /= ratio
-        intrinsics?[2][0] /= ratio
-        intrinsics?[2][1] /= ratio
+        timer += 0.01
         
         let depthTextureDescriptor = MTLTextureDescriptor()
         depthTextureDescriptor.width = Int(view.drawableSize.width)
@@ -204,32 +146,22 @@ extension Renderer: MTKViewDelegate {
         depthTextureDescriptor.usage = .renderTarget
 
         let depthTestTexture = device.makeTexture(descriptor: depthTextureDescriptor)
-        renderPassDiscriptor.depthAttachment.loadAction = .clear
-        renderPassDiscriptor.depthAttachment.storeAction = .store
-        renderPassDiscriptor.depthAttachment.clearDepth = 1.0
-        renderPassDiscriptor.depthAttachment.texture = depthTestTexture
-        
-        guard let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDiscriptor) else { return }
-        
-        renderEncoder.setDepthStencilState(self.depthStencilState)
-        renderEncoder.setRenderPipelineState(self.renderPipelineState)
-        renderEncoder.setVertexTexture(depthTexture, index: 0)
-        var viewMatrix = getViewMatrix()
-        renderEncoder.setVertexBytes(&viewMatrix, length: MemoryLayout<float4x4>.stride, index: 0)
-        renderEncoder.setVertexBytes(&intrinsics, length: MemoryLayout<matrix_float3x3>.stride, index: 1)
-        
-        
-        renderEncoder.setFragmentTexture(colorTexture, index: 0)
-        renderEncoder.drawPrimitives(type: .point, vertexStart: 0,
-                                     vertexCount: CVPixelBufferGetWidth(depthPixelBuffer) * CVPixelBufferGetHeight(depthPixelBuffer))
-        
-        renderEncoder.endEncoding()
-        
-        guard let currentDrawable = view.currentDrawable else {
-            print("[Renderer]: Coudn't render view")
-            return
-        }
-        
+        renderPassDescriptor.depthAttachment.loadAction = .clear
+        renderPassDescriptor.depthAttachment.storeAction = .store
+        renderPassDescriptor.depthAttachment.clearDepth = 1.0
+        renderPassDescriptor.depthAttachment.texture = depthTestTexture
+
+        guard let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: renderPassDescriptor) else { return }
+
+        encoder.setDepthStencilState(self.depthStencilState)
+        encoder.setRenderPipelineState(self.renderPipelineState)
+
+        updateCamera()
+        pointCloudModel?.render(encoder: encoder, uniform: self.uniform)
+        faceMeshModel?.render(encoder: encoder, uniform: self.uniform)
+
+        encoder.endEncoding()
+        guard let currentDrawable = view.currentDrawable else { return }
         commandBuffer.present(currentDrawable)
         commandBuffer.commit()
     }

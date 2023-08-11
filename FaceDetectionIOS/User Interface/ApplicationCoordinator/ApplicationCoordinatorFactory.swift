@@ -9,6 +9,6 @@ import Foundation
 
 class ApplicationCoordinatorFactory {
     func makeMainCoordinator(router: Router) -> Coordinator {
-        return DetectionCoordinator(router: router)
+        return MainListCoordinator(router: router)
     }
 }

@@ -11,12 +11,18 @@ class DebugView: UIView {
     private var rectView: UIView = UIView()
     private var ellipseView: UIView = UIView()
     private var ellipseLayer: CAShapeLayer?
+    private var faceContourLayer: CAShapeLayer?
+    private var faceRect: CGRect = .zero
+    private var yawValue: CGFloat = 0
+    
     private var debugLabel: UILabel = UILabel()
     private var debugAcceptableRollLabel: UILabel = UILabel()
     private var debugAcceptablePitchLabel: UILabel = UILabel()
     private var debugAcceptableYawLabel: UILabel = UILabel()
     private var debugAcceptableQualityLabel: UILabel = UILabel()
+    private var debugfaceAuthenticityLabel: UILabel = UILabel()
     private var debugLabelsStack: UIStackView = UIStackView()
+    
     private var faceLayoutGuideFrame: CGRect {
         return viewModel.faceLayoutGuideFrame
     }
@@ -28,6 +34,11 @@ class DebugView: UIView {
         super.init(frame: .zero)
         self.backgroundColor = .clear
         configureViews()
+        print("[DebugView]: init")
+    }
+    
+    deinit {
+        print("[DebugView]: deinit")
     }
     
     required init?(coder: NSCoder) {
@@ -38,6 +49,7 @@ class DebugView: UIView {
         switch viewModel.faceGemetryState {
         case .faceFound(let model):
             drawFaceRect(model.boundingBox)
+            //drawFaceContour(model.faceContourPoints)
             configureDebugLabelsText(faceGemetryModel: model)
             updateState()
         case .faceNotFound:
@@ -50,21 +62,61 @@ class DebugView: UIView {
     }
     
     func drawFaceRect(_ rect: CGRect) {
-        guard let context = UIGraphicsGetCurrentContext() else {
-          return
-        }
-
-        context.saveGState()
-        defer {
-          context.restoreGState()
-        }
+        guard let context = UIGraphicsGetCurrentContext() else { return }
+        self.faceRect = rect
+        context.setStrokeColor(UIColor.yellow.cgColor)
+        context.setLineWidth(2)
         context.addRect(rect)
-        UIColor.yellow.setStroke()
-        context.strokePath()
+        context.drawPath(using: .stroke)
+        //context.saveGState()
+//        defer {
+//          context.restoreGState()
+//        }
+ //       context.addRect(rect)
+ //       UIColor.yellow.setStroke()
+//        context.strokePath()
+    }
+    
+    func drawFaceContour(_ points: [CGPoint]) {
+        self.faceContourLayer?.removeFromSuperlayer()
+        
+        guard !points.isEmpty, self.faceRect != .zero else {
+            return
+        }
+        let faceContourPath = UIBezierPath()
+       
+        for index in 0..<points.count {
+            if index == 0 {
+                faceContourPath.move(to: points[0])
+                continue
+            }
+            
+            faceContourPath.addLine(to: points[index])
+            
+            if index == points.count - 1 {
+                faceContourPath.addQuadCurve(to: points[0],
+                                             controlPoint: CGPoint(x: self.faceRect.midX + self.faceRect.width * yawValue,
+                                                                   y: self.faceRect.minY - self.faceRect.height * 0.25))
+                continue
+            }
+        }
+        
+        faceContourPath.close()
+    
+        let faceShapeLayer = CAShapeLayer()
+        faceShapeLayer.path = faceContourPath.cgPath
+
+        faceShapeLayer.lineWidth = 1
+        faceShapeLayer.strokeColor = UIColor.green.cgColor
+        faceShapeLayer.fillColor = UIColor.clear.cgColor
+        self.faceContourLayer = faceShapeLayer
+        self.layer.addSublayer(faceShapeLayer)
     }
     
     public func clearFaceRect() {
         drawFaceRect(.zero)
+        self.faceContourLayer?.removeFromSuperlayer()
+        configureDebugLabelsText(faceGemetryModel: FaceGeometryModel())
         DispatchQueue.main.async {
             self.setNeedsDisplay()
         }
@@ -102,6 +154,7 @@ class DebugView: UIView {
         debugLabelsStack.addArrangedSubview(debugAcceptablePitchLabel)
         debugLabelsStack.addArrangedSubview(debugAcceptableYawLabel)
         debugLabelsStack.addArrangedSubview(debugAcceptableQualityLabel)
+        debugLabelsStack.addArrangedSubview(debugfaceAuthenticityLabel)
     }
     
     private func configureDebugLabelsText(faceGemetryModel: FaceGeometryModel? = nil) {
@@ -126,10 +179,26 @@ class DebugView: UIView {
         debugAcceptableYawLabel.text = "Yaw:\(faceGemetryModel.yaw)"
         debugAcceptableYawLabel.textColor =  isAcceptableYaw ? .green : .red
         debugAcceptableYawLabel.font = .systemFont(ofSize: 12)
+        self.yawValue = CGFloat(faceGemetryModel.yaw.floatValue)
         
         debugAcceptableQualityLabel.text = "Quality:\(faceGemetryModel.quality)"
         debugAcceptableQualityLabel.textColor =  isAcceptableQuality ? .green : .red
         debugAcceptableQualityLabel.font = .systemFont(ofSize: 12)
+        
+        var faceRealString: String = "fake face"
+        switch faceGemetryModel.faceAuthenticity {
+        case .realFace: faceRealString = "real face"
+        case .fakeFace:
+            switch self.viewModel.faceDetectedState {
+            case .faceFound(_):
+                faceRealString = "fake face"
+            default:
+                faceRealString = "unknown"
+            }
+        }
+        debugfaceAuthenticityLabel.text = "isReal: \(faceRealString)"
+        debugfaceAuthenticityLabel.textColor =  faceGemetryModel.faceAuthenticity == .fakeFace ? .red : .green
+        debugfaceAuthenticityLabel.font = .systemFont(ofSize: 12)
     }
     
     private func updateState() {
