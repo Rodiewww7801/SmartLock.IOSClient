@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F80734FB2A8BCBBF0055D473 /* FDLoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80734FA2A8BCBBF0055D473 /* FDLoadingScreen.swift */; };
 		F8301C532A117CD900455964 /* PointCloudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8301C522A117CD900455964 /* PointCloudViewController.swift */; };
 		F8301C582A1184A300455964 /* SessionSetupResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8301C572A1184A300455964 /* SessionSetupResult.swift */; };
 		F8348CB529DB56BD00AF14F2 /* FDAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8348CB429DB56BD00AF14F2 /* FDAlert.swift */; };
@@ -91,6 +92,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F80734FA2A8BCBBF0055D473 /* FDLoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDLoadingScreen.swift; sourceTree = "<group>"; };
 		F8301C522A117CD900455964 /* PointCloudViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointCloudViewController.swift; sourceTree = "<group>"; };
 		F8301C572A1184A300455964 /* SessionSetupResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSetupResult.swift; sourceTree = "<group>"; };
 		F8348CB429DB56BD00AF14F2 /* FDAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDAlert.swift; sourceTree = "<group>"; };
@@ -665,6 +667,7 @@
 				F8348CB429DB56BD00AF14F2 /* FDAlert.swift */,
 				F881A83F2A32CF01003408B3 /* SettingsTableViewCell.swift */,
 				F8377C9A2A89857C00E18B59 /* UIColor+Extension.swift */,
+				F80734FA2A8BCBBF0055D473 /* FDLoadingScreen.swift */,
 			);
 			path = "Custom UI Helpers";
 			sourceTree = "<group>";
@@ -809,6 +812,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F80734FB2A8BCBBF0055D473 /* FDLoadingScreen.swift in Sources */,
 				F8CFA70529D36A5C00905F94 /* FDFadeAnimatedButton.swift in Sources */,
 				F8377D012A8AF52200E18B59 /* AuthenticationSceneCoordinatorOutput.swift in Sources */,
 				F8377CBE2A8A5CAA00E18B59 /* CommandsFactoryProtocol.swift in Sources */,

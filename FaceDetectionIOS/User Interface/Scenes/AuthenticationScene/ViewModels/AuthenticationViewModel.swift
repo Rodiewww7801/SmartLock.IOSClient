@@ -19,7 +19,7 @@ class AuthenticationViewModel: AuthenticationViewModelDelegate {
     }
     
     func onLogin(_ email: String, password: String, _ completion: @escaping ((Bool, Error?) -> ())) {
-        var loginRequestDTO = LoginRequestDTO(email: email, password: password)
+        let loginRequestDTO = LoginRequestDTO(email: email, password: password)
         loginCommand.execute(with: loginRequestDTO) { result in
             switch result {
             case .success(let success):

@@ -30,10 +30,23 @@ class SessionManager: SessionManagerProtocol {
             switch responseStatus {
             case .success:
                 completion(.success( () ))
+                if let data = data, let bodyString = String(data: data, encoding: .utf8)  {
+                    print("[SessionManager]: SUCCESS response \(String(describing: urlResponse)), body \(bodyString)")
+                } else {
+                    print("[SessionManager]: SUCCESS response \(String(describing: urlResponse))")
+                }
             case .failed(let networkingError):
-                completion(.failure(networkingError))
+                if let data = data, let bodyString = String(data: data, encoding: .utf8)  {
+                    completion(.failure(NetworkingError.withError(errorString: bodyString)))
+                    print("[SessionManager]: FAILURE response \(String(describing: urlResponse)), body \(bodyString)")
+                } else {
+                    completion(.failure(networkingError))
+                    print("[SessionManager]: FAILURE response \(String(describing: urlResponse))")
+                }
             }
         }.resume()
+        
+        print("[SessionManager]: request \(request)")
     }
     
     func request<Success: Decodable>(_ requestModel: RequestModel, _ completion: @escaping (Result<Success,Error>) -> ()) {
@@ -48,10 +61,24 @@ class SessionManager: SessionManagerProtocol {
                 } else {
                     completion(.failure(NetworkingError.unableToDecode))
                 }
+                if let data = data, let bodyString = String(data: data, encoding: .utf8)  {
+                    print("[SessionManager]: SUCCESS response \(String(describing: urlResponse)), body \(bodyString)")
+                } else {
+                    print("[SessionManager]: SUCCESS response \(String(describing: urlResponse))")
+                }
+               
             case .failed(let networkingError):
-                completion(.failure(networkingError))
+                if let data = data, let bodyString = String(data: data, encoding: .utf8)  {
+                    completion(.failure(NetworkingError.withError(errorString: bodyString)))
+                    print("[SessionManager]: FAILURE response \(String(describing: urlResponse)), body \(bodyString)")
+                } else {
+                    completion(.failure(networkingError))
+                    print("[SessionManager]: FAILURE response \(String(describing: urlResponse))")
+                }
             }
         }.resume()
+        
+        print("[SessionManager]: request \(request)")
     }
     
     private func handleResponseStatusCode(_ urlResponse: URLResponse?) -> ResponseStatusCode {

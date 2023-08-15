@@ -26,9 +26,9 @@ final class ApplicationCoordinator: Coordinator {
     private func authenticationScene() {
         let authenticationCoordinator = AuthenticationSceneCoordinator(router: router)
         authenticationCoordinator.showMainView = { [weak self] in
-            self?.mainListScene()
-            authenticationCoordinator.removeAllChildren()
             self?.removeChild(authenticationCoordinator)
+            authenticationCoordinator.removeAllChildren()
+            self?.mainListScene()
         }
         self.childCoordinators.append(authenticationCoordinator)
         authenticationCoordinator.start()

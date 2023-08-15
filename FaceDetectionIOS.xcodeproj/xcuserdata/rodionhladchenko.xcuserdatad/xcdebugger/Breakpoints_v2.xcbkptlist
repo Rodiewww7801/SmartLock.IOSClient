@@ -7,319 +7,177 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CDF21D65-52E5-4193-9705-2DAF94E36E23"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FaceDetectionIOS/User Interface/Scenes/AuthenticationScene/ViewControllers/RegistrationVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "277"
-            endingLineNumber = "277"
-            landmarkName = "register()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "CDF21D65-52E5-4193-9705-2DAF94E36E23 - a1e1f590a60ce60b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in FaceDetectionIOS.RegistrationVC.register() -&gt; ()"
-                  moduleName = "FaceDetectionIOS"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/Scenes/AuthenticationScene/ViewControllers/RegistrationVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "277"
-                  endingLineNumber = "277"
-                  offsetFromSymbolStart = "108">
-               </Location>
-               <Location
-                  uuid = "CDF21D65-52E5-4193-9705-2DAF94E36E23 - c4ad2bd3272f84b4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in FaceDetectionIOS.RegistrationVC.register() -&gt; ()"
-                  moduleName = "FaceDetectionIOS"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/Scenes/AuthenticationScene/ViewControllers/RegistrationVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "277"
-                  endingLineNumber = "277"
-                  offsetFromSymbolStart = "80">
-               </Location>
-               <Location
-                  uuid = "CDF21D65-52E5-4193-9705-2DAF94E36E23 - c4ad2bd3272f84b4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in FaceDetectionIOS.RegistrationVC.register() -&gt; ()"
-                  moduleName = "FaceDetectionIOS"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/Scenes/AuthenticationScene/ViewControllers/RegistrationVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "277"
-                  endingLineNumber = "277"
-                  offsetFromSymbolStart = "72">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "CF24B11C-58C5-4413-995B-984542F63492"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FaceDetectionIOS/Infrastracture/Netwroking/Services/NetworkingService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
-            landmarkName = "init(sessionManager:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F33ED350-2D47-4DC4-BD5B-8A20F971E6F3"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FaceDetectionIOS/Infrastracture/Netwroking/Services/NetworkingService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "request(_:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "EEF62252-C330-4EBD-82D9-99EF4F55CF03"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FaceDetectionIOS/Domain/Commands/RegisterCommand.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "execute(with:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "A0B0540D-D567-49F5-A27B-CF863CDBA891"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FaceDetectionIOS/Domain/Commands/RegisterCommand.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "execute(with:_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A0B0540D-D567-49F5-A27B-CF863CDBA891 - 99fb021f3b83ab37"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FaceDetectionIOS.RegisterCommand.execute(with: FaceDetectionIOS.RegisterRequestDTO, _: (Swift.Result&lt;Swift.Bool, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "FaceDetectionIOS"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/Domain/Commands/RegisterCommand.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "136">
-               </Location>
-               <Location
-                  uuid = "A0B0540D-D567-49F5-A27B-CF863CDBA891 - 22384acd84edc3e2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Swift.Result&lt;FaceDetectionIOS.Empty, Swift.Error&gt;) -&gt; () in FaceDetectionIOS.RegisterCommand.execute(with: FaceDetectionIOS.RegisterRequestDTO, _: (Swift.Result&lt;Swift.Bool, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "FaceDetectionIOS"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/Domain/Commands/RegisterCommand.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "21"
-                  endingLineNumber = "21"
-                  offsetFromSymbolStart = "88">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "36233B8A-E37C-4485-AB76-4D4C857E4E0C"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FaceDetectionIOS/Infrastracture/Netwroking/Managers/SessionManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "request(_:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7216A372-522B-4A83-9975-5414F16FE2F0"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FaceDetectionIOS/Infrastracture/Netwroking/Managers/SessionManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "request(_:_:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "7216A372-522B-4A83-9975-5414F16FE2F0 - c0eed7a0b37900b9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FaceDetectionIOS.SessionManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(FaceDetectionIOS.RequestModel, (Swift.Result&lt;&#x3c4;_0_0, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "FaceDetectionIOS"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/Infrastracture/Netwroking/Managers/SessionManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26"
-                  offsetFromSymbolStart = "328">
-               </Location>
-               <Location
-                  uuid = "7216A372-522B-4A83-9975-5414F16FE2F0 - 9136ce9ed0ea4eca"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in FaceDetectionIOS.SessionManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(FaceDetectionIOS.RequestModel, (Swift.Result&lt;&#x3c4;_0_0, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "FaceDetectionIOS"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/Infrastracture/Netwroking/Managers/SessionManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26"
-                  offsetFromSymbolStart = "472">
-               </Location>
-               <Location
-                  uuid = "7216A372-522B-4A83-9975-5414F16FE2F0 - 9136ce9ed0ea4eeb"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in FaceDetectionIOS.SessionManager.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(FaceDetectionIOS.RequestModel, (Swift.Result&lt;&#x3c4;_0_0, Swift.Error&gt;) -&gt; ()) -&gt; ()"
-                  moduleName = "FaceDetectionIOS"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/Infrastracture/Netwroking/Managers/SessionManager.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "27"
-                  endingLineNumber = "27"
-                  offsetFromSymbolStart = "408">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "62853D42-D958-468F-B80A-3805AD9B6737"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FaceDetectionIOS/User Interface/Scenes/AuthenticationScene/ViewControllers/AuthenticationVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
-            landmarkName = "login()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "224C437F-EAFB-4EA2-84A4-D075B8821EDA"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FaceDetectionIOS/User Interface/Scenes/AuthenticationScene/ViewControllers/AuthenticationVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
-            landmarkName = "login()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "83495999-7FA1-45AE-BDA5-F0E7F48C3124"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FaceDetectionIOS/User Interface/Scenes/AuthenticationScene/ViewControllers/AuthenticationVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
-            landmarkName = "login()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9B803D77-70D2-435E-988A-CC52C13836CE"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FaceDetectionIOS/User Interface/Scenes/AuthenticationScene/ViewControllers/RegistrationVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "286"
-            endingLineNumber = "286"
-            landmarkName = "register()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DC508149-1172-44FA-BA4D-2BAA2362A4D1"
+            uuid = "4AA3688F-E913-4379-BDFF-2982343D2AA0"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FaceDetectionIOS/User Interface/Scenes/AuthenticationScene/ViewModels/RegistrationViewModel.swift"
+            filePath = "FaceDetectionIOS/User Interface/ApplicationCoordinator/ApplicationCoordinator.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "onRegister(_:_:)"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "authenticationScene()"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4AA3688F-E913-4379-BDFF-2982343D2AA0 - 5cfe4fe1863970a4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in FaceDetectionIOS.ApplicationCoordinator.authenticationScene() -&gt; ()"
+                  moduleName = "FaceDetectionIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/ApplicationCoordinator/ApplicationCoordinator.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "64">
+               </Location>
+               <Location
+                  uuid = "4AA3688F-E913-4379-BDFF-2982343D2AA0 - 5cfe4fe1863970e2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in FaceDetectionIOS.ApplicationCoordinator.authenticationScene() -&gt; ()"
+                  moduleName = "FaceDetectionIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/ApplicationCoordinator/ApplicationCoordinator.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "52">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D0678700-12F6-47BA-9D26-65DF5807AD99"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FaceDetectionIOS/User Interface/ApplicationCoordinator/ApplicationCoordinator.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "mainListScene()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1F54AEF1-0960-414E-A5F3-B363188A5408"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FaceDetectionIOS/User Interface/Scenes/AuthenticationScene/ViewControllers/AuthenticationVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
+            landmarkName = "login()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1F54AEF1-0960-414E-A5F3-B363188A5408 - f32aac42e9678b1a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in FaceDetectionIOS.AuthenticationVC.login() -&gt; ()"
+                  moduleName = "FaceDetectionIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/Scenes/AuthenticationScene/ViewControllers/AuthenticationVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "159"
+                  endingLineNumber = "159"
+                  offsetFromSymbolStart = "268">
+               </Location>
+               <Location
+                  uuid = "1F54AEF1-0960-414E-A5F3-B363188A5408 - f32aac42e9678b1a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in FaceDetectionIOS.AuthenticationVC.login() -&gt; ()"
+                  moduleName = "FaceDetectionIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/Scenes/AuthenticationScene/ViewControllers/AuthenticationVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "159"
+                  endingLineNumber = "159"
+                  offsetFromSymbolStart = "76">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "10C60CFA-4EC9-45F4-833A-78FBD835224C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FaceDetectionIOS/User Interface/Custom UI Helpers/FDLoaderScreen.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "stop()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0AEA86B3-CF1D-4ACA-8A1D-28B682A9C8FE"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FaceDetectionIOS/User Interface/Custom UI Helpers/FDLoaderScreen.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "show(on:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0AEA86B3-CF1D-4ACA-8A1D-28B682A9C8FE - 496da6585a64f52"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FaceDetectionIOS.FDLoaderScreen.show(on: __C.UIView) -&gt; ()"
+                  moduleName = "FaceDetectionIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/Custom%20UI%20Helpers/FDLoaderScreen.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "168">
+               </Location>
+               <Location
+                  uuid = "0AEA86B3-CF1D-4ACA-8A1D-28B682A9C8FE - 496da6585a64f52"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FaceDetectionIOS.FDLoaderScreen.show(on: __C.UIView) -&gt; ()"
+                  moduleName = "FaceDetectionIOS"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/Custom%20UI%20Helpers/FDLoaderScreen.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "80">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

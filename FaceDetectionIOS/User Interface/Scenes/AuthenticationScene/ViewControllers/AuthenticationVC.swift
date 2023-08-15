@@ -19,6 +19,7 @@ class AuthenticationVC: UIViewController {
     private var isValidEmail: Bool = false
     private var isValidPassword: Bool = false
     private var viewModelDelegate: AuthenticationViewModelDelegate
+    private var loadingScreen = FDLoadingScreen()
     
     var onLoginAction: (()->())?
     var onRegisterAction: (()->())?
@@ -65,6 +66,8 @@ class AuthenticationVC: UIViewController {
         emailTextField.placeholder = "Email"
         emailTextField.borderStyle = .roundedRect
         emailTextField.addTarget(self, action: #selector(validateTextFields), for: .editingChanged)
+        emailTextField.textContentType = .emailAddress
+        emailTextField.keyboardType = .emailAddress
         
         stackView.addArrangedSubview(emailTextField)
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -78,6 +81,7 @@ class AuthenticationVC: UIViewController {
         passwordTextField.addTarget(self, action: #selector(validateTextFields), for: .editingChanged)
         passwordTextField.borderStyle = .roundedRect
         passwordTextField.isSecureTextEntry = true
+        passwordTextField.textContentType = .password
         
         
         stackView.addArrangedSubview(passwordTextField)
@@ -150,14 +154,20 @@ class AuthenticationVC: UIViewController {
     
     @objc private func login() {
         if let email = emailTextField.text, let password = passwordTextField.text {
+            loadingScreen.show(on: self.view)
             viewModelDelegate.onLogin(email, password: password) { [weak self] isSuccess, error in
-                if isSuccess {
-                    self?.onLoginAction?()
-                } else {
-                    FDAlert()
-                        .createWith(title: "Sorry, but this user doesn't exist", message: "\(String(describing: error))")
-                        .addAction(title: "Try again", style: .default, handler: nil)
-                        .present(on: self)
+                DispatchQueue.main.async {
+                    self?.loadingScreen.stop()
+                    if isSuccess {
+                        DispatchQueue.main.async {
+                            self?.onLoginAction?()
+                        }
+                    } else {
+                        FDAlert()
+                            .createWith(title: "Sorry, error", message: "\(String(describing: error))")
+                            .addAction(title: "Try again", style: .default, handler: nil)
+                            .present(on: self)
+                    }
                 }
             }
         }

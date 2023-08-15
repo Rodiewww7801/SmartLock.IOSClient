@@ -23,6 +23,7 @@ class RegistrationVC: UIViewController {
     private var isValidEmail: Bool = false
     private var isValidPassword: Bool = false
     private var registrationViewModel: RegistrationViewModelDelegate
+    private var loadingScreen = FDLoadingScreen()
     var onRegisterAction: (()->())?
     
     init(with delegate: RegistrationViewModelDelegate) {
@@ -74,6 +75,8 @@ class RegistrationVC: UIViewController {
         emailTextField.addTarget(self, action: #selector(validateTextFields), for: .editingChanged)
         emailTextField.borderStyle = .roundedRect
         emailTextField.delegate = self
+        emailTextField.textContentType = .username
+        emailTextField.keyboardType = .emailAddress
         
         stackView.addArrangedSubview(emailTextField)
         emailTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -88,7 +91,7 @@ class RegistrationVC: UIViewController {
         passwordTextField.borderStyle = .roundedRect
         passwordTextField.isSecureTextEntry = true
         passwordTextField.delegate = self
-        
+        passwordTextField.textContentType = .newPassword
         
         stackView.addArrangedSubview(passwordTextField)
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -103,7 +106,7 @@ class RegistrationVC: UIViewController {
         confirmPasswordTextField.borderStyle = .roundedRect
         confirmPasswordTextField.isSecureTextEntry = true
         confirmPasswordTextField.delegate = self
-        
+        passwordTextField.textContentType = .newPassword
         
         stackView.addArrangedSubview(confirmPasswordTextField)
         confirmPasswordTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -272,11 +275,13 @@ class RegistrationVC: UIViewController {
                                           confirmPassword: confirmPassword,
                                           firstName: firstName,
                                           lastName: lastName)
+        loadingScreen.show(on: self.view)
         registrationViewModel.onRegister(registerModel) { [weak self] isSuccess, error in
             DispatchQueue.main.async {
+                self?.loadingScreen.stop()
                 if isSuccess {
                     FDAlert()
-                        .createWith(title: "You are register successfully", message: "\(String(describing: error))")
+                        .createWith(title: "You are register successfully", message: nil)
                         .addAction(title: "Login", style: .default, handler: { [weak self] in
                             self?.onRegisterAction?()
                         })
