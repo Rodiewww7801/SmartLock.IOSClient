@@ -9,9 +9,14 @@ import Foundation
 
 final class ApplicationCoordinator: Coordinator {
     let router: Router
+    private var authTokenRepository: AuthTokenRepositoryProtocol
     private var isUserLoggedIn = false
     
     init(router: Router) {
+        self.authTokenRepository = RepositoryFactory.authTokenRepository()
+        if let _ = authTokenRepository.getToken(for: .accessTokenKey) {
+            self.isUserLoggedIn = false
+        }
         self.router = router
     }
     
@@ -38,5 +43,19 @@ final class ApplicationCoordinator: Coordinator {
         let mainListCoordinator = MainListSceneCoordinator(router: router)
         self.childCoordinators.append(mainListCoordinator)
         mainListCoordinator.start()
+    }
+}
+
+extension ApplicationCoordinator: TokenListener {
+    func refreshTokenExpired() {
+        DispatchQueue.main.async { [weak self] in
+            self?.removeAllChildren()
+            self?.authenticationScene()
+        }
+    }
+    
+    private func subscribeOnTokenManager() {
+        let tokenObservable = NetworkingServiceFactory.tokenObservable()
+        tokenObservable.subscribeListener(self)
     }
 }

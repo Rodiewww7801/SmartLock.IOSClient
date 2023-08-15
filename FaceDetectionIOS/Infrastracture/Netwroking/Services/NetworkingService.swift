@@ -16,25 +16,39 @@ protocol NetworkingServiceProotocol {
 
 class NetworkingService: NetworkingServiceProotocol {    
     private var sessionManager: SessionManagerProtocol
-    private let authTokenRepository: AuthTokenRepositoryProtocol
+    private let tokenManager: TokenManagerProtocol
     
     private var deviceId: String {
         return UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
     }
     
-    init(sessionManager: SessionManagerProtocol) {
+    init(sessionManager: SessionManagerProtocol, tokenManager: TokenManagerProtocol) {
         self.sessionManager = sessionManager
-        self.authTokenRepository = RepositoryFactory.authTokenRepository()
+        self.tokenManager = tokenManager
     }
     
     public func request<Success: Decodable>(_ requestModel: RequestModel, _ completion: @escaping (Result<Success,Error>)->()) {
-        requestModel.headers = makeHttpHeaders(from: requestModel.headers)
-        sessionManager.request(requestModel, completion)
+        if !requestModel.path.contains("Authentication") {
+            tokenManager.refreshTokenIfNeeded {
+                requestModel.headers = self.makeHttpHeaders(from: requestModel.headers)
+                self.sessionManager.request(requestModel, completion)
+            }
+        } else {
+            requestModel.headers = self.makeHttpHeaders(from: requestModel.headers)
+            self.sessionManager.request(requestModel, completion)
+        }
     }
     
     public func request(_ requestModel: RequestModel, _ completion: @escaping (Result<Void,Error>)->()) {
-        requestModel.headers = makeHttpHeaders(from: requestModel.headers)
-        sessionManager.request(requestModel, completion)
+        if !requestModel.path.contains("Authentication") {
+            tokenManager.refreshTokenIfNeeded {
+                requestModel.headers = self.makeHttpHeaders(from: requestModel.headers)
+                self.sessionManager.request(requestModel, completion)
+            }
+        } else {
+            requestModel.headers = self.makeHttpHeaders(from: requestModel.headers)
+            self.sessionManager.request(requestModel, completion)
+        }
     }
     
     private func makeHttpHeaders(from headers: [String:String]?) -> [String:String] {
@@ -48,7 +62,7 @@ class NetworkingService: NetworkingServiceProotocol {
     }
     
     private func addAuthenticationHeader(from headers: inout [String:String]) {
-        if let accessToken = authTokenRepository.getToken(for: .accessTokenKey) {
+        if let accessToken = tokenManager.accessToken {
             headers.updateValue("Bearer \(accessToken)", forKey: "Authorization")
         }
     }

@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "F8CFA6DB29D32F5000905F94"
-               BuildableName = "FaceDetectionIOS.app"
-               BlueprintName = "FaceDetectionIOS"
+               BuildableName = "Smart Lock.app"
+               BlueprintName = "Smart Lock"
                ReferencedContainer = "container:FaceDetectionIOS.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,8 +46,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F8CFA6DB29D32F5000905F94"
-            BuildableName = "FaceDetectionIOS.app"
-            BlueprintName = "FaceDetectionIOS"
+            BuildableName = "Smart Lock.app"
+            BlueprintName = "Smart Lock"
             ReferencedContainer = "container:FaceDetectionIOS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -63,8 +63,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "F8CFA6DB29D32F5000905F94"
-            BuildableName = "FaceDetectionIOS.app"
-            BlueprintName = "FaceDetectionIOS"
+            BuildableName = "Smart Lock.app"
+            BlueprintName = "Smart Lock"
             ReferencedContainer = "container:FaceDetectionIOS.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

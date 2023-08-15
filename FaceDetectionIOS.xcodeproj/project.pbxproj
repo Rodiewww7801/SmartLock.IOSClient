@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		F80734FB2A8BCBBF0055D473 /* FDLoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80734FA2A8BCBBF0055D473 /* FDLoadingScreen.swift */; };
+		F80734FD2A8BDEBA0055D473 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80734FC2A8BDEBA0055D473 /* TokenManager.swift */; };
+		F80735002A8BE8260055D473 /* JWTDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80734FF2A8BE8260055D473 /* JWTDecoder.swift */; };
+		F80735022A8BF3AE0055D473 /* RefreshResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80735012A8BF3AE0055D473 /* RefreshResponseDTO.swift */; };
+		F80735042A8C06B40055D473 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80735032A8C06B40055D473 /* Weak.swift */; };
 		F8301C532A117CD900455964 /* PointCloudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8301C522A117CD900455964 /* PointCloudViewController.swift */; };
 		F8301C582A1184A300455964 /* SessionSetupResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8301C572A1184A300455964 /* SessionSetupResult.swift */; };
 		F8348CB529DB56BD00AF14F2 /* FDAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8348CB429DB56BD00AF14F2 /* FDAlert.swift */; };
@@ -42,7 +46,6 @@
 		F8377CD52A8AA91E00E18B59 /* RequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8377CD42A8AA91E00E18B59 /* RequestBuilder.swift */; };
 		F8377CE12A8ABBC600E18B59 /* LoginCommandProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8377CE02A8ABBC600E18B59 /* LoginCommandProtocol.swift */; };
 		F8377CE32A8ABDA200E18B59 /* LoginCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8377CE22A8ABDA200E18B59 /* LoginCommand.swift */; };
-		F8377CE62A8AD55A00E18B59 /* Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8377CE52A8AD55A00E18B59 /* Empty.swift */; };
 		F8377CEA2A8AE99900E18B59 /* KeychainStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8377CE92A8AE99900E18B59 /* KeychainStorage.swift */; };
 		F8377CEC2A8AE9DD00E18B59 /* SecureStorageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8377CEB2A8AE9DD00E18B59 /* SecureStorageProtocol.swift */; };
 		F8377CEE2A8AEA2E00E18B59 /* StorageError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8377CED2A8AEA2E00E18B59 /* StorageError.swift */; };
@@ -93,6 +96,10 @@
 
 /* Begin PBXFileReference section */
 		F80734FA2A8BCBBF0055D473 /* FDLoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDLoadingScreen.swift; sourceTree = "<group>"; };
+		F80734FC2A8BDEBA0055D473 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
+		F80734FF2A8BE8260055D473 /* JWTDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTDecoder.swift; sourceTree = "<group>"; };
+		F80735012A8BF3AE0055D473 /* RefreshResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshResponseDTO.swift; sourceTree = "<group>"; };
+		F80735032A8C06B40055D473 /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
 		F8301C522A117CD900455964 /* PointCloudViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointCloudViewController.swift; sourceTree = "<group>"; };
 		F8301C572A1184A300455964 /* SessionSetupResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSetupResult.swift; sourceTree = "<group>"; };
 		F8348CB429DB56BD00AF14F2 /* FDAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDAlert.swift; sourceTree = "<group>"; };
@@ -128,7 +135,6 @@
 		F8377CD42A8AA91E00E18B59 /* RequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBuilder.swift; sourceTree = "<group>"; };
 		F8377CE02A8ABBC600E18B59 /* LoginCommandProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCommandProtocol.swift; sourceTree = "<group>"; };
 		F8377CE22A8ABDA200E18B59 /* LoginCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCommand.swift; sourceTree = "<group>"; };
-		F8377CE52A8AD55A00E18B59 /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
 		F8377CE92A8AE99900E18B59 /* KeychainStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStorage.swift; sourceTree = "<group>"; };
 		F8377CEB2A8AE9DD00E18B59 /* SecureStorageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorageProtocol.swift; sourceTree = "<group>"; };
 		F8377CED2A8AEA2E00E18B59 /* StorageError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageError.swift; sourceTree = "<group>"; };
@@ -158,7 +164,7 @@
 		F8CE81322A3B4F2600AED35D /* FaceMeshModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceMeshModel.swift; sourceTree = "<group>"; };
 		F8CE81342A3C776200AED35D /* ShaderCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderCommon.h; sourceTree = "<group>"; };
 		F8CE81352A3C7C7700AED35D /* ShaderCommon + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShaderCommon + Extension.swift"; sourceTree = "<group>"; };
-		F8CFA6DC29D32F5000905F94 /* FaceDetectionIOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceDetectionIOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F8CFA6DC29D32F5000905F94 /* Smart Lock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Smart Lock.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8CFA6DF29D32F5000905F94 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F8CFA6E129D32F5000905F94 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F8CFA6E829D32F5100905F94 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -236,6 +242,7 @@
 				F8377C792A893F5800E18B59 /* HTTPMethod.swift */,
 				F8377C772A893EFC00E18B59 /* RequestModel.swift */,
 				F8377C7F2A894A0600E18B59 /* ResponseStatus.swift */,
+				F8377CCE2A8A9AF300E18B59 /* Token.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -318,6 +325,8 @@
 				F8377CA92A8A15FD00E18B59 /* RegexValidator.swift */,
 				F8377CC82A8A745C00E18B59 /* Encodable + Extension.swift */,
 				F8377CCA2A8A764400E18B59 /* Data + Extension.swift */,
+				F80734FF2A8BE8260055D473 /* JWTDecoder.swift */,
+				F80735032A8C06B40055D473 /* Weak.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -338,15 +347,6 @@
 				F8377CAB2A8A240800E18B59 /* RegistrationViewModel.swift */,
 			);
 			path = ViewModels;
-			sourceTree = "<group>";
-		};
-		F8377CA02A89949C00E18B59 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				F8377CCE2A8A9AF300E18B59 /* Token.swift */,
-				F8377CE52A8AD55A00E18B59 /* Empty.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		F8377CB22A8A260100E18B59 /* Commands */ = {
@@ -411,6 +411,7 @@
 				F8377CA22A89959000E18B59 /* RegisterRequestDTO.swift */,
 				F8377CA52A89967500E18B59 /* LoginRequestDTO.swift */,
 				F8377CD22A8A9B5C00E18B59 /* LoginResponseDTO.swift */,
+				F80735012A8BF3AE0055D473 /* RefreshResponseDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -419,6 +420,7 @@
 			isa = PBXGroup;
 			children = (
 				F8377C632A892F7500E18B59 /* SessionManager.swift */,
+				F80734FC2A8BDEBA0055D473 /* TokenManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -594,7 +596,7 @@
 		F8CFA6DD29D32F5000905F94 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F8CFA6DC29D32F5000905F94 /* FaceDetectionIOS.app */,
+				F8CFA6DC29D32F5000905F94 /* Smart Lock.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -639,7 +641,6 @@
 				F8377CB22A8A260100E18B59 /* Commands */,
 				F8377C902A896AD500E18B59 /* Helpers */,
 				F8B2DEAA2A190077003F7544 /* Utility */,
-				F8377CA02A89949C00E18B59 /* Models */,
 				F849F2942A1FA13C00672D34 /* Controllers */,
 				F8E4D47429D8968300B6F0BB /* MetalCore */,
 				F8FBB24F29D62CE8009E3680 /* Face Detection */,
@@ -744,9 +745,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		F8CFA6DB29D32F5000905F94 /* FaceDetectionIOS */ = {
+		F8CFA6DB29D32F5000905F94 /* Smart Lock */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F8CFA6F029D32F5100905F94 /* Build configuration list for PBXNativeTarget "FaceDetectionIOS" */;
+			buildConfigurationList = F8CFA6F029D32F5100905F94 /* Build configuration list for PBXNativeTarget "Smart Lock" */;
 			buildPhases = (
 				F8CFA6D829D32F5000905F94 /* Sources */,
 				F8CFA6D929D32F5000905F94 /* Frameworks */,
@@ -756,9 +757,9 @@
 			);
 			dependencies = (
 			);
-			name = FaceDetectionIOS;
+			name = "Smart Lock";
 			productName = FaceDetectionIOS;
-			productReference = F8CFA6DC29D32F5000905F94 /* FaceDetectionIOS.app */;
+			productReference = F8CFA6DC29D32F5000905F94 /* Smart Lock.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -790,7 +791,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F8CFA6DB29D32F5000905F94 /* FaceDetectionIOS */,
+				F8CFA6DB29D32F5000905F94 /* Smart Lock */,
 			);
 		};
 /* End PBXProject section */
@@ -834,9 +835,11 @@
 				F8377C9B2A89857C00E18B59 /* UIColor+Extension.swift in Sources */,
 				F8CFA6E029D32F5000905F94 /* AppDelegate.swift in Sources */,
 				F8377CD32A8A9B5C00E18B59 /* LoginResponseDTO.swift in Sources */,
+				F80735002A8BE8260055D473 /* JWTDecoder.swift in Sources */,
 				F849F2962A1FA14900672D34 /* GestureController.swift in Sources */,
 				F8377CEA2A8AE99900E18B59 /* KeychainStorage.swift in Sources */,
 				F881A8422A32CF3F003408B3 /* DetecetionSceneSettingsViewController.swift in Sources */,
+				F80735022A8BF3AE0055D473 /* RefreshResponseDTO.swift in Sources */,
 				F8377CEC2A8AE9DD00E18B59 /* SecureStorageProtocol.swift in Sources */,
 				F8377CA82A8996FE00E18B59 /* RegistrationVC.swift in Sources */,
 				F881A83C2A32ADE2003408B3 /* PointCloudSceneCoordinator.swift in Sources */,
@@ -858,6 +861,7 @@
 				F8897ACB2A2FDABB0057D7A7 /* MainListViewController.swift in Sources */,
 				F8377CA32A89959000E18B59 /* RegisterRequestDTO.swift in Sources */,
 				F8CFA6FE29D3433F00905F94 /* FaceDetector.swift in Sources */,
+				F80734FD2A8BDEBA0055D473 /* TokenManager.swift in Sources */,
 				F8872E592A3CBC7A00B2A0D7 /* PointCloudModel.swift in Sources */,
 				F8CFA6E229D32F5000905F94 /* SceneDelegate.swift in Sources */,
 				F8377C852A8962CA00E18B59 /* FaceLockAPIRequestFactory.swift in Sources */,
@@ -867,7 +871,6 @@
 				F8377CB52A8A263900E18B59 /* RegisterCommandProtocol.swift in Sources */,
 				F8377C992A89734500E18B59 /* AuthenticationVC.swift in Sources */,
 				F8301C582A1184A300455964 /* SessionSetupResult.swift in Sources */,
-				F8377CE62A8AD55A00E18B59 /* Empty.swift in Sources */,
 				F8E4D47C29D898DE00B6F0BB /* Presentable.swift in Sources */,
 				F8FBC9C62A6BEC55009100F1 /* FaceAuthenticity.swift in Sources */,
 				F8B2DEAF2A196E9F003F7544 /* Renderer.swift in Sources */,
@@ -887,6 +890,7 @@
 				F8377CC52A8A5DA300E18B59 /* NetworkingServiceFactoryProtocol.swift in Sources */,
 				F8377CC32A8A5D8B00E18B59 /* NetworkingServiceFactory.swift in Sources */,
 				F8377CAA2A8A15FD00E18B59 /* RegexValidator.swift in Sources */,
+				F80735042A8C06B40055D473 /* Weak.swift in Sources */,
 				F8377C642A892F7500E18B59 /* SessionManager.swift in Sources */,
 				F8348CB529DB56BD00AF14F2 /* FDAlert.swift in Sources */,
 				F8CE81362A3C7C7700AED35D /* ShaderCommon + Extension.swift in Sources */,
@@ -1050,7 +1054,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_HEADER_SEARCH_PATHS = FaceDetectionIOS/Domain/Utility;
 				PRODUCT_BUNDLE_IDENTIFIER = rodia.FaceDetectionIOS;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Smart Lock";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "FaceDetectionIOS/Domain/Utility/FaceDetectionIOS-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1084,7 +1088,7 @@
 				MARKETING_VERSION = 1.0;
 				MTL_HEADER_SEARCH_PATHS = FaceDetectionIOS/Domain/Utility;
 				PRODUCT_BUNDLE_IDENTIFIER = rodia.FaceDetectionIOS;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Smart Lock";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "FaceDetectionIOS/Domain/Utility/FaceDetectionIOS-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -1104,7 +1108,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F8CFA6F029D32F5100905F94 /* Build configuration list for PBXNativeTarget "FaceDetectionIOS" */ = {
+		F8CFA6F029D32F5100905F94 /* Build configuration list for PBXNativeTarget "Smart Lock" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				F8CFA6F129D32F5100905F94 /* Debug */,

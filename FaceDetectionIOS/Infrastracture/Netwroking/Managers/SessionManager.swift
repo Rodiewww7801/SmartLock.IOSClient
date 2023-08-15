@@ -29,19 +29,20 @@ class SessionManager: SessionManagerProtocol {
             let responseStatus = self.handleResponseStatusCode(urlResponse)
             switch responseStatus {
             case .success:
-                completion(.success( () ))
                 if let data = data, let bodyString = String(data: data, encoding: .utf8)  {
                     print("[SessionManager]: SUCCESS response \(String(describing: urlResponse)), body \(bodyString)")
                 } else {
                     print("[SessionManager]: SUCCESS response \(String(describing: urlResponse))")
                 }
+                
+                completion(.success( () ))
             case .failed(let networkingError):
                 if let data = data, let bodyString = String(data: data, encoding: .utf8)  {
-                    completion(.failure(NetworkingError.withError(errorString: bodyString)))
                     print("[SessionManager]: FAILURE response \(String(describing: urlResponse)), body \(bodyString)")
+                    completion(.failure(NetworkingError.withError(errorString: bodyString)))
                 } else {
-                    completion(.failure(networkingError))
                     print("[SessionManager]: FAILURE response \(String(describing: urlResponse))")
+                    completion(.failure(networkingError))
                 }
             }
         }.resume()
@@ -56,24 +57,24 @@ class SessionManager: SessionManagerProtocol {
             let responseStatus = self.handleResponseStatusCode(urlResponse)
             switch responseStatus {
             case .success:
-                if let data = data, let model = try? JSONDecoder().decode(Success.self, from: data) {
-                    completion(.success(model))
-                } else {
-                    completion(.failure(NetworkingError.unableToDecode))
-                }
                 if let data = data, let bodyString = String(data: data, encoding: .utf8)  {
                     print("[SessionManager]: SUCCESS response \(String(describing: urlResponse)), body \(bodyString)")
                 } else {
                     print("[SessionManager]: SUCCESS response \(String(describing: urlResponse))")
                 }
-               
-            case .failed(let networkingError):
-                if let data = data, let bodyString = String(data: data, encoding: .utf8)  {
-                    completion(.failure(NetworkingError.withError(errorString: bodyString)))
-                    print("[SessionManager]: FAILURE response \(String(describing: urlResponse)), body \(bodyString)")
+                
+                if let data = data, let model = try? JSONDecoder().decode(Success.self, from: data) {
+                    completion(.success(model))
                 } else {
-                    completion(.failure(networkingError))
+                    completion(.failure(NetworkingError.unableToDecode))
+                }
+            case .failed(let networkingError):
+                if let data = data, let bodyString = String(data: data, encoding: .utf8), bodyString.isEmpty == false  {
+                    print("[SessionManager]: FAILURE response \(String(describing: urlResponse)), body \(bodyString)")
+                    completion(.failure(NetworkingError.withError(errorString: bodyString)))
+                } else {
                     print("[SessionManager]: FAILURE response \(String(describing: urlResponse))")
+                    completion(.failure(networkingError))
                 }
             }
         }.resume()

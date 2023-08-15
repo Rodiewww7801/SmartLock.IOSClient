@@ -10,4 +10,6 @@ import Foundation
 protocol NetworkingServiceFactoryProtocol {
     static func sessionManager() -> SessionManagerProtocol 
     static func networkingService() -> NetworkingServiceProotocol
+    static func tokenManager() -> TokenManagerProtocol
+    static func tokenObservable() -> TokenObservable
 }
