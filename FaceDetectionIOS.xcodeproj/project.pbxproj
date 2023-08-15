@@ -11,7 +11,9 @@
 		F80734FD2A8BDEBA0055D473 /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80734FC2A8BDEBA0055D473 /* TokenManager.swift */; };
 		F80735002A8BE8260055D473 /* JWTDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80734FF2A8BE8260055D473 /* JWTDecoder.swift */; };
 		F80735022A8BF3AE0055D473 /* RefreshResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80735012A8BF3AE0055D473 /* RefreshResponseDTO.swift */; };
-		F80735042A8C06B40055D473 /* Weak.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80735032A8C06B40055D473 /* Weak.swift */; };
+		F807350A2A8C2CE60055D473 /* MainListSceneCoordinatorOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80735092A8C2CE60055D473 /* MainListSceneCoordinatorOutput.swift */; };
+		F807350C2A8C2F300055D473 /* LogoutCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F807350B2A8C2F300055D473 /* LogoutCommand.swift */; };
+		F807350E2A8C2F480055D473 /* LogoutCommandProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F807350D2A8C2F480055D473 /* LogoutCommandProtocol.swift */; };
 		F8301C532A117CD900455964 /* PointCloudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8301C522A117CD900455964 /* PointCloudViewController.swift */; };
 		F8301C582A1184A300455964 /* SessionSetupResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8301C572A1184A300455964 /* SessionSetupResult.swift */; };
 		F8348CB529DB56BD00AF14F2 /* FDAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8348CB429DB56BD00AF14F2 /* FDAlert.swift */; };
@@ -99,7 +101,9 @@
 		F80734FC2A8BDEBA0055D473 /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		F80734FF2A8BE8260055D473 /* JWTDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTDecoder.swift; sourceTree = "<group>"; };
 		F80735012A8BF3AE0055D473 /* RefreshResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshResponseDTO.swift; sourceTree = "<group>"; };
-		F80735032A8C06B40055D473 /* Weak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weak.swift; sourceTree = "<group>"; };
+		F80735092A8C2CE60055D473 /* MainListSceneCoordinatorOutput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListSceneCoordinatorOutput.swift; sourceTree = "<group>"; };
+		F807350B2A8C2F300055D473 /* LogoutCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutCommand.swift; sourceTree = "<group>"; };
+		F807350D2A8C2F480055D473 /* LogoutCommandProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutCommandProtocol.swift; sourceTree = "<group>"; };
 		F8301C522A117CD900455964 /* PointCloudViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointCloudViewController.swift; sourceTree = "<group>"; };
 		F8301C572A1184A300455964 /* SessionSetupResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSetupResult.swift; sourceTree = "<group>"; };
 		F8348CB429DB56BD00AF14F2 /* FDAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDAlert.swift; sourceTree = "<group>"; };
@@ -198,6 +202,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F80735052A8C2CAB0055D473 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				F8E4D48829D8AE1900B6F0BB /* MainListSceneCoordinator.swift */,
+				F80735092A8C2CE60055D473 /* MainListSceneCoordinatorOutput.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		F80735062A8C2CB70055D473 /* ViewControlers */ = {
+			isa = PBXGroup;
+			children = (
+				F8897ACA2A2FDABB0057D7A7 /* MainListViewController.swift */,
+			);
+			path = ViewControlers;
+			sourceTree = "<group>";
+		};
+		F80735072A8C2CC10055D473 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F8897ACC2A2FE0CF0057D7A7 /* MainListViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		F8301C512A117CAF00455964 /* PointCloudScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -326,7 +355,6 @@
 				F8377CC82A8A745C00E18B59 /* Encodable + Extension.swift */,
 				F8377CCA2A8A764400E18B59 /* Data + Extension.swift */,
 				F80734FF2A8BE8260055D473 /* JWTDecoder.swift */,
-				F80735032A8C06B40055D473 /* Weak.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -355,6 +383,7 @@
 				F8377CDF2A8ABBAA00E18B59 /* Interfaces */,
 				F8377CB62A8A26A900E18B59 /* RegisterCommand.swift */,
 				F8377CE22A8ABDA200E18B59 /* LoginCommand.swift */,
+				F807350B2A8C2F300055D473 /* LogoutCommand.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -447,6 +476,7 @@
 			children = (
 				F8377CB42A8A263900E18B59 /* RegisterCommandProtocol.swift */,
 				F8377CE02A8ABBC600E18B59 /* LoginCommandProtocol.swift */,
+				F807350D2A8C2F480055D473 /* LogoutCommandProtocol.swift */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -560,9 +590,9 @@
 		F8897AC92A2FDA950057D7A7 /* MainListScene */ = {
 			isa = PBXGroup;
 			children = (
-				F8E4D48829D8AE1900B6F0BB /* MainListSceneCoordinator.swift */,
-				F8897ACA2A2FDABB0057D7A7 /* MainListViewController.swift */,
-				F8897ACC2A2FE0CF0057D7A7 /* MainListViewModel.swift */,
+				F80735072A8C2CC10055D473 /* ViewModels */,
+				F80735062A8C2CB70055D473 /* ViewControlers */,
+				F80735052A8C2CAB0055D473 /* Coordinators */,
 			);
 			path = MainListScene;
 			sourceTree = "<group>";
@@ -825,6 +855,7 @@
 				F8377C5C2A86F98100E18B59 /* FaceFeaturePosition.swift in Sources */,
 				F8377C782A893EFC00E18B59 /* RequestModel.swift in Sources */,
 				F8377CE32A8ABDA200E18B59 /* LoginCommand.swift in Sources */,
+				F807350A2A8C2CE60055D473 /* MainListSceneCoordinatorOutput.swift in Sources */,
 				F8377CB72A8A26A900E18B59 /* RegisterCommand.swift in Sources */,
 				F8377C8F2A89686300E18B59 /* AuthenticationSceneCoordinator.swift in Sources */,
 				F8897ACD2A2FE0CF0057D7A7 /* MainListViewModel.swift in Sources */,
@@ -879,6 +910,7 @@
 				F8FBC9C42A6BEBD9009100F1 /* FaceObservation.swift in Sources */,
 				F8377CF02A8AEB0D00E18B59 /* GenericPasswordQueryable.swift in Sources */,
 				F8377CBB2A8A5C4D00E18B59 /* CommandsFactory.swift in Sources */,
+				F807350C2A8C2F300055D473 /* LogoutCommand.swift in Sources */,
 				F8377C7C2A89405200E18B59 /* FaceLockAPIPaths.swift in Sources */,
 				F8377CAC2A8A240800E18B59 /* RegistrationViewModel.swift in Sources */,
 				F8377CCD2A8A984F00E18B59 /* AuthenticationViewModel.swift in Sources */,
@@ -890,11 +922,11 @@
 				F8377CC52A8A5DA300E18B59 /* NetworkingServiceFactoryProtocol.swift in Sources */,
 				F8377CC32A8A5D8B00E18B59 /* NetworkingServiceFactory.swift in Sources */,
 				F8377CAA2A8A15FD00E18B59 /* RegexValidator.swift in Sources */,
-				F80735042A8C06B40055D473 /* Weak.swift in Sources */,
 				F8377C642A892F7500E18B59 /* SessionManager.swift in Sources */,
 				F8348CB529DB56BD00AF14F2 /* FDAlert.swift in Sources */,
 				F8CE81362A3C7C7700AED35D /* ShaderCommon + Extension.swift in Sources */,
 				F8377CD52A8AA91E00E18B59 /* RequestBuilder.swift in Sources */,
+				F807350E2A8C2F480055D473 /* LogoutCommandProtocol.swift in Sources */,
 				F8377C922A896ADE00E18B59 /* ApplicationConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

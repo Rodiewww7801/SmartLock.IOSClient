@@ -11,6 +11,8 @@ import UIKit
 class MainListViewController: UIViewController {
     var tableView: UITableView!
     var viewModel: MainListViewModel
+    private var topStackView: UIStackView!
+    private var logoutButton: UIButton!
     
     init(with viewModel: MainListViewModel) {
         self.viewModel = viewModel
@@ -41,6 +43,10 @@ class MainListViewController: UIViewController {
         self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     }
+    
+    private func configreTopStackView() {
+        
+    }
 }
 
 extension MainListViewController: UITableViewDataSource {
@@ -57,8 +63,6 @@ extension MainListViewController: UITableViewDataSource {
         cell.contentConfiguration = configuration
         return cell
     }
-    
-
 }
 
 extension MainListViewController: UITableViewDelegate {

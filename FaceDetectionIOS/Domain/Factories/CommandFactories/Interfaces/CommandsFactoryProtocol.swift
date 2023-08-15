@@ -10,4 +10,5 @@ import Foundation
 protocol CommandsFactoryProtocol {
     static func registerCommand() -> RegisterCommandProtocol
     static func loginCommand() -> LoginCommandProtocol
+    static func logoutCommand() -> LogoutCommandProtocol
 }

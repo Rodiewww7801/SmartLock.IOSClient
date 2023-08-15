@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct NavigationItem {
+struct MainListData {
     var name: String
     var link: (()->())?
 }
 
 class MainListViewModel {
-    var mainListDataSource: [NavigationItem] = []
+    var mainListDataSource: [MainListData] = []
 }

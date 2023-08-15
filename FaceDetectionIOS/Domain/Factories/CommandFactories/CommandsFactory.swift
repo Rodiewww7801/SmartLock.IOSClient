@@ -15,4 +15,8 @@ class CommandsFactory: CommandsFactoryProtocol {
     static func loginCommand() -> LoginCommandProtocol {
         return LoginCommand()
     }
+    
+    static func logoutCommand() -> LogoutCommandProtocol {
+        return LogoutCommand()
+    }
 }

@@ -37,7 +37,7 @@ class SessionManager: SessionManagerProtocol {
                 
                 completion(.success( () ))
             case .failed(let networkingError):
-                if let data = data, let bodyString = String(data: data, encoding: .utf8)  {
+                if let data = data, let bodyString = String(data: data, encoding: .utf8), bodyString.isEmpty == false  {
                     print("[SessionManager]: FAILURE response \(String(describing: urlResponse)), body \(bodyString)")
                     completion(.failure(NetworkingError.withError(errorString: bodyString)))
                 } else {

@@ -15,9 +15,12 @@ final class ApplicationCoordinator: Coordinator {
     init(router: Router) {
         self.authTokenRepository = RepositoryFactory.authTokenRepository()
         if let _ = authTokenRepository.getToken(for: .accessTokenKey) {
-            self.isUserLoggedIn = false
+            self.isUserLoggedIn = true
         }
         self.router = router
+        super.init()
+        
+        subscribeOnTokenManager()
     }
     
     override func start() {
@@ -41,6 +44,13 @@ final class ApplicationCoordinator: Coordinator {
     
     private func mainListScene() {
         let mainListCoordinator = MainListSceneCoordinator(router: router)
+        mainListCoordinator.logout = { [weak self] in
+            mainListCoordinator.removeAllChildren()
+            self?.removeChild(mainListCoordinator)
+            DispatchQueue.main.async {
+                self?.authenticationScene()
+            }
+        }
         self.childCoordinators.append(mainListCoordinator)
         mainListCoordinator.start()
     }

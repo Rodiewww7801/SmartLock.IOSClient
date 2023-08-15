@@ -28,7 +28,7 @@ class NetworkingService: NetworkingServiceProotocol {
     }
     
     public func request<Success: Decodable>(_ requestModel: RequestModel, _ completion: @escaping (Result<Success,Error>)->()) {
-        if !requestModel.path.contains("Authentication") {
+        if !requestModel.path.contains("Authentication") || requestModel.path.contains("logout") {
             tokenManager.refreshTokenIfNeeded {
                 requestModel.headers = self.makeHttpHeaders(from: requestModel.headers)
                 self.sessionManager.request(requestModel, completion)
@@ -40,7 +40,7 @@ class NetworkingService: NetworkingServiceProotocol {
     }
     
     public func request(_ requestModel: RequestModel, _ completion: @escaping (Result<Void,Error>)->()) {
-        if !requestModel.path.contains("Authentication") {
+        if !requestModel.path.contains("Authentication") || requestModel.path.contains("logout") {
             tokenManager.refreshTokenIfNeeded {
                 requestModel.headers = self.makeHttpHeaders(from: requestModel.headers)
                 self.sessionManager.request(requestModel, completion)

@@ -9,12 +9,16 @@ import Foundation
 import AVFoundation
 import UIKit
 
-final class MainListSceneCoordinator: Coordinator {
-    let router: Router
-    var alert: FDAlert?
+final class MainListSceneCoordinator: Coordinator, MainListSceneCoordinatorOutput {
+    private let router: Router
+    private var alert: FDAlert?
+    private let logoutCommand: LogoutCommandProtocol
+    
+    var logout: (() -> ())?
     
     init(router: Router) {
         self.router = router
+        self.logoutCommand = CommandsFactory.logoutCommand()
         print("[MainListCoordinator]: init")
     }
     
@@ -62,13 +66,30 @@ final class MainListSceneCoordinator: Coordinator {
     
     private func showNavigationTest() {
         let viewModel = MainListViewModel()
-        viewModel.mainListDataSource.append(NavigationItem(name: "Face detection scene", link: { [weak self] in
-            self?.showDetectionScene()
-        }))
-        viewModel.mainListDataSource.append(NavigationItem(name: "Point cloud scene", link: { [weak self] in
-            self?.showTrueDepthScene()
-        }))
+        viewModel.mainListDataSource = configureDataSourceForMainList()
         let main = MainListViewController(with: viewModel)
         router.setToRootModule(main, animated: true)
+    }
+    
+    private func configureDataSourceForMainList() -> [MainListData] {
+        var mainListDataSource = [MainListData]()
+        mainListDataSource.append(MainListData(
+            name: "Face detection scene",
+            link: { [weak self] in
+                self?.showDetectionScene()
+            }))
+        mainListDataSource.append(MainListData(
+            name: "Point cloud scene",
+            link: { [weak self] in
+                self?.showTrueDepthScene()
+            }))
+        mainListDataSource.append(MainListData(
+            name: "Logout",
+            link: { [weak self] in
+                self?.logoutCommand.execute { _ in
+                    self?.logout?()
+                }
+            }))
+        return mainListDataSource
     }
 }

@@ -30,7 +30,13 @@ class FaceLockAPIRequestFactory {
     
     static func createRefreshRequest(refreshToken: String) -> RequestModel? {
         let headers = ["refreshToken":refreshToken]
-        let refreshRequestModel = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.refresh, httpMethod: .get, headers: headers)
+        let refreshRequestModel = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.refresh, httpMethod: .post, headers: headers)
         return refreshRequestModel
+    }
+    
+    static func createLogoutRequest(accessToken: String, refreshToken: String) -> RequestModel? {
+        let headers = ["refreshToken":refreshToken]
+        let logoutRequestModel = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.logout, httpMethod: .post, headers: headers)
+        return logoutRequestModel
     }
 }
