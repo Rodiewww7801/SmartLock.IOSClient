@@ -159,8 +159,6 @@ class FaceDetector: NSObject {
         let depthDataMap = depthData.depthDataMap
         
         CVPixelBufferLockBaseAddress(depthDataMap, .readOnly)
-        let scaleX = CGFloat(CVPixelBufferGetWidth(depthDataMap)) / CGFloat(CVPixelBufferGetWidth(imageBuffer))
-        let scaleY = CGFloat(CVPixelBufferGetHeight(depthDataMap)) / CGFloat(CVPixelBufferGetHeight(imageBuffer))
         let cidepthImage = CIImage(cvPixelBuffer: depthDataMap)
         
         let baseAddress = CVPixelBufferGetBaseAddress(depthDataMap)!

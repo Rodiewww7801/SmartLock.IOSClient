@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         baseNavigationController.navigationBar.barTintColor = .white
         baseNavigationController.navigationBar.isTranslucent = true
         baseNavigationController.view.backgroundColor = .white
-        baseNavigationController.navigationBar.tintColor = .black
+        baseNavigationController.navigationBar.tintColor = .gray
         self.window?.rootViewController = baseNavigationController
         self.makeAppliactionCoordinator()
         self.applicationCoordinator?.start()

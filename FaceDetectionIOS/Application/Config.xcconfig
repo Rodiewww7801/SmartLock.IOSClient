@@ -1,0 +1,10 @@
+//
+//  Config.xcconfig
+//  FaceDetectionIOS
+//
+//  Created by Rodion Hladchenko on 14.08.2023.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+FACE_LOCK_API_URL=https:/$()/face-lock-webapi-win.azurewebsites.net

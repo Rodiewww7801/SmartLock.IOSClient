@@ -9,7 +9,7 @@ import Foundation
 import AVFoundation
 import UIKit
 
-final class MainListCoordinator: Coordinator {
+final class MainListSceneCoordinator: Coordinator {
     let router: Router
     var alert: FDAlert?
     

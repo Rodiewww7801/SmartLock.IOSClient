@@ -8,20 +8,35 @@
 import Foundation
 
 final class ApplicationCoordinator: Coordinator {
-    let coordinatorFactory: ApplicationCoordinatorFactory = ApplicationCoordinatorFactory()
     let router: Router
+    private var isUserLoggedIn = false
     
     init(router: Router) {
         self.router = router
     }
     
     override func start() {
-        startMainScene()
+        if isUserLoggedIn {
+            mainListScene()
+        } else {
+            authenticationScene()
+        }
     }
     
-    private func startMainScene() {
-        let coordinator = coordinatorFactory.makeMainCoordinator(router: self.router)
-        addChild(coordinator)
-        coordinator.start()
+    private func authenticationScene() {
+        let authenticationCoordinator = AuthenticationSceneCoordinator(router: router)
+        authenticationCoordinator.showMainView = { [weak self] in
+            self?.mainListScene()
+            authenticationCoordinator.removeAllChildren()
+            self?.removeChild(authenticationCoordinator)
+        }
+        self.childCoordinators.append(authenticationCoordinator)
+        authenticationCoordinator.start()
+    }
+    
+    private func mainListScene() {
+        let mainListCoordinator = MainListSceneCoordinator(router: router)
+        self.childCoordinators.append(mainListCoordinator)
+        mainListCoordinator.start()
     }
 }
