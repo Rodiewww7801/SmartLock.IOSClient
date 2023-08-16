@@ -10,7 +10,6 @@ import Foundation
 class UserRepository: UserRepositoryProtocol {
     private var getUserCommand: GetUserCommandProtocol
     private var getUserByIdCommand: GetUserByIdCommandProtocol
-    private var 
     
     init() {
         self.getUserCommand = CommandsFactory.getUserCommand()
