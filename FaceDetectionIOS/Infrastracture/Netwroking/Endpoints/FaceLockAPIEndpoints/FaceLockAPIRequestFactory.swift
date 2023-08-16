@@ -21,14 +21,14 @@ class FaceLockAPIRequestFactory {
         return model
     }
     
-    static func createAdminCreateUserRequest() -> RequestModel? {
-        let model = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.adminGetUsers, httpMethod: .post)
+    static func createAdminGetUsersRequest() -> RequestModel? {
+        let model = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.adminGetUsers, httpMethod: .get)
         return model
     }
     
-    static func createAdminCreateUserRequest(userId: String) -> RequestModel? {
+    static func createAdminGetUserRequest(userId: String) -> RequestModel? {
         let path = FaceLockAPIPaths.adminGetUser.replacingOccurrences(of: "{userId}", with: userId)
-        let model = RequestModel(basePath: serverAPI, path: path, httpMethod: .post)
+        let model = RequestModel(basePath: serverAPI, path: path, httpMethod: .get)
         return model
     }
     

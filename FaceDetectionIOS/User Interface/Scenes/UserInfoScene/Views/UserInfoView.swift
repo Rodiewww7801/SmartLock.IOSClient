@@ -98,9 +98,6 @@ class UserInfoView: UIView {
             lastNameLabel.text = "Last name: \(model.user.lastName)"
 
             roleLabel.text = "Role: \(model.user.role.rawValue)"
-            
-            let stackHeight = userInfoStackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
-            self.heightAnchor.constraint(equalToConstant: stackHeight + 10).isActive = true
         }
     }
 }

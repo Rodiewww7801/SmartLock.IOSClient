@@ -11,7 +11,7 @@ class RequestBuilder {
     static func buildRequest(_ requestModel: RequestModel) -> URLRequest? {
         let url = createUrl(requestModel)
     
-        var urlRequest = URLRequest(url: url, timeoutInterval: 10.0)
+        var urlRequest = URLRequest(url: url, timeoutInterval: 60.0)
         
         if let headers = requestModel.headers {
             addHeaders(&urlRequest, headers: headers)

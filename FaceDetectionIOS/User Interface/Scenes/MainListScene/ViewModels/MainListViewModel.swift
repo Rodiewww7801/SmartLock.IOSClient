@@ -16,6 +16,7 @@ protocol MainListViewModelDelegate {
     var showDetectionScene: (()->Void)? { get }
     var showPointToCloudScene: (()->Void)? { get }
     var createUserScene: (()->Void)? { get }
+    var usersListScene: (()->Void)? { get }
     var logout: (()->Void)? { get }
 }
 
@@ -29,6 +30,7 @@ class MainListViewModel: MainListViewModelDelegate {
     var showPointToCloudScene: (()->Void)?
     var createUserScene: (()->Void)?
     var showUserInfoScene: (() -> Void)?
+    var usersListScene: (()->Void)?
     var logout: (()->Void)?
     
     init() {
@@ -67,6 +69,12 @@ class MainListViewModel: MainListViewModelDelegate {
                 name: "Create user",
                 link: { [weak self] in
                     self?.createUserScene?()
+                }
+            ))
+            adminDataSource.append(MainListData(
+                name: "Get users",
+                link: { [weak self] in
+                    self?.usersListScene?()
                 }
             ))
             mainListDataSource.updateValue(adminDataSource, forKey: "Admin section")

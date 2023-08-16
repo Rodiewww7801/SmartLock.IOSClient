@@ -32,7 +32,7 @@ class UserInfoViewController: UIViewController {
     }
     
     private func configureViews() {
-        self.view.backgroundColor = .white
+        //self.view.backgroundColor = .white
         configureUserInfoView()
     }
     
@@ -56,5 +56,6 @@ class UserInfoViewController: UIViewController {
         userInfoView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         userInfoView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         userInfoView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+        userInfoView.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
     }
 }

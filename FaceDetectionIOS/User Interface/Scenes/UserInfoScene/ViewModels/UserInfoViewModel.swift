@@ -16,11 +16,11 @@ class UserInfoViewModel {
     }
     
     func configure(_ completion: @escaping ((UserInfoModel)->Void)) {
-        Task {
-            let userModel = await self.userRepository.getUser()
+        Task { [weak self] in
+            let userModel = await self?.userRepository.getUser()
             guard let userModel = userModel else { return }
             let userInfoModel = UserInfoModel(user: userModel)
-            self.userInfoModel = userInfoModel
+            self?.userInfoModel = userInfoModel
             completion(userInfoModel)
         }
     }

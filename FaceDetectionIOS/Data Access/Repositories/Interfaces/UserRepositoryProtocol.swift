@@ -10,4 +10,5 @@ import Foundation
 protocol UserRepositoryProtocol {
     func getUser() async -> User?
     func getUser(id: String) async -> User?
+    func getUsers() async -> [User]
 }

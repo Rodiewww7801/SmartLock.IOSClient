@@ -1,21 +1,18 @@
 //
-//  MainListViewController.swift
-//  FaceDetectionIOS
+//  UserListViewController.swift
+//  Smart Lock
 //
-//  Created by Rodion Hladchenko on 07.06.2023.
+//  Created by Rodion Hladchenko on 16.08.2023.
 //
 
-import Foundation
 import UIKit
 
-class MainListViewController: UIViewController {
+class UserListViewController: UIViewController {
     private var tableView: UITableView!
-    private var viewModel: MainListViewModel
-    private var topStackView: UIStackView!
-    private var logoutButton: UIButton!
+    private var viewModel: UserListViewModel
     private var loadingScreen = FDLoadingScreen()
     
-    init(with viewModel: MainListViewModel) {
+    init(with viewModel: UserListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -40,10 +37,9 @@ class MainListViewController: UIViewController {
     
     private func loadModel() {
         loadingScreen.show(on: self.view)
-        viewModel.configure { [weak self] in
+        viewModel.loadData { [weak self] _ in
             DispatchQueue.main.async {
                 self?.loadingScreen.stop()
-                self?.sections = (self?.viewModel.mainListDataSource.keys.map({ $0 })) ?? []
                 self?.tableView.reloadData()
             }
         }
@@ -51,7 +47,7 @@ class MainListViewController: UIViewController {
     
     private func configureNavigationList() {
         self.tableView = UITableView()
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: UserInfoViewCell.reuseIdentifier)
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
@@ -62,45 +58,31 @@ class MainListViewController: UIViewController {
         self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     }
-    
-    private func configreTopStackView() {
-        
-    }
 }
 
-extension MainListViewController: UITableViewDataSource {
+extension UserListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionKey = sections[section]
-        let numberOfRows = viewModel.mainListDataSource[sectionKey]?.count ?? 0
-        return numberOfRows
+        return viewModel.dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let sectionKey = sections[indexPath.section]
-        guard let data = self.viewModel.mainListDataSource[sectionKey]?[indexPath.row] else { return UITableViewCell() }
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
-        var configuration = UIListContentConfiguration.cell()
-        let title = data.name
-        let attrString = NSAttributedString(string: title, attributes: [.foregroundColor: UIColor.black])
-        configuration.attributedText = attrString
-        cell.contentConfiguration = configuration
+        let user = self.viewModel.dataSource[indexPath.row]
+        if let dequeueCell = tableView.dequeueReusableCell(withIdentifier: UserInfoViewCell.reuseIdentifier) as? UserInfoViewCell {
+            dequeueCell.configureViews(user)
+            return dequeueCell
+        }
+        let cell = UserInfoViewCell(style: .default, reuseIdentifier: UserInfoViewCell.reuseIdentifier)
+        cell.configureViews(user)
         return cell
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return sections.count
-    }
-    
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sections[section]
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 250
     }
 }
 
-extension MainListViewController: UITableViewDelegate {
+extension UserListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let sectionKey = sections[indexPath.section]
-        viewModel.mainListDataSource[sectionKey]?[indexPath.row].link?()
     }
 }

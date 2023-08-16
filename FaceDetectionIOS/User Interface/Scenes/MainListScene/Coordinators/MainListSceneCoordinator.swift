@@ -75,23 +75,20 @@ final class MainListSceneCoordinator: Coordinator, MainListSceneCoordinatorOutpu
         router.push(userInfoViewController, animated: true)
     }
     
+    private func showUsersListScene() {
+        let userListViewModel = UserListViewModel()
+        let userListViewController = UserListViewController(with: userListViewModel)
+        router.push(userListViewController, animated: true)
+    }
+    
     private func showNavigationTest() {
         let viewModel = MainListViewModel()
-        viewModel.showDetectionScene = { [weak self] in
-            self?.showDetectionScene()
-        }
-        viewModel.showPointToCloudScene = { [weak self] in
-            self?.showTrueDepthScene()
-        }
-        viewModel.createUserScene = { [weak self] in
-            self?.showCreateUserScene()
-        }
-        viewModel.logout = { [weak self] in
-            self?.logout?()
-        }
-        viewModel.showUserInfoScene = { [weak self] in
-            self?.showUserInfoScene()
-        }
+        viewModel.showDetectionScene = self.showDetectionScene
+        viewModel.showPointToCloudScene = self.showTrueDepthScene
+        viewModel.createUserScene =  self.showCreateUserScene
+        viewModel.logout =  self.logout
+        viewModel.usersListScene = self.showUsersListScene
+        viewModel.showUserInfoScene = self.showUserInfoScene
         let main = MainListViewController(with: viewModel)
         router.setToRootModule(main, animated: true)
     }

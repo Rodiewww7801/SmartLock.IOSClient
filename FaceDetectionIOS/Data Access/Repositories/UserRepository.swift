@@ -10,10 +10,12 @@ import Foundation
 class UserRepository: UserRepositoryProtocol {
     private var getUserCommand: GetUserCommandProtocol
     private var getUserByIdCommand: GetUserByIdCommandProtocol
+    private var getUsersCommand: GetUsersCommandProtocol
     
     init() {
         self.getUserCommand = CommandsFactory.getUserCommand()
         self.getUserByIdCommand = CommandsFactory.getUserByIdCommand()
+        self.getUsersCommand = CommandsFactory.getUsersCommand()
     }
     
     func getUser() async -> User? {
@@ -50,7 +52,20 @@ class UserRepository: UserRepositoryProtocol {
         return user
     }
     
-    func createUser(_ dto: CreateUserRequestDTO) {
+    func getUsers() async -> [User] {
+        let usersDTO = try? await withUnsafeThrowingContinuation { continuation in
+            getUsersCommand.execute { result in
+                continuation.resume(with: result)
+            }
+        }
         
+        guard let usersDTO = usersDTO else { return [] }
+        let users = usersDTO.users.map { User(id: $0.id,
+                                              username: $0.username,
+                                              email: $0.email,
+                                              firstName: $0.firstName,
+                                              lastName: $0.lastName,
+                                              role: User.Role(rawValue: $0.status) ?? .user)}
+        return users
     }
 }
