@@ -11,4 +11,8 @@ class RepositoryFactory: RepositoryFactoryProtocol {
     static func authTokenRepository() -> AuthTokenRepositoryProtocol {
         return AuthTokenRepository()
     }
+    
+    static func userRepository() -> UserRepositoryProtocol {
+        return UserRepository()
+    }
 }

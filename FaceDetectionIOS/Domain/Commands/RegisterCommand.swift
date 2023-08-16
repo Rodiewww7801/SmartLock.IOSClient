@@ -11,11 +11,11 @@ class RegisterCommand: RegisterCommandProtocol {
     private let networkingSerivce: NetworkingServiceProotocol
     
     init() {
-        self.networkingSerivce = NetworkingServiceFactory.networkingService()
+        self.networkingSerivce = NetworkingFactory.networkingService()
     }
     
     func execute(with model: RegisterRequestDTO, _ completion: @escaping (Result<Bool,Error>) -> ()) {
-        guard let requestModel = FaceLockAPIRequestFactory.createRegisterRequest(model) else { return }
+        guard let requestModel = FaceLockAPIRequestFactory.createRegisterRequest(with: model) else { return }
         networkingSerivce.request(requestModel) { result in
             switch result {
             case .success(_):

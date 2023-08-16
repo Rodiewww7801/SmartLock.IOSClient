@@ -13,6 +13,7 @@ class MainListViewController: UIViewController {
     var viewModel: MainListViewModel
     private var topStackView: UIStackView!
     private var logoutButton: UIButton!
+    private var loadingScreen = FDLoadingScreen()
     
     init(with viewModel: MainListViewModel) {
         self.viewModel = viewModel
@@ -28,6 +29,17 @@ class MainListViewController: UIViewController {
         super.viewDidLoad()
         
         self.configureNavigationList()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadingScreen.show(on: self.view)
+        viewModel.configure { [weak self] in
+            DispatchQueue.main.async {
+                self?.loadingScreen.stop()
+                self?.tableView.reloadData()
+            }
+        }
     }
     
     private func configureNavigationList() {

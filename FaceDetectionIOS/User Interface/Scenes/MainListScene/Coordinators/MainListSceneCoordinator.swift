@@ -12,13 +12,12 @@ import UIKit
 final class MainListSceneCoordinator: Coordinator, MainListSceneCoordinatorOutput {
     private let router: Router
     private var alert: FDAlert?
-    private let logoutCommand: LogoutCommandProtocol
     
     var logout: (() -> ())?
     
     init(router: Router) {
         self.router = router
-        self.logoutCommand = CommandsFactory.logoutCommand()
+        
         print("[MainListCoordinator]: init")
     }
     
@@ -64,32 +63,27 @@ final class MainListSceneCoordinator: Coordinator, MainListSceneCoordinatorOutpu
         pointCloudCor.start()
     }
     
-    private func showNavigationTest() {
-        let viewModel = MainListViewModel()
-        viewModel.mainListDataSource = configureDataSourceForMainList()
-        let main = MainListViewController(with: viewModel)
-        router.setToRootModule(main, animated: true)
+    private func showUserInfoScene() {
+        let userInfoViewModel = UserInfoViewModel()
+        let userInfoViewController = UserInfoViewController(with: userInfoViewModel)
+        router.push(userInfoViewController, animated: true)
     }
     
-    private func configureDataSourceForMainList() -> [MainListData] {
-        var mainListDataSource = [MainListData]()
-        mainListDataSource.append(MainListData(
-            name: "Face detection scene",
-            link: { [weak self] in
-                self?.showDetectionScene()
-            }))
-        mainListDataSource.append(MainListData(
-            name: "Point cloud scene",
-            link: { [weak self] in
-                self?.showTrueDepthScene()
-            }))
-        mainListDataSource.append(MainListData(
-            name: "Logout",
-            link: { [weak self] in
-                self?.logoutCommand.execute { _ in
-                    self?.logout?()
-                }
-            }))
-        return mainListDataSource
+    private func showNavigationTest() {
+        let viewModel = MainListViewModel()
+        viewModel.showDetectionScene = { [weak self] in
+            self?.showDetectionScene()
+        }
+        viewModel.showPointToCloudScene = { [weak self] in
+            self?.showTrueDepthScene()
+        }
+        viewModel.logout = { [weak self] in
+            self?.logout?()
+        }
+        viewModel.showUserInfoScene = { [weak self] in
+            self?.showUserInfoScene()
+        }
+        let main = MainListViewController(with: viewModel)
+        router.setToRootModule(main, animated: true)
     }
 }

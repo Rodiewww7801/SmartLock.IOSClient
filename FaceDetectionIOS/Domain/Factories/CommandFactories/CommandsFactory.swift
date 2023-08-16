@@ -19,4 +19,12 @@ class CommandsFactory: CommandsFactoryProtocol {
     static func logoutCommand() -> LogoutCommandProtocol {
         return LogoutCommand()
     }
+    
+    static func getUserCommand() -> GetUserCommandProtocol {
+        return GetUserCommand()
+    }
+    
+    static func getUserByIdCommand() -> GetUserByIdCommand {
+        return GetUserByIdCommand()
+    }
 }

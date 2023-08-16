@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol NetworkingServiceFactoryProtocol {
+protocol NetworkingFactoryProtocol {
     static func sessionManager() -> SessionManagerProtocol 
     static func networkingService() -> NetworkingServiceProotocol
     static func tokenManager() -> TokenManagerProtocol

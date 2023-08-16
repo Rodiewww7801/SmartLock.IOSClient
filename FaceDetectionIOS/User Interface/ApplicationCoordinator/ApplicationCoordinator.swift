@@ -65,7 +65,7 @@ extension ApplicationCoordinator: TokenListener {
     }
     
     private func subscribeOnTokenManager() {
-        let tokenObservable = NetworkingServiceFactory.tokenObservable()
+        let tokenObservable = NetworkingFactory.tokenObservable()
         tokenObservable.subscribeListener(self)
     }
 }

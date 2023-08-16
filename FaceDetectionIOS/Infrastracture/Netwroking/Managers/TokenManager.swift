@@ -18,7 +18,7 @@ protocol TokenListener: AnyObject {
 
 protocol TokenManagerProtocol {
     var accessToken: String? { get }
-    func refreshTokenIfNeeded(_ completion: (()->Void)?)
+    func refreshTokenIfNeeded(_ completion: ((Result<Void,Error>)->Void)?)
 }
 
 class TokenManager: TokenManagerProtocol {
@@ -37,29 +37,31 @@ class TokenManager: TokenManagerProtocol {
     
     init(sessionManager: SessionManagerProtocol) {
         self.authTokenRepository = RepositoryFactory.authTokenRepository()
-        self.sessionManager = sessionManager
+        self.sessionManager = NetworkingFactory.sessionManager()
     }
     
-    func refreshTokenIfNeeded(_ completion: (()->Void)?) {
+    func refreshTokenIfNeeded(_ completion: ((Result<Void,Error>)->Void)?) {
         let token = decodeToken()
         if let token = token, Date().timeIntervalSince1970 > token.expirationTime {
             print("[TokenManager] token has expired")
-            if let refreshToken = refreshToken,
-               let refreshRequestModel = FaceLockAPIRequestFactory.createRefreshRequest(refreshToken: refreshToken) {
-                sessionManager.request(refreshRequestModel) { [weak self] (result: Result<RefreshResponseDTO, Error>) in
+            if let refreshToken = refreshToken, let requestModel = FaceLockAPIRequestFactory.createRefreshRequest(refreshToken: refreshToken) {
+                sessionManager.request(requestModel) { [weak self] (result: Result<RefreshResponseDTO, Error>) in
                     switch result {
                     case .success(let success):
                         print("[TokenManager] token has updated")
                         self?.authTokenRepository.setToken(success.accessToken, for: .accessTokenKey)
-                        completion?()
+                        completion?(.success( () ))
                     case .failure(_):
                         print("[TokenManager] refresh token has expired")
+                        self?.authTokenRepository.removeToken(for: .refreshTokenKey)
+                        self?.authTokenRepository.removeToken(for: .accessTokenKey)
+                        completion?(.failure(NetworkingError.refreshTokenExpired))
                         self?.notifyRefreshTokenExpired()
                     }
                 }
             }
         } else {
-            completion?()
+            completion?(.success( () ))
         }
     }
     

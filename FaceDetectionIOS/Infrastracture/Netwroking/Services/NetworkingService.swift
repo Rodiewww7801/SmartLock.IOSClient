@@ -16,22 +16,29 @@ protocol NetworkingServiceProotocol {
 
 class NetworkingService: NetworkingServiceProotocol {    
     private var sessionManager: SessionManagerProtocol
-    private let tokenManager: TokenManagerProtocol
+    
+    private var tokenManager: TokenManagerProtocol {
+        return NetworkingFactory.tokenManager()
+    }
     
     private var deviceId: String {
         return UIDevice.current.identifierForVendor?.uuidString ?? UUID().uuidString
     }
     
-    init(sessionManager: SessionManagerProtocol, tokenManager: TokenManagerProtocol) {
+    init(sessionManager: SessionManagerProtocol) {
         self.sessionManager = sessionManager
-        self.tokenManager = tokenManager
     }
     
     public func request<Success: Decodable>(_ requestModel: RequestModel, _ completion: @escaping (Result<Success,Error>)->()) {
         if !requestModel.path.contains("Authentication") || requestModel.path.contains("logout") {
-            tokenManager.refreshTokenIfNeeded {
-                requestModel.headers = self.makeHttpHeaders(from: requestModel.headers)
-                self.sessionManager.request(requestModel, completion)
+            tokenManager.refreshTokenIfNeeded { result in
+                switch result {
+                case .success(_):
+                    requestModel.headers = self.makeHttpHeaders(from: requestModel.headers)
+                    self.sessionManager.request(requestModel, completion)
+                case .failure(let error):
+                    completion(.failure(error))
+                }
             }
         } else {
             requestModel.headers = self.makeHttpHeaders(from: requestModel.headers)
@@ -41,9 +48,14 @@ class NetworkingService: NetworkingServiceProotocol {
     
     public func request(_ requestModel: RequestModel, _ completion: @escaping (Result<Void,Error>)->()) {
         if !requestModel.path.contains("Authentication") || requestModel.path.contains("logout") {
-            tokenManager.refreshTokenIfNeeded {
-                requestModel.headers = self.makeHttpHeaders(from: requestModel.headers)
-                self.sessionManager.request(requestModel, completion)
+            tokenManager.refreshTokenIfNeeded { result in
+                switch result {
+                case .success(_):
+                    requestModel.headers = self.makeHttpHeaders(from: requestModel.headers)
+                    self.sessionManager.request(requestModel, completion)
+                case .failure(let error):
+                    completion(.failure(error))
+                }
             }
         } else {
             requestModel.headers = self.makeHttpHeaders(from: requestModel.headers)

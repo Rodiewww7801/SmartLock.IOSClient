@@ -9,4 +9,5 @@ import Foundation
 
 protocol RepositoryFactoryProtocol {
     static func authTokenRepository() -> AuthTokenRepositoryProtocol
+    static func userRepository() -> UserRepositoryProtocol
 }

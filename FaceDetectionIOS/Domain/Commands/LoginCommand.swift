@@ -13,11 +13,11 @@ class LoginCommand: LoginCommandProtocol {
     
     init() {
         self.authTokenRepository = RepositoryFactory.authTokenRepository()
-        self.networkingSerivce = NetworkingServiceFactory.networkingService()
+        self.networkingSerivce = NetworkingFactory.networkingService()
     }
     
     func execute(with model: LoginRequestDTO, _ completion: @escaping (Result<Bool, Error>) -> ()) {
-        guard let requestModel = FaceLockAPIRequestFactory.createLoginRequest(model) else { return }
+        guard let requestModel = FaceLockAPIRequestFactory.createLoginRequest(with: model) else { return }
         networkingSerivce.request(requestModel) { [weak self] (result: Result<LoginResponseDTO, Error>) in
             switch result {
             case .success(let success):

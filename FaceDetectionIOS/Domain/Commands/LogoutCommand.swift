@@ -13,7 +13,7 @@ class LogoutCommand: LogoutCommandProtocol {
     
     init() {
         self.authTokenRepository = RepositoryFactory.authTokenRepository()
-        self.networkingService = NetworkingServiceFactory.networkingService()
+        self.networkingService = NetworkingFactory.networkingService()
     }
     
     func execute(_ comletion: @escaping (Result<Bool,Error>) -> ()) {

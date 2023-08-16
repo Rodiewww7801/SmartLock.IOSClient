@@ -25,4 +25,5 @@ enum NetworkingError: Error {
     case noData
     case unableToDecode
     case withError(errorString: String)
+    case refreshTokenExpired
 }

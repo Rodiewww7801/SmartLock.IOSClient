@@ -29,7 +29,7 @@ class AuthenticationSceneCoordinator: Coordinator, AuthenticationSceneCoordinato
         authenticationVC.onLoginAction = { [weak self] in
             self?.showMainView?()
         }
-        router.push(authenticationVC, animated: true)
+        router.setToRootModule(authenticationVC, animated: true)
     }
     
     private func registrationScene() {

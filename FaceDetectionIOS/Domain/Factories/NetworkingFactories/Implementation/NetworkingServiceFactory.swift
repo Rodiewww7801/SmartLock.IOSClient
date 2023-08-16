@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NetworkingServiceFactory: NetworkingServiceFactoryProtocol {
+struct NetworkingFactory: NetworkingFactoryProtocol {
     private static var sessionManagerShared: SessionManagerProtocol?
     private static var networkingServiceShared: NetworkingServiceProotocol?
     private static var tokenManagerShared: TokenManagerProtocol?
@@ -25,7 +25,7 @@ struct NetworkingServiceFactory: NetworkingServiceFactoryProtocol {
         if let networkingService = self.networkingServiceShared {
             return networkingService
         }
-        let networkingService = NetworkingService(sessionManager: sessionManager(), tokenManager: tokenManager())
+        let networkingService = NetworkingService(sessionManager: sessionManager())
         self.networkingServiceShared = networkingService
         return networkingService
     }
