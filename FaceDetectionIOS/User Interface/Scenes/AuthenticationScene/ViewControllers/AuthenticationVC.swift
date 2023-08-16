@@ -39,6 +39,7 @@ class AuthenticationVC: UIViewController {
     }
     
     private func configureViews() {
+        self.view.backgroundColor = .white
         configureStackView()
         configureEmailTextField()
         configurePasswordTextField()
@@ -162,11 +163,6 @@ class AuthenticationVC: UIViewController {
                         DispatchQueue.main.async {
                             self?.onLoginAction?()
                         }
-                    } else {
-                        FDAlert()
-                            .createWith(title: "Sorry, error", message: "\(String(describing: error))")
-                            .addAction(title: "Try again", style: .default, handler: nil)
-                            .present(on: self)
                     }
                 }
             }

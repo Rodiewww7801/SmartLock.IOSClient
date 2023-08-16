@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol TokenObservable {
+protocol TokenPublisher {
     func subscribeListener(_ object: TokenListener)
     func removeListener(_ object: TokenListener)
 }
@@ -18,14 +18,14 @@ protocol TokenListener: AnyObject {
 
 protocol TokenManagerProtocol {
     var accessToken: String? { get }
-    func refreshTokenIfNeeded(_ completion: ((Result<Void,Error>)->Void)?)
+    func refreshTokenIfNeeded(_ completion: ((Result<Void,NetworkingError>)->Void)?)
 }
 
 class TokenManager: TokenManagerProtocol {
     private var authTokenRepository: AuthTokenRepositoryProtocol
     private var sessionManager: SessionManagerProtocol
     
-    private var listeners: [TokenListener] = []
+    private var listeners: [TokenListener] = [] // todo: need weak reference
     
     var accessToken: String? {
         return authTokenRepository.getToken(for: .accessTokenKey)
@@ -40,12 +40,12 @@ class TokenManager: TokenManagerProtocol {
         self.sessionManager = NetworkingFactory.sessionManager()
     }
     
-    func refreshTokenIfNeeded(_ completion: ((Result<Void,Error>)->Void)?) {
+    func refreshTokenIfNeeded(_ completion: ((Result<Void,NetworkingError>)->Void)?) {
         let token = decodeToken()
         if let token = token, Date().timeIntervalSince1970 > token.expirationTime {
             print("[TokenManager] token has expired")
             if let refreshToken = refreshToken, let requestModel = FaceLockAPIRequestFactory.createRefreshRequest(refreshToken: refreshToken) {
-                sessionManager.request(requestModel) { [weak self] (result: Result<RefreshResponseDTO, Error>) in
+                sessionManager.request(requestModel) { [weak self] (result: Result<RefreshResponseDTO, NetworkingError>) in
                     switch result {
                     case .success(let success):
                         print("[TokenManager] token has updated")
@@ -55,7 +55,7 @@ class TokenManager: TokenManagerProtocol {
                         print("[TokenManager] refresh token has expired")
                         self?.authTokenRepository.removeToken(for: .refreshTokenKey)
                         self?.authTokenRepository.removeToken(for: .accessTokenKey)
-                        completion?(.failure(NetworkingError.refreshTokenExpired))
+                        completion?(.failure(NetworkingError.refreshTokenExpired()))
                         self?.notifyRefreshTokenExpired()
                     }
                 }
@@ -72,7 +72,7 @@ class TokenManager: TokenManagerProtocol {
     }
 }
 
-extension TokenManager: TokenObservable {
+extension TokenManager: TokenPublisher {
     func subscribeListener(_ object: TokenListener) {
         if !listeners.contains(where: { $0 === object }) {
             listeners.append(object)

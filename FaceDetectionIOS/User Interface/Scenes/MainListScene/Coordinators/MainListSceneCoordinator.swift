@@ -63,6 +63,12 @@ final class MainListSceneCoordinator: Coordinator, MainListSceneCoordinatorOutpu
         pointCloudCor.start()
     }
     
+    private func showCreateUserScene() {
+        let viewModel = CreateUserViewModel()
+        let viewController = UserCreateViewController(with: viewModel)
+        router.push(viewController, animated: true)
+    }
+    
     private func showUserInfoScene() {
         let userInfoViewModel = UserInfoViewModel()
         let userInfoViewController = UserInfoViewController(with: userInfoViewModel)
@@ -76,6 +82,9 @@ final class MainListSceneCoordinator: Coordinator, MainListSceneCoordinatorOutpu
         }
         viewModel.showPointToCloudScene = { [weak self] in
             self?.showTrueDepthScene()
+        }
+        viewModel.createUserScene = { [weak self] in
+            self?.showCreateUserScene()
         }
         viewModel.logout = { [weak self] in
             self?.logout?()

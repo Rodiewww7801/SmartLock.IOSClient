@@ -20,6 +20,8 @@ class MainListViewController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
+    private var sections: [String] = []
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -29,14 +31,19 @@ class MainListViewController: UIViewController {
         super.viewDidLoad()
         
         self.configureNavigationList()
+        self.loadModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    private func loadModel() {
         loadingScreen.show(on: self.view)
         viewModel.configure { [weak self] in
             DispatchQueue.main.async {
                 self?.loadingScreen.stop()
+                self?.sections = (self?.viewModel.mainListDataSource.keys.map({ $0 })) ?? []
                 self?.tableView.reloadData()
             }
         }
@@ -63,23 +70,37 @@ class MainListViewController: UIViewController {
 
 extension MainListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.mainListDataSource.count
+        let sectionKey = sections[section]
+        let numberOfRows = viewModel.mainListDataSource[sectionKey]?.count ?? 0
+        return numberOfRows
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let sectionKey = sections[indexPath.section]
+        guard let data = self.viewModel.mainListDataSource[sectionKey]?[indexPath.row] else { return UITableViewCell() }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
         var configuration = UIListContentConfiguration.cell()
-        let title = self.viewModel.mainListDataSource[indexPath.row].name
+        let title = data.name
         let attrString = NSAttributedString(string: title, attributes: [.foregroundColor: UIColor.black])
         configuration.attributedText = attrString
         cell.contentConfiguration = configuration
         return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return sections.count
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sections[section]
     }
 }
 
 extension MainListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        viewModel.mainListDataSource[indexPath.row].link?()
+        let sectionKey = sections[indexPath.section]
+        viewModel.mainListDataSource[sectionKey]?[indexPath.row].link?()
     }
 }

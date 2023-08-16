@@ -20,7 +20,8 @@ final class ApplicationCoordinator: Coordinator {
         self.router = router
         super.init()
         
-        subscribeOnTokenManager()
+        subscribeOnTokenPublisher()
+        subscribeNetworkingPublisher()
     }
     
     override func start() {
@@ -64,8 +65,26 @@ extension ApplicationCoordinator: TokenListener {
         }
     }
     
-    private func subscribeOnTokenManager() {
-        let tokenObservable = NetworkingFactory.tokenObservable()
-        tokenObservable.subscribeListener(self)
+    private func subscribeOnTokenPublisher() {
+        let tokenPublisher = NetworkingFactory.tokenPublisher()
+        tokenPublisher.subscribeListener(self)
+    }
+}
+
+extension ApplicationCoordinator: NetwrokingListener {
+    func receivedError(_ error: NetworkingError) {
+        DispatchQueue.main.async { [weak self] in
+            guard let presentedViewController = self?.router.rootController.topViewController else { return }
+            
+            FDAlert()
+                .createWith(title: error.title, message: error.message)
+                .addAction(title: "Try again", style: .default, handler: { })
+                .present(on: presentedViewController)
+        }
+    }
+    
+    private func subscribeNetworkingPublisher() {
+        let networkingPublisher = NetworkingFactory.networkingPublisher()
+        networkingPublisher.subscribeListener(self)
     }
 }

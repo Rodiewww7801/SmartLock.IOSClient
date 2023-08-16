@@ -13,4 +13,5 @@ protocol CommandsFactoryProtocol {
     static func logoutCommand() -> LogoutCommandProtocol
     static func getUserCommand() -> GetUserCommandProtocol
     static func getUserByIdCommand() -> GetUserByIdCommand
+    static func createUserCommand() -> CreateUserCommandProtocol
 }

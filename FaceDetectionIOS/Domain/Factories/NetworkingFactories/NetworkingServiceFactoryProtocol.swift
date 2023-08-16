@@ -11,5 +11,6 @@ protocol NetworkingFactoryProtocol {
     static func sessionManager() -> SessionManagerProtocol 
     static func networkingService() -> NetworkingServiceProotocol
     static func tokenManager() -> TokenManagerProtocol
-    static func tokenObservable() -> TokenObservable
+    static func tokenPublisher() -> TokenPublisher
+    static func networkingPublisher() -> NetworkingPublisher
 }

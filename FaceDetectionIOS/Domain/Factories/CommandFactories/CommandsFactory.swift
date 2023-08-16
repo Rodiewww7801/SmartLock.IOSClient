@@ -27,4 +27,8 @@ class CommandsFactory: CommandsFactoryProtocol {
     static func getUserByIdCommand() -> GetUserByIdCommand {
         return GetUserByIdCommand()
     }
+    
+    static func createUserCommand() -> CreateUserCommandProtocol {
+        return CreateUserCommand()
+    }
 }

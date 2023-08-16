@@ -8,8 +8,8 @@
 import Foundation
 
 protocol SessionManagerProtocol {
-    func request<Success: Decodable>(_ requestModel: RequestModel, _ completion: @escaping (Result<Success,Error>) -> ())
-    func request(_ requestModel: RequestModel, _ completion: @escaping (Result<Void,Error>) -> ())
+    func request<Success: Decodable>(_ requestModel: RequestModel, _ completion: @escaping (Result<Success,NetworkingError>) -> ())
+    func request(_ requestModel: RequestModel, _ completion: @escaping (Result<Void,NetworkingError>) -> ())
 }
 
 class SessionManager: SessionManagerProtocol {
@@ -22,7 +22,7 @@ class SessionManager: SessionManagerProtocol {
         session = URLSession(configuration: .default)
     }
     
-    func request(_ requestModel: RequestModel, _ completion: @escaping (Result<Void,Error>) -> ()) {
+    func request(_ requestModel: RequestModel, _ completion: @escaping (Result<Void,NetworkingError>) -> ()) {
         guard let request = RequestBuilder.buildRequest(requestModel) else { return }
         session.dataTask(with: request) { [weak self] data, urlResponse, error in
             guard let self = self else { return }
@@ -39,7 +39,7 @@ class SessionManager: SessionManagerProtocol {
             case .failed(let networkingError):
                 if let data = data, let bodyString = String(data: data, encoding: .utf8), bodyString.isEmpty == false  {
                     print("[SessionManager]: FAILURE response \(String(describing: urlResponse)), body \(bodyString)")
-                    completion(.failure(NetworkingError.withError(errorString: bodyString)))
+                    completion(.failure(NetworkingError.failed(message: bodyString)))
                 } else {
                     print("[SessionManager]: FAILURE response \(String(describing: urlResponse))")
                     completion(.failure(networkingError))
@@ -50,7 +50,7 @@ class SessionManager: SessionManagerProtocol {
         print("[SessionManager]: request \(request)")
     }
     
-    func request<Success: Decodable>(_ requestModel: RequestModel, _ completion: @escaping (Result<Success,Error>) -> ()) {
+    func request<Success: Decodable>(_ requestModel: RequestModel, _ completion: @escaping (Result<Success,NetworkingError>) -> ()) {
         guard let request = RequestBuilder.buildRequest(requestModel) else { return }
         session.dataTask(with: request) { [weak self] data, urlResponse, error in
             guard let self = self else { return }
@@ -66,12 +66,12 @@ class SessionManager: SessionManagerProtocol {
                 if let data = data, let model = try? JSONDecoder().decode(Success.self, from: data) {
                     completion(.success(model))
                 } else {
-                    completion(.failure(NetworkingError.unableToDecode))
+                    completion(.failure(NetworkingError.unableToDecode()))
                 }
             case .failed(let networkingError):
                 if let data = data, let bodyString = String(data: data, encoding: .utf8), bodyString.isEmpty == false  {
                     print("[SessionManager]: FAILURE response \(String(describing: urlResponse)), body \(bodyString)")
-                    completion(.failure(NetworkingError.withError(errorString: bodyString)))
+                    completion(.failure(NetworkingError.failed(message: bodyString)))
                 } else {
                     print("[SessionManager]: FAILURE response \(String(describing: urlResponse))")
                     completion(.failure(networkingError))
@@ -82,19 +82,19 @@ class SessionManager: SessionManagerProtocol {
         print("[SessionManager]: request \(request)")
     }
     
-    private func handleResponseStatusCode(_ urlResponse: URLResponse?) -> ResponseStatusCode {
-        guard let httpResponse = urlResponse as? HTTPURLResponse else { return  .failed(.failed)}
+    private func handleResponseStatusCode(_ urlResponse: URLResponse?) -> ResponseStatus {
+        guard let httpResponse = urlResponse as? HTTPURLResponse else { return  .failed(.failed(message: "Unknown"))}
         switch httpResponse.statusCode {
         case 200...299:
             return .success
         case 401...403:
-            return .failed(.authenticationError)
+            return .failed(.authenticationError(message: "\(httpResponse.statusCode)"))
         case 501...599:
-            return .failed(.badRequest)
+            return .failed(.badRequest(message: "\(httpResponse.statusCode)"))
         case 600:
-            return .failed(.outdated)
+            return .failed(.outdated(message: "\(httpResponse.statusCode)"))
         default:
-            return .failed(.failed)
+            return .failed(.failed(message: "\(httpResponse.statusCode)"))
         }
     }
 }

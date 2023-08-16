@@ -15,17 +15,19 @@ struct MainListData {
 protocol MainListViewModelDelegate {
     var showDetectionScene: (()->Void)? { get }
     var showPointToCloudScene: (()->Void)? { get }
+    var createUserScene: (()->Void)? { get }
     var logout: (()->Void)? { get }
 }
 
 class MainListViewModel: MainListViewModelDelegate {
-    var mainListDataSource: [MainListData] = []
+    var mainListDataSource: [String:[MainListData]] = [:]
     private let logoutCommand: LogoutCommandProtocol
     private let userRepository: UserRepositoryProtocol
     private var user: User?
     
     var showDetectionScene: (()->Void)?
     var showPointToCloudScene: (()->Void)?
+    var createUserScene: (()->Void)?
     var showUserInfoScene: (() -> Void)?
     var logout: (()->Void)?
     
@@ -42,33 +44,49 @@ class MainListViewModel: MainListViewModelDelegate {
         }
     }
     
-    private func configureDataSourceForMainList() -> [MainListData] {
-        guard let user = user else { return [] }
+    private func configureDataSourceForMainList() -> [String:[MainListData]] {
+        guard let user = user else { return [:] }
+        var mainListDataSource = [String:[MainListData]]()
+        var faceDetectionDataSource = [MainListData]()
         
-        var mainListDataSource = [MainListData]()
-        mainListDataSource.append(MainListData(
+        faceDetectionDataSource.append(MainListData(
             name: "Face detection scene",
             link: { [weak self] in
                 self?.showDetectionScene?()
             }))
-        mainListDataSource.append(MainListData(
+        faceDetectionDataSource.append(MainListData(
             name: "Point cloud scene",
             link: { [weak self] in
                 self?.showPointToCloudScene?()
             }))
-        mainListDataSource.append(MainListData(
+        mainListDataSource.updateValue(faceDetectionDataSource, forKey: "Face Detection section")
+        
+        if user.role == .admin {
+            var adminDataSource = [MainListData]()
+            adminDataSource.append(MainListData(
+                name: "Create user",
+                link: { [weak self] in
+                    self?.createUserScene?()
+                }
+            ))
+            mainListDataSource.updateValue(adminDataSource, forKey: "Admin section")
+        }
+        
+        var userDataSource = [MainListData]()
+        userDataSource.append(MainListData(
             name: "User info",
             link: { [weak self] in
                 self?.showUserInfoScene?()
             }
         ))
-        mainListDataSource.append(MainListData(
+        userDataSource.append(MainListData(
             name: "Logout",
             link: { [weak self] in
                 self?.logoutCommand.execute { _ in
                     self?.logout?()
                 }
             }))
+        mainListDataSource.updateValue(userDataSource, forKey: "User section")
         return mainListDataSource
     }
 }

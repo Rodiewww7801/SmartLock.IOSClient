@@ -7,23 +7,7 @@
 
 import Foundation
 
-enum NetworkingStatus<T> {
-    case success(T?)
-    case failure(NetworkingError)
-}
-
-enum ResponseStatusCode {
+enum ResponseStatus {
     case success
     case failed(NetworkingError)
-}
-
-enum NetworkingError: Error {
-    case authenticationError
-    case badRequest
-    case outdated
-    case failed
-    case noData
-    case unableToDecode
-    case withError(errorString: String)
-    case refreshTokenExpired
 }

@@ -15,10 +15,6 @@ class Router {
         self.rootController = rootController
     }
     
-    var rootModule: Presentable? {
-        return rootController
-    }
-    
     func present(_ module: Presentable, animated: Bool) {
         self.rootController.present(module.toPresent(), animated: animated)
     }

@@ -8,6 +8,15 @@
 import Foundation
 import UIKit
 
+protocol NetworkingPublisher {
+    func subscribeListener(_ object: NetwrokingListener)
+    func removeListener(_ object: NetwrokingListener)
+}
+
+protocol NetwrokingListener: AnyObject {
+    func receivedError(_ error: NetworkingError)
+}
+
 protocol NetworkingServiceProotocol {
     typealias requsetCompletion = (Data?, URLResponse?, Error?) -> Void
     func request<Success: Decodable>(_ requestModel: RequestModel, _ completion: @escaping (Result<Success,Error>)->())
@@ -16,6 +25,8 @@ protocol NetworkingServiceProotocol {
 
 class NetworkingService: NetworkingServiceProotocol {    
     private var sessionManager: SessionManagerProtocol
+    
+    private var listeners: [NetwrokingListener] = [] // todo: need weak reference
     
     private var tokenManager: TokenManagerProtocol {
         return NetworkingFactory.tokenManager()
@@ -30,36 +41,53 @@ class NetworkingService: NetworkingServiceProotocol {
     }
     
     public func request<Success: Decodable>(_ requestModel: RequestModel, _ completion: @escaping (Result<Success,Error>)->()) {
-        if !requestModel.path.contains("Authentication") || requestModel.path.contains("logout") {
-            tokenManager.refreshTokenIfNeeded { result in
-                switch result {
-                case .success(_):
-                    requestModel.headers = self.makeHttpHeaders(from: requestModel.headers)
-                    self.sessionManager.request(requestModel, completion)
-                case .failure(let error):
-                    completion(.failure(error))
+        checkToken(requestModel: requestModel) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                requestModel.headers = self.makeHttpHeaders(from: requestModel.headers)
+                self.sessionManager.request<Success>(requestModel) { [weak self] result in
+                    self?.handleError(result: result, completion)
                 }
             }
-        } else {
-            requestModel.headers = self.makeHttpHeaders(from: requestModel.headers)
-            self.sessionManager.request(requestModel, completion)
         }
     }
     
     public func request(_ requestModel: RequestModel, _ completion: @escaping (Result<Void,Error>)->()) {
+        checkToken(requestModel: requestModel) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                requestModel.headers = self.makeHttpHeaders(from: requestModel.headers)
+                self.sessionManager.request<Success>(requestModel) { [weak self] result in
+                    self?.handleError(result: result, completion)
+                }
+            }
+        }
+    }
+    
+    private func checkToken(requestModel: RequestModel, _ completion: @escaping (NetworkingError?)->Void) {
         if !requestModel.path.contains("Authentication") || requestModel.path.contains("logout") {
             tokenManager.refreshTokenIfNeeded { result in
                 switch result {
                 case .success(_):
-                    requestModel.headers = self.makeHttpHeaders(from: requestModel.headers)
-                    self.sessionManager.request(requestModel, completion)
+                    completion(nil)
                 case .failure(let error):
-                    completion(.failure(error))
+                    completion(error)
                 }
             }
         } else {
-            requestModel.headers = self.makeHttpHeaders(from: requestModel.headers)
-            self.sessionManager.request(requestModel, completion)
+            completion(nil)
+        }
+    }
+    
+    private func handleError<Success>(result: Result<Success,NetworkingError>, _ completion: @escaping (Result<Success,Error>)->()) {
+        switch result {
+        case .success(let value):
+            completion(.success(value))
+        case .failure(let error):
+            notifyWithReceivedError(error)
+            completion(.failure(error))
         }
     }
     
@@ -77,5 +105,21 @@ class NetworkingService: NetworkingServiceProotocol {
         if let accessToken = tokenManager.accessToken {
             headers.updateValue("Bearer \(accessToken)", forKey: "Authorization")
         }
+    }
+}
+
+extension NetworkingService: NetworkingPublisher {
+    func subscribeListener(_ object: NetwrokingListener) {
+        if !listeners.contains(where: { $0 === object }) {
+            listeners.append(object)
+        }
+    }
+    
+    func removeListener(_ object: NetwrokingListener) {
+        listeners.removeAll(where: { $0 === object })
+    }
+    
+    private func notifyWithReceivedError(_ error: NetworkingError) {
+        listeners.forEach({ $0.receivedError(error) })
     }
 }

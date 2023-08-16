@@ -286,11 +286,6 @@ class RegistrationVC: UIViewController {
                             self?.onRegisterAction?()
                         })
                         .present(on: self)
-                } else {
-                    FDAlert()
-                        .createWith(title: "Sorry, but something wrong", message: "\(String(describing: error))")
-                        .addAction(title: "Try again", style: .default, handler: { })
-                        .present(on: self)
                 }
             }
         }

@@ -39,7 +39,11 @@ struct NetworkingFactory: NetworkingFactoryProtocol {
         return tokenManager
     }
     
-    static func tokenObservable() -> TokenObservable {
-        return tokenManager() as! TokenObservable
+    static func tokenPublisher() -> TokenPublisher {
+        return tokenManager() as! TokenPublisher
+    }
+    
+    static func networkingPublisher() -> NetworkingPublisher {
+        return networkingService() as! NetworkingPublisher
     }
 }

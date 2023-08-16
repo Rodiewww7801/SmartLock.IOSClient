@@ -24,11 +24,11 @@ class UserInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureViews()
+        loadModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configureModel()
     }
     
     private func configureViews() {
@@ -36,16 +36,7 @@ class UserInfoViewController: UIViewController {
         configureUserInfoView()
     }
     
-    private func configureUserInfoView() {
-        userInfoView = UserInfoView()
-        self.view.addSubview(userInfoView)
-        userInfoView.translatesAutoresizingMaskIntoConstraints = false
-        userInfoView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
-        userInfoView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        userInfoView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
-    }
-    
-    private func configureModel() {
+    private func loadModel() {
         loadingScreen.show(on: self.view)
         viewModel.configure { [weak self] model in
             DispatchQueue.main.async {
@@ -56,5 +47,14 @@ class UserInfoViewController: UIViewController {
                 self?.loadingScreen.stop()
             }
         }
+    }
+    
+    private func configureUserInfoView() {
+        userInfoView = UserInfoView()
+        self.view.addSubview(userInfoView)
+        userInfoView.translatesAutoresizingMaskIntoConstraints = false
+        userInfoView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
+        userInfoView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        userInfoView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
     }
 }

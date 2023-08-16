@@ -49,4 +49,8 @@ class UserRepository: UserRepositoryProtocol {
                         role: User.Role(rawValue: userDTO.status) ?? .user)
         return user
     }
+    
+    func createUser(_ dto: CreateUserRequestDTO) {
+        
+    }
 }
