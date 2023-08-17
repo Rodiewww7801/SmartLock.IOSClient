@@ -8,18 +8,18 @@
 import Foundation
 
 class UserInfoViewModel {
-    var userInfoModel: UserInfoModel?
+    var userInfoModel: UserInfo?
     private var userRepository: UserRepositoryProtocol
     
     init() {
         self.userRepository = RepositoryFactory.userRepository()
     }
     
-    func configure(_ completion: @escaping ((UserInfoModel)->Void)) {
+    func configure(_ completion: @escaping ((UserInfo)->Void)) {
         Task { [weak self] in
             let userModel = await self?.userRepository.getUser()
             guard let userModel = userModel else { return }
-            let userInfoModel = UserInfoModel(user: userModel)
+            let userInfoModel = UserInfo(user: userModel)
             self?.userInfoModel = userInfoModel
             completion(userInfoModel)
         }

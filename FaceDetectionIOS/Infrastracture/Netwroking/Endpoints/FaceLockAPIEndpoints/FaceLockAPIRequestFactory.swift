@@ -21,13 +21,27 @@ class FaceLockAPIRequestFactory {
         return model
     }
     
-    static func createAdminGetUsersRequest() -> RequestModel? {
+    static func createAdminGetUsersRequest() -> RequestModel {
         let model = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.adminGetUsers, httpMethod: .get)
         return model
     }
     
-    static func createAdminGetUserRequest(userId: String) -> RequestModel? {
+    static func createAdminGetUserRequest(userId: String) -> RequestModel {
         let path = FaceLockAPIPaths.adminGetUser.replacingOccurrences(of: "{userId}", with: userId)
+        let model = RequestModel(basePath: serverAPI, path: path, httpMethod: .get)
+        return model
+    }
+    
+    static func createAdminGetUserPhotosInfo(userId: String) -> RequestModel {
+        let path = FaceLockAPIPaths.adminGetUserPhotosInfo.replacingOccurrences(of: "{userId}", with: userId)
+        let model = RequestModel(basePath: serverAPI, path: path, httpMethod: .get)
+        return model
+    }
+    
+    static func createAdminGetUserPhoto(userId: String, photoId: String) -> RequestModel {
+        let path = FaceLockAPIPaths.adminGetUserPhoto
+            .replacingOccurrences(of: "{userId}", with: userId)
+            .replacingOccurrences(of: "{faceId}", with: photoId)
         let model = RequestModel(basePath: serverAPI, path: path, httpMethod: .get)
         return model
     }

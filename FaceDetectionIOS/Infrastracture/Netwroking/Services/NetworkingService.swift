@@ -18,9 +18,9 @@ protocol NetwrokingListener: AnyObject {
 }
 
 protocol NetworkingServiceProotocol {
-    typealias requsetCompletion = (Data?, URLResponse?, Error?) -> Void
     func request<Success: Decodable>(_ requestModel: RequestModel, _ completion: @escaping (Result<Success,Error>)->())
     func request(_ requestModel: RequestModel, _ completion: @escaping (Result<Void,Error>) -> ())
+    func request(_ requestModel: RequestModel, _ completion: @escaping (Result<Data,Error>) -> ())
 }
 
 class NetworkingService: NetworkingServiceProotocol {    
@@ -46,8 +46,19 @@ class NetworkingService: NetworkingServiceProotocol {
                 completion(.failure(error))
             } else {
                 requestModel.headers = self.makeHttpHeaders(from: requestModel.headers)
-                self.sessionManager.request<Success>(requestModel) { [weak self] result in
-                    self?.handleError(result: result, completion)
+                self.sessionManager.request(requestModel) { [weak self] result in
+                    switch result {
+                    case .success(let data):
+                        if let data = data, let decodedData = try? JSONDecoder().decode(Success.self, from: data) {
+                            completion(.success(decodedData))
+                        } else {
+                            self?.notifyWithReceivedError(NetworkingError.unableToDecode())
+                            completion(.failure(NetworkingError.unableToDecode()))
+                        }
+                    case .failure(let error):
+                        self?.notifyWithReceivedError(error)
+                        completion(.failure(error))
+                    }
                 }
             }
         }
@@ -59,8 +70,38 @@ class NetworkingService: NetworkingServiceProotocol {
                 completion(.failure(error))
             } else {
                 requestModel.headers = self.makeHttpHeaders(from: requestModel.headers)
-                self.sessionManager.request<Success>(requestModel) { [weak self] result in
-                    self?.handleError(result: result, completion)
+                self.sessionManager.request(requestModel) { [weak self] result in
+                    switch result {
+                    case .success(_):
+                        completion(.success( () ))
+                    case .failure(let error):
+                        self?.notifyWithReceivedError(error)
+                        completion(.failure(error))
+                    }
+                }
+            }
+        }
+    }
+    
+    public func request(_ requestModel: RequestModel, _ completion: @escaping (Result<Data,Error>)->()) {
+        checkToken(requestModel: requestModel) { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                requestModel.headers = self.makeHttpHeaders(from: requestModel.headers)
+                self.sessionManager.request(requestModel) { [weak self] result in
+                    switch result {
+                    case .success(let data):
+                        if let data = data {
+                            completion(.success(data))
+                        } else {
+                            self?.notifyWithReceivedError(NetworkingError.noData())
+                            completion(.failure(NetworkingError.noData()))
+                        }
+                    case .failure(let error):
+                        self?.notifyWithReceivedError(error)
+                        completion(.failure(error))
+                    }
                 }
             }
         }
@@ -78,16 +119,6 @@ class NetworkingService: NetworkingServiceProotocol {
             }
         } else {
             completion(nil)
-        }
-    }
-    
-    private func handleError<Success>(result: Result<Success,NetworkingError>, _ completion: @escaping (Result<Success,Error>)->()) {
-        switch result {
-        case .success(let value):
-            completion(.success(value))
-        case .failure(let error):
-            notifyWithReceivedError(error)
-            completion(.failure(error))
         }
     }
     

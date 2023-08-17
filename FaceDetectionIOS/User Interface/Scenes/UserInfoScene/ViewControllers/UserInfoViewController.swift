@@ -8,7 +8,7 @@
 import UIKit
 
 class UserInfoViewController: UIViewController {
-    private var userInfoView: UserInfoView!
+    private var userInfoView: UserInfoViewCell!
     private var viewModel: UserInfoViewModel
     private var loadingScreen = FDLoadingScreen()
     
@@ -22,6 +22,7 @@ class UserInfoViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        self.view.backgroundColor = .white
         super.viewDidLoad()
         configureViews()
         loadModel()
@@ -40,8 +41,7 @@ class UserInfoViewController: UIViewController {
         loadingScreen.show(on: self.view)
         viewModel.configure { [weak self] model in
             DispatchQueue.main.async {
-                self?.userInfoView.model = model
-                self?.userInfoView.updateLabels()
+                self?.userInfoView.configure(model)
                 self?.view.setNeedsLayout()
                 self?.view.layoutIfNeeded()
                 self?.loadingScreen.stop()
@@ -50,12 +50,11 @@ class UserInfoViewController: UIViewController {
     }
     
     private func configureUserInfoView() {
-        userInfoView = UserInfoView()
+        userInfoView = UserInfoViewCell()
         self.view.addSubview(userInfoView)
         userInfoView.translatesAutoresizingMaskIntoConstraints = false
         userInfoView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
         userInfoView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         userInfoView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
-        userInfoView.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
     }
 }

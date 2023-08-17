@@ -15,10 +15,7 @@ class GetUsersCommand: GetUsersCommandProtocol {
     }
     
     func execute(_ completion: @escaping (Result<GetUsersResponseDTO, Error>) -> Void) {
-        guard let requestModel = FaceLockAPIRequestFactory.createAdminGetUsersRequest() else {
-            completion(.failure(NetworkingError.failedToCreateRequestModel()))
-            return
-        }
+        let requestModel = FaceLockAPIRequestFactory.createAdminGetUsersRequest()
         networkingSerivce.request(requestModel, completion)
     }
 }

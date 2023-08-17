@@ -23,7 +23,7 @@ class LogoutCommand: LogoutCommandProtocol {
         else {
             return
         }
-        networkingService.request(requestModel) { [weak self] result in
+        networkingService.request(requestModel) { [weak self] (result: Result<Void, Error>) in
             switch result {
             case .success(_):
                 print("[LogoutCommand] SUCCESS perform logout requset")

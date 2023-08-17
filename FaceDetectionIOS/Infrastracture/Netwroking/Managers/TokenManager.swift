@@ -45,12 +45,17 @@ class TokenManager: TokenManagerProtocol {
         if let token = token, Date().timeIntervalSince1970 > token.expirationTime {
             print("[TokenManager] token has expired")
             if let refreshToken = refreshToken, let requestModel = FaceLockAPIRequestFactory.createRefreshRequest(refreshToken: refreshToken) {
-                sessionManager.request(requestModel) { [weak self] (result: Result<RefreshResponseDTO, NetworkingError>) in
+                sessionManager.request(requestModel) { [weak self] (result: Result<Data?, NetworkingError>) in
                     switch result {
-                    case .success(let success):
-                        print("[TokenManager] token has updated")
-                        self?.authTokenRepository.setToken(success.accessToken, for: .accessTokenKey)
-                        completion?(.success( () ))
+                    case .success(let data):
+                        if let data = data, let decodedData = try? JSONDecoder().decode(RefreshResponseDTO.self, from: data) {
+                            print("[TokenManager] token has updated")
+                            self?.authTokenRepository.setToken(decodedData.accessToken, for: .accessTokenKey)
+                            completion?(.success( () ))
+                        } else {
+                            print("[TokenManager] failde to decode token")
+                            completion?(.failure(NetworkingError.unableToDecode()))
+                        }
                     case .failure(_):
                         print("[TokenManager] refresh token has expired")
                         self?.authTokenRepository.removeToken(for: .refreshTokenKey)

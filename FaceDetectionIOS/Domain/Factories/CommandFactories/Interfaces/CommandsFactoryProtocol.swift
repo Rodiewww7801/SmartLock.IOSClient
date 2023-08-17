@@ -14,5 +14,7 @@ protocol CommandsFactoryProtocol {
     static func getUserCommand() -> GetUserCommandProtocol
     static func getUserByIdCommand() -> GetUserByIdCommand
     static func createUserCommand() -> CreateUserCommandProtocol
-    static func getUsersCommand() -> GetUsersCommandProtocol 
+    static func getUsersCommand() -> GetUsersCommandProtocol
+    static func getUserPhotosInfoCommand() -> GetUserPhotosInfoCommandProtocol
+    static func getUserPhotoByPhotoIdCommand() -> GetUserPhotoByPhotoIdCommandProtocol
 }

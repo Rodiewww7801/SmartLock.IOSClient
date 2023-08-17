@@ -8,7 +8,7 @@
 import UIKit
 
 class UserInfoView: UIView {
-    var model: UserInfoModel?
+    var model: UserInfo?
     private var userInfoStackView: UIStackView!
     private var userImageView: UIImageView!
     private var userIdLabel: UITextView!
@@ -39,7 +39,7 @@ class UserInfoView: UIView {
         let userImage = UIImage(systemName: "person.fill")
         userImageView = UIImageView(image: userImage)
         userImageView.tintColor = .black
-        userImageView.contentMode = .scaleAspectFit
+        //userImageView.contentMode = .scaleAspectFit
         
         self.addSubview(userImageView)
         userImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -98,6 +98,9 @@ class UserInfoView: UIView {
             lastNameLabel.text = "Last name: \(model.user.lastName)"
 
             roleLabel.text = "Role: \(model.user.role.rawValue)"
+            
+            let stackHeight = userInfoStackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+            self.heightAnchor.constraint(equalToConstant: stackHeight + 10).isActive = true
         }
     }
 }

@@ -6,16 +6,21 @@
 //
 
 import Foundation
+import UIKit
 
 class UserRepository: UserRepositoryProtocol {
     private var getUserCommand: GetUserCommandProtocol
     private var getUserByIdCommand: GetUserByIdCommandProtocol
     private var getUsersCommand: GetUsersCommandProtocol
+    private var getUserPhotosInfoCommand: GetUserPhotosInfoCommandProtocol
+    private var getUserPhotoByPhotoIdCommand: GetUserPhotoByPhotoIdCommandProtocol
     
     init() {
         self.getUserCommand = CommandsFactory.getUserCommand()
         self.getUserByIdCommand = CommandsFactory.getUserByIdCommand()
         self.getUsersCommand = CommandsFactory.getUsersCommand()
+        self.getUserPhotosInfoCommand = CommandsFactory.getUserPhotosInfoCommand()
+        self.getUserPhotoByPhotoIdCommand = CommandsFactory.getUserPhotoByPhotoIdCommand()
     }
     
     func getUser() async -> User? {
@@ -68,4 +73,52 @@ class UserRepository: UserRepositoryProtocol {
                                               role: User.Role(rawValue: $0.status) ?? .user)}
         return users
     }
+    
+    func getUserInfo() async -> [UserInfo] {
+        let users = await self.getUsers()
+        var userInfos = [UserInfo]()
+        await withTaskGroup(of: UserInfo?.self) { taskGroup in
+            users.forEach { user in
+                taskGroup.addTask { [weak self] in
+                    print("[UserRepository] start async operation to get UserInfo")
+                    if let photosInfo = await self?.getUserPhotosInfo(userId: user.id) {
+                        let userImage = await self?.getUserPhoto(userId: user.id, photoId: String(photosInfo.id))
+                        print("[UserRepository] async operation recived UserInfo")
+                        return UserInfo(user: user, photo: userImage)
+                    }
+                    return UserInfo(user: user)
+                }
+            }
+            
+            for await value in taskGroup {
+                if let value = value {
+                    print("[UserRepository] async operation returned UserInfo")
+                    userInfos.append(value)
+                }
+            }
+        }
+        
+        return userInfos
+    }
+    
+    func getUserPhoto(userId: String, photoId: String) async -> UIImage? {
+        let userImage = try? await withUnsafeThrowingContinuation { continuation in
+            getUserPhotoByPhotoIdCommand.execute(userId: userId, photoId: photoId) { result in
+                continuation.resume(with: result)
+            }
+        }
+        
+        return userImage
+    }
+    
+    func getUserPhotosInfo(userId: String) async -> PhotoInfoResponseDTO? {
+        let userPhotosInfoDTO = try? await withUnsafeThrowingContinuation { continuation in
+            getUserPhotosInfoCommand.execute(userId: userId) { result in
+                continuation.resume(with: result)
+            }
+        }
+        
+        return userPhotosInfoDTO?.first
+    }
+    
 }

@@ -15,7 +15,7 @@ class GetUserByIdCommand: GetUserByIdCommandProtocol {
     }
     
     func execute(userId: String, _ completion: @escaping (Result<UserDTO, Error>) -> Void) {
-        guard let requestModel = FaceLockAPIRequestFactory.createAdminGetUserRequest(userId: userId) else { return }
+        let requestModel = FaceLockAPIRequestFactory.createAdminGetUserRequest(userId: userId)
         networkingSerivce.request(requestModel, completion)
     }
 }

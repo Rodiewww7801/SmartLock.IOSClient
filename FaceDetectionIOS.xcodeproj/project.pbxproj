@@ -23,10 +23,15 @@
 		F807351D2A8C58BC0055D473 /* GetUserByIdCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F807351C2A8C58BC0055D473 /* GetUserByIdCommand.swift */; };
 		F807351F2A8C58D50055D473 /* GetUserByIdCommandProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F807351E2A8C58D50055D473 /* GetUserByIdCommandProtocol.swift */; };
 		F80735232A8C60E20055D473 /* CreateUserRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80735222A8C60E20055D473 /* CreateUserRequestDTO.swift */; };
-		F80735312A8CEC240055D473 /* UserInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80735302A8CEC240055D473 /* UserInfoModel.swift */; };
+		F80735312A8CEC240055D473 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80735302A8CEC240055D473 /* UserInfo.swift */; };
 		F80735332A8CEC670055D473 /* UserInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80735322A8CEC670055D473 /* UserInfoView.swift */; };
 		F80735352A8CF4D40055D473 /* UserInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80735342A8CF4D40055D473 /* UserInfoViewController.swift */; };
 		F80735382A8CF6780055D473 /* UserInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80735372A8CF6780055D473 /* UserInfoViewModel.swift */; };
+		F816DFB62A8E9184003B8446 /* GetUserPhotosInfoCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816DFB52A8E9184003B8446 /* GetUserPhotosInfoCommand.swift */; };
+		F816DFB82A8E91CF003B8446 /* GetUserPhotosInfoCommandProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816DFB72A8E91CF003B8446 /* GetUserPhotosInfoCommandProtocol.swift */; };
+		F816DFBA2A8E923E003B8446 /* PhotoInfoResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816DFB92A8E923E003B8446 /* PhotoInfoResponseDTO.swift */; };
+		F816DFBC2A8E969B003B8446 /* GetUserPhotoByPhotoIdCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816DFBB2A8E969B003B8446 /* GetUserPhotoByPhotoIdCommand.swift */; };
+		F816DFBE2A8E96CE003B8446 /* GetUserPhotoByPhotoIdCommandProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816DFBD2A8E96CE003B8446 /* GetUserPhotoByPhotoIdCommandProtocol.swift */; };
 		F8301C532A117CD900455964 /* PointCloudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8301C522A117CD900455964 /* PointCloudViewController.swift */; };
 		F8301C582A1184A300455964 /* SessionSetupResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8301C572A1184A300455964 /* SessionSetupResult.swift */; };
 		F8348CB529DB56BD00AF14F2 /* FDAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8348CB429DB56BD00AF14F2 /* FDAlert.swift */; };
@@ -139,10 +144,15 @@
 		F807351C2A8C58BC0055D473 /* GetUserByIdCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserByIdCommand.swift; sourceTree = "<group>"; };
 		F807351E2A8C58D50055D473 /* GetUserByIdCommandProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserByIdCommandProtocol.swift; sourceTree = "<group>"; };
 		F80735222A8C60E20055D473 /* CreateUserRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateUserRequestDTO.swift; sourceTree = "<group>"; };
-		F80735302A8CEC240055D473 /* UserInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoModel.swift; sourceTree = "<group>"; };
+		F80735302A8CEC240055D473 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		F80735322A8CEC670055D473 /* UserInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoView.swift; sourceTree = "<group>"; };
 		F80735342A8CF4D40055D473 /* UserInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewController.swift; sourceTree = "<group>"; };
 		F80735372A8CF6780055D473 /* UserInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewModel.swift; sourceTree = "<group>"; };
+		F816DFB52A8E9184003B8446 /* GetUserPhotosInfoCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserPhotosInfoCommand.swift; sourceTree = "<group>"; };
+		F816DFB72A8E91CF003B8446 /* GetUserPhotosInfoCommandProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserPhotosInfoCommandProtocol.swift; sourceTree = "<group>"; };
+		F816DFB92A8E923E003B8446 /* PhotoInfoResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoInfoResponseDTO.swift; sourceTree = "<group>"; };
+		F816DFBB2A8E969B003B8446 /* GetUserPhotoByPhotoIdCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserPhotoByPhotoIdCommand.swift; sourceTree = "<group>"; };
+		F816DFBD2A8E96CE003B8446 /* GetUserPhotoByPhotoIdCommandProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUserPhotoByPhotoIdCommandProtocol.swift; sourceTree = "<group>"; };
 		F8301C522A117CD900455964 /* PointCloudViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointCloudViewController.swift; sourceTree = "<group>"; };
 		F8301C572A1184A300455964 /* SessionSetupResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSetupResult.swift; sourceTree = "<group>"; };
 		F8348CB429DB56BD00AF14F2 /* FDAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDAlert.swift; sourceTree = "<group>"; };
@@ -283,7 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				F80735102A8C53C60055D473 /* User.swift */,
-				F80735302A8CEC240055D473 /* UserInfoModel.swift */,
+				F80735302A8CEC240055D473 /* UserInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -488,6 +498,8 @@
 				F807351C2A8C58BC0055D473 /* GetUserByIdCommand.swift */,
 				F861216D2A8D407B00822B0D /* CreateUserCommand.swift */,
 				F861217C2A8D691400822B0D /* GetUsersCommand.swift */,
+				F816DFB52A8E9184003B8446 /* GetUserPhotosInfoCommand.swift */,
+				F816DFBB2A8E969B003B8446 /* GetUserPhotoByPhotoIdCommand.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -548,6 +560,7 @@
 				F807351A2A8C583E0055D473 /* UserDTO.swift */,
 				F80735222A8C60E20055D473 /* CreateUserRequestDTO.swift */,
 				F86121802A8D6B5E00822B0D /* GetUsersResponseDTO.swift */,
+				F816DFB92A8E923E003B8446 /* PhotoInfoResponseDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -589,6 +602,8 @@
 				F807351E2A8C58D50055D473 /* GetUserByIdCommandProtocol.swift */,
 				F861216F2A8D408B00822B0D /* CreateUserCommandProtocol.swift */,
 				F861217E2A8D6ACA00822B0D /* GetUsersCommandProtocol.swift */,
+				F816DFB72A8E91CF003B8446 /* GetUserPhotosInfoCommandProtocol.swift */,
+				F816DFBD2A8E96CE003B8446 /* GetUserPhotoByPhotoIdCommandProtocol.swift */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -1061,6 +1076,7 @@
 				F8377CEC2A8AE9DD00E18B59 /* SecureStorageProtocol.swift in Sources */,
 				F8377CA82A8996FE00E18B59 /* RegistrationVC.swift in Sources */,
 				F881A83C2A32ADE2003408B3 /* PointCloudSceneCoordinator.swift in Sources */,
+				F816DFBA2A8E923E003B8446 /* PhotoInfoResponseDTO.swift in Sources */,
 				F8E4D47A29D8985E00B6F0BB /* Router.swift in Sources */,
 				F8377CC92A8A745C00E18B59 /* Encodable + Extension.swift in Sources */,
 				F8377CCB2A8A764400E18B59 /* Data + Extension.swift in Sources */,
@@ -1077,6 +1093,7 @@
 				F86121702A8D408B00822B0D /* CreateUserCommandProtocol.swift in Sources */,
 				F881A83E2A32B066003408B3 /* PointCloudSceneSettingsViewController.swift in Sources */,
 				F80735112A8C53C60055D473 /* User.swift in Sources */,
+				F816DFBE2A8E96CE003B8446 /* GetUserPhotoByPhotoIdCommandProtocol.swift in Sources */,
 				F8377C752A893B0E00E18B59 /* NetworkingService.swift in Sources */,
 				F86121672A8D394100822B0D /* UserCreateView.swift in Sources */,
 				F8E4D48929D8AE1900B6F0BB /* MainListSceneCoordinator.swift in Sources */,
@@ -1091,6 +1108,7 @@
 				F8872E592A3CBC7A00B2A0D7 /* PointCloudModel.swift in Sources */,
 				F8CFA6E229D32F5000905F94 /* SceneDelegate.swift in Sources */,
 				F8377C852A8962CA00E18B59 /* FaceLockAPIRequestFactory.swift in Sources */,
+				F816DFBC2A8E969B003B8446 /* GetUserPhotoByPhotoIdCommand.swift in Sources */,
 				F86121842A8D74BE00822B0D /* UserInfoViewCell.swift in Sources */,
 				F80735332A8CEC670055D473 /* UserInfoView.swift in Sources */,
 				F8377CF92A8AEE4F00E18B59 /* RepositoryFactoryProtocol.swift in Sources */,
@@ -1099,6 +1117,7 @@
 				F8377C7A2A893F5800E18B59 /* HTTPMethod.swift in Sources */,
 				F8377CB52A8A263900E18B59 /* RegisterCommandProtocol.swift in Sources */,
 				F807351D2A8C58BC0055D473 /* GetUserByIdCommand.swift in Sources */,
+				F816DFB62A8E9184003B8446 /* GetUserPhotosInfoCommand.swift in Sources */,
 				F80735232A8C60E20055D473 /* CreateUserRequestDTO.swift in Sources */,
 				F8377C992A89734500E18B59 /* AuthenticationVC.swift in Sources */,
 				F8301C582A1184A300455964 /* SessionSetupResult.swift in Sources */,
@@ -1125,6 +1144,7 @@
 				F8377CC52A8A5DA300E18B59 /* NetworkingServiceFactoryProtocol.swift in Sources */,
 				F8377CC32A8A5D8B00E18B59 /* NetworkingServiceFactory.swift in Sources */,
 				F8377CAA2A8A15FD00E18B59 /* RegexValidator.swift in Sources */,
+				F816DFB82A8E91CF003B8446 /* GetUserPhotosInfoCommandProtocol.swift in Sources */,
 				F807351F2A8C58D50055D473 /* GetUserByIdCommandProtocol.swift in Sources */,
 				F8377C642A892F7500E18B59 /* SessionManager.swift in Sources */,
 				F80735172A8C56430055D473 /* GetUserCommand.swift in Sources */,
@@ -1133,7 +1153,7 @@
 				F8CE81362A3C7C7700AED35D /* ShaderCommon + Extension.swift in Sources */,
 				F8377CD52A8AA91E00E18B59 /* RequestBuilder.swift in Sources */,
 				F807350E2A8C2F480055D473 /* LogoutCommandProtocol.swift in Sources */,
-				F80735312A8CEC240055D473 /* UserInfoModel.swift in Sources */,
+				F80735312A8CEC240055D473 /* UserInfo.swift in Sources */,
 				F86121742A8D446600822B0D /* Error.swift in Sources */,
 				F8377C922A896ADE00E18B59 /* ApplicationConfig.swift in Sources */,
 			);

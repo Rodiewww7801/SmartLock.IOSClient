@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct UserInfoModel {
+struct UserInfo {
     var user: User
     var photo: UIImage?
     

@@ -47,9 +47,10 @@ class UserListViewController: UIViewController {
     
     private func configureNavigationList() {
         self.tableView = UITableView()
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: UserInfoViewCell.reuseIdentifier)
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.estimatedRowHeight = 88.0
         
         self.view.addSubview(self.tableView)
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -66,18 +67,18 @@ extension UserListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let user = self.viewModel.dataSource[indexPath.row]
-        if let dequeueCell = tableView.dequeueReusableCell(withIdentifier: UserInfoViewCell.reuseIdentifier) as? UserInfoViewCell {
-            dequeueCell.configureViews(user)
-            return dequeueCell
-        }
-        let cell = UserInfoViewCell(style: .default, reuseIdentifier: UserInfoViewCell.reuseIdentifier)
-        cell.configureViews(user)
+        let userInfo = self.viewModel.dataSource[indexPath.row]
+//        if let dequeueCell = tableView.dequeueReusableCell(withIdentifier: UserInfoViewCell.reuseIdentifier) as? UserInfoViewCell {
+//            dequeueCell.configureViews(user)
+//            return dequeueCell
+//        }
+        let cell = UserInfoViewCell()
+        cell.configure(userInfo)
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 250
+        return  UITableView.automaticDimension
     }
 }
 
