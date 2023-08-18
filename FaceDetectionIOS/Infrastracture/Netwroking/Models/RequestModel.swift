@@ -13,14 +13,14 @@ class RequestModel {
     var httpMethod: HTTPMethod
     var headers: [String : String]?
     var queryParameters: [String : String]?
-    var body: [String:Any]?
+    var body: Data?
     
     init(basePath: String,
          path: String,
          httpMethod: HTTPMethod,
          headers: [String : String]? = nil,
          queryParameters: [String : String]? = nil,
-         body: [String:Any]? = nil) {
+         body: Data? = nil) {
         self.basePath = basePath
         self.path = path
         self.httpMethod = httpMethod

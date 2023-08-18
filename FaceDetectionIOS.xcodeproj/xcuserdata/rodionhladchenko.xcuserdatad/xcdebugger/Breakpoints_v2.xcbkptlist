@@ -222,8 +222,8 @@
             filePath = "FaceDetectionIOS/User Interface/Scenes/UserListScene/ViewControllers/UserListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "tableView(_:numberOfRowsInSection:)"
             landmarkType = "7">
             <Locations>
@@ -270,8 +270,8 @@
             filePath = "FaceDetectionIOS/User Interface/Scenes/UserListScene/ViewControllers/UserListViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
             landmarkName = "tableView(_:didSelectRowAt:)"
             landmarkType = "7">
             <Locations>
@@ -486,17 +486,683 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BCC0156C-CB52-421D-A859-4731DC97347D"
+            uuid = "BF8AE441-C382-49A3-9198-0F7DFF139638"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FaceDetectionIOS/User Interface/Scenes/UserListScene/Views/UserInfoViewCell.swift"
+            filePath = "FaceDetectionIOS/Infrastracture/Netwroking/Endpoints/FaceLockAPIEndpoints/FaceLockAPIRequestFactory.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "createAdminAddUserPhotos(userId:images:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "BF8AE441-C382-49A3-9198-0F7DFF139638 - 355556c312cfa431"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Smart_Lock.FaceLockAPIRequestFactory.createAdminAddUserPhotos(userId: Swift.String, images: Swift.Array&lt;__C.UIImage&gt;) -&gt; Smart_Lock.RequestModel"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/Infrastracture/Netwroking/Endpoints/FaceLockAPIEndpoints/FaceLockAPIRequestFactory.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "6028">
+               </Location>
+               <Location
+                  uuid = "BF8AE441-C382-49A3-9198-0F7DFF139638 - 355556c312cfa7bd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Smart_Lock.FaceLockAPIRequestFactory.createAdminAddUserPhotos(userId: Swift.String, images: Swift.Array&lt;__C.UIImage&gt;) -&gt; Smart_Lock.RequestModel"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/Infrastracture/Netwroking/Endpoints/FaceLockAPIEndpoints/FaceLockAPIRequestFactory.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "87"
+                  endingLineNumber = "87"
+                  offsetFromSymbolStart = "652">
+               </Location>
+               <Location
+                  uuid = "BF8AE441-C382-49A3-9198-0F7DFF139638 - 355556c312cfa582"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Smart_Lock.FaceLockAPIRequestFactory.createAdminAddUserPhotos(userId: Swift.String, images: Swift.Array&lt;__C.UIImage&gt;) -&gt; Smart_Lock.RequestModel"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/Infrastracture/Netwroking/Endpoints/FaceLockAPIEndpoints/FaceLockAPIRequestFactory.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "3976">
+               </Location>
+               <Location
+                  uuid = "BF8AE441-C382-49A3-9198-0F7DFF139638 - 355556c312cfa582"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Smart_Lock.FaceLockAPIRequestFactory.createAdminAddUserPhotos(userId: Swift.String, images: Swift.Array&lt;__C.UIImage&gt;) -&gt; Smart_Lock.RequestModel"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/Infrastracture/Netwroking/Endpoints/FaceLockAPIEndpoints/FaceLockAPIRequestFactory.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "4036">
+               </Location>
+               <Location
+                  uuid = "BF8AE441-C382-49A3-9198-0F7DFF139638 - 355556c312cfa582"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Smart_Lock.FaceLockAPIRequestFactory.createAdminAddUserPhotos(userId: Swift.String, images: Swift.Array&lt;__C.UIImage&gt;) -&gt; Smart_Lock.RequestModel"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/Infrastracture/Netwroking/Endpoints/FaceLockAPIEndpoints/FaceLockAPIRequestFactory.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "70"
+                  endingLineNumber = "70"
+                  offsetFromSymbolStart = "4268">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "95791654-2675-4617-8A2F-D6CD6D1A425A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FaceDetectionIOS/User Interface/Scenes/UserManagementScene/ViewControllers/UserManagmentViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "186"
+            endingLineNumber = "186"
+            landmarkName = "picker(_:didFinishPicking:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "95791654-2675-4617-8A2F-D6CD6D1A425A - b0a6fb04ac78e75e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (PhotosUI.PHPickerResult) -&gt; () in Smart_Lock.UserManagmentViewController.picker(_: __C.PHPickerViewController, didFinishPicking: Swift.Array&lt;PhotosUI.PHPickerResult&gt;) -&gt; ()"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/Scenes/UserManagementScene/ViewControllers/UserManagmentViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "155"
+                  endingLineNumber = "155"
+                  offsetFromSymbolStart = "412">
+               </Location>
+               <Location
+                  uuid = "95791654-2675-4617-8A2F-D6CD6D1A425A - f6bae4317f42a8ad"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;__C.NSItemProviderReading&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (PhotosUI.PHPickerResult) -&gt; () in Smart_Lock.UserManagmentViewController.picker(_: __C.PHPickerViewController, didFinishPicking: Swift.Array&lt;PhotosUI.PHPickerResult&gt;) -&gt; ()"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/Scenes/UserManagementScene/ViewControllers/UserManagmentViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "155"
+                  endingLineNumber = "155"
+                  offsetFromSymbolStart = "392">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A9DBD8C6-761F-4AC4-AC72-DA1CFFE7E842"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FaceDetectionIOS/User Interface/Scenes/UserManagementScene/ViewControllers/UserManagmentViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "picker(_:didFinishPicking:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A9DBD8C6-761F-4AC4-AC72-DA1CFFE7E842 - 1b68a057e5c075a7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in Smart_Lock.UserManagmentViewController.picker(_: __C.PHPickerViewController, didFinishPicking: Swift.Array&lt;PhotosUI.PHPickerResult&gt;) -&gt; ()"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/Scenes/UserManagementScene/ViewControllers/UserManagmentViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "162"
+                  endingLineNumber = "162"
+                  offsetFromSymbolStart = "492">
+               </Location>
+               <Location
+                  uuid = "A9DBD8C6-761F-4AC4-AC72-DA1CFFE7E842 - 1b68a057e5c075a7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in Smart_Lock.UserManagmentViewController.picker(_: __C.PHPickerViewController, didFinishPicking: Swift.Array&lt;PhotosUI.PHPickerResult&gt;) -&gt; ()"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/Scenes/UserManagementScene/ViewControllers/UserManagmentViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "162"
+                  endingLineNumber = "162"
+                  offsetFromSymbolStart = "240">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F5C33593-78DF-4FDE-8E77-1BED45CD0836"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FaceDetectionIOS/Infrastracture/Netwroking/Endpoints/FaceLockAPIEndpoints/FaceLockAPIRequestFactory.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "createAdminAddUserPhotos(userId:images:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F5C33593-78DF-4FDE-8E77-1BED45CD0836 - 355556c312cfa39d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Smart_Lock.FaceLockAPIRequestFactory.createAdminAddUserPhotos(userId: Swift.String, images: Swift.Array&lt;__C.UIImage&gt;) -&gt; Smart_Lock.RequestModel"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/Infrastracture/Netwroking/Endpoints/FaceLockAPIEndpoints/FaceLockAPIRequestFactory.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "1152">
+               </Location>
+               <Location
+                  uuid = "F5C33593-78DF-4FDE-8E77-1BED45CD0836 - 355556c312cfa39d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Smart_Lock.FaceLockAPIRequestFactory.createAdminAddUserPhotos(userId: Swift.String, images: Swift.Array&lt;__C.UIImage&gt;) -&gt; Smart_Lock.RequestModel"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/Infrastracture/Netwroking/Endpoints/FaceLockAPIEndpoints/FaceLockAPIRequestFactory.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "1212">
+               </Location>
+               <Location
+                  uuid = "F5C33593-78DF-4FDE-8E77-1BED45CD0836 - 355556c312cfa39d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Smart_Lock.FaceLockAPIRequestFactory.createAdminAddUserPhotos(userId: Swift.String, images: Swift.Array&lt;__C.UIImage&gt;) -&gt; Smart_Lock.RequestModel"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/Infrastracture/Netwroking/Endpoints/FaceLockAPIEndpoints/FaceLockAPIRequestFactory.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "1448">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "35BBC158-9364-41CB-989D-40C8D5C29AE2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FaceDetectionIOS/Infrastracture/Netwroking/Services/NetworkingService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
+            landmarkName = "makeHttpHeaders(from:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EC008BEA-F4D5-4B17-9030-6F2CC4F9EBDD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FaceDetectionIOS/Infrastracture/Netwroking/Services/NetworkingService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "request(_:_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "EC008BEA-F4D5-4B17-9030-6F2CC4F9EBDD - baf02f79bf27f234"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Smart_Lock.NetworkingError&gt;) -&gt; () in Smart_Lock.NetworkingService.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(Smart_Lock.RequestModel, (Swift.Result&lt;&#x3c4;_0_0, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/Infrastracture/Netwroking/Services/NetworkingService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "412">
+               </Location>
+               <Location
+                  uuid = "EC008BEA-F4D5-4B17-9030-6F2CC4F9EBDD - ed3078eea259d65"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.Optional&lt;Foundation.Data&gt;, Smart_Lock.NetworkingError&gt;) -&gt; () in closure #1 (Swift.Optional&lt;Smart_Lock.NetworkingError&gt;) -&gt; () in Smart_Lock.NetworkingService.request&lt;&#x3c4;_0_0 where &#x3c4;_0_0: Swift.Decodable&gt;(Smart_Lock.RequestModel, (Swift.Result&lt;&#x3c4;_0_0, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/Infrastracture/Netwroking/Services/NetworkingService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "656">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2730B96D-8038-49B8-BB60-93591BC83146"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FaceDetectionIOS/Infrastracture/Netwroking/Services/NetworkingService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "request(_:_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2730B96D-8038-49B8-BB60-93591BC83146 - b1a18f60c28605e9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Smart_Lock.NetworkingError&gt;) -&gt; () in Smart_Lock.NetworkingService.request(Smart_Lock.RequestModel, (Swift.Result&lt;(), Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/Infrastracture/Netwroking/Services/NetworkingService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "73"
+                  endingLineNumber = "73"
+                  offsetFromSymbolStart = "236">
+               </Location>
+               <Location
+                  uuid = "2730B96D-8038-49B8-BB60-93591BC83146 - ac3c644cc8edfae9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.Optional&lt;Foundation.Data&gt;, Smart_Lock.NetworkingError&gt;) -&gt; () in closure #1 (Swift.Optional&lt;Smart_Lock.NetworkingError&gt;) -&gt; () in Smart_Lock.NetworkingService.request(Smart_Lock.RequestModel, (Swift.Result&lt;(), Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/Infrastracture/Netwroking/Services/NetworkingService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "73"
+                  endingLineNumber = "73"
+                  offsetFromSymbolStart = "132">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1C0129A3-0F1C-43D0-9B3D-185826882084"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FaceDetectionIOS/Infrastracture/Netwroking/Services/NetworkingService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "request(_:_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1C0129A3-0F1C-43D0-9B3D-185826882084 - bfa8401e2cace41e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Smart_Lock.NetworkingError&gt;) -&gt; () in Smart_Lock.NetworkingService.request(Smart_Lock.RequestModel, (Swift.Result&lt;Foundation.Data, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/Infrastracture/Netwroking/Services/NetworkingService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92"
+                  offsetFromSymbolStart = "236">
+               </Location>
+               <Location
+                  uuid = "1C0129A3-0F1C-43D0-9B3D-185826882084 - ddd539a107a65d82"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;Swift.Optional&lt;Foundation.Data&gt;, Smart_Lock.NetworkingError&gt;) -&gt; () in closure #1 (Swift.Optional&lt;Smart_Lock.NetworkingError&gt;) -&gt; () in Smart_Lock.NetworkingService.request(Smart_Lock.RequestModel, (Swift.Result&lt;Foundation.Data, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/Infrastracture/Netwroking/Services/NetworkingService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "92"
+                  endingLineNumber = "92"
+                  offsetFromSymbolStart = "148">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FFDE38E5-0B1B-49C2-AF0D-037F92932648"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FaceDetectionIOS/User Interface/Scenes/UserManagementScene/ViewControllers/UserManagmentViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "193"
+            endingLineNumber = "193"
+            landmarkName = "picker(_:didFinishPicking:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5D54457F-B301-48CA-BF8E-0DCA2D2667E5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FaceDetectionIOS/User Interface/Scenes/UserManagementScene/ViewControllers/UserManagmentViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
+            landmarkName = "picker(_:didFinishPicking:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5D54457F-B301-48CA-BF8E-0DCA2D2667E5 - fbee5fa754862003"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Smart_Lock.UserManagmentViewController.picker(_: __C.PHPickerViewController, didFinishPicking: Swift.Array&lt;PhotosUI.PHPickerResult&gt;) -&gt; ()"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/Scenes/UserManagementScene/ViewControllers/UserManagmentViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "146"
+                  endingLineNumber = "146"
+                  offsetFromSymbolStart = "304">
+               </Location>
+               <Location
+                  uuid = "5D54457F-B301-48CA-BF8E-0DCA2D2667E5 - b0a6fb04ac78e627"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (PhotosUI.PHPickerResult) -&gt; () in Smart_Lock.UserManagmentViewController.picker(_: __C.PHPickerViewController, didFinishPicking: Swift.Array&lt;PhotosUI.PHPickerResult&gt;) -&gt; ()"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/Scenes/UserManagementScene/ViewControllers/UserManagmentViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "146"
+                  endingLineNumber = "146"
+                  offsetFromSymbolStart = "148">
+               </Location>
+               <Location
+                  uuid = "5D54457F-B301-48CA-BF8E-0DCA2D2667E5 - f6bae4317f42a9d4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;__C.NSItemProviderReading&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (PhotosUI.PHPickerResult) -&gt; () in Smart_Lock.UserManagmentViewController.picker(_: __C.PHPickerViewController, didFinishPicking: Swift.Array&lt;PhotosUI.PHPickerResult&gt;) -&gt; ()"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/Scenes/UserManagementScene/ViewControllers/UserManagmentViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "146"
+                  endingLineNumber = "146"
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  uuid = "5D54457F-B301-48CA-BF8E-0DCA2D2667E5 - 1b68a057e5c077b7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in Smart_Lock.UserManagmentViewController.picker(_: __C.PHPickerViewController, didFinishPicking: Swift.Array&lt;PhotosUI.PHPickerResult&gt;) -&gt; ()"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/Scenes/UserManagementScene/ViewControllers/UserManagmentViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "146"
+                  endingLineNumber = "146"
+                  offsetFromSymbolStart = "92">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5DF71C4A-0158-48D9-81D3-6BC67FB0405B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FaceDetectionIOS/User Interface/Scenes/UserManagementScene/ViewControllers/UserManagmentViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
+            landmarkName = "picker(_:didFinishPicking:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "51B11477-AC36-42B0-BF35-9F65D989D16A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FaceDetectionIOS/User Interface/Scenes/UserManagementScene/ViewControllers/UserManagmentViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
+            landmarkName = "picker(_:didFinishPicking:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "03D0C87D-5BA4-4E37-812C-DB1F07CFC7BC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FaceDetectionIOS/User Interface/Scenes/UserManagementScene/ViewControllers/UserManagmentViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
+            landmarkName = "picker(_:didFinishPicking:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "03D0C87D-5BA4-4E37-812C-DB1F07CFC7BC - 1b68a057e5c075e5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in Smart_Lock.UserManagmentViewController.picker(_: __C.PHPickerViewController, didFinishPicking: Swift.Array&lt;PhotosUI.PHPickerResult&gt;) -&gt; ()"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/Scenes/UserManagementScene/ViewControllers/UserManagmentViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "164"
+                  endingLineNumber = "164"
+                  offsetFromSymbolStart = "228">
+               </Location>
+               <Location
+                  uuid = "03D0C87D-5BA4-4E37-812C-DB1F07CFC7BC - 3d19171e3d655731"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Bool) -&gt; () in closure #2 () -&gt; () in Smart_Lock.UserManagmentViewController.picker(_: __C.PHPickerViewController, didFinishPicking: Swift.Array&lt;PhotosUI.PHPickerResult&gt;) -&gt; ()"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/Scenes/UserManagementScene/ViewControllers/UserManagmentViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "164"
+                  endingLineNumber = "164"
+                  offsetFromSymbolStart = "232">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "52D590AA-DDBE-4E60-AC07-FF757EF89490"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FaceDetectionIOS/User Interface/Scenes/PhotosListScene/ViewModels/PhotoListViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "32"
             endingLineNumber = "32"
-            landmarkName = "configureTopImageView(_:)"
+            landmarkName = "delete(userId:photoId:_:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "52D590AA-DDBE-4E60-AC07-FF757EF89490 - bdc9410a1d24d3e6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Smart_Lock.PhotoListViewModel.delete(userId: Swift.String, photoId: Swift.Int, _: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/Scenes/PhotosListScene/ViewModels/PhotoListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "84">
+               </Location>
+               <Location
+                  uuid = "52D590AA-DDBE-4E60-AC07-FF757EF89490 - 43b9b8ba94fb598"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;(), Swift.Error&gt;) -&gt; () in Smart_Lock.PhotoListViewModel.delete(userId: Swift.String, photoId: Swift.Int, _: (Swift.Bool) -&gt; ()) -&gt; ()"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/User%20Interface/Scenes/PhotosListScene/ViewModels/PhotoListViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "72">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CAA92FB1-EB77-4A2E-85F8-BA95E21455D3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FaceDetectionIOS/Infrastracture/Netwroking/Managers/SessionManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "request(_:_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "CAA92FB1-EB77-4A2E-85F8-BA95E21455D3 - 19132f1c1d7b01ee"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Smart_Lock.SessionManager.request(Smart_Lock.RequestModel, (Swift.Result&lt;Swift.Optional&lt;Foundation.Data&gt;, Smart_Lock.NetworkingError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/Infrastracture/Netwroking/Managers/SessionManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "416">
+               </Location>
+               <Location
+                  uuid = "CAA92FB1-EB77-4A2E-85F8-BA95E21455D3 - 2cbe8b23c3a7f684"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in Smart_Lock.SessionManager.request(Smart_Lock.RequestModel, (Swift.Result&lt;Swift.Optional&lt;Foundation.Data&gt;, Smart_Lock.NetworkingError&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "Smart Lock"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/rodionhladchenko/Documents/my_repos/FaceDetectionIOS/FaceDetectionIOS/Infrastracture/Netwroking/Managers/SessionManager.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "336">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

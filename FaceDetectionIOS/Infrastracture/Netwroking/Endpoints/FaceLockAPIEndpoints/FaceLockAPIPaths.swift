@@ -19,6 +19,7 @@ enum FaceLockAPIPaths {
     static let adminUpdateUser = "/api/AdminUser/{userId}/UpdateUser"
     static let adminDeleteUser = "/api/AdminUser/{userId}/DeleteUser"
     static let adminDeleteUserPhotos = "/api/AdminUser/{userId}/DeleteUserPhotos"
+    static let adminDeleteUserPhotoByPhotoId = "/api/AdminUser/{userId}/DeleteUserPhoto/{faceId}"
     
     // MARK: - Authentication
     static let register = "/api/Authentication/register"

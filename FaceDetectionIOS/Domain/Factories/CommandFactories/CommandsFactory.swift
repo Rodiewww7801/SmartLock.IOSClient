@@ -43,4 +43,16 @@ class CommandsFactory: CommandsFactoryProtocol {
     static func getUserPhotoByPhotoIdCommand() -> GetUserPhotoByPhotoIdCommandProtocol {
         return GetUserPhotoByPhotoIdCommand()
     }
+    
+    static func addUserPhotosCommand() -> AddUserPhotosCommandProtocol {
+        return AddUserPhotosCommand()
+    }
+    
+    static func deletePhotoByPhtotoIdCommand() -> DeletePhotoByPhtotoIdCommandProtocol {
+        return DeletePhotoByPhtotoIdCommand()
+    }
+    
+    static func deleteUserCommand() -> DeleteUserCommand {
+        return DeleteUserCommand()
+    }
 }

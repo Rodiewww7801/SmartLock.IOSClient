@@ -25,11 +25,11 @@ class UserInfoViewController: UIViewController {
         self.view.backgroundColor = .white
         super.viewDidLoad()
         configureViews()
-        loadModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        loadModel()
     }
     
     private func configureViews() {
@@ -41,7 +41,7 @@ class UserInfoViewController: UIViewController {
         loadingScreen.show(on: self.view)
         viewModel.configure { [weak self] model in
             DispatchQueue.main.async {
-                self?.userInfoView.configure(model)
+                self?.userInfoView.updateData(model)
                 self?.view.setNeedsLayout()
                 self?.view.layoutIfNeeded()
                 self?.loadingScreen.stop()
@@ -51,6 +51,7 @@ class UserInfoViewController: UIViewController {
     
     private func configureUserInfoView() {
         userInfoView = UserInfoViewCell()
+        userInfoView.configure()
         self.view.addSubview(userInfoView)
         userInfoView.translatesAutoresizingMaskIntoConstraints = false
         userInfoView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true

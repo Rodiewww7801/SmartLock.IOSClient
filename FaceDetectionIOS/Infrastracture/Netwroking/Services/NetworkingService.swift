@@ -124,7 +124,9 @@ class NetworkingService: NetworkingServiceProotocol {
     
     private func makeHttpHeaders(from headers: [String:String]?) -> [String:String] {
         var newHeaders = headers ?? [String:String]()
-        newHeaders.updateValue("application/json; charset=utf-8", forKey: "Content-Type")
+        if headers?["Content-Type"] == nil {
+            newHeaders.updateValue("application/json; charset=utf-8", forKey: "Content-Type")
+        }
         newHeaders.updateValue(deviceId, forKey: "device")
         newHeaders.updateValue("unknown", forKey: "country")
         newHeaders.updateValue("unknown", forKey: "city")

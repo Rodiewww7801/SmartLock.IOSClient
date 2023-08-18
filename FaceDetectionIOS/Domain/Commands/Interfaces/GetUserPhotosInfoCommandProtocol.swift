@@ -8,5 +8,5 @@
 import Foundation
 
 protocol GetUserPhotosInfoCommandProtocol {
-    func execute(userId: String, _ completion: @escaping (Result<[PhotoInfoResponseDTO], Error>) -> Void)
+    func execute(userId: String, _ completion: @escaping (Result<[PhotoInfoDTO], Error>) -> Void)
 }

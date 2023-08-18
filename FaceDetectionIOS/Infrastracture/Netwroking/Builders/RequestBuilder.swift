@@ -18,7 +18,7 @@ class RequestBuilder {
         }
         
         if let body = requestModel.body {
-            addBody(&urlRequest, body: body)
+            urlRequest.httpBody = body
         }
         
         urlRequest.httpMethod = requestModel.httpMethod.rawValue        
@@ -48,10 +48,5 @@ class RequestBuilder {
         headers.forEach { header in
             urlRequest.addValue(header.value, forHTTPHeaderField: header.key)
         }
-    }
-    
-    static private func addBody(_ urlRequest: inout URLRequest, body: [String: Any]) {
-        let jsonData = try? JSONSerialization.data(withJSONObject: body)
-        urlRequest.httpBody = jsonData
     }
 }

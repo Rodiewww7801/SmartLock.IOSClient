@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PhotoInfoResponseDTO: Decodable {
+struct PhotoInfoDTO: Decodable {
     var id: Int
     var imageMimeType: String
     var userId: String

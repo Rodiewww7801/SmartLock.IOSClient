@@ -106,7 +106,7 @@ class UserCreateView: UIView {
     
     private func configureRegisterButton() {
         createUserButton = UIButton(type: .system)
-        createUserButton.setTitle("Register", for: .normal)
+        createUserButton.setTitle("Create user", for: .normal)
         createUserButton.setTitleColor(.systemBlue, for: .normal)
         createUserButton.addTarget(self, action: #selector(register), for: .touchUpInside)
         

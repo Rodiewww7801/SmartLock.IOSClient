@@ -76,9 +76,13 @@ final class MainListSceneCoordinator: Coordinator, MainListSceneCoordinatorOutpu
     }
     
     private func showUsersListScene() {
-        let userListViewModel = UserListViewModel()
-        let userListViewController = UserListViewController(with: userListViewModel)
-        router.push(userListViewController, animated: true)
+        let userListSceneCoordinator = UserListSceneCoordinator(router: self.router)
+        userListSceneCoordinator.removeCoordinator = { [weak self, weak userListSceneCoordinator] in
+            guard let userListSceneCoordinator = userListSceneCoordinator else { return }
+            self?.removeChild(userListSceneCoordinator)
+        }
+        self.addChild(userListSceneCoordinator)
+        userListSceneCoordinator.start()
     }
     
     private func showNavigationTest() {

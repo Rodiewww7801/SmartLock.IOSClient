@@ -13,4 +13,6 @@ protocol UserRepositoryProtocol {
     func getUsers() async -> [User]
     func getUserInfo() async -> [UserInfo]
     func getUserPhoto(userId: String, photoId: String) async -> UIImage?
+    func getUserPhotosInfo(userId: String) async -> [PhotoInfoDTO]
+    func getUserPhotos(userId: String) async -> [Photo]
 }

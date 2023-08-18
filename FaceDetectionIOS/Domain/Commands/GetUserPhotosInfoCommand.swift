@@ -14,7 +14,7 @@ class GetUserPhotosInfoCommand: GetUserPhotosInfoCommandProtocol {
         self.networkingSerivce = NetworkingFactory.networkingService()
     }
     
-    func execute(userId: String, _ completion: @escaping (Result<[PhotoInfoResponseDTO], Error>) -> Void) {
+    func execute(userId: String, _ completion: @escaping (Result<[PhotoInfoDTO], Error>) -> Void) {
         let requestModel = FaceLockAPIRequestFactory.createAdminGetUserPhotosInfo(userId: userId)
         networkingSerivce.request(requestModel, completion)
     }

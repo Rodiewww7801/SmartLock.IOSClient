@@ -22,18 +22,27 @@ class UserInfoViewCell: UITableViewCell {
     private var roleLabelTitle: UILabel!
     private var roleLabelText: UILabel!
     
-    func configure(_ model: UserInfo) {
-        configureTopImageView(model)
-        configureLabels(model)
+    func configure() {
+        configureTopImageView()
+        configureLabels()
     }
     
-    private func configureTopImageView(_ model: UserInfo) {
-        var image: UIImage?
+    func updateData(_ model: UserInfo) {
+        usernameLableText.text = model.user.username
+        userIdLableText.text = model.user.id
+        emailLableText.text = model.user.email
+        firstNameLabelText.text = model.user.firstName
+        lastNameLabelText.text =  model.user.lastName
+        roleLabelText.text = model.user.role.rawValue
         if let photo = model.photo {
-            image = photo
+            topImageView.image = photo
         } else {
-            image = UIImage(systemName: "person.fill")
+            topImageView.image = UIImage(systemName: "person.fill")
         }
+    }
+    
+    private func configureTopImageView() {
+        let image = UIImage(systemName: "person.fill")
         topImageView = UIImageView(image: image)
         topImageView.tintColor = .systemGray5
         topImageView.contentMode = .scaleAspectFit
@@ -49,7 +58,7 @@ class UserInfoViewCell: UITableViewCell {
         topImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
     }
     
-    private func configureLabels(_ model: UserInfo) {
+    private func configureLabels() {
         userIdLableTitle = UILabel(frame: .zero)
         userIdLableTitle.text = "Id"
         userIdLableTitle.font = UIFont.preferredFont(forTextStyle: .body)
@@ -99,7 +108,6 @@ class UserInfoViewCell: UITableViewCell {
         self.addSubview(roleLabelTitle)
         
         userIdLableText = UILabel(frame: .zero)
-        userIdLableText.text = model.user.id
         userIdLableText.font = UIFont.preferredFont(forTextStyle: .body)
         userIdLableText.numberOfLines = 0
         userIdLableText.textColor = .black
@@ -107,7 +115,6 @@ class UserInfoViewCell: UITableViewCell {
         self.addSubview(userIdLableText)
         
         usernameLableText = UILabel(frame: .zero)
-        usernameLableText.text = model.user.username
         usernameLableText.font = UIFont.preferredFont(forTextStyle: .body)
         usernameLableText.numberOfLines = 0
         usernameLableText.textColor = .black
@@ -115,7 +122,6 @@ class UserInfoViewCell: UITableViewCell {
         self.addSubview(usernameLableText)
         
         emailLableText = UILabel(frame: .zero)
-        emailLableText.text = model.user.email
         emailLableText.font = UIFont.preferredFont(forTextStyle: .body)
         emailLableText.numberOfLines = 0
         emailLableText.textColor = .black
@@ -123,7 +129,6 @@ class UserInfoViewCell: UITableViewCell {
         self.addSubview(emailLableText)
         
         firstNameLabelText = UILabel(frame: .zero)
-        firstNameLabelText.text = model.user.firstName
         firstNameLabelText.font = UIFont.preferredFont(forTextStyle: .body)
         firstNameLabelText.numberOfLines = 0
         firstNameLabelText.textColor = .black
@@ -131,7 +136,6 @@ class UserInfoViewCell: UITableViewCell {
         self.addSubview(firstNameLabelText)
         
         lastNameLabelText = UILabel(frame: .zero)
-        lastNameLabelText.text =  model.user.lastName
         lastNameLabelText.font = UIFont.preferredFont(forTextStyle: .body)
         lastNameLabelText.numberOfLines = 0
         lastNameLabelText.textColor = .black
@@ -139,7 +143,6 @@ class UserInfoViewCell: UITableViewCell {
         self.addSubview(lastNameLabelText)
         
         roleLabelText = UILabel(frame: .zero)
-        roleLabelText.text = model.user.role.rawValue
         roleLabelText.font = UIFont.preferredFont(forTextStyle: .body)
         roleLabelText.numberOfLines = 0
         roleLabelText.textColor = .black

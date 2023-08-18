@@ -81,8 +81,8 @@ class UserRepository: UserRepositoryProtocol {
             users.forEach { user in
                 taskGroup.addTask { [weak self] in
                     print("[UserRepository] start async operation to get UserInfo")
-                    if let photosInfo = await self?.getUserPhotosInfo(userId: user.id) {
-                        let userImage = await self?.getUserPhoto(userId: user.id, photoId: String(photosInfo.id))
+                    if let photoInfo = await self?.getUserPhotosInfo(userId: user.id).first {
+                        let userImage = await self?.getUserPhoto(userId: user.id, photoId: String(photoInfo.id))
                         print("[UserRepository] async operation recived UserInfo")
                         return UserInfo(user: user, photo: userImage)
                     }
@@ -98,7 +98,7 @@ class UserRepository: UserRepositoryProtocol {
             }
         }
         
-        return userInfos
+        return userInfos.sorted(by: { $0.user.email < $1.user.email })
     }
     
     func getUserPhoto(userId: String, photoId: String) async -> UIImage? {
@@ -111,14 +111,38 @@ class UserRepository: UserRepositoryProtocol {
         return userImage
     }
     
-    func getUserPhotosInfo(userId: String) async -> PhotoInfoResponseDTO? {
+    func getUserPhotosInfo(userId: String) async -> [PhotoInfoDTO] {
         let userPhotosInfoDTO = try? await withUnsafeThrowingContinuation { continuation in
             getUserPhotosInfoCommand.execute(userId: userId) { result in
                 continuation.resume(with: result)
             }
         }
         
-        return userPhotosInfoDTO?.first
+        return userPhotosInfoDTO ?? []
     }
     
+    func getUserPhotos(userId: String) async -> [Photo] {
+        var userPhotos = [Photo]()
+        var photosInfo = await self.getUserPhotosInfo(userId: userId)
+        await withTaskGroup(of: Photo?.self) { taskGroup in
+            photosInfo.forEach { photoInfo in
+                taskGroup.addTask { [weak self] in
+                    var photo = await self?.getUserPhoto(userId: userId, photoId: String(photoInfo.id))
+                    if let photo = photo {
+                        return Photo(image: photo, info: photoInfo)
+                    } else {
+                        return nil
+                    }
+                }
+            }
+            
+            for await value in taskGroup {
+                if let value = value {
+                    userPhotos.append(value)
+                }
+            }
+        }
+        
+        return userPhotos
+    }
 }

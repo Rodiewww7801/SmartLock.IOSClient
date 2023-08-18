@@ -1,22 +1,22 @@
 //
-//  UserListViewController.swift
+//  PhotoListViewController.swift
 //  Smart Lock
 //
-//  Created by Rodion Hladchenko on 16.08.2023.
+//  Created by Rodion Hladchenko on 18.08.2023.
 //
 
 import UIKit
 
-class UserListViewController: UIViewController {
+class PhotoListViewController: UIViewController {
     private var tableView: UITableView!
-    private var viewModel: UserListViewModel
+    private var viewModel: PhotoListViewModel
     private var loadingScreen = FDLoadingScreen()
     private var sections: [String] = []
     
     var onBackTapped: (()->Void)?
-    var onUserSelected: ((String)->Void)?
+    var onUserSelected: ((UserInfo)->Void)?
     
-    init(with viewModel: UserListViewModel) {
+    init(with viewModel: PhotoListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -30,11 +30,11 @@ class UserListViewController: UIViewController {
         super.viewDidLoad()
         
         self.configureNavigationList()
+        self.loadModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.loadModel()
     }
     
     override func willMove(toParent parent: UIViewController?) {
@@ -57,7 +57,6 @@ class UserListViewController: UIViewController {
     private func configureNavigationList() {
         self.tableView = UITableView()
         self.tableView.dataSource = self
-        self.tableView.delegate = self
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.estimatedRowHeight = 88.0
         
@@ -68,30 +67,39 @@ class UserListViewController: UIViewController {
         self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
     }
+    
+    private func onDelete(userId: String, photoId: Int) {
+        loadingScreen.show(on: self.view)
+        viewModel.delete(userId: userId, photoId: photoId) { isSuccess in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                if isSuccess {
+                    FDAlert()
+                        .createWith(title: "Photo was deleted", message: "photo with \(photoId) id was deleted successfully")
+                        .addAction(title: "Login", style: .default, handler: nil)
+                        .present(on: self)
+                }
+                self.loadingScreen.stop()
+                self.loadModel()
+            }
+        }
+    }
 }
 
-extension UserListViewController: UITableViewDataSource {
+extension PhotoListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let userInfo = self.viewModel.dataSource[indexPath.row]
-        let cell = UserInfoViewCell()
-        cell.configure()
-        cell.updateData(userInfo)
+        let cell = PhotoListViewCell()
+        cell.configure(userInfo)
+        cell.onDeleteAction = onDelete
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return  UITableView.automaticDimension
-    }
-}
-
-extension UserListViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let userInfo = viewModel.dataSource[indexPath.row]
-        self.onUserSelected?(userInfo.user.id)
     }
 }
