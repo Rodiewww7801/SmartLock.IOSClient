@@ -36,6 +36,7 @@ class UserListSceneCoordinator: Coordinator {
         let viewModel = UserManagmentViewModel(userId: userId)
         let viewController = UserManagmentViewController(with: viewModel)
         viewController.onGetUserPhotosAction = showPhotoListScene
+        viewController.onUpdateUserAction = showUpdateUserScene
         viewController.onDeleteUserAction = { [weak self] in
             self?.router.pop(animated: true)
         }
@@ -46,5 +47,14 @@ class UserListSceneCoordinator: Coordinator {
         let viewModel = PhotoListViewModel(userId: userId)
         let viewController = PhotoListViewController(with: viewModel)
         router.push(viewController, animated: true)
+    }
+    
+    private func showUpdateUserScene(_ userInfo: UserInfo) {
+        let viewModel = AdminUpdateUserViewModel(userInfo: userInfo)
+        let viewController = UpdateUserViewController(with: viewModel)
+        viewController.onUserUpdate = { [weak self] in
+            self?.router.pop(animated: true)
+        }
+        self.router.push(viewController, animated: true)
     }
 }

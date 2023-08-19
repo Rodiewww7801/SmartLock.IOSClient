@@ -72,6 +72,7 @@ final class MainListSceneCoordinator: Coordinator, MainListSceneCoordinatorOutpu
     private func showUserInfoScene() {
         let userInfoViewModel = UserInfoViewModel()
         let userInfoViewController = UserInfoViewController(with: userInfoViewModel)
+        userInfoViewController.onUpdateUserAction = showUpdateUserScene
         router.push(userInfoViewController, animated: true)
     }
     
@@ -83,6 +84,15 @@ final class MainListSceneCoordinator: Coordinator, MainListSceneCoordinatorOutpu
         }
         self.addChild(userListSceneCoordinator)
         userListSceneCoordinator.start()
+    }
+    
+    private func showUpdateUserScene(_ userInfo: UserInfo) {
+        let viewModel = UpdateUserViewModel(userInfo: userInfo)
+        let viewController = UpdateUserViewController(with: viewModel)
+        viewController.onUserUpdate = { [weak self] in
+            self?.router.pop(animated: true)
+        }
+        self.router.push(viewController, animated: true)
     }
     
     private func showNavigationTest() {

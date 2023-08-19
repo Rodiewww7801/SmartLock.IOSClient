@@ -45,6 +45,15 @@
 		F816DFDC2A8FF9E3003B8446 /* DeletePhotoByIdCommandProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816DFDB2A8FF9E3003B8446 /* DeletePhotoByIdCommandProtocol.swift */; };
 		F816DFDE2A901CF4003B8446 /* DeleteUserCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816DFDD2A901CF4003B8446 /* DeleteUserCommand.swift */; };
 		F816DFE02A901F5D003B8446 /* DeleteUserCommandProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816DFDF2A901F5D003B8446 /* DeleteUserCommandProtocol.swift */; };
+		F816DFE32A90256F003B8446 /* UpdateUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816DFE22A90256F003B8446 /* UpdateUserViewController.swift */; };
+		F816DFE82A90297C003B8446 /* AdminUpdateUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816DFE72A90297C003B8446 /* AdminUpdateUserViewModel.swift */; };
+		F816DFEA2A9035C1003B8446 /* AdminUpdateUserCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816DFE92A9035C1003B8446 /* AdminUpdateUserCommand.swift */; };
+		F816DFEC2A9035E7003B8446 /* AdminUpdateUserCommandProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816DFEB2A9035E7003B8446 /* AdminUpdateUserCommandProtocol.swift */; };
+		F816DFEE2A9036E7003B8446 /* AdminUpdateUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816DFED2A9036E7003B8446 /* AdminUpdateUserDTO.swift */; };
+		F816DFF02A904029003B8446 /* UpdateUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816DFEF2A904029003B8446 /* UpdateUserDTO.swift */; };
+		F816DFF22A904043003B8446 /* UpdateUserCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816DFF12A904043003B8446 /* UpdateUserCommand.swift */; };
+		F816DFF42A9040E1003B8446 /* UpdateUserCommandProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816DFF32A9040E1003B8446 /* UpdateUserCommandProtocol.swift */; };
+		F816DFF62A9041C7003B8446 /* UpdateUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F816DFF52A9041C7003B8446 /* UpdateUserViewModel.swift */; };
 		F8301C532A117CD900455964 /* PointCloudViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8301C522A117CD900455964 /* PointCloudViewController.swift */; };
 		F8301C582A1184A300455964 /* SessionSetupResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8301C572A1184A300455964 /* SessionSetupResult.swift */; };
 		F8348CB529DB56BD00AF14F2 /* FDAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8348CB429DB56BD00AF14F2 /* FDAlert.swift */; };
@@ -179,6 +188,15 @@
 		F816DFDB2A8FF9E3003B8446 /* DeletePhotoByIdCommandProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeletePhotoByIdCommandProtocol.swift; sourceTree = "<group>"; };
 		F816DFDD2A901CF4003B8446 /* DeleteUserCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserCommand.swift; sourceTree = "<group>"; };
 		F816DFDF2A901F5D003B8446 /* DeleteUserCommandProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserCommandProtocol.swift; sourceTree = "<group>"; };
+		F816DFE22A90256F003B8446 /* UpdateUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserViewController.swift; sourceTree = "<group>"; };
+		F816DFE72A90297C003B8446 /* AdminUpdateUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminUpdateUserViewModel.swift; sourceTree = "<group>"; };
+		F816DFE92A9035C1003B8446 /* AdminUpdateUserCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminUpdateUserCommand.swift; sourceTree = "<group>"; };
+		F816DFEB2A9035E7003B8446 /* AdminUpdateUserCommandProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminUpdateUserCommandProtocol.swift; sourceTree = "<group>"; };
+		F816DFED2A9036E7003B8446 /* AdminUpdateUserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminUpdateUserDTO.swift; sourceTree = "<group>"; };
+		F816DFEF2A904029003B8446 /* UpdateUserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserDTO.swift; sourceTree = "<group>"; };
+		F816DFF12A904043003B8446 /* UpdateUserCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserCommand.swift; sourceTree = "<group>"; };
+		F816DFF32A9040E1003B8446 /* UpdateUserCommandProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserCommandProtocol.swift; sourceTree = "<group>"; };
+		F816DFF52A9041C7003B8446 /* UpdateUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UpdateUserViewModel.swift; path = ../../UserInfoScene/ViewModels/UpdateUserViewModel.swift; sourceTree = "<group>"; };
 		F8301C522A117CD900455964 /* PointCloudViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointCloudViewController.swift; sourceTree = "<group>"; };
 		F8301C572A1184A300455964 /* SessionSetupResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionSetupResult.swift; sourceTree = "<group>"; };
 		F8348CB429DB56BD00AF14F2 /* FDAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FDAlert.swift; sourceTree = "<group>"; };
@@ -426,6 +444,32 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
+		F816DFE12A90230A003B8446 /* UpdateUserScene */ = {
+			isa = PBXGroup;
+			children = (
+				F816DFE52A902586003B8446 /* ViewModels */,
+				F816DFE42A90257B003B8446 /* ViewControllers */,
+			);
+			path = UpdateUserScene;
+			sourceTree = "<group>";
+		};
+		F816DFE42A90257B003B8446 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F816DFE22A90256F003B8446 /* UpdateUserViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F816DFE52A902586003B8446 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F816DFF52A9041C7003B8446 /* UpdateUserViewModel.swift */,
+				F816DFE72A90297C003B8446 /* AdminUpdateUserViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		F8301C512A117CAF00455964 /* PointCloudScene */ = {
 			isa = PBXGroup;
 			children = (
@@ -496,6 +540,7 @@
 		F8377C882A89668D00E18B59 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				F816DFE12A90230A003B8446 /* UpdateUserScene */,
 				F816DFC92A8F5C75003B8446 /* PhotosListScene */,
 				F816DFBF2A8EB41E003B8446 /* UserManagementScene */,
 				F86121752A8D646500822B0D /* UserListScene */,
@@ -599,6 +644,8 @@
 				F816DFD52A8F6AC5003B8446 /* AddUserPhotosCommand.swift */,
 				F816DFD92A8FF9B3003B8446 /* DeletePhotoByPhtotoIdCommand.swift */,
 				F816DFDD2A901CF4003B8446 /* DeleteUserCommand.swift */,
+				F816DFE92A9035C1003B8446 /* AdminUpdateUserCommand.swift */,
+				F816DFF12A904043003B8446 /* UpdateUserCommand.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -660,6 +707,8 @@
 				F80735222A8C60E20055D473 /* CreateUserRequestDTO.swift */,
 				F86121802A8D6B5E00822B0D /* GetUsersResponseDTO.swift */,
 				F816DFB92A8E923E003B8446 /* PhotoInfoDTO.swift */,
+				F816DFED2A9036E7003B8446 /* AdminUpdateUserDTO.swift */,
+				F816DFEF2A904029003B8446 /* UpdateUserDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -706,6 +755,8 @@
 				F816DFD72A8F6ACF003B8446 /* AddUserPhotosCommandProtocol.swift */,
 				F816DFDB2A8FF9E3003B8446 /* DeletePhotoByIdCommandProtocol.swift */,
 				F816DFDF2A901F5D003B8446 /* DeleteUserCommandProtocol.swift */,
+				F816DFEB2A9035E7003B8446 /* AdminUpdateUserCommandProtocol.swift */,
+				F816DFF32A9040E1003B8446 /* UpdateUserCommandProtocol.swift */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -1147,6 +1198,7 @@
 				F80734FB2A8BCBBF0055D473 /* FDLoadingScreen.swift in Sources */,
 				F8CFA70529D36A5C00905F94 /* FDFadeAnimatedButton.swift in Sources */,
 				F8377D012A8AF52200E18B59 /* AuthenticationSceneCoordinatorOutput.swift in Sources */,
+				F816DFEC2A9035E7003B8446 /* AdminUpdateUserCommandProtocol.swift in Sources */,
 				F8377CBE2A8A5CAA00E18B59 /* CommandsFactoryProtocol.swift in Sources */,
 				F807351B2A8C583E0055D473 /* UserDTO.swift in Sources */,
 				F8CFA6FC29D3425C00905F94 /* DetectionSceneVC.swift in Sources */,
@@ -1191,7 +1243,9 @@
 				F86121812A8D6B5E00822B0D /* GetUsersResponseDTO.swift in Sources */,
 				F8301C532A117CD900455964 /* PointCloudViewController.swift in Sources */,
 				F849F2902A1F946600672D34 /* AcrballCamera.swift in Sources */,
+				F816DFF02A904029003B8446 /* UpdateUserDTO.swift in Sources */,
 				F8CFA70729D43B1400905F94 /* DebugView.swift in Sources */,
+				F816DFF22A904043003B8446 /* UpdateUserCommand.swift in Sources */,
 				F8E4D47E29D89A1B00B6F0BB /* SceneCoordinator.swift in Sources */,
 				F8377C802A894A0600E18B59 /* ResponseStatus.swift in Sources */,
 				F8872E5B2A3CECEC00B2A0D7 /* RenderModel.swift in Sources */,
@@ -1232,11 +1286,14 @@
 				F816DFB62A8E9184003B8446 /* GetUserPhotosInfoCommand.swift in Sources */,
 				F80735232A8C60E20055D473 /* CreateUserRequestDTO.swift in Sources */,
 				F8377C992A89734500E18B59 /* AuthenticationVC.swift in Sources */,
+				F816DFF62A9041C7003B8446 /* UpdateUserViewModel.swift in Sources */,
 				F816DFCD2A8F5CD0003B8446 /* PhotoListViewCell.swift in Sources */,
 				F8301C582A1184A300455964 /* SessionSetupResult.swift in Sources */,
 				F8E4D47C29D898DE00B6F0BB /* Presentable.swift in Sources */,
+				F816DFEE2A9036E7003B8446 /* AdminUpdateUserDTO.swift in Sources */,
 				F8FBC9C62A6BEC55009100F1 /* FaceAuthenticity.swift in Sources */,
 				F8B2DEAF2A196E9F003F7544 /* Renderer.swift in Sources */,
+				F816DFF42A9040E1003B8446 /* UpdateUserCommandProtocol.swift in Sources */,
 				F849F28E2A1F757600672D34 /* Transform.swift in Sources */,
 				F85AE9652A1EA202001E565F /* MathLibrary.swift in Sources */,
 				F8FBC9C42A6BEBD9009100F1 /* FaceObservation.swift in Sources */,
@@ -1245,10 +1302,12 @@
 				F807350C2A8C2F300055D473 /* LogoutCommand.swift in Sources */,
 				F8377C7C2A89405200E18B59 /* FaceLockAPIPaths.swift in Sources */,
 				F86121692A8D3DC900822B0D /* UserCreateViewController.swift in Sources */,
+				F816DFE82A90297C003B8446 /* AdminUpdateUserViewModel.swift in Sources */,
 				F861217D2A8D691400822B0D /* GetUsersCommand.swift in Sources */,
 				F8377CAC2A8A240800E18B59 /* RegistrationViewModel.swift in Sources */,
 				F8377CCD2A8A984F00E18B59 /* AuthenticationViewModel.swift in Sources */,
 				F8377CF52A8AEB7A00E18B59 /* AuthTokenRepository.swift in Sources */,
+				F816DFE32A90256F003B8446 /* UpdateUserViewController.swift in Sources */,
 				F8CFA70029D3437300905F94 /* DetectionSceneViewModel.swift in Sources */,
 				F8CFA71429D5A89E00905F94 /* FaceBoundsState.swift in Sources */,
 				F8E4D48129D8AA6400B6F0BB /* ApplicationCoordinator.swift in Sources */,
@@ -1272,6 +1331,7 @@
 				F80735312A8CEC240055D473 /* UserInfo.swift in Sources */,
 				F86121742A8D446600822B0D /* Error.swift in Sources */,
 				F8377C922A896ADE00E18B59 /* ApplicationConfig.swift in Sources */,
+				F816DFEA2A9035C1003B8446 /* AdminUpdateUserCommand.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1420,8 +1480,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1454,8 +1513,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

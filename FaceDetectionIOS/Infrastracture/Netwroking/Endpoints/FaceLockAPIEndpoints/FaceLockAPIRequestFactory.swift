@@ -87,6 +87,14 @@ class FaceLockAPIRequestFactory {
         return model
     }
     
+    static func createAdminUpdateUser(userId: String, _ dto: AdminUpdateUserDTO) -> RequestModel {
+        let encodedData = try? JSONEncoder().encode(dto)
+        let path =  FaceLockAPIPaths.adminUpdateUser.replacingOccurrences(of: "{userId}", with: userId)
+        let model = RequestModel(basePath: serverAPI, path: path, httpMethod: .put)
+        model.body = encodedData
+        return model
+    }
+    
     // MARK: - Authentication
     
     static func createRegisterRequest(with dto: RegisterRequestDTO) -> RequestModel? {
@@ -144,6 +152,13 @@ class FaceLockAPIRequestFactory {
     
     static func createDeleteAccountRequest() -> RequestModel? {
         let model = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.deleteAccount, httpMethod: .delete)
+        return model
+    }
+    
+    static func createUpdateUserRequest(_ dto: UpdateUserDTO) -> RequestModel {
+        let encodedData = try? JSONEncoder().encode(dto)
+        let model = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.updateAccount, httpMethod: .put)
+        model.body = encodedData
         return model
     }
 }

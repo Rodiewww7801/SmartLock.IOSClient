@@ -10,7 +10,11 @@ import UIKit
 class UserInfoViewController: UIViewController {
     private var userInfoView: UserInfoViewCell!
     private var viewModel: UserInfoViewModel
+    private var buttonStackView: UIStackView!
+    private var updateUserButton: UIButton!
     private var loadingScreen = FDLoadingScreen()
+    
+    var onUpdateUserAction: ((UserInfo)->Void)?
     
     init(with viewModel: UserInfoViewModel) {
         self.viewModel = viewModel
@@ -33,8 +37,10 @@ class UserInfoViewController: UIViewController {
     }
     
     private func configureViews() {
-        //self.view.backgroundColor = .white
+        self.view.backgroundColor = .white
         configureUserInfoView()
+        configureButtonStackView()
+        configureManagmentStackView()
     }
     
     private func loadModel() {
@@ -58,4 +64,47 @@ class UserInfoViewController: UIViewController {
         userInfoView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         userInfoView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
     }
+    
+    private func configureButtonStackView() {
+        buttonStackView = UIStackView()
+        buttonStackView.axis = .vertical
+        buttonStackView.spacing = 0
+        
+        self.view.addSubview(buttonStackView)
+        buttonStackView.translatesAutoresizingMaskIntoConstraints = false
+        buttonStackView.topAnchor.constraint(equalTo: userInfoView.bottomAnchor, constant: 20).isActive = true
+        buttonStackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        buttonStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
+        buttonStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
+    }
+    
+    private func configureManagmentStackView() {
+        addDividerIn(buttonStackView)
+        
+        updateUserButton = UIButton(type: .system)
+        updateUserButton.backgroundColor = .white
+        updateUserButton.setTitle("Edit", for: .normal)
+        updateUserButton.setTitleColor(.systemBlue, for: .normal)
+        updateUserButton.addTarget(self, action: #selector(updateUser), for: .touchUpInside)
+        
+        buttonStackView.addArrangedSubview(updateUserButton)
+        updateUserButton.translatesAutoresizingMaskIntoConstraints = false
+        updateUserButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    }
+    
+    private func addDividerIn(_ stackView: UIStackView) {
+        let divider = UIView()
+        divider.layer.backgroundColor = UIColor.systemGray6.cgColor
+        
+        stackView.addArrangedSubview(divider)
+        divider.translatesAutoresizingMaskIntoConstraints = false
+        divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        divider.widthAnchor.constraint(equalTo: stackView.widthAnchor).isActive = true
+    }
+    
+    @objc private func updateUser() {
+        guard let userInfo = viewModel.userInfoModel else { return }
+        self.onUpdateUserAction?(userInfo)
+    }
+    
 }

@@ -55,4 +55,12 @@ class CommandsFactory: CommandsFactoryProtocol {
     static func deleteUserCommand() -> DeleteUserCommand {
         return DeleteUserCommand()
     }
+    
+    static func adminUpdateUserCommand() -> AdminUpdateUserCommandProtocol {
+        return AdminUpdateUserCommand()
+    }
+    
+    static func updateUserCommand() -> UpdateUserCommandProtocol {
+        return UpdateUserCommand()
+    }
 }

@@ -13,12 +13,14 @@ class UserManagmentViewController: UIViewController {
     private var buttonStackView: UIStackView!
     private var userPhotosButton: UIButton!
     private var addUserPhotosButton: UIButton!
+    private var updateUserButton: UIButton!
     private var deleteUserButton: UIButton!
     private let viewModel: UserManagmentViewModel
     private let loadingScreen = FDLoadingScreen()
     
     var onGetUserPhotosAction: ((_ userId: String)->Void)?
     var onDeleteUserAction: (()->Void)?
+    var onUpdateUserAction: ((UserInfo)->Void)?
     
     init(with viewModel: UserManagmentViewModel) {
         self.viewModel = viewModel
@@ -106,6 +108,19 @@ class UserManagmentViewController: UIViewController {
         addUserPhotosButton.translatesAutoresizingMaskIntoConstraints = false
         addUserPhotosButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
+        
+        addDividerIn(buttonStackView)
+        
+        updateUserButton = UIButton(type: .system)
+        updateUserButton.backgroundColor = .white
+        updateUserButton.setTitle("Update user", for: .normal)
+        updateUserButton.setTitleColor(.systemBlue, for: .normal)
+        updateUserButton.addTarget(self, action: #selector(updateUser), for: .touchUpInside)
+        
+        buttonStackView.addArrangedSubview(updateUserButton)
+        updateUserButton.translatesAutoresizingMaskIntoConstraints = false
+        updateUserButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
         addDividerIn(buttonStackView)
         
         addUserPhotosButton = UIButton(type: .system)
@@ -156,6 +171,11 @@ class UserManagmentViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    @objc private func updateUser() {
+        guard let userInfo = viewModel.userInfo else { return }
+        self.onUpdateUserAction?(userInfo)
     }
     
     private func configurePhotoPickerViewController() {

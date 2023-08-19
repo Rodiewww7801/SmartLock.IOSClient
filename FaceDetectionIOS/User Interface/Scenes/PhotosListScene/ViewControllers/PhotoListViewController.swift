@@ -76,7 +76,7 @@ class PhotoListViewController: UIViewController {
                 if isSuccess {
                     FDAlert()
                         .createWith(title: "Photo was deleted", message: "photo with \(photoId) id was deleted successfully")
-                        .addAction(title: "Login", style: .default, handler: nil)
+                        .addAction(title: "Ok", style: .default, handler: nil)
                         .present(on: self)
                 }
                 self.loadingScreen.stop()
