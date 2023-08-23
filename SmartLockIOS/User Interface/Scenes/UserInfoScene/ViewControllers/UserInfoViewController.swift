@@ -15,7 +15,7 @@ class UserInfoViewController: UIViewController {
     private var deleteUserButton: UIButton!
     private var loadingScreen = FDLoadingScreen()
     
-    var onUpdateUserAction: ((UserInfo)->Void)?
+    var onUpdateUserAction: ((User)->Void)?
     var onDeleteUserAction: (()->Void)?
     var onBackTapped: (()->Void)?
     
@@ -154,7 +154,7 @@ class UserInfoViewController: UIViewController {
             }
         }
         
-        guard let firstName = viewModel.userInfoModel?.user.firstName, let lastName = viewModel.userInfoModel?.user.lastName else { return }
+        guard let firstName = viewModel.userInfoModel?.firstName, let lastName = viewModel.userInfoModel?.lastName else { return }
         FDAlert()
             .createWith(title: "Are you sure you want to delete \(firstName) \(lastName)?", message: nil)
             .addAction(title: "Cancel", style: .cancel, handler: nil)

@@ -10,8 +10,10 @@ import Foundation
 
 
 protocol MainListViewModelDelegate {
+    var showUserInfoScene: (() -> Void)? { get }
     var usersListScene: (()->Void)? { get }
     var logout: (()->Void)? { get }
+    var showLockListScene: (()->Void)? { get }
 }
 
 class MainListViewModel: MainListViewModelDelegate {
@@ -23,6 +25,7 @@ class MainListViewModel: MainListViewModelDelegate {
     var showUserInfoScene: (() -> Void)?
     var usersListScene: (()->Void)?
     var logout: (()->Void)?
+    var showLockListScene: (()->Void)?
     
     init() {
         self.logoutCommand = CommandsFactory.logoutCommand()
@@ -50,6 +53,15 @@ class MainListViewModel: MainListViewModelDelegate {
                 }
             ))
             mainListDataSource.append(MainListSectionData(section: "Admin section", data: adminDataSource))
+            
+            var lockDataSource = [MainListData]()
+            lockDataSource.append(MainListData(
+                name: "Lock list",
+                link: { [weak self] in
+                    self?.showLockListScene?()
+                }
+            ))
+            mainListDataSource.append(MainListSectionData(section: "Lock section", data: lockDataSource))
         }
         
         var userDataSource = [MainListData]()
@@ -67,6 +79,7 @@ class MainListViewModel: MainListViewModelDelegate {
                 }
             }))
         mainListDataSource.append(MainListSectionData(section: "User section", data: userDataSource))
+        
         return mainListDataSource
     }
 }

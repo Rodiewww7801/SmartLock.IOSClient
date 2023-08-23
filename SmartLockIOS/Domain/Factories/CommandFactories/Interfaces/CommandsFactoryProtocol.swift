@@ -24,4 +24,11 @@ protocol CommandsFactoryProtocol {
     static func getUserPhotosInfoCommand() -> GetUserPhotosInfoCommandProtocol
     static func getUserPhotoByPhotoIdCommand() -> GetUserPhotoByPhotoIdCommandProtocol
     static func recognizeUserCommand() -> RecognizeUserCommandProtocol
+    static func getLocksCommand() -> GetLocksCommandProtocol
+    static func createLockCommand() -> CreateLockCommandProtocol
+    static func getLockByIdCommand() -> GetLockByIdCommandProtocol
+    static func deleteLockCommand() -> DeleteLockCommandProtocol
+    static func getUserAccessesByLockIdCommand () -> GetUserAccessesByLockIdCommandProtocol
+    static func deleteAccessLockCommand() -> DeleteAccessLockCommandProtocol
+    static func createAccessLockCommand() -> CreateAccessLockCommandProtocol
 }

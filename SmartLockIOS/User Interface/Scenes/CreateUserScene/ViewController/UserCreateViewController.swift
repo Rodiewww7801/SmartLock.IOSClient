@@ -13,7 +13,6 @@ class UserCreateViewController: UIViewController {
     private var loadingScreen = FDLoadingScreen()
     
     var modalDelegate: ModalPresentedViewDelegate?
-    var onUserCreatedFinish: (()->())?
     
     init(with viewModel: CreateUserViewModel) {
         self.viewModel = viewModel
@@ -56,7 +55,7 @@ class UserCreateViewController: UIViewController {
             DispatchQueue.main.async {
                 if isSuccess {
                     FDAlert()
-                        .createWith(title: "User created", message: nil)
+                        .createWith(title: "User was created", message: nil)
                         .addAction(title: "Ok", style: .default, handler: {
                             self.dismiss(animated: true)
                         })

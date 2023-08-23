@@ -8,9 +8,9 @@
 import UIKit
 
 class UserListViewController: UIViewController {
-    private var tableView: UITableView!
-    private var viewModel: UserListViewModel
+    private var tableView: UserListTableView!
     private var loadingScreen = FDLoadingScreen()
+    private var viewModel: UserListViewModel
     private var sections: [String] = []
     
     var onBackTapped: (()->Void)?
@@ -30,13 +30,19 @@ class UserListViewController: UIViewController {
         self.view.backgroundColor = .white
         super.viewDidLoad()
         
-        self.configureNavigationList()
-        self.configureAddButton()
+        self.configureTableView()
+        self.viewModel.getCurrentUser { [weak self] user in
+            if user.role == .admin {
+                DispatchQueue.main.async {
+                    self?.configureAddButton()
+                }
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.loadModel()
+        self.loadData()
     }
     
     override func willMove(toParent parent: UIViewController?) {
@@ -46,22 +52,21 @@ class UserListViewController: UIViewController {
         }
     }
     
-    private func loadModel() {
+    private func loadData() {
         loadingScreen.show(on: self.view)
         viewModel.loadData { [weak self] _ in
+            guard let self = self else { return }
             DispatchQueue.main.async {
-                self?.loadingScreen.stop()
-                self?.tableView.reloadData()
+                self.loadingScreen.stop()
+                self.tableView.dataSource = self.viewModel.dataSource
+                self.tableView.reloadData()
             }
         }
     }
     
-    private func configureNavigationList() {
-        self.tableView = UITableView()
-        self.tableView.dataSource = self
-        self.tableView.delegate = self
-        self.tableView.rowHeight = UITableView.automaticDimension
-        self.tableView.estimatedRowHeight = 88.0
+    private func configureTableView() {
+        self.tableView = UserListTableView()
+        self.tableView.onUserSelected = self.onUserSelected
         
         self.view.addSubview(self.tableView)
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -81,34 +86,8 @@ class UserListViewController: UIViewController {
     }
 }
 
-extension UserListViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.dataSource.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let userInfo = self.viewModel.dataSource[indexPath.row]
-        let cell = UserInfoViewCell()
-        cell.configure()
-        cell.updateData(userInfo)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return  UITableView.automaticDimension
-    }
-}
-
-extension UserListViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        let userInfo = viewModel.dataSource[indexPath.row]
-        self.onUserSelected?(userInfo.user.id)
-    }
-}
-
 extension UserListViewController: ModalPresentedViewDelegate {
     func onViewWillDisappear() {
-        self.loadModel()
+        self.loadData()
     }
 }

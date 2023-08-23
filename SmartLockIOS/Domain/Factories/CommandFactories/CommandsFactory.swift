@@ -79,4 +79,32 @@ class CommandsFactory: CommandsFactoryProtocol {
     static func recognizeUserCommand() -> RecognizeUserCommandProtocol {
         return RecognizeUserCommand()
     }
+    
+    static func getLocksCommand() -> GetLocksCommandProtocol {
+        return GetLocksCommand()
+    }
+    
+    static func createLockCommand() -> CreateLockCommandProtocol {
+        return CreateLockCommand()
+    }
+    
+    static func getLockByIdCommand() -> GetLockByIdCommandProtocol {
+        return GetLockByIdCommand()
+    }
+    
+    static func deleteLockCommand() -> DeleteLockCommandProtocol {
+        return DeleteLockCommand()
+    }
+    
+    static func getUserAccessesByLockIdCommand () -> GetUserAccessesByLockIdCommandProtocol {
+        return GetUserAccessesByLockIdCommand()
+    }
+    
+    static func deleteAccessLockCommand() -> DeleteAccessLockCommandProtocol {
+        return DeleteAccessLockCommand()
+    }
+    
+    static func createAccessLockCommand() -> CreateAccessLockCommandProtocol {
+        return CreateAccessLockCommand()
+    }
 }

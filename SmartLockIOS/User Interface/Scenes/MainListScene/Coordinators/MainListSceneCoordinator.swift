@@ -27,6 +27,17 @@ final class MainListSceneCoordinator: Coordinator {
             guard let coordinator = coordinator else { return }
             self?.removeChild(coordinator)
         }
+        self.addChild(coordinator)
+        coordinator.start()
+    }
+    
+    private func showLockListScene() {
+        let coordinator = LockListSceneCoordinator(router: self.router)
+        coordinator.removeCoordinator = { [weak self, weak coordinator] in
+            guard let coordinator = coordinator else { return }
+            self?.removeChild(coordinator)
+        }
+        self.addChild(coordinator)
         coordinator.start()
     }
     
@@ -45,6 +56,7 @@ final class MainListSceneCoordinator: Coordinator {
         viewModel.logout =  self.logout
         viewModel.usersListScene = self.showUsersListScene
         viewModel.showUserInfoScene = self.showUserInfoScene
+        viewModel.showLockListScene = self.showLockListScene
         let main = MainListViewController(with: viewModel)
         router.popToRoot(animated: false)
         router.push(main, animated: true)

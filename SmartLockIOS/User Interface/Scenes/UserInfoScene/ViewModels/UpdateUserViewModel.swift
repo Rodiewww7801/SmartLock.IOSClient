@@ -8,7 +8,7 @@
 import Foundation
 
 protocol UpdateUserViewModelDelegate {
-    var userInfo: UserInfo { get }
+    var userInfo: User { get }
     func updateUser(_ user: User, completion: @escaping (Bool)->())
     func getCurrentUser(_ completion: @escaping (User?)->())
 }
@@ -16,9 +16,9 @@ protocol UpdateUserViewModelDelegate {
 class UpdateUserViewModel: UpdateUserViewModelDelegate {
     private var userRepository: UserRepositoryProtocol
     private var updateUserCommand: UpdateUserCommandProtocol
-    var userInfo: UserInfo
+    var userInfo: User
     
-    init(userInfo: UserInfo) {
+    init(userInfo: User) {
         self.userInfo = userInfo
         self.updateUserCommand = CommandsFactory.updateUserCommand()
         self.userRepository = RepositoryFactory.userRepository()

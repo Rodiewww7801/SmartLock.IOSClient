@@ -27,14 +27,14 @@ class UserInfoViewCell: UITableViewCell {
         configureLabels()
     }
     
-    func updateData(_ model: UserInfo) {
-        usernameLableText.text = model.user.username
-        userIdLableText.text = model.user.id
-        emailLableText.text = model.user.email
-        firstNameLabelText.text = model.user.firstName
-        lastNameLabelText.text =  model.user.lastName
-        roleLabelText.text = model.user.role.rawValue
-        if let photo = model.photo {
+    func updateData(_ model: User) {
+        usernameLableText.text = model.username
+        userIdLableText.text = model.id
+        emailLableText.text = model.email
+        firstNameLabelText.text = model.firstName
+        lastNameLabelText.text =  model.lastName
+        roleLabelText.text = model.role.rawValue
+        if let photo = model.face {
             topImageView.image = photo
         } else {
             topImageView.image = UIImage(systemName: "person.fill")

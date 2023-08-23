@@ -54,7 +54,7 @@ class UserListSceneCoordinator: Coordinator {
         router.push(viewController, animated: true)
     }
     
-    private func showUpdateUserScene(_ userInfo: UserInfo) {
+    private func showUpdateUserScene(_ userInfo: User) {
         let viewModel = AdminUpdateUserViewModel(userInfo: userInfo)
         let viewController = UpdateUserViewController(with: viewModel)
         viewController.onUserUpdate = { [weak self] in

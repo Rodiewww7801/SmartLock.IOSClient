@@ -84,15 +84,15 @@ class UpdateUserViewController: UIViewController {
         contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, constant: -100).isActive = true
     }
     
-    func updateData(_ model: UserInfo) {
-        usernameLableText.text = model.user.username
-        userIdLableText.text = model.user.id
+    func updateData(_ model: User) {
+        usernameLableText.text = model.username
+        userIdLableText.text = model.id
         userIdLableText.isEditable = false
-        emailLableText.text = model.user.email
-        firstNameLabelText.text = model.user.firstName
-        lastNameLabelText.text =  model.user.lastName
-        roleLabelText.text = model.user.role.rawValue
-        if let photo = model.photo {
+        emailLableText.text = model.email
+        firstNameLabelText.text = model.firstName
+        lastNameLabelText.text =  model.lastName
+        roleLabelText.text = model.role.rawValue
+        if let photo = model.face {
             topImageView.image = photo
         } else {
             topImageView.image = UIImage(systemName: "person.fill")
@@ -314,7 +314,7 @@ class UpdateUserViewController: UIViewController {
         else {
             return
         }
-        let user = User(id: viewModel.userInfo.user.id,
+        let user = User(id: viewModel.userInfo.id,
                         username: username,
                         email: email,
                         firstName: firstName,

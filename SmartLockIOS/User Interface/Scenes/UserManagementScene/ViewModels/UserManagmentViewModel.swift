@@ -9,7 +9,7 @@ import UIKit
 
 class UserManagmentViewModel {
     var userId: String
-    var userInfo: UserInfo?
+    var userInfo: User?
     var userRepository: UserRepositoryProtocol
     var deleteUserCommand: AdminDeleteUserCommandProtocol
     
@@ -22,7 +22,7 @@ class UserManagmentViewModel {
     func loadData(_ completion: @escaping ()->() ) {
         Task { [weak self] in
             guard let self = self else { return }
-            self.userInfo = await self.userRepository.getUsersInfo().first(where: { $0.user.id == self.userId })
+            self.userInfo = await self.userRepository.getUsers().first(where: { $0.id == self.userId })
             completion()
         }
     }

@@ -15,7 +15,7 @@ class PhotoListViewController: UIViewController {
     private var sections: [String] = []
     
     var onBackTapped: (()->Void)?
-    var onUserSelected: ((UserInfo)->Void)?
+    var onUserSelected: ((User)->Void)?
     
     init(with viewModel: PhotoListViewModel) {
         self.viewModel = viewModel
@@ -143,7 +143,7 @@ extension PhotoListViewController: PHPickerViewControllerDelegate {
             }
         }
         
-        dispatchGroup.notify(queue: .main) { [weak self] in
+        dispatchGroup.notify(queue: .main) { [weak self] in //todo: global
             guard let self = self else { return }
             if !images.isEmpty {
                 self.loadingScreen.show(on: self.view)

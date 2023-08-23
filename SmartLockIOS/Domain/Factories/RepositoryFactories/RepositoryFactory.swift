@@ -15,4 +15,8 @@ class RepositoryFactory: RepositoryFactoryProtocol {
     static func userRepository() -> UserRepositoryProtocol {
         return UserRepository()
     }
+    
+    static func lockRepository() -> LockRepositoryProtocol {
+        return LockRepository()
+    }
 }

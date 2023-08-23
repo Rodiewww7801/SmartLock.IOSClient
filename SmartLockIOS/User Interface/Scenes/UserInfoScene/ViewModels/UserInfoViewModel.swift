@@ -8,7 +8,7 @@
 import Foundation
 
 class UserInfoViewModel {
-    var userInfoModel: UserInfo?
+    var userInfoModel: User?
     private var userRepository: UserRepositoryProtocol
     private var deleteUserCommand: DeleteUserCommandProtocol
     
@@ -17,7 +17,7 @@ class UserInfoViewModel {
         self.deleteUserCommand = CommandsFactory.deleteUserCommand()
     }
     
-    func configure(_ completion: @escaping ((UserInfo)->Void)) {
+    func configure(_ completion: @escaping ((User)->Void)) {
         Task { [weak self] in
             let userInfo = await self?.getUserInfo()
             guard let userInfo = userInfo else { return }
@@ -25,8 +25,8 @@ class UserInfoViewModel {
         }
     }
     
-    func getUserInfo() async -> UserInfo? {
-        let userInfo = await self.userRepository.getUserInfo()
+    func getUserInfo() async -> User? {
+        let userInfo = await self.userRepository.getUser()
         self.userInfoModel = userInfo
         return userInfo
     }

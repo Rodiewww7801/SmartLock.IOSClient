@@ -10,9 +10,9 @@ import Foundation
 class AdminUpdateUserViewModel: UpdateUserViewModelDelegate {
     private var adminUpdateUserCommand: AdminUpdateUserCommandProtocol
     private var userRepository: UserRepositoryProtocol
-    var userInfo: UserInfo
+    var userInfo: User
     
-    init(userInfo: UserInfo) {
+    init(userInfo: User) {
         self.userInfo = userInfo
         self.adminUpdateUserCommand = CommandsFactory.adminUpdateUserCommand()
         self.userRepository = RepositoryFactory.userRepository()

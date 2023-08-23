@@ -184,6 +184,108 @@ class FaceLockAPIRequestFactory {
         model.body = bodyData
         return model
     }
+    
+    //MARK: - Lock
+    
+    static func createLock(_ dto: CreateLockRequestDTO) -> RequestModel {
+        let encodedData = try? JSONEncoder().encode(dto)
+        let model = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.createLock, httpMethod: .post)
+        model.body = encodedData
+        return model
+    }
+    
+    static func createAccessLock(_ dto: CreateAccessLockDTO) -> RequestModel {
+        let encodedData = try? JSONEncoder().encode(dto)
+        let model = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.createAccessLock, httpMethod: .post)
+        model.body = encodedData
+        return model
+    }
+    
+    static func getLocks() -> RequestModel {
+        let model = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.getLocks, httpMethod: .get)
+        return model
+    }
+    
+    static func getLockById(lockId: String) -> RequestModel {
+        let path = FaceLockAPIPaths.getLockById.replacingOccurrences(of: "{doorLockId}", with: lockId)
+        let model = RequestModel(basePath: serverAPI, path: path, httpMethod: .get)
+        return model
+    }
+    
+    static func getUserAccessesByLockId(lockId: String) -> RequestModel {
+        let path = FaceLockAPIPaths.getUserAccessesByLockId.replacingOccurrences(of: "{doorLockId}", with: lockId)
+        let model = RequestModel(basePath: serverAPI, path: path, httpMethod: .get)
+        return model
+    }
+    
+    static func getUserAccessesByUserId(userId: String) -> RequestModel {
+        let path = FaceLockAPIPaths.getUserAccessesByUserId.replacingOccurrences(of: "{userId}", with: userId)
+        let model = RequestModel(basePath: serverAPI, path: path, httpMethod: .get)
+        return model
+    }
+    
+    static func getLockHistoryByLockId(lockId: String) -> RequestModel {
+        let path = FaceLockAPIPaths.getLockHistoryByLockId.replacingOccurrences(of: "{doorLockId}", with: lockId)
+        let model = RequestModel(basePath: serverAPI, path: path, httpMethod: .get)
+        return model
+    }
+    
+    static func getLockHistoryByUserId(userId: String) -> RequestModel {
+        let path = FaceLockAPIPaths.getLockHistoryByUserId.replacingOccurrences(of: "{userId}", with: userId)
+        let model = RequestModel(basePath: serverAPI, path: path, httpMethod: .get)
+        return model
+    }
+    
+    static func updateLock(_ dto: LockDTO) -> RequestModel {
+        let path = FaceLockAPIPaths.updateLock.replacingOccurrences(of: "{doorLockId}", with: String(dto.id))
+        let encodedData = try? JSONEncoder().encode(dto)
+        let model = RequestModel(basePath: serverAPI, path: path, httpMethod: .post)
+        model.body = encodedData
+        return model
+    }
+    
+    static func updateAccessLock(_ dto: UpdateAccessLockDTO) -> RequestModel {
+        let encodedData = try? JSONEncoder().encode(dto)
+        let model = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.updateAccessLock, httpMethod: .post)
+        model.body = encodedData
+        return model
+    }
+    
+    static func deleteLockById(lockId: String) -> RequestModel {
+        let path = FaceLockAPIPaths.deleteLockById.replacingOccurrences(of: "{placeId}", with: lockId)
+        let model = RequestModel(basePath: serverAPI, path: path, httpMethod: .delete)
+        return model
+    }
+    
+    static func deleteAccessLock(lockId: String, userId: String) -> RequestModel {
+        let path = FaceLockAPIPaths.deleteAccessLock
+            .replacingOccurrences(of: "{doorLockId}", with: lockId)
+            .replacingOccurrences(of: "{userId}", with: userId)
+        let model = RequestModel(basePath: serverAPI, path: path, httpMethod: .delete)
+        return model
+    }
+    
+    //MARK: - Place
+    
+    static func createPlace(_ dto: CreatePlaceDTO) -> RequestModel {
+        let encodedData = try? JSONEncoder().encode(dto)
+        let model = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.createPlace, httpMethod: .post)
+        model.body = encodedData
+        return model
+    }
+    
+    static func getPlaces() -> RequestModel {
+        let model = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.getPlaces, httpMethod: .get)
+        return model
+    }
+    
+    static func updatePlace(_ dto: UpdatePlaceDTO) -> RequestModel {
+        let encodedData = try? JSONEncoder().encode(dto)
+        let path = FaceLockAPIPaths.createPlace.replacingOccurrences(of: "{placeId}", with: String(dto.id))
+        let model = RequestModel(basePath: serverAPI, path: path, httpMethod: .post)
+        model.body = encodedData
+        return model
+    }
 }
 
 extension FaceLockAPIRequestFactory {

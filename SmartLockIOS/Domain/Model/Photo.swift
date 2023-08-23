@@ -9,5 +9,7 @@ import UIKit
 
 struct Photo {
     var image: UIImage
-    var info: PhotoInfoDTO
+    var id: Int
+    var imageMimeType: String
+    var userId: String
 }

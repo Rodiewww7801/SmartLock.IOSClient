@@ -52,7 +52,7 @@ class PhotoListViewCell: UITableViewCell {
         self.addSubview(idLableTitle)
         
         idLableText = UILabel(frame: .zero)
-        idLableText.text = String(model.info.id)
+        idLableText.text = String(model.id)
         idLableText.font = UIFont.preferredFont(forTextStyle: .body)
         idLableText.numberOfLines = 0
         idLableText.textColor = .black
@@ -76,7 +76,6 @@ class PhotoListViewCell: UITableViewCell {
         
         self.addSubview(deleteButton)
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
-        deleteButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         deleteButton.topAnchor.constraint(equalTo: idLableText.bottomAnchor, constant: 10).isActive = true
         deleteButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         deleteButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -10).isActive = true
@@ -84,6 +83,6 @@ class PhotoListViewCell: UITableViewCell {
     
     @objc private func onDelete() {
         guard let model = self.model else { return }
-        onDeleteAction?(model.info.userId, model.info.id)
+        onDeleteAction?(model.userId, model.id)
     }
 }

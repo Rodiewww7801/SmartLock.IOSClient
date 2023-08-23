@@ -33,7 +33,7 @@ final class UserInfoSceneCoordinator: Coordinator {
         router.push(userInfoViewController, animated: true)
     }
     
-    private func showUpdateUserScene(_ userInfo: UserInfo) {
+    private func showUpdateUserScene(_ userInfo: User) {
         let viewModel = UpdateUserViewModel(userInfo: userInfo)
         let viewController = UpdateUserViewController(with: viewModel)
         viewController.onUserUpdate = { [weak self] in

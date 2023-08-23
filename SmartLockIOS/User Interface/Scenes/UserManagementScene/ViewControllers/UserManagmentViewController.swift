@@ -19,7 +19,7 @@ class UserManagmentViewController: UIViewController {
     
     var onGetUserPhotosAction: ((_ userId: String)->Void)?
     var onDeleteUserAction: (()->Void)?
-    var onUpdateUserAction: ((UserInfo)->Void)?
+    var onUpdateUserAction: ((User)->Void)?
     
     init(with viewModel: UserManagmentViewModel) {
         self.viewModel = viewModel
@@ -117,7 +117,7 @@ class UserManagmentViewController: UIViewController {
         deleteUserButton = UIButton(type: .system)
         deleteUserButton.backgroundColor = .white
         deleteUserButton.contentHorizontalAlignment = .left
-        deleteUserButton.setTitle("Delete user", for: .normal)
+        deleteUserButton.setTitle("Delete", for: .normal)
         deleteUserButton.setTitleColor(.red, for: .normal)
         deleteUserButton.addTarget(self, action: #selector(deleteUser), for: .touchUpInside)
        
@@ -140,7 +140,7 @@ class UserManagmentViewController: UIViewController {
     }
     
     @objc private func getUserPhotos() {
-        guard let userId = viewModel.userInfo?.user.id else { return }
+        guard let userId = viewModel.userInfo?.id else { return }
         self.onGetUserPhotosAction?(userId)
     }
     
@@ -153,7 +153,7 @@ class UserManagmentViewController: UIViewController {
                     loadingScreen.stop()
                     if isSuccess {
                         FDAlert()
-                            .createWith(title: "User deleted", message: nil)
+                            .createWith(title: "User was deleted", message: nil)
                             .addAction(title: "Ok", style: .default, handler: {
                                 self.onDeleteUserAction?()
                             })
@@ -163,7 +163,7 @@ class UserManagmentViewController: UIViewController {
             }
         }
         
-        guard let firstName = viewModel.userInfo?.user.firstName, let lastName = viewModel.userInfo?.user.lastName else { return }
+        guard let firstName = viewModel.userInfo?.firstName, let lastName = viewModel.userInfo?.lastName else { return }
         FDAlert()
             .createWith(title: "Are you sure you want to delete \(firstName) \(lastName)?", message: nil)
             .addAction(title: "Cancel", style: .cancel, handler: nil)

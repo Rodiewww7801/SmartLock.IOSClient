@@ -45,7 +45,7 @@ class UserCreateView: UIView {
         configureFirstNameTextField()
         configureLastNameTextField()
         configureRoleTextField()
-        configureRegisterButton()
+        configureCreateButton()
     }
     
     private func configureScrollView() {
@@ -136,9 +136,9 @@ class UserCreateView: UIView {
         roleTextField.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
-    private func configureRegisterButton() {
+    private func configureCreateButton() {
         createUserButton = UIButton(type: .system)
-        createUserButton.setTitle("Create user", for: .normal)
+        createUserButton.setTitle("Create", for: .normal)
         createUserButton.setTitleColor(.systemBlue, for: .normal)
         createUserButton.addTarget(self, action: #selector(creataeUser), for: .touchUpInside)
         
@@ -164,7 +164,7 @@ class UserCreateView: UIView {
     }
     
     @objc private func validateTextFields(_ sender: Any) {
-        print("heelo")
+
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {

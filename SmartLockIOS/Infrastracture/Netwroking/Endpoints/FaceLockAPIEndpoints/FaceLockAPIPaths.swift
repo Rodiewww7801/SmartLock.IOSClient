@@ -41,4 +41,24 @@ enum FaceLockAPIPaths {
     //MARK: - Recognition
     static let recognizeUser = "/api/Recognition/RecognizeUser"
     static let recognizeUserForDoorLock = "/api/Recognition/{doorLockId}/RecognizeUserForDoorLock"
+    
+    //MARK: - Lock
+    static let createLock = "/api/DoorLock/CreateDoorLock"
+    static let createAccessLock = "/api/DoorLock/CreateAccessDoorLock"
+    static let getLocks = "/api/DoorLock/GetDoorLocks"
+    static let getLockById = "/api/DoorLock/GetDoorLock/{doorLockId}"
+    static let getUserAccessesByLockId = "/api/DoorLock/GetUserAccessesByDoorLockId/{doorLockId}"
+    static let getUserAccessesByUserId = "/api/DoorLock/GetUserAccessesByUserId/{userId}"
+    static let getLockHistoryByLockId = "/api/DoorLock/GetDoorLockHistoryByDoorLockId/{doorLockId}"
+    static let getLockHistoryByUserId = "/api/DoorLock/GetDoorLockHistoryByUserId/{userId}"
+    static let updateLock = "/api/DoorLock/UpdateDoorLock/{doorLockId}"
+    static let updateAccessLock = "/api/DoorLock/UpdateAccessDoorLock"
+    static let deleteLockById = "/api/DoorLock/DeleteDoorLock/{placeId}"
+    static let deleteAccessLock = "/api/DoorLock/{doorLockId}/DeleteAccessDoorLock/{userId}"
+    
+    //MARK: - Place
+    static let createPlace = "/api/Place/CreatePlace"
+    static let getPlaces = "/api/Place/GetPlaces"
+    static let getPlaceById = "api/Place/GetPlace/{placeId}"
+    static let updatePlace = "/api/Place/UpdatePlace/{placeId}"
 }

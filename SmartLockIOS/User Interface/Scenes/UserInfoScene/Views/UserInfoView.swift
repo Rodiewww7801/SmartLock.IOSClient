@@ -8,7 +8,7 @@
 import UIKit
 
 class UserInfoView: UIView {
-    var model: UserInfo?
+    var model: User?
     private var userInfoStackView: UIStackView!
     private var userImageView: UIImageView!
     private var userIdLabel: UITextView!
@@ -87,17 +87,17 @@ class UserInfoView: UIView {
             guard let self = self else { return }
             guard let model = model else { return }
 
-            userIdLabel.text = "Id: \(model.user.id)"
+            userIdLabel.text = "Id: \(model.id)"
 
-            usernameLabel.text = "Username: \(model.user.username)"
+            usernameLabel.text = "Username: \(model.username)"
 
-            emailLabel.text = "Email: \(model.user.email)"
+            emailLabel.text = "Email: \(model.email)"
 
-            firstNameLabel.text = "First name: \(model.user.firstName)"
+            firstNameLabel.text = "First name: \(model.firstName)"
 
-            lastNameLabel.text = "Last name: \(model.user.lastName)"
+            lastNameLabel.text = "Last name: \(model.lastName)"
 
-            roleLabel.text = "Role: \(model.user.role.rawValue)"
+            roleLabel.text = "Role: \(model.role.rawValue)"
             
             let stackHeight = userInfoStackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
             self.heightAnchor.constraint(equalToConstant: stackHeight + 10).isActive = true
