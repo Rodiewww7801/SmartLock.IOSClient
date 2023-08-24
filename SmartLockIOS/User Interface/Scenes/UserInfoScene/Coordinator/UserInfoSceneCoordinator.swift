@@ -25,6 +25,8 @@ final class UserInfoSceneCoordinator: Coordinator {
     private func showUserInfoScene() {
         let userInfoViewModel = UserInfoViewModel()
         let userInfoViewController = UserInfoViewController(with: userInfoViewModel)
+        userInfoViewController.onGetUserLockAccessesAction = showLockAccessesListScene
+        userInfoViewController.onGetHistroriesAction = showLockHistoryScene
         userInfoViewController.onUpdateUserAction = showUpdateUserScene
         userInfoViewController.onDeleteUserAction = self.logout
         userInfoViewController.onBackTapped = { [weak self] in
@@ -39,6 +41,18 @@ final class UserInfoSceneCoordinator: Coordinator {
         viewController.onUserUpdate = { [weak self] in
             self?.router.pop(animated: true)
         }
+        self.router.push(viewController, animated: true)
+    }
+    
+    private func showLockAccessesListScene(userId: String) {
+        let viewModel = LockAccessesViewModel(userId: userId)
+        let viewController = LockAccessesListViewController(with: viewModel)
+        self.router.push(viewController, animated: true)
+    }
+    
+    private func showLockHistoryScene(userId: String) {
+        let viewModel = LockHistoryViewModel(userId: userId)
+        let viewController = LockHistoryViewController(with: viewModel)
         self.router.push(viewController, animated: true)
     }
 }

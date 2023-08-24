@@ -8,5 +8,5 @@
 import Foundation
 
 protocol CreateAccessLockCommandProtocol {
-    func execute(_ dto: CreateAccessLockDTO, _ completion: @escaping (Result<Void, Error>) -> Void)
+    func execute(_ dto: AccessLockDTO, _ completion: @escaping (Result<Void, Error>) -> Void)
 }

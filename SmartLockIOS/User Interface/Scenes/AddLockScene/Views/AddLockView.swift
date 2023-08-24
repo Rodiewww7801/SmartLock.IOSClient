@@ -11,6 +11,7 @@ class AddLockView: UIView {
     private var scrollView: UIScrollView!
     private var contentView: UIView!
     private var stackView: UIStackView!
+    private var topImageView: UIImageView!
     private var lockNameTextField: UITextField!
     private var descriptionTextField: UITextField!
     private var createButton: UIButton!
@@ -39,6 +40,7 @@ class AddLockView: UIView {
         
         configureScrollView()
         configureStackView()
+        configureTopImageView()
         configureNameTextField()
         configureDescriptionTextField()
         configureCreateButton()
@@ -73,9 +75,31 @@ class AddLockView: UIView {
         
         contentView.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 200).isActive = true
+        stackView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
         stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 25).isActive = true
         stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25).isActive = true
+    }
+    
+    private func configureTopImageView() {
+        let imageContainer = UIView()
+        let image = UIImage(systemName: "lock")
+        topImageView = UIImageView(image: image)
+        topImageView.tintColor = .systemGray5
+        topImageView.contentMode = .scaleAspectFit
+        topImageView.layer.borderWidth = 1
+        topImageView.backgroundColor = .white
+        topImageView.layer.borderColor = UIColor.systemGray5.cgColor
+        
+        stackView.addArrangedSubview(imageContainer)
+        imageContainer.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        imageContainer.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        imageContainer.addSubview(topImageView)
+        topImageView.translatesAutoresizingMaskIntoConstraints = false
+        topImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        topImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        topImageView.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor).isActive = true
+        topImageView.centerYAnchor.constraint(equalTo: imageContainer.centerYAnchor).isActive = true
     }
     
     private func configureNameTextField() {

@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 class LockManagmentViewController: UIViewController {
+    private var scrollView: UIScrollView!
+    private var contentView: UIView!
     private var lockViewCell: LockViewCell!
     private var buttonStackView: UIStackView!
     private var lockHistoriesButton: UIButton!
@@ -58,19 +60,42 @@ class LockManagmentViewController: UIViewController {
     
     private func configureViews() {
         self.view.backgroundColor = .white
+        configureScrollView()
         configureLockView()
         configureButtonStackView()
         configureManagmentStackView()
+    }
+    
+    private func configureScrollView() {
+        scrollView = UIScrollView()
+        scrollView.contentInset = .zero
+        scrollView.scrollIndicatorInsets = .zero
+
+        self.view.addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        scrollView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        
+        contentView = UIView()
+        scrollView.addSubview(contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, constant: -100).isActive = true
     }
     
     private func configureLockView() {
         lockViewCell = LockViewCell()
         lockViewCell.configure()
         lockViewCell.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(lockViewCell)
-        lockViewCell.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
-        lockViewCell.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        lockViewCell.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        self.contentView.addSubview(lockViewCell)
+        lockViewCell.topAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.topAnchor).isActive = true
+        lockViewCell.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
+        lockViewCell.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
     }
     
     private func configureButtonStackView() {
@@ -79,12 +104,12 @@ class LockManagmentViewController: UIViewController {
         buttonStackView.contentMode = .left
         buttonStackView.spacing = 0
         
-        self.view.addSubview(buttonStackView)
+        self.contentView.addSubview(buttonStackView)
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         buttonStackView.topAnchor.constraint(equalTo: lockViewCell.bottomAnchor, constant: 20).isActive = true
-        buttonStackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        buttonStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
-        buttonStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
+        buttonStackView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor).isActive = true
+        buttonStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 25).isActive = true
+        buttonStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -25).isActive = true
     }
     
     
@@ -94,7 +119,7 @@ class LockManagmentViewController: UIViewController {
         userAccessesButton = UIButton(type: .system)
         userAccessesButton.backgroundColor = .white
         userAccessesButton.contentHorizontalAlignment = .left
-        userAccessesButton.setTitle("User accesses", for: .normal)
+        userAccessesButton.setTitle("Accesses", for: .normal)
         userAccessesButton.setTitleColor(.systemGray, for: .normal)
         userAccessesButton.addTarget(self, action: #selector(onGetUserLockAccessesTapped), for: .touchUpInside)
         
@@ -108,7 +133,7 @@ class LockManagmentViewController: UIViewController {
         lockHistoriesButton = UIButton(type: .system)
         lockHistoriesButton.backgroundColor = .white
         lockHistoriesButton.contentHorizontalAlignment = .left
-        lockHistoriesButton.setTitle("Histories", for: .normal)
+        lockHistoriesButton.setTitle("History", for: .normal)
         lockHistoriesButton.setTitleColor(.systemGray, for: .normal)
         lockHistoriesButton.addTarget(self, action: #selector(onHistoriesTapped), for: .touchUpInside)
         

@@ -1,22 +1,20 @@
 //
-//  UserAccessesListViewController.swift
+//  LockAccessesListViewController.swift
 //  Smart Lock
 //
-//  Created by Rodion Hladchenko on 23.08.2023.
+//  Created by Rodion Hladchenko on 24.08.2023.
 //
 
 import Foundation
 import UIKit
 
-class UserAccessesListViewController: UIViewController {
-    private var tableView: UserAccessesTableView!
-    private var viewModel: UserAccessesViewModel
+class LockAccessesListViewController: UIViewController {
+    private var tableView: LockAccessesTableView!
+    private var viewModel: LockAccessesViewModel
     private var loadingScreen = FDLoadingScreen()
     private var sections: [String] = []
     
-    var onAddButtonAction: (()->Void)?
-    
-    init(with viewModel: UserAccessesViewModel) {
+    init(with viewModel: LockAccessesViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -29,13 +27,6 @@ class UserAccessesListViewController: UIViewController {
         super.viewDidLoad()
         
         self.configureTableView()
-        self.viewModel.getCurrentUser { [weak self] user in
-            DispatchQueue.main.async {
-                if user.role == .admin {
-                    self?.configureAddButton()
-                }
-            }
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,7 +47,7 @@ class UserAccessesListViewController: UIViewController {
     }
     
     private func configureTableView() {
-        self.tableView = UserAccessesTableView()
+        self.tableView = LockAccessesTableView()
         self.tableView.dataSource = viewModel.dataSource
         self.tableView.onDeleteAction = self.onDeleteAction
         self.view.addSubview(self.tableView)
@@ -65,15 +56,6 @@ class UserAccessesListViewController: UIViewController {
         self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-    }
-    
-    private func configureAddButton() {
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addAccessTapped))
-        navigationItem.rightBarButtonItem = addButton
-    }
-    
-    @objc private func addAccessTapped() {
-        self.onAddButtonAction?()
     }
     
     private func onDeleteAction(_ lockId: String, _ userId: String) {
@@ -106,11 +88,5 @@ class UserAccessesListViewController: UIViewController {
                 startDeleteUser()
             })
             .present(on: self)
-    }
-}
-
-extension UserAccessesListViewController: ModalPresentedViewDelegate {
-    func onViewWillDisappear() {
-        self.loadData()
     }
 }

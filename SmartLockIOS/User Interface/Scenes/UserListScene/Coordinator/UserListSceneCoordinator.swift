@@ -42,6 +42,8 @@ class UserListSceneCoordinator: Coordinator {
         let viewController = UserManagmentViewController(with: viewModel)
         viewController.onGetUserPhotosAction = showPhotoListScene
         viewController.onUpdateUserAction = showUpdateUserScene
+        viewController.onGetUserLockAccessesAction = showLockAccessesListScene
+        viewController.onGetHistroriesAction = showLockHistoryScene
         viewController.onDeleteUserAction = { [weak self] in
             self?.router.pop(animated: true)
         }
@@ -68,5 +70,17 @@ class UserListSceneCoordinator: Coordinator {
         let modalViewController = UserCreateViewController(with: viewModal)
         modalViewController.modalDelegate = presenteViewController
         self.router.present(modalViewController, animated: true)
+    }
+    
+    private func showLockAccessesListScene(userId: String) {
+        let viewModel = LockAccessesViewModel(userId: userId)
+        let viewController = LockAccessesListViewController(with: viewModel)
+        self.router.push(viewController, animated: true)
+    }
+    
+    private func showLockHistoryScene(userId: String) {
+        let viewModel = LockHistoryViewModel(userId: userId)
+        let viewController = LockHistoryViewController(with: viewModel)
+        self.router.push(viewController, animated: true)
     }
 }

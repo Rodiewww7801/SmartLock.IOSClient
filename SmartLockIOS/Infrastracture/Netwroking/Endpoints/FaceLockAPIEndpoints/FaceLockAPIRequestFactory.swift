@@ -194,7 +194,7 @@ class FaceLockAPIRequestFactory {
         return model
     }
     
-    static func createAccessLock(_ dto: CreateAccessLockDTO) -> RequestModel {
+    static func createAccessLock(_ dto: AccessLockDTO) -> RequestModel {
         let encodedData = try? JSONEncoder().encode(dto)
         let model = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.createAccessLock, httpMethod: .post)
         model.body = encodedData
@@ -244,7 +244,7 @@ class FaceLockAPIRequestFactory {
         return model
     }
     
-    static func updateAccessLock(_ dto: UpdateAccessLockDTO) -> RequestModel {
+    static func updateAccessLock(_ dto: AccessLockDTO) -> RequestModel {
         let encodedData = try? JSONEncoder().encode(dto)
         let model = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.updateAccessLock, httpMethod: .post)
         model.body = encodedData

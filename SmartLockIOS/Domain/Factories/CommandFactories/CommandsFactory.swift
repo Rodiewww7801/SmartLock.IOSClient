@@ -100,11 +100,23 @@ class CommandsFactory: CommandsFactoryProtocol {
         return GetUserAccessesByLockIdCommand()
     }
     
+    static func getUserAccessesByUserIdCommand() -> GetUserAccessesByUserIdCommandProtocol {
+        return GetUserAccessesByUserIdCommand()
+    }
+    
     static func deleteAccessLockCommand() -> DeleteAccessLockCommandProtocol {
         return DeleteAccessLockCommand()
     }
     
     static func createAccessLockCommand() -> CreateAccessLockCommandProtocol {
         return CreateAccessLockCommand()
+    }
+    
+    static func getDoorLockHistoryByUserIdCommand() -> GetDoorLockHistoryByUserIdCommandProtocol {
+        return GetDoorLockHistoryByUserIdCommand()
+    }
+    
+    static func getDoorLockHistoryByDoorLockIdCommand() -> GetDoorLockHistoryByDoorLockIdCommandProtocol {
+        return GetDoorLockHistoryByDoorLockIdCommand()
     }
 }

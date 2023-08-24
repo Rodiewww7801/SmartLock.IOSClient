@@ -11,6 +11,7 @@ class UserCreateView: UIView {
     private var scrollView: UIScrollView!
     private var contentView: UIView!
     private var stackView: UIStackView!
+    private var topImageView: UIImageView!
     private var emailTextField: UITextField!
     private var firstNameTextField: UITextField!
     private var lastNameTextField: UITextField!
@@ -41,6 +42,7 @@ class UserCreateView: UIView {
         
         configureScrollView()
         configureStackView()
+        configureTopImageView()
         configureEmailTextField()
         configureFirstNameTextField()
         configureLastNameTextField()
@@ -77,9 +79,31 @@ class UserCreateView: UIView {
         
         contentView.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 200).isActive = true
+        stackView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
         stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 25).isActive = true
         stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25).isActive = true
+    }
+    
+    private func configureTopImageView() {
+        let imageContainer = UIView()
+        let image = UIImage(systemName: "person.fill")
+        topImageView = UIImageView(image: image)
+        topImageView.tintColor = .systemGray5
+        topImageView.contentMode = .scaleAspectFit
+        topImageView.layer.borderWidth = 1
+        topImageView.backgroundColor = .white
+        topImageView.layer.borderColor = UIColor.systemGray5.cgColor
+        
+        stackView.addArrangedSubview(imageContainer)
+        imageContainer.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        imageContainer.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        
+        imageContainer.addSubview(topImageView)
+        topImageView.translatesAutoresizingMaskIntoConstraints = false
+        topImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        topImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        topImageView.centerXAnchor.constraint(equalTo: imageContainer.centerXAnchor).isActive = true
+        topImageView.centerYAnchor.constraint(equalTo: imageContainer.centerYAnchor).isActive = true
     }
     
     private func configureEmailTextField() {

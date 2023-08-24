@@ -8,13 +8,19 @@
 import UIKit
 
 class UserInfoViewController: UIViewController {
+    private var scrollView: UIScrollView!
+    private var contentView: UIView!
     private var userInfoView: UserInfoViewCell!
     private var viewModel: UserInfoViewModel
     private var buttonStackView: UIStackView!
+    private var userAccessesButton: UIButton!
+    private var lockHistoriesButton: UIButton!
     private var updateUserButton: UIButton!
     private var deleteUserButton: UIButton!
     private var loadingScreen = FDLoadingScreen()
     
+    var onGetHistroriesAction: ((String)->Void)?
+    var onGetUserLockAccessesAction: ((String)->Void)?
     var onUpdateUserAction: ((User)->Void)?
     var onDeleteUserAction: (()->Void)?
     var onBackTapped: (()->Void)?
@@ -48,6 +54,7 @@ class UserInfoViewController: UIViewController {
     
     private func configureViews() {
         self.view.backgroundColor = .white
+        configureScrollView()
         configureUserInfoView()
         configureButtonStackView()
         configureManagmentStackView()
@@ -65,14 +72,36 @@ class UserInfoViewController: UIViewController {
         }
     }
     
+    private func configureScrollView() {
+        scrollView = UIScrollView()
+        scrollView.contentInset = .zero
+        scrollView.scrollIndicatorInsets = .zero
+
+        self.view.addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
+        scrollView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        
+        contentView = UIView()
+        scrollView.addSubview(contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        contentView.heightAnchor.constraint(equalTo: scrollView.heightAnchor, constant: -100).isActive = true
+    }
+    
     private func configureUserInfoView() {
         userInfoView = UserInfoViewCell()
         userInfoView.configure()
-        self.view.addSubview(userInfoView)
+        self.contentView.addSubview(userInfoView)
         userInfoView.translatesAutoresizingMaskIntoConstraints = false
-        userInfoView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor).isActive = true
-        userInfoView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
-        userInfoView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+        userInfoView.topAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.topAnchor).isActive = true
+        userInfoView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
+        userInfoView.widthAnchor.constraint(equalTo: self.contentView.widthAnchor).isActive = true
     }
     
     private func configureButtonStackView() {
@@ -80,15 +109,43 @@ class UserInfoViewController: UIViewController {
         buttonStackView.axis = .vertical
         buttonStackView.spacing = 0
         
-        self.view.addSubview(buttonStackView)
+        self.contentView.addSubview(buttonStackView)
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         buttonStackView.topAnchor.constraint(equalTo: userInfoView.bottomAnchor, constant: 20).isActive = true
-        buttonStackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
-        buttonStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
-        buttonStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
+        buttonStackView.centerXAnchor.constraint(equalTo: self.contentView.centerXAnchor).isActive = true
+        buttonStackView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 25).isActive = true
+        buttonStackView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -25).isActive = true
     }
     
     private func configureManagmentStackView() {
+        addDividerIn(buttonStackView)
+        
+        userAccessesButton = UIButton(type: .system)
+        userAccessesButton.backgroundColor = .white
+        userAccessesButton.contentHorizontalAlignment = .left
+        userAccessesButton.setTitle("Accesses", for: .normal)
+        userAccessesButton.setTitleColor(.systemGray, for: .normal)
+        userAccessesButton.addTarget(self, action: #selector(onGetUserLockAccessesTapped), for: .touchUpInside)
+        
+        buttonStackView.addArrangedSubview(userAccessesButton)
+        userAccessesButton.translatesAutoresizingMaskIntoConstraints = false
+        userAccessesButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        userAccessesButton.widthAnchor.constraint(equalTo: buttonStackView.widthAnchor).isActive = true
+        
+        addDividerIn(buttonStackView)
+        
+        lockHistoriesButton = UIButton(type: .system)
+        lockHistoriesButton.backgroundColor = .white
+        lockHistoriesButton.contentHorizontalAlignment = .left
+        lockHistoriesButton.setTitle("History", for: .normal)
+        lockHistoriesButton.setTitleColor(.systemGray, for: .normal)
+        lockHistoriesButton.addTarget(self, action: #selector(onHistoriesTapped), for: .touchUpInside)
+        
+        buttonStackView.addArrangedSubview(lockHistoriesButton)
+        lockHistoriesButton.translatesAutoresizingMaskIntoConstraints = false
+        lockHistoriesButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        lockHistoriesButton.widthAnchor.constraint(equalTo: buttonStackView.widthAnchor).isActive = true
+        
         addDividerIn(buttonStackView)
         
         updateUserButton = UIButton(type: .system)
@@ -108,7 +165,7 @@ class UserInfoViewController: UIViewController {
         deleteUserButton = UIButton(type: .system)
         deleteUserButton.backgroundColor = .white
         deleteUserButton.contentHorizontalAlignment = .left
-        deleteUserButton.setTitle("Delete user", for: .normal)
+        deleteUserButton.setTitle("Delete", for: .normal)
         deleteUserButton.setTitleColor(.red, for: .normal)
         deleteUserButton.addTarget(self, action: #selector(deleteUser), for: .touchUpInside)
        
@@ -162,5 +219,15 @@ class UserInfoViewController: UIViewController {
                 startDeleteUser()
             })
             .present(on: self)
+    }
+    
+    @objc private func onHistoriesTapped() {
+        guard let user = self.viewModel.userInfoModel else { return }
+        self.onGetHistroriesAction?(user.id)
+    }
+    
+    @objc private func onGetUserLockAccessesTapped()  {
+        guard let user = self.viewModel.userInfoModel else { return }
+        self.onGetUserLockAccessesAction?(user.id)
     }
 }

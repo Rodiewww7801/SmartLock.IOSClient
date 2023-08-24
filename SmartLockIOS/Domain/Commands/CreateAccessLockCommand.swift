@@ -14,7 +14,7 @@ class CreateAccessLockCommand: CreateAccessLockCommandProtocol {
         self.networkingSerivce = NetworkingFactory.networkingService()
     }
     
-    func execute(_ dto: CreateAccessLockDTO, _ completion: @escaping (Result<Void, Error>) -> Void) {
+    func execute(_ dto: AccessLockDTO, _ completion: @escaping (Result<Void, Error>) -> Void) {
         let requestModel = FaceLockAPIRequestFactory.createAccessLock(dto)
         networkingSerivce.request(requestModel, completion)
     }

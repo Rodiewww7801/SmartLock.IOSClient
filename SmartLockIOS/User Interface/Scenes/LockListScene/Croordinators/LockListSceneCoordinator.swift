@@ -42,10 +42,8 @@ class LockListSceneCoordinator: Coordinator {
         viewController.onDeleteAction = { [weak self] in
             self?.router.pop(animated: true)
         }
-        viewController.onGetUserLockAccessesAction = { [weak self] lockId in
-            self?.showUserLockAccessList(lockId: lockId)
-        }
-        viewController.onGetHistroriesAction = nil
+        viewController.onGetUserLockAccessesAction = showUserLockAccessList
+        viewController.onGetHistroriesAction = showLockHistoriesScene
         router.push(viewController, animated: true)
     }
     
@@ -72,5 +70,11 @@ class LockListSceneCoordinator: Coordinator {
         let modalViewController = AddUserLockAccessViewController(with: viewModal)
         modalViewController.modalDelegate = presenteViewController
         self.router.present(modalViewController, animated: true)
+    }
+    
+    private func showLockHistoriesScene(lockId: String) {
+        let viewModel = UserHistoryViewModel(lockId: lockId)
+        let viewControllet = UserHistroryViewController(with: viewModel)
+        self.router.push(viewControllet, animated: true)
     }
 }

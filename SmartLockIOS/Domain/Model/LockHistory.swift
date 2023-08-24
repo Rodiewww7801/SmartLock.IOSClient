@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct LockHistrory {
-    var id: Int
-    var userId: String
-    var lockId: String
+struct LockHistory {
+    var id: String
+    var user: User
+    var lock: Lock
     var openedDataTime: Date
 }

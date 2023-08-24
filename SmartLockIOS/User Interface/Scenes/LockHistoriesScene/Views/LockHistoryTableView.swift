@@ -1,19 +1,17 @@
 //
-//  UserAccessesViewTableView.swift
+//  LockHistoryTableView.swift
 //  Smart Lock
 //
-//  Created by Rodion Hladchenko on 23.08.2023.
+//  Created by Rodion Hladchenko on 24.08.2023.
 //
 
 import Foundation
 import UIKit
 
-class UserAccessesViewTableView: UIView {
+class LockHistoryTableView: UIView {
     private var tableView: UITableView!
     private var sections: [String] = []
-    var dataSource: [UserLockAccess] = []
-    
-    var onDeleteAction: ((String, String)->Void)?
+    var dataSource: [LockHistory] = []
     
     init() {
         super.init(frame: .zero)
@@ -43,15 +41,14 @@ class UserAccessesViewTableView: UIView {
     }
 }
 
-extension UserAccessesViewTableView: UITableViewDataSource {
+extension LockHistoryTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = self.dataSource[indexPath.row]
-        let cell = UserAccessesViewCell()
-        cell.onDeleteAction = self.onDeleteAction
+        let cell = LockHistoryViewCell()
         cell.configure()
         cell.updateData(data)
         return cell
