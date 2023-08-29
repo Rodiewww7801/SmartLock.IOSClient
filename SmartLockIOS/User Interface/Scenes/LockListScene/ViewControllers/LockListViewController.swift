@@ -10,13 +10,14 @@ import UIKit
 
 class LockListViewController: UIViewController {
     private var tableView: LockListTableView!
-    private var viewModel: LockListViewModel
+    private var viewModel: LockListViewModelDelegate
+    private var loadingScreen = FDLoadingScreen()
     
     var onBackTapped: (()->Void)?
     var onAddButtonAction: (()->Void)?
     var onLockSelected: ((String)->Void)?
     
-    init(with viewModel: LockListViewModel) {
+    init(with viewModel: LockListViewModelDelegate) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -38,10 +39,26 @@ class LockListViewController: UIViewController {
         configureViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.loadData()
+    }
+    
     override func willMove(toParent parent: UIViewController?) {
         super.willMove(toParent: parent)
         if parent == nil {
             self.onBackTapped?()
+        }
+    }
+    
+    func loadData() {
+        loadingScreen.show(on: self.view)
+        viewModel.loadData { [weak self] dataSource in
+            DispatchQueue.main.async {
+                self?.loadingScreen.stop()
+                self?.tableView.dataSource = dataSource
+                self?.tableView.reloadData()
+            }
         }
     }
     
@@ -50,7 +67,7 @@ class LockListViewController: UIViewController {
     }
     
     private func configureTableView() {
-        tableView = LockListTableView(with: self.viewModel)
+        tableView = LockListTableView()
         tableView.onLockSelected = self.onLockSelected
         self.view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -72,6 +89,6 @@ class LockListViewController: UIViewController {
 
 extension LockListViewController: ModalPresentedViewDelegate {
     func onViewWillDisappear() {
-        self.tableView.loadData()
+        self.loadData()
     }
 }

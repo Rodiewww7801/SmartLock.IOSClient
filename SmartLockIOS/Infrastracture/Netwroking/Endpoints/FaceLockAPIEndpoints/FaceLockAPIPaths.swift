@@ -55,6 +55,7 @@ enum FaceLockAPIPaths {
     static let updateAccessLock = "/api/DoorLock/UpdateAccessDoorLock"
     static let deleteLockById = "/api/DoorLock/DeleteDoorLock/{placeId}"
     static let deleteAccessLock = "/api/DoorLock/{doorLockId}/DeleteAccessDoorLock/{userId}"
+    static let createSecretInfoDoorLock = "/api/DoorLock/CreateSecretInfoDoorLock"
     
     //MARK: - Place
     static let createPlace = "/api/Place/CreatePlace"

@@ -21,7 +21,7 @@ class LockListSceneCoordinator: Coordinator {
     }
     
     private func showLockListScene() {
-        let viewModel = LockListViewModel()
+        let viewModel = AdminLockListViewModel()
         let viewController = LockListViewController(with: viewModel)
         viewController.onBackTapped = { [weak self] in
             self?.removeCoordinator?()

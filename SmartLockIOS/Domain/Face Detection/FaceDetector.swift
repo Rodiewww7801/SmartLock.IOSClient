@@ -18,7 +18,7 @@ protocol FaceDetectorPresenterDelegate: AnyObject {
     //func draw(image: CIImage)
 }
 
-protocol FaceDetectorViewModelDelegate: AnyObject {
+protocol FaceDetectorDelegate: AnyObject {
     func publishNoFaceObserved()
     func publishFaceObservation(_ faceGeometryModel: FaceGeometryModel)
     func publishSavePhotoObservation(_ image: UIImage)
@@ -26,7 +26,7 @@ protocol FaceDetectorViewModelDelegate: AnyObject {
 }
 
 class FaceDetector: NSObject {
-    weak var viewModelDelegate: FaceDetectorViewModelDelegate?
+    weak var viewModelDelegate: FaceDetectorDelegate?
     weak var presentationDelegate: FaceDetectorPresenterDelegate?
     
     private var sequenceHandler = VNSequenceRequestHandler()
@@ -52,7 +52,7 @@ class FaceDetector: NSObject {
     func captureCurrentImage() {
         imageCaptureQueue.async { [weak self] in
             guard let self = self, let currentFrameBuffer = self.currentFrameBuffer else { return }
-            let originalImage = CIImage(cvImageBuffer: currentFrameBuffer)
+            let originalImage = CIImage(cvImageBuffer: currentFrameBuffer).oriented(.right)
             var outputImage = originalImage
             
             //remove background
@@ -60,7 +60,7 @@ class FaceDetector: NSObject {
                 let detectSegmentationRequest = VNGeneratePersonSegmentationRequest()
                 detectSegmentationRequest.qualityLevel = .accurate
                 
-                try? self.sequenceHandler.perform([detectSegmentationRequest], on: currentFrameBuffer, orientation: .leftMirrored)
+                try? self.sequenceHandler.perform([detectSegmentationRequest], on: currentFrameBuffer, orientation: .downMirrored)
                 
                 if let maskPixelBuffer = detectSegmentationRequest.results?.first?.pixelBuffer {
                     outputImage = self.removeBackgroundFrom(image: originalImage, using: maskPixelBuffer)

@@ -9,14 +9,11 @@ import UIKit
 
 class LockListTableView: UIView {
     private var tableView: UITableView!
-    private var viewModel: LockListViewModel
-    private var loadingScreen = FDLoadingScreen()
-    private var sections: [String] = []
     
+    var dataSource: [Lock] = []
     var onLockSelected: ((String)->Void)?
     
-    init(with viewModel: LockListViewModel) {
-        self.viewModel = viewModel
+    init() {
         super.init(frame: .zero)
         configureViews()
     }
@@ -27,16 +24,12 @@ class LockListTableView: UIView {
     
     private func configureViews() {
         self.configureNavigationList()
-        self.loadData()
+        reloadData()
     }
     
-    func loadData() {
-        loadingScreen.show(on: self)
-        viewModel.loadData { [weak self] _ in
-            DispatchQueue.main.async {
-                self?.loadingScreen.stop()
-                self?.tableView.reloadData()
-            }
+    func reloadData() {
+        DispatchQueue.main.async { [weak self] in
+            self?.tableView.reloadData()
         }
     }
     
@@ -58,14 +51,14 @@ class LockListTableView: UIView {
 
 extension LockListTableView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.dataSource.count
+        return self.dataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let userInfo = self.viewModel.dataSource[indexPath.row]
+        let lock = self.dataSource[indexPath.row]
         let cell = LockViewCell()
         cell.configure()
-        cell.updateData(userInfo)
+        cell.updateData(lock)
         return cell
     }
     
@@ -77,7 +70,7 @@ extension LockListTableView: UITableViewDataSource {
 extension LockListTableView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let lock = viewModel.dataSource[indexPath.row]
+        let lock = self.dataSource[indexPath.row]
         self.onLockSelected?(lock.id)
     }
 }

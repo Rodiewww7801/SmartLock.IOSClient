@@ -80,6 +80,10 @@ class CommandsFactory: CommandsFactoryProtocol {
         return RecognizeUserCommand()
     }
     
+    static func recognizeUserForDoorLockCommand() -> RecognizeUserForDoorLockCommandProtocol {
+        return RecognizeUserForDoorLockCommand()
+    }
+    
     static func getLocksCommand() -> GetLocksCommandProtocol {
         return GetLocksCommand()
     }
@@ -118,5 +122,9 @@ class CommandsFactory: CommandsFactoryProtocol {
     
     static func getDoorLockHistoryByDoorLockIdCommand() -> GetDoorLockHistoryByDoorLockIdCommandProtocol {
         return GetDoorLockHistoryByDoorLockIdCommand()
+    }
+    
+    static func createSecretInfoDoorLockCommand() -> CreateSecretInfoDoorLockCommandProtocol {
+        return CreateSecretInfoDoorLockCommand()
     }
 }

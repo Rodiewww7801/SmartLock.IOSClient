@@ -12,10 +12,16 @@ protocol DetectionScenePresentedDelegate: AnyObject {
     func updateFaceGeometry()
     func updateFaceState()
     func capturePhotoObservation(image: UIImage)
+    func onShowUserCard(user: User)
+    func showLoadingScreen()
+    func stopLoadingScreen()
 }
 
 class DetectionSceneViewModel {
-    private var recognizeUserCommand: RecognizeUserCommandProtocol
+    private var userRepository: UserRepositoryProtocol
+    private let lockId: String
+    private let validationDispatchQueue = DispatchQueue(label: "validation_face_queue", qos: .background, autoreleaseFrequency: .workItem)
+    private var validationTask: Task<Void, Never>?
     
     private(set) var faceDetector: FaceDetector
     private(set) var faceDetectedState: FaceObservation<Void>
@@ -28,7 +34,8 @@ class DetectionSceneViewModel {
     private(set) var isAcceptableYaw: Bool
     private(set) var isAcceptableQuality: Bool
     private(set) var isAcceptableBounds: FaceBoundsState
-    private(set) var lastSavedPhoto: UIImage?
+    private(set) var isAcceptableAuthenticity: Bool
+    private(set) var faceWasValidated: Bool
     
     var debugModeEnabled: Bool
     var hideBackgroundModeEnabled: Bool
@@ -39,8 +46,9 @@ class DetectionSceneViewModel {
     
     weak var presentedDelegate: DetectionScenePresentedDelegate?
     
-    init() {
-        recognizeUserCommand = CommandsFactory.recognizeUserCommand()
+    init(lockId: String) {
+        self.lockId = lockId
+        self.userRepository = RepositoryFactory.userRepository()
         
         faceDetector = FaceDetector()
         faceDetectedState = .faceNotFound
@@ -52,6 +60,8 @@ class DetectionSceneViewModel {
         isAcceptableYaw = false
         isAcceptableQuality = false
         isAcceptableBounds = .unknown
+        isAcceptableAuthenticity = false
+        faceWasValidated = false
         
         debugModeEnabled = false
         hideBackgroundModeEnabled = false
@@ -64,6 +74,7 @@ class DetectionSceneViewModel {
     }
     
     //MARK: - public func
+    
     func setPresentedDelegate(_ delegate: DetectionScenePresentedDelegate) {
         self.presentedDelegate = delegate
         self.faceDetector.viewModelDelegate = self
@@ -71,10 +82,17 @@ class DetectionSceneViewModel {
     }
     
     func publishTakePhotoObservation() {
+        presentedDelegate?.showLoadingScreen()
+        print("[DetectionSceneViewModel]: capture current photo")
         faceDetector.captureCurrentImage()
     }
     
+    func unvalidateFace() {
+        self.faceWasValidated = false
+    }
+    
     //MARK: - private func
+    
     private func setWindowSize() {
         let toRect = UIScreen.main.bounds
         faceLayoutGuideFrame = CGRect(
@@ -94,6 +112,9 @@ class DetectionSceneViewModel {
             self.setAcceptableRollPitchYaw(using: roll, pitch: pitch, yaw: yaw)
             self.setAcceptableBounds(using: boundingBox)
             self.setAcceptableFaceQuality(using: faceGeometryModel.quality)
+            self.setAcceptableAuthenticity(authenticity: faceGeometryModel.faceAuthenticity)
+            
+            self.tryToStartTimer()
         case .faceNotFound:
             invalidateFaceGeometryState()
         case .errored(_):
@@ -105,15 +126,20 @@ class DetectionSceneViewModel {
         self.isAcceptableRoll = false
         self.isAcceptablePitch = false
         self.isAcceptableYaw = false
+        self.isAcceptableQuality = false
         self.isAcceptableBounds = .unknown
     }
     
     private func validateDetectedFace() {
-        self.faceValidationState = isAcceptableRoll &&
-        isAcceptablePitch &&
-        isAcceptableYaw &&
-        isAcceptableBounds == .detectedFaceAppropriateSizeAndPosition &&
-        isAcceptableQuality
+        validationDispatchQueue.sync { [weak self] in
+            guard let self = self else { return }
+            self.faceValidationState = isAcceptableRoll &&
+            isAcceptablePitch &&
+            isAcceptableYaw &&
+            isAcceptableBounds == .detectedFaceAppropriateSizeAndPosition &&
+            isAcceptableQuality &&
+            isAcceptableAuthenticity
+        }
     }
     
     private func setAcceptableRollPitchYaw(using roll: Double, pitch: Double, yaw: Double) {
@@ -141,8 +167,18 @@ class DetectionSceneViewModel {
     private func setAcceptableFaceQuality(using quality: Float) {
         if quality < 0.2 {
             self.isAcceptableQuality = false
+        } else {
+            self.isAcceptableQuality = true
         }
-        self.isAcceptableQuality = true
+    }
+    
+    private func setAcceptableAuthenticity(authenticity: FaceAuthenticity) {
+        switch authenticity {
+        case .realFace:
+            self.isAcceptableAuthenticity = true
+        default:
+            self.isAcceptableAuthenticity = false
+        }
     }
     
     private func stateOfDetectionWasChanged() {
@@ -151,10 +187,40 @@ class DetectionSceneViewModel {
         self.presentedDelegate?.updateFaceGeometry()
         self.presentedDelegate?.updateFaceState()
     }
+    
+    private func getUser(images: [UIImage], _ completion: @escaping (User?)->Void) {
+        Task { [weak self] in
+            guard let lockId = self?.lockId else { return }
+            let user = await self?.userRepository.getUser(lockId: lockId, images: images)
+            completion(user)
+        }
+    }
+    
+    private func tryToStartTimer() {
+        validationDispatchQueue.sync { [weak self] in
+            guard let self = self else { return }
+            
+            if self.faceValidationState, !self.faceWasValidated, self.validationTask == nil {
+                print("[DetectionSceneViewModel]: validation task was started")
+                self.validationTask = Task.detached(priority: .background, operation: {
+                    try? await Task.sleep(for: .seconds(3))
+                    if self.validationTask?.isCancelled == false, self.faceValidationState {
+                        self.faceWasValidated = true
+                        self.publishTakePhotoObservation()
+                    }
+                })
+            } else if !self.faceValidationState, self.validationTask != nil {
+                print("[DetectionSceneViewModel]: validation task was canceled")
+                self.validationTask?.cancel()
+                self.validationTask = nil
+            }
+        }
+    }
 }
 
 //MARK: - FaceDectorDelegateViewModel
-extension DetectionSceneViewModel: FaceDetectorViewModelDelegate {
+
+extension DetectionSceneViewModel: FaceDetectorDelegate {
     func publishNoFaceObserved() {
         faceGemetryState = .faceNotFound
         stateOfDetectionWasChanged()
@@ -166,8 +232,14 @@ extension DetectionSceneViewModel: FaceDetectorViewModelDelegate {
     }
     
     func publishSavePhotoObservation(_ image: UIImage) {
-        self.lastSavedPhoto = image
-        self.presentedDelegate?.capturePhotoObservation(image: image)
+        self.getUser(images: [image]) { [weak self] user in
+            self?.presentedDelegate?.stopLoadingScreen()
+            if let user = user {
+                self?.presentedDelegate?.onShowUserCard(user: user)
+            } else {
+                self?.unvalidateFace()
+            }
+        }
     }
     
     func getHideBackgroundState() -> Bool {

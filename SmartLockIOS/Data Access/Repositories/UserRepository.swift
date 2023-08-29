@@ -16,6 +16,8 @@ class UserRepository: UserRepositoryProtocol {
     private var adminGetUserPhotoByPhotoIdCommand: AdminGetUserPhotoByPhotoIdCommandProtocol
     private var getUserPhotosInfoCommand: GetUserPhotosInfoCommandProtocol
     private var getUserPhotoByPhotoIdCommand: GetUserPhotoByPhotoIdCommandProtocol
+    private var recognizeUserCommand: RecognizeUserCommandProtocol
+    private var recognizeUserForDoorLockCommand: RecognizeUserForDoorLockCommandProtocol
     
     init() {
         self.getUserCommand = CommandsFactory.getUserCommand()
@@ -25,6 +27,8 @@ class UserRepository: UserRepositoryProtocol {
         self.adminGetUserPhotoByPhotoIdCommand = CommandsFactory.getAdminUserPhotoByPhotoIdCommand()
         self.getUserPhotosInfoCommand = CommandsFactory.getUserPhotosInfoCommand()
         self.getUserPhotoByPhotoIdCommand = CommandsFactory.getUserPhotoByPhotoIdCommand()
+        self.recognizeUserCommand = CommandsFactory.recognizeUserCommand()
+        self.recognizeUserForDoorLockCommand = CommandsFactory.recognizeUserForDoorLockCommand()
     }
     
     func getUser() async -> User? {
@@ -43,13 +47,7 @@ class UserRepository: UserRepositoryProtocol {
         let userPhoto = await userPhotoTask.value?.first
 
         guard let userDTO = userDTO else { return nil }
-        let user = User(id: userDTO.id,
-                        face: userPhoto?.image,
-                        username: userDTO.username,
-                        email: userDTO.email,
-                        firstName: userDTO.firstName,
-                        lastName: userDTO.lastName,
-                        role: User.Role(rawValue: userDTO.status) ?? .user)
+        let user = User(id: userDTO.id, face: userPhoto?.image, username: userDTO.username, email: userDTO.email, firstName: userDTO.firstName, lastName: userDTO.lastName, role: User.Role(rawValue: userDTO.status) ?? .user)
         return user
     }
     
@@ -67,15 +65,44 @@ class UserRepository: UserRepositoryProtocol {
         let userDTO = await userDTOTask.value
         let userPhoto = await userPhotoTask.value?.first
         guard let userDTO = userDTO else { return nil }
-        let user = User(id: userDTO.id,
-                        face: userPhoto?.image,
-                        username: userDTO.username,
-                        email: userDTO.email,
-                        firstName: userDTO.firstName,
-                        lastName: userDTO.lastName,
-                        role: User.Role(rawValue: userDTO.status) ?? .user)
+        let user = User(id: userDTO.id, face: userPhoto?.image, username: userDTO.username, email: userDTO.email, firstName: userDTO.firstName, lastName: userDTO.lastName, role: User.Role(rawValue: userDTO.status) ?? .user)
         return user
     }
+    
+    func getUser(images: [UIImage]) async -> User? {
+        let userDTO = try? await withUnsafeThrowingContinuation { [weak self] continuation in
+            self?.recognizeUserCommand.execute(images: images) { result in
+                continuation.resume(with: result)
+            }
+        }
+        
+        guard let userDTO = userDTO else { return nil }
+        var userFace: UIImage? = nil
+        if let data = Data(base64Encoded: userDTO.base64UserImage.data) {
+            userFace = UIImage(data: data)
+        }
+       
+        let user = User(id: userDTO.id, face: userFace, username: userDTO.username, email: userDTO.email, firstName: userDTO.firstName, lastName: userDTO.lastName, role: User.Role(rawValue: userDTO.status) ?? .user)
+        return user
+    }
+    
+    func getUser(lockId: String, images: [UIImage]) async -> User? {
+        let userDTO = try? await withUnsafeThrowingContinuation { [weak self] continuation in
+            self?.recognizeUserForDoorLockCommand.execute(lockId: lockId, images: images) { result in
+                continuation.resume(with: result)
+            }
+        }
+        
+        guard let userDTO = userDTO else { return nil }
+        var userFace: UIImage? = nil
+        if let data = Data(base64Encoded: userDTO.base64UserImage.data) {
+            userFace = UIImage(data: data)
+        }
+       
+        let user = User(id: userDTO.id, face: userFace, username: userDTO.username, email: userDTO.email, firstName: userDTO.firstName, lastName: userDTO.lastName, role: User.Role(rawValue: userDTO.status) ?? .user)
+        return user
+    }
+    
     
     func getUsers() async -> [User] {
         let usersDTO = try? await withUnsafeThrowingContinuation { [weak self] continuation in

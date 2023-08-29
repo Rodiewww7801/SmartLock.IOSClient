@@ -9,17 +9,17 @@ import UIKit
 
 class DetectionSceneVC: UIViewController {
     private var capturePhotoButton: FDFadeAnimatedButton = FDFadeAnimatedButton()
-    private var bottomButtonsFirstStack: UIStackView = UIStackView()
-    private var bottomButtonsSecondStack: UIStackView = UIStackView()
     private var faceDetectionStateLabel: UILabel = UILabel()
     private var debugView: DebugView!
     private var ellipseLayer: CAShapeLayer = CAShapeLayer()
     private var stateLabelIsAnimating = false
+    private var loadingScreen = FDLoadingScreen()
     
     private var viewModel: DetectionSceneViewModel
     var showSettings: (()->())?
     var onBackTapped: (()->())?
     var showDetectionPermission: (()->Void)?
+    var showUserCard: ((User)->Void)?
     
     init(with viewModel: DetectionSceneViewModel) {
         self.viewModel = viewModel
@@ -52,8 +52,6 @@ class DetectionSceneVC: UIViewController {
         addSettingsNavigationItem()
         configureCameraCaptureVC()
         configureDebugView()
-        configureBottomButtonsFirstStack()
-        //configureBottomButtonsSecondStack()
         configureFaceDetectionStateLabel()
         addEllipse()
     }
@@ -65,51 +63,6 @@ class DetectionSceneVC: UIViewController {
     
     @objc private func onSettingsTapped() {
         self.showSettings?()
-    }
-    
-    private func configureBottomButtonsFirstStack() {
-        self.bottomButtonsFirstStack = UIStackView()
-        self.bottomButtonsFirstStack.axis = .horizontal
-        self.bottomButtonsFirstStack.alignment = .center
-        self.bottomButtonsFirstStack.distribution = .equalCentering
-        self.bottomButtonsFirstStack.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(bottomButtonsFirstStack)
-        self.bottomButtonsFirstStack.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -70).isActive = true
-        self.bottomButtonsFirstStack.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 25).isActive = true
-        self.bottomButtonsFirstStack.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -25).isActive = true
-        
-        let lightImageConiguration = UIImage.SymbolConfiguration(weight: .light)
-        
-        //add capturePhotoButton
-        self.capturePhotoButton = FDFadeAnimatedButton()
-        self.capturePhotoButton.addAction({ [weak self] in
-            self?.capturePhotoButtonTapped()
-        }, for: .touchDown)
-        capturePhotoButton.widthAnchor.constraint(equalToConstant: 77).isActive = true
-        capturePhotoButton.heightAnchor.constraint(equalToConstant: 77).isActive = true
-        self.bottomButtonsFirstStack.addArrangedSubview(capturePhotoButton)
-
-        
-        let capturePhotoCircleImageView = UIImageView(image: UIImage(systemName: "circle", withConfiguration: lightImageConiguration))
-        let capturePhotoCircleFillImageView = UIImageView(image: UIImage(systemName: "circle.fill"))
-        
-        capturePhotoCircleImageView.contentMode = .scaleAspectFit
-        capturePhotoCircleImageView.tintColor = .white
-        capturePhotoCircleImageView.translatesAutoresizingMaskIntoConstraints = false
-        capturePhotoButton.addSubview(capturePhotoCircleImageView)
-        capturePhotoCircleImageView.topAnchor.constraint(equalTo: capturePhotoButton.topAnchor).isActive = true
-        capturePhotoCircleImageView.bottomAnchor.constraint(equalTo: capturePhotoButton.bottomAnchor).isActive = true
-        capturePhotoCircleImageView.leadingAnchor.constraint(equalTo: capturePhotoButton.leadingAnchor).isActive = true
-        capturePhotoCircleImageView.trailingAnchor.constraint(equalTo: capturePhotoButton.trailingAnchor).isActive = true
-        
-        capturePhotoCircleFillImageView.contentMode = .scaleAspectFit
-        capturePhotoCircleFillImageView.tintColor = .white
-        capturePhotoCircleFillImageView.translatesAutoresizingMaskIntoConstraints = false
-        capturePhotoButton.addSubview(capturePhotoCircleFillImageView)
-        capturePhotoCircleFillImageView.topAnchor.constraint(equalTo: capturePhotoButton.topAnchor, constant: 9).isActive = true
-        capturePhotoCircleFillImageView.bottomAnchor.constraint(equalTo: capturePhotoButton.bottomAnchor, constant: -9).isActive = true
-        capturePhotoCircleFillImageView.leadingAnchor.constraint(equalTo: capturePhotoButton.leadingAnchor, constant: 9).isActive = true
-        capturePhotoCircleFillImageView.trailingAnchor.constraint(equalTo: capturePhotoButton.trailingAnchor, constant: -9).isActive = true
     }
     
     private func addEllipse() {
@@ -191,25 +144,26 @@ class DetectionSceneVC: UIViewController {
         cameraCaptureVC.view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         cameraCaptureVC.view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
     }
-    
-    private func hideBackgroundTapped() {
-        self.viewModel.hideBackgroundModeEnabled.toggle()
-        let state = self.viewModel.hideBackgroundModeEnabled
-    }
-    
-    private func debugModeButtonTapped() {
-        debugView.isHidden.toggle()
-        viewModel.debugModeEnabled = !debugView.isHidden
-    }
-    
-    private func capturePhotoButtonTapped() {
-        self.viewModel.publishTakePhotoObservation()
-    }
 }
 
 // MARK: - DetectionScenePresentedDelegate
 
 extension DetectionSceneVC: DetectionScenePresentedDelegate {
+    func showLoadingScreen() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.loadingScreen.show(on: self.view)
+        }
+       
+    }
+    
+    func stopLoadingScreen() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.loadingScreen.stop()
+        }
+    }
+    
     func capturePhotoObservation(image: UIImage) {
         //
     }
@@ -228,16 +182,28 @@ extension DetectionSceneVC: DetectionScenePresentedDelegate {
             self?.updateEllipseState()
         }
     }
+    
+    func onShowUserCard(user: User) {
+        DispatchQueue.main.async { [weak self] in
+            self?.showUserCard?(user)
+        }
+    }
 }
 
 // MARK: - DetectionSceneSettingsDelegate
 
 extension DetectionSceneVC: DetectionSceneSettingsDelegate {
-    func hideBackground() {
-        hideBackgroundTapped()
-    }
-    
     func debugMode() {
-        debugModeButtonTapped()
+        debugView.isHidden.toggle()
+        viewModel.debugModeEnabled = !debugView.isHidden
     }
 }
+
+// MARK: - ModalPresentedViewDelegate
+
+extension DetectionSceneVC: ModalPresentedViewDelegate {
+    func onViewWillDisappear() {
+        viewModel.unvalidateFace()
+    }
+}
+

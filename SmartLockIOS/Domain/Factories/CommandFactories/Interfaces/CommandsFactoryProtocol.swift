@@ -34,4 +34,5 @@ protocol CommandsFactoryProtocol {
     static func createAccessLockCommand() -> CreateAccessLockCommandProtocol
     static func getDoorLockHistoryByUserIdCommand() -> GetDoorLockHistoryByUserIdCommandProtocol
     static func getDoorLockHistoryByDoorLockIdCommand() -> GetDoorLockHistoryByDoorLockIdCommandProtocol
+    static func createSecretInfoDoorLockCommand() -> CreateSecretInfoDoorLockCommandProtocol
 }

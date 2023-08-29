@@ -9,19 +9,17 @@ import Foundation
 import UIKit
 
 protocol DetectionSceneSettingsDelegate {
-    func hideBackground()
     func debugMode()
 }
 
 class DetecetionSceneSettingsViewController: UIViewController {
     private var tableView: UITableView!
-    private var dataSource: [DepthDataSettings] = [.hideBackground, .debugMode]
+    private var dataSource: [DepthDataSettings] = [.debugMode]
     private var viewModel: DetectionSceneViewModel
     
     var delegate: DetectionSceneSettingsDelegate?
     
     private enum DepthDataSettings {
-        case hideBackground
         case debugMode
     }
     
@@ -68,14 +66,6 @@ extension DetecetionSceneSettingsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let settingsTableViewCell = tableView.dequeueReusableCell(withIdentifier: SettingsTableViewCell.reuseIdentifier, for: indexPath) as! SettingsTableViewCell
         switch dataSource[indexPath.row] {
-        case .hideBackground:
-            settingsTableViewCell.configure(type: .switchCell, settingName: "Hide background")
-            settingsTableViewCell.setSwitchState(viewModel.hideBackgroundModeEnabled)
-            settingsTableViewCell.toggleSwitchAction = { [weak self, weak settingsTableViewCell] in
-                guard let self = self else { return }
-                self.delegate?.hideBackground()
-                settingsTableViewCell?.setSwitchState(self.viewModel.hideBackgroundModeEnabled)
-            }
         case .debugMode:
             settingsTableViewCell.configure(type: .switchCell, settingName: "Debug mode")
             settingsTableViewCell.setSwitchState(viewModel.debugModeEnabled)

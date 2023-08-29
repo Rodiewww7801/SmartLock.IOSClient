@@ -167,7 +167,7 @@ class FaceLockAPIRequestFactory {
     // MARK: - Recognition
     
     static func recognizeUser(images: [UIImage]) -> RequestModel {
-        let boundary = UUID().uuidString
+        let boundary = "Boundary-\(UUID().uuidString)"
         let headers = ["Content-Type" : "multipart/form-data; boundary=\(boundary)"]
         let bodyData = convertImagesToBodyData(boundary: boundary, images)
         let model = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.recognizeUser, httpMethod: .post, headers: headers)
@@ -175,8 +175,8 @@ class FaceLockAPIRequestFactory {
         return model
     }
     
-    static func recognizeUserForDoorLock(doorLockId: Int, images: [UIImage]) -> RequestModel {
-        let path = FaceLockAPIPaths.recognizeUserForDoorLock.replacingOccurrences(of: "{doorLockId}", with: String(doorLockId))
+    static func recognizeUserForDoorLock(lockId: String, images: [UIImage]) -> RequestModel {
+        let path = FaceLockAPIPaths.recognizeUserForDoorLock.replacingOccurrences(of: "{doorLockId}", with: lockId)
         let boundary = UUID().uuidString
         let headers = ["Content-Type" : "multipart/form-data; boundary=\(boundary)"]
         let bodyData = convertImagesToBodyData(boundary: boundary, images)
@@ -286,12 +286,17 @@ class FaceLockAPIRequestFactory {
         model.body = encodedData
         return model
     }
+    
+    static func createSecretInfoDoorLock(_ dto: LockSecretInfoDTO) -> RequestModel {
+        let encodedData = try? JSONEncoder().encode(dto)
+        let model = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.createSecretInfoDoorLock, httpMethod: .post)
+        model.body = encodedData
+        return model
+    }
 }
 
 extension FaceLockAPIRequestFactory {
     static private func convertImagesToBodyData(boundary: String, _ images: [UIImage]) -> Data {
-        let boundary = "Boundary-\(boundary)"
-
         let body = NSMutableData()
 
         for (index, image) in images.enumerated() {

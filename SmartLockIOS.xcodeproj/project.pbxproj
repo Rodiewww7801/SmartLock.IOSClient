@@ -118,7 +118,7 @@
 		F858DA8F2A94EDDC000D57B3 /* CreateLockCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F858DA8E2A94EDDC000D57B3 /* CreateLockCommand.swift */; };
 		F858DA912A94EE1E000D57B3 /* CreateLockCommandProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F858DA902A94EE1E000D57B3 /* CreateLockCommandProtocol.swift */; };
 		F858DA952A94EFB4000D57B3 /* PlaceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F858DA942A94EFB4000D57B3 /* PlaceDTO.swift */; };
-		F858DA9C2A9510F8000D57B3 /* LockListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F858DA9B2A9510F8000D57B3 /* LockListViewModel.swift */; };
+		F858DA9C2A9510F8000D57B3 /* AdminLockListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F858DA9B2A9510F8000D57B3 /* AdminLockListViewModel.swift */; };
 		F858DA9E2A951ECF000D57B3 /* LockListSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F858DA9D2A951ECF000D57B3 /* LockListSceneCoordinator.swift */; };
 		F858DAA02A951EF3000D57B3 /* LockListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F858DA9F2A951EF3000D57B3 /* LockListViewController.swift */; };
 		F858DAA22A952116000D57B3 /* GetLocksResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F858DAA12A952116000D57B3 /* GetLocksResponseDTO.swift */; };
@@ -181,6 +181,10 @@
 		F861217F2A8D6ACA00822B0D /* GetUsersCommandProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F861217E2A8D6ACA00822B0D /* GetUsersCommandProtocol.swift */; };
 		F86121812A8D6B5E00822B0D /* GetUsersResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86121802A8D6B5E00822B0D /* GetUsersResponseDTO.swift */; };
 		F86121842A8D74BE00822B0D /* UserInfoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86121832A8D74BE00822B0D /* UserInfoViewCell.swift */; };
+		F877A84D2A9E886F0040AC7E /* CreateSecretInfoDoorLockCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F877A84C2A9E886F0040AC7E /* CreateSecretInfoDoorLockCommand.swift */; };
+		F877A84F2A9E88F50040AC7E /* LockSecretInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F877A84E2A9E88F50040AC7E /* LockSecretInfoDTO.swift */; };
+		F877A8512A9E8ADB0040AC7E /* CreateSecretInfoDoorLockCommandProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F877A8502A9E8ADB0040AC7E /* CreateSecretInfoDoorLockCommandProtocol.swift */; };
+		F877A8532A9E8DF20040AC7E /* LockListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F877A8522A9E8DF20040AC7E /* LockListViewModel.swift */; };
 		F881A83E2A32B066003408B3 /* PointCloudSceneSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F881A83D2A32B066003408B3 /* PointCloudSceneSettingsViewController.swift */; };
 		F881A8402A32CF01003408B3 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F881A83F2A32CF01003408B3 /* SettingsTableViewCell.swift */; };
 		F881A8422A32CF3F003408B3 /* DetecetionSceneSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F881A8412A32CF3F003408B3 /* DetecetionSceneSettingsViewController.swift */; };
@@ -207,6 +211,11 @@
 		F8CFA71429D5A89E00905F94 /* FaceBoundsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8CFA71329D5A89E00905F94 /* FaceBoundsState.swift */; };
 		F8DD95562A93803800CFCDFC /* RecognizeUserCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DD95552A93803800CFCDFC /* RecognizeUserCommand.swift */; };
 		F8DD95582A938A8300CFCDFC /* RecognizeUserCommandProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8DD95572A938A8300CFCDFC /* RecognizeUserCommandProtocol.swift */; };
+		F8E23E2C2A9B907200265326 /* RecognizeUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E23E2B2A9B907200265326 /* RecognizeUserDTO.swift */; };
+		F8E23E2E2A9B973D00265326 /* RecognizeUserForDoorLockCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E23E2D2A9B973D00265326 /* RecognizeUserForDoorLockCommand.swift */; };
+		F8E23E302A9B974D00265326 /* RecognizeUserForDoorLockCommandProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E23E2F2A9B974D00265326 /* RecognizeUserForDoorLockCommandProtocol.swift */; };
+		F8E23E372A9BAB9400265326 /* UserCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E23E362A9BAB9400265326 /* UserCardViewController.swift */; };
+		F8E23E392A9BAC3D00265326 /* UserCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E23E382A9BAC3D00265326 /* UserCardViewModel.swift */; };
 		F8E4D47A29D8985E00B6F0BB /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E4D47929D8985E00B6F0BB /* Router.swift */; };
 		F8E4D47C29D898DE00B6F0BB /* Presentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E4D47B29D898DE00B6F0BB /* Presentable.swift */; };
 		F8E4D47E29D89A1B00B6F0BB /* SceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E4D47D29D89A1B00B6F0BB /* SceneCoordinator.swift */; };
@@ -338,7 +347,7 @@
 		F858DA8E2A94EDDC000D57B3 /* CreateLockCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLockCommand.swift; sourceTree = "<group>"; };
 		F858DA902A94EE1E000D57B3 /* CreateLockCommandProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLockCommandProtocol.swift; sourceTree = "<group>"; };
 		F858DA942A94EFB4000D57B3 /* PlaceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceDTO.swift; sourceTree = "<group>"; };
-		F858DA9B2A9510F8000D57B3 /* LockListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockListViewModel.swift; sourceTree = "<group>"; };
+		F858DA9B2A9510F8000D57B3 /* AdminLockListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdminLockListViewModel.swift; sourceTree = "<group>"; };
 		F858DA9D2A951ECF000D57B3 /* LockListSceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockListSceneCoordinator.swift; sourceTree = "<group>"; };
 		F858DA9F2A951EF3000D57B3 /* LockListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockListViewController.swift; sourceTree = "<group>"; };
 		F858DAA12A952116000D57B3 /* GetLocksResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLocksResponseDTO.swift; sourceTree = "<group>"; };
@@ -401,6 +410,10 @@
 		F861217E2A8D6ACA00822B0D /* GetUsersCommandProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUsersCommandProtocol.swift; sourceTree = "<group>"; };
 		F86121802A8D6B5E00822B0D /* GetUsersResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUsersResponseDTO.swift; sourceTree = "<group>"; };
 		F86121832A8D74BE00822B0D /* UserInfoViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewCell.swift; sourceTree = "<group>"; };
+		F877A84C2A9E886F0040AC7E /* CreateSecretInfoDoorLockCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSecretInfoDoorLockCommand.swift; sourceTree = "<group>"; };
+		F877A84E2A9E88F50040AC7E /* LockSecretInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockSecretInfoDTO.swift; sourceTree = "<group>"; };
+		F877A8502A9E8ADB0040AC7E /* CreateSecretInfoDoorLockCommandProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSecretInfoDoorLockCommandProtocol.swift; sourceTree = "<group>"; };
+		F877A8522A9E8DF20040AC7E /* LockListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockListViewModel.swift; sourceTree = "<group>"; };
 		F881A83D2A32B066003408B3 /* PointCloudSceneSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointCloudSceneSettingsViewController.swift; sourceTree = "<group>"; };
 		F881A83F2A32CF01003408B3 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		F881A8412A32CF3F003408B3 /* DetecetionSceneSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetecetionSceneSettingsViewController.swift; sourceTree = "<group>"; };
@@ -431,6 +444,11 @@
 		F8CFA71329D5A89E00905F94 /* FaceBoundsState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceBoundsState.swift; sourceTree = "<group>"; };
 		F8DD95552A93803800CFCDFC /* RecognizeUserCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognizeUserCommand.swift; sourceTree = "<group>"; };
 		F8DD95572A938A8300CFCDFC /* RecognizeUserCommandProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognizeUserCommandProtocol.swift; sourceTree = "<group>"; };
+		F8E23E2B2A9B907200265326 /* RecognizeUserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognizeUserDTO.swift; sourceTree = "<group>"; };
+		F8E23E2D2A9B973D00265326 /* RecognizeUserForDoorLockCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognizeUserForDoorLockCommand.swift; sourceTree = "<group>"; };
+		F8E23E2F2A9B974D00265326 /* RecognizeUserForDoorLockCommandProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecognizeUserForDoorLockCommandProtocol.swift; sourceTree = "<group>"; };
+		F8E23E362A9BAB9400265326 /* UserCardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardViewController.swift; sourceTree = "<group>"; };
+		F8E23E382A9BAC3D00265326 /* UserCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCardViewModel.swift; sourceTree = "<group>"; };
 		F8E4D47929D8985E00B6F0BB /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		F8E4D47B29D898DE00B6F0BB /* Presentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentable.swift; sourceTree = "<group>"; };
 		F8E4D47D29D89A1B00B6F0BB /* SceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneCoordinator.swift; sourceTree = "<group>"; };
@@ -709,6 +727,7 @@
 		F8377C882A89668D00E18B59 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				F8E23E322A9BAB1800265326 /* UserCard */,
 				F858DB0F2A97E04E000D57B3 /* LockAccessesListScene */,
 				F858DB012A97D350000D57B3 /* LockHistoriesScene */,
 				F858DAE32A96AE74000D57B3 /* UserHistoriesScene */,
@@ -821,7 +840,6 @@
 				F8EDDDD92A911E380039C16B /* DeleteUserCommand.swift */,
 				F8EDDDE32A915F6D0039C16B /* GetUserPhotosInfoCommand.swift */,
 				F8EDDDE72A9161600039C16B /* GetUserPhotoByPhotoIdCommand.swift */,
-				F8DD95552A93803800CFCDFC /* RecognizeUserCommand.swift */,
 				F858DA7C2A94CE72000D57B3 /* GetLocksCommand.swift */,
 				F858DA8E2A94EDDC000D57B3 /* CreateLockCommand.swift */,
 				F858DABB2A9561A2000D57B3 /* GetLockByIdCommand.swift */,
@@ -832,6 +850,9 @@
 				F858DADF2A9642EA000D57B3 /* CreateAccessLockCommand.swift */,
 				F858DAEF2A97BB08000D57B3 /* GetDoorLockHistoryByUserIdCommand.swift */,
 				F858DAF32A97BD61000D57B3 /* GetDoorLockHistoryByDoorLockIdCommand.swift */,
+				F8DD95552A93803800CFCDFC /* RecognizeUserCommand.swift */,
+				F8E23E2D2A9B973D00265326 /* RecognizeUserForDoorLockCommand.swift */,
+				F877A84C2A9E886F0040AC7E /* CreateSecretInfoDoorLockCommand.swift */,
 			);
 			path = Commands;
 			sourceTree = "<group>";
@@ -906,6 +927,8 @@
 				F858DACF2A9619A9000D57B3 /* UserLockAccessDTO.swift */,
 				F858DAF52A97BDBA000D57B3 /* GetLockHistoryDTO.swift */,
 				F858DAF72A97BDD6000D57B3 /* LockHistoryDTO.swift */,
+				F8E23E2B2A9B907200265326 /* RecognizeUserDTO.swift */,
+				F877A84E2A9E88F50040AC7E /* LockSecretInfoDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -969,6 +992,8 @@
 				F858DAE12A964329000D57B3 /* CreateAccessLockCommandProtocol.swift */,
 				F858DAF12A97BB1E000D57B3 /* GetDoorLockHistoryByUserIdCommandProtocol.swift */,
 				F858DAF92A97BF8B000D57B3 /* GetDoorLockHistoryByDoorLockIdCommandProtocol.swift */,
+				F8E23E2F2A9B974D00265326 /* RecognizeUserForDoorLockCommandProtocol.swift */,
+				F877A8502A9E8ADB0040AC7E /* CreateSecretInfoDoorLockCommandProtocol.swift */,
 			);
 			path = Interfaces;
 			sourceTree = "<group>";
@@ -1102,7 +1127,8 @@
 		F858DA9A2A9510E5000D57B3 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				F858DA9B2A9510F8000D57B3 /* LockListViewModel.swift */,
+				F858DA9B2A9510F8000D57B3 /* AdminLockListViewModel.swift */,
+				F877A8522A9E8DF20040AC7E /* LockListViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1568,6 +1594,31 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		F8E23E322A9BAB1800265326 /* UserCard */ = {
+			isa = PBXGroup;
+			children = (
+				F8E23E342A9BAB3100265326 /* ViewModels */,
+				F8E23E332A9BAB2500265326 /* ViewControllers */,
+			);
+			path = UserCard;
+			sourceTree = "<group>";
+		};
+		F8E23E332A9BAB2500265326 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F8E23E362A9BAB9400265326 /* UserCardViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		F8E23E342A9BAB3100265326 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				F8E23E382A9BAC3D00265326 /* UserCardViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 		F8E4D47429D8968300B6F0BB /* MetalCore */ = {
 			isa = PBXGroup;
 			children = (
@@ -1696,6 +1747,7 @@
 			files = (
 				F858DAEB2A97B626000D57B3 /* UserHistroryViewController.swift in Sources */,
 				F80735152A8C544F0055D473 /* UserRepositoryProtocol.swift in Sources */,
+				F877A84D2A9E886F0040AC7E /* CreateSecretInfoDoorLockCommand.swift in Sources */,
 				F80734FB2A8BCBBF0055D473 /* FDLoadingScreen.swift in Sources */,
 				F8CFA70529D36A5C00905F94 /* FDFadeAnimatedButton.swift in Sources */,
 				F8377D012A8AF52200E18B59 /* AuthenticationSceneCoordinatorOutput.swift in Sources */,
@@ -1757,6 +1809,7 @@
 				F8377CEC2A8AE9DD00E18B59 /* SecureStorageProtocol.swift in Sources */,
 				F858DACA2A95AC38000D57B3 /* UserAccessesViewModel.swift in Sources */,
 				F8377CA82A8996FE00E18B59 /* RegistrationVC.swift in Sources */,
+				F877A84F2A9E88F50040AC7E /* LockSecretInfoDTO.swift in Sources */,
 				F816DFBA2A8E923E003B8446 /* PhotoInfoDTO.swift in Sources */,
 				F8E4D47A29D8985E00B6F0BB /* Router.swift in Sources */,
 				F8377CC92A8A745C00E18B59 /* Encodable + Extension.swift in Sources */,
@@ -1767,7 +1820,7 @@
 				F80735382A8CF6780055D473 /* UserInfoViewModel.swift in Sources */,
 				F86121812A8D6B5E00822B0D /* GetUsersResponseDTO.swift in Sources */,
 				F8301C532A117CD900455964 /* PointCloudViewController.swift in Sources */,
-				F858DA9C2A9510F8000D57B3 /* LockListViewModel.swift in Sources */,
+				F858DA9C2A9510F8000D57B3 /* AdminLockListViewModel.swift in Sources */,
 				F849F2902A1F946600672D34 /* AcrballCamera.swift in Sources */,
 				F816DFF02A904029003B8446 /* UpdateUserDTO.swift in Sources */,
 				F8CFA70729D43B1400905F94 /* DebugView.swift in Sources */,
@@ -1855,6 +1908,7 @@
 				F85AE9652A1EA202001E565F /* MathLibrary.swift in Sources */,
 				F8FBC9C42A6BEBD9009100F1 /* FaceObservation.swift in Sources */,
 				F8EDDDDC2A912C870039C16B /* DeleteUserCommandProtocol.swift in Sources */,
+				F8E23E372A9BAB9400265326 /* UserCardViewController.swift in Sources */,
 				F8377CF02A8AEB0D00E18B59 /* GenericPasswordQueryable.swift in Sources */,
 				F8377CBB2A8A5C4D00E18B59 /* CommandsFactory.swift in Sources */,
 				F858DA8B2A94E268000D57B3 /* UpdatePlaceDTO.swift in Sources */,
@@ -1873,6 +1927,7 @@
 				F8CFA71429D5A89E00905F94 /* FaceBoundsState.swift in Sources */,
 				F858DA832A94D7F9000D57B3 /* AccessLockDTO.swift in Sources */,
 				F8E4D48129D8AA6400B6F0BB /* ApplicationCoordinator.swift in Sources */,
+				F8E23E392A9BAC3D00265326 /* UserCardViewModel.swift in Sources */,
 				F8872E5E2A3CF0A300B2A0D7 /* CVPixelBuffer + Extension.swift in Sources */,
 				F858DAD72A9638FD000D57B3 /* DeleteAccessLockCommandProtocol.swift in Sources */,
 				F816DFE02A901F5D003B8446 /* AdminDeleteUserCommandProtocol.swift in Sources */,
@@ -1884,20 +1939,25 @@
 				F858DAF62A97BDBA000D57B3 /* GetLockHistoryDTO.swift in Sources */,
 				F8377CAA2A8A15FD00E18B59 /* RegexValidator.swift in Sources */,
 				F858DA7F2A94CEB2000D57B3 /* GetLocksCommandProtocol.swift in Sources */,
+				F877A8512A9E8ADB0040AC7E /* CreateSecretInfoDoorLockCommandProtocol.swift in Sources */,
 				F858DAA02A951EF3000D57B3 /* LockListViewController.swift in Sources */,
 				F8EDDDE82A9161600039C16B /* GetUserPhotoByPhotoIdCommand.swift in Sources */,
 				F816DFB82A8E91CF003B8446 /* AdminGetUserPhotosInfoCommandProtocol.swift in Sources */,
 				F807351F2A8C58D50055D473 /* GetUserByIdCommandProtocol.swift in Sources */,
 				F8377C642A892F7500E18B59 /* SessionManager.swift in Sources */,
+				F8E23E302A9B974D00265326 /* RecognizeUserForDoorLockCommandProtocol.swift in Sources */,
 				F80735172A8C56430055D473 /* GetUserCommand.swift in Sources */,
 				F858DAFA2A97BF8B000D57B3 /* GetDoorLockHistoryByDoorLockIdCommandProtocol.swift in Sources */,
 				F8348CB529DB56BD00AF14F2 /* FDAlert.swift in Sources */,
 				F858DADE2A96401A000D57B3 /* AddUserLockAccessesViewModel.swift in Sources */,
+				F8E23E2C2A9B907200265326 /* RecognizeUserDTO.swift in Sources */,
+				F8E23E2E2A9B973D00265326 /* RecognizeUserForDoorLockCommand.swift in Sources */,
 				F861216E2A8D407B00822B0D /* CreateUserCommand.swift in Sources */,
 				F83C660E2A91108D001463BA /* Bundle + Extension.swift in Sources */,
 				F816DFD62A8F6AC5003B8446 /* AddUserPhotosCommand.swift in Sources */,
 				F8CE81362A3C7C7700AED35D /* ShaderCommon + Extension.swift in Sources */,
 				F858DAF82A97BDD6000D57B3 /* LockHistoryDTO.swift in Sources */,
+				F877A8532A9E8DF20040AC7E /* LockListViewModel.swift in Sources */,
 				F8377CD52A8AA91E00E18B59 /* RequestBuilder.swift in Sources */,
 				F807350E2A8C2F480055D473 /* LogoutCommandProtocol.swift in Sources */,
 				F858DAE92A97A854000D57B3 /* UserHistoryTableView.swift in Sources */,
@@ -2054,7 +2114,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z9MV89M5M3;
+				DEVELOPMENT_TEAM = XWH33ZC3X5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SmartLockIOS/Application/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Please give permission to the camera for face detection";
@@ -2071,7 +2131,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				MTL_HEADER_SEARCH_PATHS = SmartLockIOS/Domain/Utility;
-				PRODUCT_BUNDLE_IDENTIFIER = rodia.SmartLockIOS;
+				PRODUCT_BUNDLE_IDENTIFIER = rodion.SmartLockIOS;
 				PRODUCT_NAME = "Smart Lock";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "SmartLockIOS/Domain/Utility/FaceDetectionIOS-Bridging-Header.h";
@@ -2090,7 +2150,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z9MV89M5M3;
+				DEVELOPMENT_TEAM = XWH33ZC3X5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = SmartLockIOS/Application/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Please give permission to the camera for face detection";
@@ -2107,7 +2167,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				MTL_HEADER_SEARCH_PATHS = SmartLockIOS/Domain/Utility;
-				PRODUCT_BUNDLE_IDENTIFIER = rodia.SmartLockIOS;
+				PRODUCT_BUNDLE_IDENTIFIER = rodion.SmartLockIOS;
 				PRODUCT_NAME = "Smart Lock";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "SmartLockIOS/Domain/Utility/FaceDetectionIOS-Bridging-Header.h";

@@ -8,6 +8,6 @@
 import UIKit
 
 protocol RecognizeUserCommandProtocol {
-    func execute(images: [UIImage], _ completion: @escaping (Result<Void, Error>) -> Void)
+    func execute(images: [UIImage], _ completion: @escaping (Result<RecognizeUserDTO, Error>) -> Void)
 }
 
