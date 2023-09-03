@@ -42,9 +42,19 @@ class LockListSceneCoordinator: Coordinator {
         viewController.onDeleteAction = { [weak self] in
             self?.router.pop(animated: true)
         }
+        viewController.onEditInfoAction = showEditLockInfoScene
         viewController.onGetUserLockAccessesAction = showUserLockAccessList
         viewController.onGetHistroriesAction = showLockHistoriesScene
         router.push(viewController, animated: true)
+    }
+    
+    private func showEditLockInfoScene(_ lock: Lock, lockSecretInfo: LockSecretInfo?) {
+        let viewModel = UpdateLockViewModel(lock: lock, lockSecretInfo: lockSecretInfo)
+        let viewController = UpdateLockViewController(with: viewModel)
+        viewController.onLockUpdate = { [weak self] in
+            self?.router.pop(animated: true)
+        }
+        self.router.push(viewController, animated: true)
     }
     
     

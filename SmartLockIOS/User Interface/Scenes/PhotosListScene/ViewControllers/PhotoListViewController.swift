@@ -50,8 +50,8 @@ class PhotoListViewController: UIViewController {
         loadingScreen.show(on: self.view)
         viewModel.loadData { [weak self] _ in
             DispatchQueue.main.async {
-                self?.loadingScreen.stop()
                 self?.tableView.reloadData()
+                self?.loadingScreen.stop()
             }
         }
     }

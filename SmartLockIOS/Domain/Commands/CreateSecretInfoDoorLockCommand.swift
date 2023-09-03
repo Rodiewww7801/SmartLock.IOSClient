@@ -14,7 +14,7 @@ class CreateSecretInfoDoorLockCommand: CreateSecretInfoDoorLockCommandProtocol {
         self.networkingSerivce = NetworkingFactory.networkingService()
     }
     
-    func execute(_ dto: LockSecretInfoDTO, _ completion: @escaping (Result<Void, Error>) -> Void) {
+    func execute(_ dto: CreateLockSecretInfoDTO, _ completion: @escaping (Result<Void, Error>) -> Void) {
         let requestModel = FaceLockAPIRequestFactory.createSecretInfoDoorLock(dto)
         networkingSerivce.request(requestModel, completion)
     }

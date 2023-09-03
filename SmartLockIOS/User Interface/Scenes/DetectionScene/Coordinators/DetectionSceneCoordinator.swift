@@ -93,7 +93,7 @@ class DetectionSceneCoordinator: Coordinator {
         router.push(viewController, animated: true)
     }
     
-    private func showUserCard(user: User, on presenteViewController: ModalPresentedViewDelegate) {
+    private func showUserCard(user: UserCardModel, on presenteViewController: ModalPresentedViewDelegate) {
         let viewModel = UserCardViewModel(user: user)
         let modalViewController = UserCardViewController(with: viewModel)
         modalViewController.modalDelegate = presenteViewController

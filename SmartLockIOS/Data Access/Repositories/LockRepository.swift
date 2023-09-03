@@ -14,6 +14,7 @@ class LockRepository: LockRepositoryProtocol {
     private let getUserAccessesByUserIdCommand: GetUserAccessesByUserIdCommandProtocol
     private let getDoorLockHistoryByUserIdCommand: GetDoorLockHistoryByUserIdCommandProtocol
     private let getDoorLockHistoryByDoorLockIdCommand: GetDoorLockHistoryByDoorLockIdCommandProtocol
+    private let getLockSecretInfoCommand: GetLockSecretInfoCommandProtocol
     private var userRepository: UserRepositoryProtocol {
         return RepositoryFactory.userRepository()
     }
@@ -25,6 +26,7 @@ class LockRepository: LockRepositoryProtocol {
         self.getUserAccessesByUserIdCommand = CommandsFactory.getUserAccessesByUserIdCommand()
         self.getDoorLockHistoryByUserIdCommand = CommandsFactory.getDoorLockHistoryByUserIdCommand()
         self.getDoorLockHistoryByDoorLockIdCommand = CommandsFactory.getDoorLockHistoryByDoorLockIdCommand()
+        self.getLockSecretInfoCommand = CommandsFactory.createGetLockSecretInfoCommand()
     }
     
     func getLocks() async -> [Lock] {
@@ -47,6 +49,17 @@ class LockRepository: LockRepositoryProtocol {
         guard let lockDTO = lockDTO else { return nil }
         let lock = Lock(id: String(lockDTO.id), name: lockDTO.name, description: lockDTO.description)
         return lock
+    }
+    
+    func getLockSecretInfo(lockId: String) async -> LockSecretInfo? {
+        let lockSecretInfoDTO = try? await withUnsafeThrowingContinuation { [weak self] continuatuion in
+            self?.getLockSecretInfoCommand.execute(lockId: lockId) { result in
+                continuatuion.resume(with: result)
+            }
+        }
+        guard let lockSecretInfoDTO = lockSecretInfoDTO else { return nil }
+        let lockSecretInfo = LockSecretInfo(secretKey: lockSecretInfoDTO.secretKey, urlConnection: lockSecretInfoDTO.urlConnection)
+        return lockSecretInfo
     }
     
     func getUserLockAccesses(lockId: String) async -> [UserLockAccess] {
@@ -171,7 +184,7 @@ class LockRepository: LockRepositoryProtocol {
         guard let user = user, let lockHistoriesDTO = lockHistoriesDTO, let locks = locks else { return [] }
         
         let lockHistrories = lockHistoriesDTO.doorLockHistories.compactMap { dto in
-            if let lock = locks.first(where: { $0.id == dto.userId }) {
+            if let lock = locks.first(where: { $0.id == String(dto.doorLockId) }) {
                 return LockHistory(id: String(dto.id), user: user, lock: lock, openedDataTime: Date.convertDateFormat(dto.openedDateTime))
             }
             return nil

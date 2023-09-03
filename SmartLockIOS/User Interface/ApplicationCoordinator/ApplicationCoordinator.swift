@@ -116,7 +116,7 @@ extension ApplicationCoordinator: NetwrokingListener {
             
             FDAlert()
                 .createWith(title: error.title, message: error.message)
-                .addAction(title: "Try again", style: .default, handler: { [weak self] in
+                .addAction(title: "Ok", style: .default, handler: { [weak self] in
                     switch error {
                     case .authenticationError(_), .refreshTokenExpired(_):
                         self?.refreshTokenExpired()

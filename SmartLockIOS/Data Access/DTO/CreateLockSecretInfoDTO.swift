@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LockSecretInfoDTO: Encodable {
+struct CreateLockSecretInfoDTO: Encodable {
     var urlConnection: String
     var doorLockId: Int
 }

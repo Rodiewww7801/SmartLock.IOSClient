@@ -13,6 +13,7 @@ class LockManagmentViewModel {
     private let userRepository: UserRepositoryProtocol
     var lockId: String
     var lock: Lock?
+    var lockSecretInfo: LockSecretInfo?
     
     init(lockId: String) {
         self.lockId = lockId
@@ -21,13 +22,22 @@ class LockManagmentViewModel {
         self.userRepository = RepositoryFactory.userRepository()
     }
     
-    func loadData(_ completion: @escaping (Lock)->Void) {
+    func loadData(_ completion: @escaping (Lock, LockSecretInfo?)->Void) {
         Task { [weak self] in
             guard let self = self else { return }
-            let lock = await self.lockRepository.getLock(lockId: self.lockId)
-            self.lock = lock
+            
+            let lockTask = Task.detached {
+                return await self.lockRepository.getLock(lockId: self.lockId)
+            }
+            
+            let lockSecretInfoTask = Task.detached {
+                return await self.lockRepository.getLockSecretInfo(lockId: self.lockId)
+            }
+            
+            self.lock = await lockTask.value
+            self.lockSecretInfo = await lockSecretInfoTask.value
             guard let lock = lock else { return }
-            completion(lock)
+            completion(lock, self.lockSecretInfo)
         }
     }
     

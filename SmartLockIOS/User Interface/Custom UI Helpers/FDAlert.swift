@@ -35,7 +35,7 @@ class FDAlert {
     
     @discardableResult
     func present(on presentedViewController: Presentable?) -> FDAlert {
-        DispatchQueue.main.async { 
+        DispatchQueue.main.async {
             presentedViewController?.toPresent().present(self.alert, animated: true, completion: nil)
         }
         return self

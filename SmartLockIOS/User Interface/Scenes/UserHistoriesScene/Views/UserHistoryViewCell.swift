@@ -124,5 +124,6 @@ class UserHistoryViewCell: UITableViewCell {
         timeLabelText.topAnchor.constraint(equalTo: timeLabelTitle.bottomAnchor, constant: 10).isActive = true
         timeLabelText.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
         timeLabelText.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
+        timeLabelText.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20).isActive = true
     }
 }

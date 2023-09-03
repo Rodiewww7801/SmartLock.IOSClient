@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class UserCardViewController: UIViewController {
-    private var userInfoView: UserInfoViewCell!
+    private var userInfoView: UserCardViewCell!
     private var viewModel: UserCardViewModel
     
     var modalDelegate: ModalPresentedViewDelegate?
@@ -43,7 +43,7 @@ class UserCardViewController: UIViewController {
     }
     
     private func configureUserInfoView() {
-        userInfoView = UserInfoViewCell()
+        userInfoView = UserCardViewCell()
         userInfoView.configure()
         userInfoView.updateData(viewModel.user)
         self.view.addSubview(userInfoView)

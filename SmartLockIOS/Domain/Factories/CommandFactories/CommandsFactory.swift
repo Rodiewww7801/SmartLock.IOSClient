@@ -127,4 +127,16 @@ class CommandsFactory: CommandsFactoryProtocol {
     static func createSecretInfoDoorLockCommand() -> CreateSecretInfoDoorLockCommandProtocol {
         return CreateSecretInfoDoorLockCommand()
     }
+    
+    static func createUpdateLockCommand() -> UpdateLockCommandProtocol {
+        return UpdateLockCommand()
+    }
+    
+    static func createUpdateSecretInfoLockCommand() -> UpdateSecretInfoLockCommandProtocol {
+        return UpdateSecretInfoLockCommand()
+    }
+    
+    static func createGetLockSecretInfoCommand() -> GetLockSecretInfoCommandProtocol {
+        return GetLockSecretInfoCommand()
+    }
 }

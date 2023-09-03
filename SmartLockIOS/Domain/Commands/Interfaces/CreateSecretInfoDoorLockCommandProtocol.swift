@@ -8,5 +8,5 @@
 import Foundation
 
 protocol CreateSecretInfoDoorLockCommandProtocol {
-    func execute(_ dto: LockSecretInfoDTO, _ completion: @escaping (Result<Void, Error>) -> Void) 
+    func execute(_ dto: CreateLockSecretInfoDTO, _ completion: @escaping (Result<Void, Error>) -> Void) 
 }

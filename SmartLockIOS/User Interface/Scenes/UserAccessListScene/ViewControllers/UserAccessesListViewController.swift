@@ -48,9 +48,9 @@ class UserAccessesListViewController: UIViewController {
         viewModel.loadData { [weak self] _ in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.loadingScreen.stop()
                 self.tableView.dataSource = self.viewModel.dataSource
                 self.tableView.reloadData()
+                self.loadingScreen.stop()
             }
         }
     }

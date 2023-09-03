@@ -12,7 +12,7 @@ protocol DetectionScenePresentedDelegate: AnyObject {
     func updateFaceGeometry()
     func updateFaceState()
     func capturePhotoObservation(image: UIImage)
-    func onShowUserCard(user: User)
+    func onShowUserCard(user: UserCardModel)
     func showLoadingScreen()
     func stopLoadingScreen()
 }
@@ -143,7 +143,7 @@ class DetectionSceneViewModel {
     }
     
     private func setAcceptableRollPitchYaw(using roll: Double, pitch: Double, yaw: Double) {
-        self.isAcceptableRoll = (roll > 1.2 && roll < 1.6)
+        self.isAcceptableRoll = (roll > 1.4 && roll < 1.7)
         self.isAcceptablePitch = abs(CGFloat(pitch)) < 0.2
         self.isAcceptableYaw = abs(CGFloat(yaw)) < 0.15
     }
@@ -188,10 +188,10 @@ class DetectionSceneViewModel {
         self.presentedDelegate?.updateFaceState()
     }
     
-    private func getUser(images: [UIImage], _ completion: @escaping (User?)->Void) {
+    private func getUser(images: [UIImage], _ completion: @escaping (UserCardModel?)->Void) {
         Task { [weak self] in
             guard let lockId = self?.lockId else { return }
-            let user = await self?.userRepository.getUser(lockId: lockId, images: images)
+            let user = await self?.userRepository.getUserCardModel(lockId: lockId, images: images)
             completion(user)
         }
     }

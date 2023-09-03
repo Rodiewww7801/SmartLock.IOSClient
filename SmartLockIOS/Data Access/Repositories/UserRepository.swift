@@ -103,6 +103,23 @@ class UserRepository: UserRepositoryProtocol {
         return user
     }
     
+    func getUserCardModel(lockId: String, images: [UIImage]) async -> UserCardModel? {
+        let userDTO = try? await withUnsafeThrowingContinuation { [weak self] continuation in
+            self?.recognizeUserForDoorLockCommand.execute(lockId: lockId, images: images) { result in
+                continuation.resume(with: result)
+            }
+        }
+        
+        guard let userDTO = userDTO else { return nil }
+        var userFace: UIImage? = nil
+        if let data = Data(base64Encoded: userDTO.base64UserImage.data) {
+            userFace = UIImage(data: data)
+        }
+       
+        let user = UserCardModel(id: userDTO.id, face: userFace, username: userDTO.username, email: userDTO.email, firstName: userDTO.firstName, lastName: userDTO.lastName, role: User.Role(rawValue: userDTO.status) ?? .user, predictionDistance: userDTO.predictionDistance)
+        return user
+    }
+    
     
     func getUsers() async -> [User] {
         let usersDTO = try? await withUnsafeThrowingContinuation { [weak self] continuation in

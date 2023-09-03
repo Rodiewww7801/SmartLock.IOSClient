@@ -14,4 +14,5 @@ protocol LockRepositoryProtocol {
     func getUserLockAccesses(userId: String) async -> [UserLockAccess]
     func getLockHistories(lockId: String) async -> [LockHistory]
     func getLockHistories(userId: String) async -> [LockHistory]
+    func getLockSecretInfo(lockId: String) async -> LockSecretInfo?
 }

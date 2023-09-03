@@ -19,7 +19,7 @@ class DetectionSceneVC: UIViewController {
     var showSettings: (()->())?
     var onBackTapped: (()->())?
     var showDetectionPermission: (()->Void)?
-    var showUserCard: ((User)->Void)?
+    var showUserCard: ((UserCardModel)->Void)?
     
     init(with viewModel: DetectionSceneViewModel) {
         self.viewModel = viewModel
@@ -183,7 +183,7 @@ extension DetectionSceneVC: DetectionScenePresentedDelegate {
         }
     }
     
-    func onShowUserCard(user: User) {
+    func onShowUserCard(user: UserCardModel) {
         DispatchQueue.main.async { [weak self] in
             self?.showUserCard?(user)
         }

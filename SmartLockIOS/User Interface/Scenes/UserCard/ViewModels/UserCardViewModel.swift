@@ -8,9 +8,9 @@
 import Foundation
 
 class UserCardViewModel {
-    let user: User
+    let user: UserCardModel
     
-    init(user: User) {
+    init(user: UserCardModel) {
         self.user = user
     }
 }

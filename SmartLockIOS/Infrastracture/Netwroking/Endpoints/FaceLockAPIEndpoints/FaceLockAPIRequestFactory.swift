@@ -212,6 +212,12 @@ class FaceLockAPIRequestFactory {
         return model
     }
     
+    static func getDoorLockSecretInfo(lockId: String) -> RequestModel {
+        let path = FaceLockAPIPaths.getDoorLockSecretInfo.replacingOccurrences(of: "{doorLockId}", with: lockId)
+        let model = RequestModel(basePath: serverAPI, path: path, httpMethod: .get)
+        return model
+    }
+    
     static func getUserAccessesByLockId(lockId: String) -> RequestModel {
         let path = FaceLockAPIPaths.getUserAccessesByLockId.replacingOccurrences(of: "{doorLockId}", with: lockId)
         let model = RequestModel(basePath: serverAPI, path: path, httpMethod: .get)
@@ -236,10 +242,18 @@ class FaceLockAPIRequestFactory {
         return model
     }
     
-    static func updateLock(_ dto: LockDTO) -> RequestModel {
-        let path = FaceLockAPIPaths.updateLock.replacingOccurrences(of: "{doorLockId}", with: String(dto.id))
+    static func updateLock(lockId: Int, _ dto: UpdateLockDTO) -> RequestModel {
+        let path = FaceLockAPIPaths.updateLock.replacingOccurrences(of: "{doorLockId}", with: String(lockId))
         let encodedData = try? JSONEncoder().encode(dto)
-        let model = RequestModel(basePath: serverAPI, path: path, httpMethod: .post)
+        let model = RequestModel(basePath: serverAPI, path: path, httpMethod: .put)
+        model.body = encodedData
+        return model
+    }
+    
+    static func updateSecretLockInfo(lockId: String, _ dto: UpdateSecretLockInfoDTO) -> RequestModel {
+        let path = FaceLockAPIPaths.updateSecretInfoLock.replacingOccurrences(of: "{doorLockId}", with: lockId)
+        let encodedData = try? JSONEncoder().encode(dto)
+        let model = RequestModel(basePath: serverAPI, path: path, httpMethod: .put)
         model.body = encodedData
         return model
     }
@@ -279,15 +293,7 @@ class FaceLockAPIRequestFactory {
         return model
     }
     
-    static func updatePlace(_ dto: UpdatePlaceDTO) -> RequestModel {
-        let encodedData = try? JSONEncoder().encode(dto)
-        let path = FaceLockAPIPaths.createPlace.replacingOccurrences(of: "{placeId}", with: String(dto.id))
-        let model = RequestModel(basePath: serverAPI, path: path, httpMethod: .post)
-        model.body = encodedData
-        return model
-    }
-    
-    static func createSecretInfoDoorLock(_ dto: LockSecretInfoDTO) -> RequestModel {
+    static func createSecretInfoDoorLock(_ dto: CreateLockSecretInfoDTO) -> RequestModel {
         let encodedData = try? JSONEncoder().encode(dto)
         let model = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.createSecretInfoDoorLock, httpMethod: .post)
         model.body = encodedData

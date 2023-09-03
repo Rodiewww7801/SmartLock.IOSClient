@@ -11,16 +11,18 @@ import UIKit
 class LockManagmentViewController: UIViewController {
     private var scrollView: UIScrollView!
     private var contentView: UIView!
-    private var lockViewCell: LockViewCell!
+    private var lockViewCell: AdminLockViewCell!
     private var buttonStackView: UIStackView!
     private var lockHistoriesButton: UIButton!
     private var userAccessesButton: UIButton!
+    private var editInfoButton: UIButton!
     private var deleteButton: UIButton!
     private let viewModel: LockManagmentViewModel
     private let loadingScreen = FDLoadingScreen()
     
     var onGetUserLockAccessesAction: ((_ lockId: String)->Void)?
     var onGetHistroriesAction: ((_ lockId: String) -> Void)?
+    var onEditInfoAction: ((_ lock: Lock, _ lockSecret: LockSecretInfo?) -> Void)?
     var onDeleteAction: (()->Void)?
     
     init(with viewModel: LockManagmentViewModel) {
@@ -49,10 +51,10 @@ class LockManagmentViewController: UIViewController {
     
     private func loadData() {
         self.loadingScreen.show(on: self.view)
-        self.viewModel.loadData { [weak self] lock in
+        self.viewModel.loadData { [weak self] lock, secretInfo in
             DispatchQueue.main.async {
                 guard let self = self else { return }
-                self.lockViewCell.updateData(lock)
+                self.lockViewCell.updateData(lock: lock, secretLockInfo: secretInfo)
                 self.loadingScreen.stop()
             }
         }
@@ -89,7 +91,7 @@ class LockManagmentViewController: UIViewController {
     }
     
     private func configureLockView() {
-        lockViewCell = LockViewCell()
+        lockViewCell = AdminLockViewCell()
         lockViewCell.configure()
         lockViewCell.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(lockViewCell)
@@ -141,6 +143,20 @@ class LockManagmentViewController: UIViewController {
         lockHistoriesButton.translatesAutoresizingMaskIntoConstraints = false
         lockHistoriesButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         lockHistoriesButton.widthAnchor.constraint(equalTo: buttonStackView.widthAnchor).isActive = true
+        
+        addDividerIn(buttonStackView)
+        
+        editInfoButton = UIButton(type: .system)
+        editInfoButton.backgroundColor = .white
+        editInfoButton.contentHorizontalAlignment = .left
+        editInfoButton.setTitle("Edit", for: .normal)
+        editInfoButton.setTitleColor(.systemGray, for: .normal)
+        editInfoButton.addTarget(self, action: #selector(onEditInfoTapped), for: .touchUpInside)
+        
+        buttonStackView.addArrangedSubview(editInfoButton)
+        editInfoButton.translatesAutoresizingMaskIntoConstraints = false
+        editInfoButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        editInfoButton.widthAnchor.constraint(equalTo: buttonStackView.widthAnchor).isActive = true
         
         addDividerIn(buttonStackView)
         
@@ -205,5 +221,11 @@ class LockManagmentViewController: UIViewController {
     
     @objc private func onGetUserLockAccessesTapped()  {
         self.onGetUserLockAccessesAction?(self.viewModel.lockId)
+    }
+    
+    @objc private func onEditInfoTapped() {
+        guard let lock = self.viewModel.lock else { return }
+        let lockSecret = self.viewModel.lockSecretInfo
+        self.onEditInfoAction?(lock, lockSecret)
     }
 }
