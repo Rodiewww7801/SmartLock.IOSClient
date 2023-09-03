@@ -56,15 +56,13 @@ class FaceDetector: NSObject {
             var outputImage = originalImage
             
             //remove background
-            if self.viewModelDelegate?.getHideBackgroundState() ?? false {
-                let detectSegmentationRequest = VNGeneratePersonSegmentationRequest()
-                detectSegmentationRequest.qualityLevel = .accurate
-                
-                try? self.sequenceHandler.perform([detectSegmentationRequest], on: currentFrameBuffer, orientation: .downMirrored)
-                
-                if let maskPixelBuffer = detectSegmentationRequest.results?.first?.pixelBuffer {
-                    outputImage = self.removeBackgroundFrom(image: originalImage, using: maskPixelBuffer)
-                }
+            let detectSegmentationRequest = VNGeneratePersonSegmentationRequest()
+            detectSegmentationRequest.qualityLevel = .accurate
+            
+            try? self.sequenceHandler.perform([detectSegmentationRequest], on: currentFrameBuffer, orientation: .downMirrored)
+            
+            if let maskPixelBuffer = detectSegmentationRequest.results?.first?.pixelBuffer {
+                outputImage = self.removeBackgroundFrom(image: originalImage, using: maskPixelBuffer)
             }
             
             let coreImageWidth = outputImage.extent.width
@@ -159,25 +157,63 @@ class FaceDetector: NSObject {
         let depthDataMap = depthData.depthDataMap
         
         CVPixelBufferLockBaseAddress(depthDataMap, .readOnly)
-        let cidepthImage = CIImage(cvPixelBuffer: depthDataMap)
         
-        let baseAddress = CVPixelBufferGetBaseAddress(depthDataMap)!
+        // Ensure that the pixel buffer has a valid base address
+        guard let baseAddress = CVPixelBufferGetBaseAddress(depthDataMap) else {
+            // Handle the case where the base address is nil
+            CVPixelBufferUnlockBaseAddress(depthDataMap, .readOnly)
+            return
+        }
+        
         let bytesPerRow = CVPixelBufferGetBytesPerRow(depthDataMap)
         
-        let rowDataCenter = baseAddress + Int(cidepthImage.extent.maxY - face.centerPosition.y) * bytesPerRow
-        let centerValue = rowDataCenter.assumingMemoryBound(to: Float16.self)[Int(face.centerPosition.x)] * 100.0
+        // Ensure that the row data pointers are within bounds
+        let maxY = CIImage(cvPixelBuffer: depthDataMap).extent.maxY
+        guard maxY >= 0, Int(maxY) < bytesPerRow else {
+            // Handle the case where the maxY is out of bounds
+            CVPixelBufferUnlockBaseAddress(depthDataMap, .readOnly)
+            return
+        }
         
-        let rowDataMouth = baseAddress + Int(cidepthImage.extent.maxY - face.mouthPosition.y) * bytesPerRow
-        let mouthValue = rowDataMouth.assumingMemoryBound(to: Float16.self)[Int(face.mouthPosition.x)] * 100.0
+        let rowDataCenter = baseAddress + Int(maxY - face.centerPosition.y) * bytesPerRow
+        let centerX = Int(face.centerPosition.x)
+        // Ensure that the center position is within bounds
+        guard centerX >= 0, centerX < bytesPerRow / MemoryLayout<Float16>.stride else {
+            // Handle the case where the centerX is out of bounds
+            CVPixelBufferUnlockBaseAddress(depthDataMap, .readOnly)
+            return
+        }
+        let centerValue = rowDataCenter.assumingMemoryBound(to: Float16.self)[centerX] * 100.0
+
+        let rowDataMouth = baseAddress + Int(maxY - face.mouthPosition.y) * bytesPerRow
+        let mouthX = Int(face.mouthPosition.x)
+        guard mouthX >= 0, mouthX < bytesPerRow / MemoryLayout<Float16>.stride else {
+            CVPixelBufferUnlockBaseAddress(depthDataMap, .readOnly)
+            return
+        }
+        let mouthValue = rowDataMouth.assumingMemoryBound(to: Float16.self)[mouthX] * 100.0
         
-        let rowDataLeftEye = baseAddress + Int(cidepthImage.extent.maxY - face.leftEyePosition.y) * bytesPerRow
-        let leftEyeValue = rowDataLeftEye.assumingMemoryBound(to: Float16.self)[Int(face.leftEyePosition.x)] * 100.0
+        let rowDataLeftEye = baseAddress + Int(maxY - face.leftEyePosition.y) * bytesPerRow
+        let leftEyeX = Int(face.leftEyePosition.x)
+        guard leftEyeX >= 0, leftEyeX < bytesPerRow / MemoryLayout<Float16>.stride else {
+            CVPixelBufferUnlockBaseAddress(depthDataMap, .readOnly)
+            return
+        }
+        let leftEyeValue = rowDataLeftEye.assumingMemoryBound(to: Float16.self)[leftEyeX] * 100.0
         
-        let rowDataRightEye = baseAddress + Int(cidepthImage.extent.maxY - face.rightEyePosition.y) * bytesPerRow
-        let rightEyeValue = rowDataRightEye.assumingMemoryBound(to: Float16.self)[Int(face.rightEyePosition.x)] * 100.0
+        let rowDataRightEye = baseAddress + Int(maxY - face.rightEyePosition.y) * bytesPerRow
+        let rightEyeX = Int(face.rightEyePosition.x)
+        guard rightEyeX >= 0, rightEyeX < bytesPerRow / MemoryLayout<Float16>.stride else {
+            CVPixelBufferUnlockBaseAddress(depthDataMap, .readOnly)
+            return
+        }
+        let rightEyeValue = rowDataRightEye.assumingMemoryBound(to: Float16.self)[rightEyeX] * 100.0
         
-        let isReal: Bool = ((centerValue < mouthValue) && (centerValue < leftEyeValue) && centerValue < rightEyeValue)
         CVPixelBufferUnlockBaseAddress(depthDataMap, .readOnly)
+//        //for testing
+//        print("\n\n\n")
+//        print("centerValue: \(centerValue) \nmouthValue: \(mouthValue) \nleftEye: \(leftEyeValue) \nrightEye: \(rightEyeValue)")
+        let isReal: Bool = ((centerValue < mouthValue) && (centerValue < leftEyeValue) && centerValue < rightEyeValue)
         
         let faceAuthenticity: FaceAuthenticity = isReal ? .realFace : .fakeFace
         self.faceObservationModel.faceAuthenticity = faceAuthenticity
