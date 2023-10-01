@@ -14,7 +14,10 @@ class DetectionSceneCoordinator: Coordinator {
     var alert: FDAlert?
     var removeCoordinator: (()->())?
     
-    private var detectionSceneViewModel: DetectionSceneViewModel?
+    private var detectionSettingsViewModel = DetectionSettingsViewModel()
+    private var currentLockId: String?
+    //var detectionViewController: DetectionSceneVC?
+   // var pointToCloudViewContorller: PointCloudViewController?
     
     init(router: Router) {
         self.router = router
@@ -29,30 +32,45 @@ class DetectionSceneCoordinator: Coordinator {
         showLockListScene()
     }
     
-    private func showDetectionScene(lockId: String) {
+    private func showDetectionScene() {
+        guard let lockId = currentLockId else { return }
         let detectionSceneViewModel = DetectionSceneViewModel(lockId: lockId)
         let detectionScene = DetectionSceneVC(with: detectionSceneViewModel)
-        detectionScene.showSettings = { [weak self, weak detectionScene] in
-            self?.showDetecetionSceneSettingsViewController(delegate: detectionScene)
+        
+        detectionScene.showSettings = { [weak self] in
+            self?.showDetecetionSceneSettingsViewController()
         }
+        
         detectionScene.showUserCard = { [weak self, weak detectionScene] user in
             guard let detectionScene = detectionScene else { return }
             self?.showUserCard(user: user, on: detectionScene)
         }
+        
         detectionScene.showDetectionPermission = showAlert
-        self.detectionSceneViewModel = detectionSceneViewModel
-        router.push(detectionScene, animated: true)
+        
+        self.detectionSettingsViewModel.onDebugActionSwitch = { [weak detectionSceneViewModel] value in
+            detectionSceneViewModel?.debugModeEnabled = value
+        }
+        //self.detectionViewController = detectionScene
+
+        if router.rootController.viewControllers.contains(where: { $0 is PointCloudViewController }) {
+            var viewControllers = router.rootController.viewControllers
+            viewControllers[viewControllers.endIndex - 2] = detectionScene
+            router.rootController.setViewControllers(viewControllers, animated: false)
+        } else {
+            router.push(detectionScene, animated: true)
+        }
     }
     
-    private func showDepthData() {
+    private func showPointToCloudScene() {
         let depthDataViewController = PointCloudViewController()
-        depthDataViewController.onBackTapped = { [weak self] in
-            self?.removeCoordinator?()
-        }
         depthDataViewController.showSettings = { [weak self] in
-            self?.showDepthDataSettings()
+            self?.showDetecetionSceneSettingsViewController()
         }
-        router.push(depthDataViewController, animated: true)
+        
+        var viewControllers = router.rootController.viewControllers
+        viewControllers[viewControllers.endIndex - 2] = depthDataViewController
+        router.rootController.setViewControllers(viewControllers, animated: false)
     }
     
     private func showAlert() {
@@ -68,17 +86,17 @@ class DetectionSceneCoordinator: Coordinator {
             .present(on: router)
     }
     
-    private func showDetecetionSceneSettingsViewController(delegate: DetectionSceneSettingsDelegate?) {
-        guard let detectionSceneViewModel = detectionSceneViewModel else { return } // todo: fix it pls
-        let detecetionSceneSettingsViewController = DetecetionSceneSettingsViewController(with: detectionSceneViewModel)
-        detecetionSceneSettingsViewController.delegate = delegate
-        router.push(detecetionSceneSettingsViewController, animated: true)
-    }
-    
-    
-    private func showDepthDataSettings() {
-        let depthDataSettings = PointCloudSceneSettingsViewController()
-        router.push(depthDataSettings, animated: true)
+    private func showDetecetionSceneSettingsViewController() {
+        let detectionSettingsViewController = DetecetionSettingsViewController(viewModel: self.detectionSettingsViewModel)
+        self.detectionSettingsViewModel.onPointToCloudSwitch = { [weak self] value in
+            if value {
+                self?.showPointToCloudScene()
+            } else {
+                self?.showDetectionScene()
+            }
+            
+        }
+        router.push(detectionSettingsViewController, animated: true)
     }
     
     private func showLockListScene() {
@@ -88,7 +106,8 @@ class DetectionSceneCoordinator: Coordinator {
             self?.removeCoordinator?()
         }
         viewController.onLockSelected = { [weak self] lockId in
-            self?.showDetectionScene(lockId: lockId)
+            self?.currentLockId = lockId
+            self?.showDetectionScene()
         }
         router.push(viewController, animated: true)
     }
@@ -99,4 +118,5 @@ class DetectionSceneCoordinator: Coordinator {
         modalViewController.modalDelegate = presenteViewController
         self.router.present(modalViewController, animated: true)
     }
+    
 }

@@ -10,6 +10,5 @@ import Foundation
 struct SecretLockInfoDTO: Decodable {
     var id: Int
     var doorLockId: Int
-    var urlConnection: String
-    var secretKey: String
+    var serialNumber: String
 }

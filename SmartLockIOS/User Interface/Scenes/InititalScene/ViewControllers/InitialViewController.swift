@@ -80,7 +80,7 @@ class InitialViewController: UIViewController {
         profileImageView.widthAnchor.constraint(equalToConstant: 80).isActive = true
         
         let profileLabel = UILabel()
-        profileLabel.text = "Profile"
+        profileLabel.text = "User account"
         profileLabel.textColor = .systemBlue
         profileLabel.font = .systemFont(ofSize: 14)
         

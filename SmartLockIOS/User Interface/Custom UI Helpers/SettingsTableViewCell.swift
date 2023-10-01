@@ -16,7 +16,7 @@ class SettingsTableViewCell: UITableViewCell {
     var toggleSwitchAction: (()->())?
     var settingType: SettingsTableViewCellType?
     var settingName: String?
-    private var toggleSwitch: UISwitch!
+    private(set) var toggleSwitch: UISwitch!
     private var label: UILabel!
     
     
@@ -37,9 +37,17 @@ class SettingsTableViewCell: UITableViewCell {
         }
     }
     
-    func setSwitchState(_ state: Bool) {
+    func toggleSwitchState() {
         DispatchQueue.main.async {
+            let state = !self.toggleSwitch.isOn
             self.toggleSwitch.setOn(state, animated: true)
+            self.toggleSwitchTapped()
+        }
+    }
+    
+    func setSwitchState(_ state: Bool, animated: Bool = false) {
+        DispatchQueue.main.async {
+            self.toggleSwitch.setOn(state, animated: animated)
         }
     }
     

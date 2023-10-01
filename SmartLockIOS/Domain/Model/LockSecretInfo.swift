@@ -8,6 +8,5 @@
 import Foundation
 
 struct LockSecretInfo {
-    var secretKey: String
-    var urlConnection: String
+    var serialNumber: String
 }

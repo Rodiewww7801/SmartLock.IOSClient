@@ -8,6 +8,6 @@
 import Foundation
 
 struct CreateLockSecretInfoDTO: Encodable {
-    var urlConnection: String
+    var serialNumber: String
     var doorLockId: Int
 }

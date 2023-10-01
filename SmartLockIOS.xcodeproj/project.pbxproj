@@ -194,13 +194,14 @@
 		F861217F2A8D6ACA00822B0D /* GetUsersCommandProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F861217E2A8D6ACA00822B0D /* GetUsersCommandProtocol.swift */; };
 		F86121812A8D6B5E00822B0D /* GetUsersResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86121802A8D6B5E00822B0D /* GetUsersResponseDTO.swift */; };
 		F86121842A8D74BE00822B0D /* UserInfoViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86121832A8D74BE00822B0D /* UserInfoViewCell.swift */; };
+		F8698FF82AC4C8E600747A4A /* DetectionSettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8698FF72AC4C8E600747A4A /* DetectionSettingsViewModel.swift */; };
 		F877A84D2A9E886F0040AC7E /* CreateSecretInfoDoorLockCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = F877A84C2A9E886F0040AC7E /* CreateSecretInfoDoorLockCommand.swift */; };
 		F877A84F2A9E88F50040AC7E /* CreateLockSecretInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F877A84E2A9E88F50040AC7E /* CreateLockSecretInfoDTO.swift */; };
 		F877A8512A9E8ADB0040AC7E /* CreateSecretInfoDoorLockCommandProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F877A8502A9E8ADB0040AC7E /* CreateSecretInfoDoorLockCommandProtocol.swift */; };
 		F877A8532A9E8DF20040AC7E /* LockListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F877A8522A9E8DF20040AC7E /* LockListViewModel.swift */; };
 		F881A83E2A32B066003408B3 /* PointCloudSceneSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F881A83D2A32B066003408B3 /* PointCloudSceneSettingsViewController.swift */; };
 		F881A8402A32CF01003408B3 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F881A83F2A32CF01003408B3 /* SettingsTableViewCell.swift */; };
-		F881A8422A32CF3F003408B3 /* DetecetionSceneSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F881A8412A32CF3F003408B3 /* DetecetionSceneSettingsViewController.swift */; };
+		F881A8422A32CF3F003408B3 /* DetecetionSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F881A8412A32CF3F003408B3 /* DetecetionSettingsViewController.swift */; };
 		F881A8442A32CFFE003408B3 /* DetectionSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F881A8432A32CFFE003408B3 /* DetectionSceneCoordinator.swift */; };
 		F8872E592A3CBC7A00B2A0D7 /* PointCloudModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8872E582A3CBC7A00B2A0D7 /* PointCloudModel.swift */; };
 		F8872E5B2A3CECEC00B2A0D7 /* RenderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8872E5A2A3CECEC00B2A0D7 /* RenderModel.swift */; };
@@ -438,13 +439,14 @@
 		F861217E2A8D6ACA00822B0D /* GetUsersCommandProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUsersCommandProtocol.swift; sourceTree = "<group>"; };
 		F86121802A8D6B5E00822B0D /* GetUsersResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetUsersResponseDTO.swift; sourceTree = "<group>"; };
 		F86121832A8D74BE00822B0D /* UserInfoViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoViewCell.swift; sourceTree = "<group>"; };
+		F8698FF72AC4C8E600747A4A /* DetectionSettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionSettingsViewModel.swift; sourceTree = "<group>"; };
 		F877A84C2A9E886F0040AC7E /* CreateSecretInfoDoorLockCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSecretInfoDoorLockCommand.swift; sourceTree = "<group>"; };
 		F877A84E2A9E88F50040AC7E /* CreateLockSecretInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateLockSecretInfoDTO.swift; sourceTree = "<group>"; };
 		F877A8502A9E8ADB0040AC7E /* CreateSecretInfoDoorLockCommandProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateSecretInfoDoorLockCommandProtocol.swift; sourceTree = "<group>"; };
 		F877A8522A9E8DF20040AC7E /* LockListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockListViewModel.swift; sourceTree = "<group>"; };
 		F881A83D2A32B066003408B3 /* PointCloudSceneSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointCloudSceneSettingsViewController.swift; sourceTree = "<group>"; };
 		F881A83F2A32CF01003408B3 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
-		F881A8412A32CF3F003408B3 /* DetecetionSceneSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetecetionSceneSettingsViewController.swift; sourceTree = "<group>"; };
+		F881A8412A32CF3F003408B3 /* DetecetionSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetecetionSettingsViewController.swift; sourceTree = "<group>"; };
 		F881A8432A32CFFE003408B3 /* DetectionSceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectionSceneCoordinator.swift; sourceTree = "<group>"; };
 		F8872E582A3CBC7A00B2A0D7 /* PointCloudModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointCloudModel.swift; sourceTree = "<group>"; };
 		F8872E5A2A3CECEC00B2A0D7 /* RenderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RenderModel.swift; sourceTree = "<group>"; };
@@ -1645,7 +1647,7 @@
 				F8CFA6FB29D3425C00905F94 /* DetectionSceneVC.swift */,
 				F8CFA70629D43B1400905F94 /* DebugView.swift */,
 				F8CFA70829D45E4000905F94 /* CameraCaptureVC.swift */,
-				F881A8412A32CF3F003408B3 /* DetecetionSceneSettingsViewController.swift */,
+				F881A8412A32CF3F003408B3 /* DetecetionSettingsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -1654,6 +1656,7 @@
 			isa = PBXGroup;
 			children = (
 				F8CFA6FF29D3437300905F94 /* DetectionSceneViewModel.swift */,
+				F8698FF72AC4C8E600747A4A /* DetectionSettingsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -1854,6 +1857,7 @@
 				F858DAA22A952116000D57B3 /* GetLocksResponseDTO.swift in Sources */,
 				F8377C5C2A86F98100E18B59 /* FaceFeaturePosition.swift in Sources */,
 				F8377C782A893EFC00E18B59 /* RequestModel.swift in Sources */,
+				F8698FF82AC4C8E600747A4A /* DetectionSettingsViewModel.swift in Sources */,
 				F8377CE32A8ABDA200E18B59 /* LoginCommand.swift in Sources */,
 				F8377CB72A8A26A900E18B59 /* RegisterCommand.swift in Sources */,
 				F8377C8F2A89686300E18B59 /* AuthenticationSceneCoordinator.swift in Sources */,
@@ -1882,7 +1886,7 @@
 				F858DB182A97E1EB000D57B3 /* LockAccessesViewCell.swift in Sources */,
 				F849F2962A1FA14900672D34 /* GestureController.swift in Sources */,
 				F8377CEA2A8AE99900E18B59 /* KeychainStorage.swift in Sources */,
-				F881A8422A32CF3F003408B3 /* DetecetionSceneSettingsViewController.swift in Sources */,
+				F881A8422A32CF3F003408B3 /* DetecetionSettingsViewController.swift in Sources */,
 				F80735022A8BF3AE0055D473 /* RefreshResponseDTO.swift in Sources */,
 				F818964B2AA37767001C949C /* UpdateSecretLockInfoDTO.swift in Sources */,
 				F858DA752A93D594000D57B3 /* UserLockAccess.swift in Sources */,
@@ -2223,7 +2227,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				MTL_HEADER_SEARCH_PATHS = SmartLockIOS/Domain/Utility;
-				PRODUCT_BUNDLE_IDENTIFIER = rodion.SmartLockIOS;
+				PRODUCT_BUNDLE_IDENTIFIER = rodion.SmartLock.IOS;
 				PRODUCT_NAME = "Smart Lock";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "SmartLockIOS/Domain/Utility/FaceDetectionIOS-Bridging-Header.h";
@@ -2259,7 +2263,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				MTL_HEADER_SEARCH_PATHS = SmartLockIOS/Domain/Utility;
-				PRODUCT_BUNDLE_IDENTIFIER = rodion.SmartLockIOS;
+				PRODUCT_BUNDLE_IDENTIFIER = rodion.SmartLock.IOS;
 				PRODUCT_NAME = "Smart Lock";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "SmartLockIOS/Domain/Utility/FaceDetectionIOS-Bridging-Header.h";

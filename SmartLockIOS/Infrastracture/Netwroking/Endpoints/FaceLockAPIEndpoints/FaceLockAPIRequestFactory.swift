@@ -201,6 +201,13 @@ class FaceLockAPIRequestFactory {
         return model
     }
     
+    static func createSecretInfoDoorLock(_ dto: CreateLockSecretInfoDTO) -> RequestModel {
+        let encodedData = try? JSONEncoder().encode(dto)
+        let model = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.createSecretInfoDoorLock, httpMethod: .post)
+        model.body = encodedData
+        return model
+    }
+    
     static func getLocks() -> RequestModel {
         let model = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.getLocks, httpMethod: .get)
         return model
@@ -290,13 +297,6 @@ class FaceLockAPIRequestFactory {
     
     static func getPlaces() -> RequestModel {
         let model = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.getPlaces, httpMethod: .get)
-        return model
-    }
-    
-    static func createSecretInfoDoorLock(_ dto: CreateLockSecretInfoDTO) -> RequestModel {
-        let encodedData = try? JSONEncoder().encode(dto)
-        let model = RequestModel(basePath: serverAPI, path: FaceLockAPIPaths.createSecretInfoDoorLock, httpMethod: .post)
-        model.body = encodedData
         return model
     }
 }

@@ -18,10 +18,10 @@ class UpdateLockViewController: UIViewController {
     private var nameLableText: UITextView!
     private var descriptionLableTitle: UILabel!
     private var descriptionLableText: UITextView!
-    private var secretKeyLabelTitle: UILabel!
-    private var secretKeyLabelText: UITextView!
-    private var urlConnectionLabelTitle: UILabel!
-    private var urlConnectionLabelText: UITextView!
+    private var serialNumberLabelTitle: UILabel!
+    private var serialNumberLabelText: UITextView!
+//    private var urlConnectionLabelTitle: UILabel!
+//    private var urlConnectionLabelText: UITextView!
     private var updateUserButton: UIButton!
     private var loadingScreen = FDLoadingScreen()
     private var divider: UIView!
@@ -88,8 +88,7 @@ class UpdateLockViewController: UIViewController {
         lockIdLableText.text = lock.id
         lockIdLableText.isEditable = false
         descriptionLableText.text = lock.description
-        secretKeyLabelText.text = secretInfo?.secretKey
-        urlConnectionLabelText.text =  secretInfo?.urlConnection
+        serialNumberLabelText.text = secretInfo?.serialNumber
     }
     
     private func configureTopImageView() {
@@ -134,21 +133,13 @@ class UpdateLockViewController: UIViewController {
         descriptionLableTitle.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(descriptionLableTitle)
         
-        secretKeyLabelTitle = UILabel(frame: .zero)
-        secretKeyLabelTitle.text = "Secret Key"
-        secretKeyLabelTitle.font = UIFont.preferredFont(forTextStyle: .body)
-        secretKeyLabelTitle.numberOfLines = 0
-        secretKeyLabelTitle.textColor = .gray
-        secretKeyLabelTitle.translatesAutoresizingMaskIntoConstraints = false
-        self.contentView.addSubview(secretKeyLabelTitle)
-        
-        urlConnectionLabelTitle = UILabel(frame: .zero)
-        urlConnectionLabelTitle.text = "URL Connection"
-        urlConnectionLabelTitle.font = UIFont.preferredFont(forTextStyle: .body)
-        urlConnectionLabelTitle.numberOfLines = 0
-        urlConnectionLabelTitle.textColor = .gray
-        urlConnectionLabelTitle.translatesAutoresizingMaskIntoConstraints = false
-        self.contentView.addSubview(urlConnectionLabelTitle)
+        serialNumberLabelTitle = UILabel(frame: .zero)
+        serialNumberLabelTitle.text = "Serial number"
+        serialNumberLabelTitle.font = UIFont.preferredFont(forTextStyle: .body)
+        serialNumberLabelTitle.numberOfLines = 0
+        serialNumberLabelTitle.textColor = .gray
+        serialNumberLabelTitle.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(serialNumberLabelTitle)
         
         lockIdLableText = UITextView(frame: .zero)
         lockIdLableText.font = UIFont.preferredFont(forTextStyle: .body)
@@ -173,26 +164,13 @@ class UpdateLockViewController: UIViewController {
         descriptionLableText.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(descriptionLableText)
         
-        secretKeyLabelText = UITextView(frame: .zero)
-        secretKeyLabelText.font = UIFont.preferredFont(forTextStyle: .body)
-        secretKeyLabelText.textColor = .black
-        if viewModel.lockSecretInfo?.secretKey == nil {
-            secretKeyLabelText.isEditable = false
-            secretKeyLabelText.text = " "
-        } else {
-            secretKeyLabelText.isEditable = true
-            secretKeyLabelText.backgroundColor = .systemGray6
-        }
-        secretKeyLabelText.translatesAutoresizingMaskIntoConstraints = false
-        self.contentView.addSubview(secretKeyLabelText)
-        
-        urlConnectionLabelText = UITextView(frame: .zero)
-        urlConnectionLabelText.font = UIFont.preferredFont(forTextStyle: .body)
-        urlConnectionLabelText.textColor = .black
-        urlConnectionLabelText.backgroundColor = .systemGray6
-        urlConnectionLabelText.isEditable = true
-        urlConnectionLabelText.translatesAutoresizingMaskIntoConstraints = false
-        self.contentView.addSubview(urlConnectionLabelText)
+        serialNumberLabelText = UITextView(frame: .zero)
+        serialNumberLabelText.font = UIFont.preferredFont(forTextStyle: .body)
+        serialNumberLabelText.textColor = .black
+        serialNumberLabelText.backgroundColor = .systemGray6
+        serialNumberLabelText.isEditable = true
+        serialNumberLabelText.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(serialNumberLabelText)
         
         lockIdLableTitle.topAnchor.constraint(equalTo: topImageView.bottomAnchor, constant: 10).isActive = true
         lockIdLableTitle.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20).isActive = true
@@ -221,23 +199,14 @@ class UpdateLockViewController: UIViewController {
         descriptionLableText.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, constant: -20).isActive = true
         descriptionLableText.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
         
-        secretKeyLabelTitle.topAnchor.constraint(equalTo: descriptionLableText.bottomAnchor, constant: 10).isActive = true
-        secretKeyLabelTitle.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20).isActive = true
-        secretKeyLabelTitle.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, constant: -20).isActive = true
+        serialNumberLabelTitle.topAnchor.constraint(equalTo: descriptionLableText.bottomAnchor, constant: 10).isActive = true
+        serialNumberLabelTitle.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20).isActive = true
+        serialNumberLabelTitle.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, constant: -20).isActive = true
         
-        secretKeyLabelText.topAnchor.constraint(equalTo: secretKeyLabelTitle.bottomAnchor, constant: 10).isActive = true
-        secretKeyLabelText.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20).isActive = true
-        secretKeyLabelText.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, constant: -20).isActive = true
-        secretKeyLabelText.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
-        
-        urlConnectionLabelTitle.topAnchor.constraint(equalTo: secretKeyLabelText.bottomAnchor, constant: 10).isActive = true
-        urlConnectionLabelTitle.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20).isActive = true
-        urlConnectionLabelTitle.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, constant: -20).isActive = true
-        
-        urlConnectionLabelText.topAnchor.constraint(equalTo: urlConnectionLabelTitle.bottomAnchor, constant: 10).isActive = true
-        urlConnectionLabelText.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20).isActive = true
-        urlConnectionLabelText.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, constant: -20).isActive = true
-        urlConnectionLabelText.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
+        serialNumberLabelText.topAnchor.constraint(equalTo: serialNumberLabelTitle.bottomAnchor, constant: 10).isActive = true
+        serialNumberLabelText.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20).isActive = true
+        serialNumberLabelText.widthAnchor.constraint(equalTo: self.contentView.widthAnchor, constant: -20).isActive = true
+        serialNumberLabelText.heightAnchor.constraint(greaterThanOrEqualToConstant: 40).isActive = true
     }
     
     private func configureDivider() {
@@ -246,7 +215,7 @@ class UpdateLockViewController: UIViewController {
         
         self.contentView.addSubview(divider)
         divider.translatesAutoresizingMaskIntoConstraints = false
-        divider.topAnchor.constraint(equalTo: urlConnectionLabelText.bottomAnchor, constant: 10).isActive = true
+        divider.topAnchor.constraint(equalTo: serialNumberLabelText.bottomAnchor, constant: 10).isActive = true
         divider.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         divider.heightAnchor.constraint(equalToConstant: 1).isActive = true
         divider.widthAnchor.constraint(equalTo: self.view.widthAnchor, constant: 20).isActive = true
@@ -270,14 +239,13 @@ class UpdateLockViewController: UIViewController {
         guard
             let description = descriptionLableText.text,
             let name = nameLableText.text,
-            let secretKey = secretKeyLabelText.text,
-            let urlConnection = urlConnectionLabelText.text
+            let serialNumber = serialNumberLabelText.text
         else {
             return
         }
         
         let lock = Lock(id: viewModel.lock.id, name: name, description: description)
-        let lockSecretInfo = LockSecretInfo(secretKey: secretKey, urlConnection: urlConnection)
+        let lockSecretInfo = LockSecretInfo(serialNumber: serialNumber)
         loadingScreen.show(on: self.view)
         viewModel.updateLock(lock, lockSecretInfo) { [weak self] isSuccess in
             DispatchQueue.main.async { [weak self] in

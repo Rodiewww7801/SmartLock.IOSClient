@@ -9,6 +9,5 @@ import Foundation
 
 struct UpdateSecretLockInfoDTO: Encodable {
     var id: Int
-    var secretKey: String
-    var urlConnection: String
+    var serialNumber: String
 }

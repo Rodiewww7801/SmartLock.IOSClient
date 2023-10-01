@@ -25,7 +25,7 @@ class UpdateLockViewModel {
     func updateLock(_ lock: Lock, _ lockSecretInfo: LockSecretInfo, completion: @escaping (Bool)->()) {
         guard let lockId = Int(lock.id) else { return }
         let lockDTO = UpdateLockDTO(name: lock.name, description: lock.description)
-        let updateSecretDTO = UpdateSecretLockInfoDTO(id: lockId, secretKey: lockSecretInfo.secretKey, urlConnection: lockSecretInfo.urlConnection)
+        let updateSecretDTO = UpdateSecretLockInfoDTO(id: lockId, serialNumber: lockSecretInfo.serialNumber)
         updateLockCommand.execute(lockId: lockId, lockDTO) { [weak self] result in
             switch result {
             case .success(_):
@@ -34,7 +34,7 @@ class UpdateLockViewModel {
                     case .success(_):
                         completion(true)
                     case .failure(_):
-                        let secretDTO = CreateLockSecretInfoDTO(urlConnection: updateSecretDTO.urlConnection, doorLockId: updateSecretDTO.id)
+                        let secretDTO = CreateLockSecretInfoDTO(serialNumber: updateSecretDTO.serialNumber, doorLockId: updateSecretDTO.id)
                         self?.createSecretInfoLockCommand.execute(secretDTO) { result in
                             switch result {
                             case .success(_):

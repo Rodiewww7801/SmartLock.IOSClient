@@ -8,22 +8,17 @@
 import Foundation
 import UIKit
 
-protocol DetectionSceneSettingsDelegate {
-    func debugMode()
-}
-
-class DetecetionSceneSettingsViewController: UIViewController {
+class DetecetionSettingsViewController: UIViewController {
     private var tableView: UITableView!
-    private var dataSource: [DepthDataSettings] = [.debugMode]
-    private var viewModel: DetectionSceneViewModel
-    
-    var delegate: DetectionSceneSettingsDelegate?
+    private var dataSource: [DepthDataSettings] = [.debugMode, .pointToCloudScene]
+    private var viewModel: DetectionSettingsViewModel
     
     private enum DepthDataSettings {
         case debugMode
+        case pointToCloudScene
     }
     
-    init(with viewModel: DetectionSceneViewModel) {
+    init(viewModel: DetectionSettingsViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         print("[DetecetionSceneSettingsViewController] init")
@@ -58,7 +53,7 @@ class DetecetionSceneSettingsViewController: UIViewController {
     }
 }
 
-extension DetecetionSceneSettingsViewController: UITableViewDataSource {
+extension DetecetionSettingsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.dataSource.count
     }
@@ -68,11 +63,19 @@ extension DetecetionSceneSettingsViewController: UITableViewDataSource {
         switch dataSource[indexPath.row] {
         case .debugMode:
             settingsTableViewCell.configure(type: .switchCell, settingName: "Debug mode")
-            settingsTableViewCell.setSwitchState(viewModel.debugModeEnabled)
+            settingsTableViewCell.setSwitchState(viewModel.model.debugState)
             settingsTableViewCell.toggleSwitchAction = { [weak self, weak settingsTableViewCell] in
-                guard let self = self else { return }
-                self.delegate?.debugMode()
-                settingsTableViewCell?.setSwitchState(self.viewModel.debugModeEnabled)
+                guard let self = self, let settingsTableViewCell = settingsTableViewCell else { return }
+                //settingsTableViewCell.toggleSwitchState()
+                viewModel.debugActionSwitch(settingsTableViewCell.toggleSwitch.isOn)
+            }
+        case .pointToCloudScene:
+            settingsTableViewCell.configure(type: .switchCell, settingName: "Point to cloud scene")
+            settingsTableViewCell.setSwitchState(viewModel.model.pointToCloudState)
+            settingsTableViewCell.toggleSwitchAction = { [weak self, weak settingsTableViewCell] in
+                guard let self = self, let settingsTableViewCell = settingsTableViewCell else { return }
+                //settingsTableViewCell.toggleSwitchState()
+                viewModel.pointToCloudState(settingsTableViewCell.toggleSwitch.isOn)
             }
         }
         
@@ -80,12 +83,12 @@ extension DetecetionSceneSettingsViewController: UITableViewDataSource {
     }
 }
 
-extension DetecetionSceneSettingsViewController: UITableViewDelegate {
+extension DetecetionSettingsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
         if let cell = tableView.cellForRow(at: indexPath) as? SettingsTableViewCell {
-            cell.toggleSwitchAction?()
+            cell.toggleSwitchState()
         }
     }
     

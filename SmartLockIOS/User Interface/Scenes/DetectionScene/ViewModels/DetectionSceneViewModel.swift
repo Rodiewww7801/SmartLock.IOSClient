@@ -15,6 +15,7 @@ protocol DetectionScenePresentedDelegate: AnyObject {
     func onShowUserCard(user: UserCardModel)
     func showLoadingScreen()
     func stopLoadingScreen()
+    func debugMode()
 }
 
 class DetectionSceneViewModel {
@@ -37,7 +38,11 @@ class DetectionSceneViewModel {
     private(set) var isAcceptableAuthenticity: Bool
     private(set) var faceWasValidated: Bool
     
-    var debugModeEnabled: Bool
+    var debugModeEnabled: Bool {
+        didSet {
+            self.presentedDelegate?.debugMode()
+        }
+    }
     var hideBackgroundModeEnabled: Bool
     var faceLayoutGuideFrame: CGRect = {
         let screenSize: CGRect = UIScreen.main.bounds

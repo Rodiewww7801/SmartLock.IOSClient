@@ -58,7 +58,7 @@ class LockRepository: LockRepositoryProtocol {
             }
         }
         guard let lockSecretInfoDTO = lockSecretInfoDTO else { return nil }
-        let lockSecretInfo = LockSecretInfo(secretKey: lockSecretInfoDTO.secretKey, urlConnection: lockSecretInfoDTO.urlConnection)
+        let lockSecretInfo = LockSecretInfo(serialNumber: lockSecretInfoDTO.serialNumber)
         return lockSecretInfo
     }
     

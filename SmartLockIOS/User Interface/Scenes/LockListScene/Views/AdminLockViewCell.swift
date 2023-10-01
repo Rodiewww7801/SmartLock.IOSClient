@@ -16,10 +16,8 @@ class AdminLockViewCell: UITableViewCell {
     private var lockNameLableText: UILabel!
     private var lockDescriptionLableTitle: UILabel!
     private var lockDescriptionLableText: UILabel!
-    private var lockSecretLableTitle: UILabel!
-    private var lockSecretLableText: UILabel!
-    private var lockURLConnectionLableTitle: UILabel!
-    private var lockURLConnectionLableText: UILabel!
+    private var lockSerialNumberLableTitle: UILabel!
+    private var lockSerialNumberLableText: UILabel!
     
     func configure() {
         configureTopImageView()
@@ -30,8 +28,7 @@ class AdminLockViewCell: UITableViewCell {
         lockNameLableText.text = lock.name
         lockIdLableText.text = lock.id
         lockDescriptionLableText.text = lock.description
-        lockSecretLableText.text = secretLockInfo?.secretKey
-        lockURLConnectionLableText.text = secretLockInfo?.urlConnection
+        lockSerialNumberLableText.text = secretLockInfo?.serialNumber
     }
     
     private func configureTopImageView() {
@@ -76,21 +73,13 @@ class AdminLockViewCell: UITableViewCell {
         lockDescriptionLableTitle.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(lockDescriptionLableTitle)
         
-        lockSecretLableTitle = UILabel(frame: .zero)
-        lockSecretLableTitle.text = "Lock secret"
-        lockSecretLableTitle.font = UIFont.preferredFont(forTextStyle: .body)
-        lockSecretLableTitle.numberOfLines = 0
-        lockSecretLableTitle.textColor = .gray
-        lockSecretLableTitle.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(lockSecretLableTitle)
-        
-        lockURLConnectionLableTitle = UILabel(frame: .zero)
-        lockURLConnectionLableTitle.text = "Lock URL connection"
-        lockURLConnectionLableTitle.font = UIFont.preferredFont(forTextStyle: .body)
-        lockURLConnectionLableTitle.numberOfLines = 0
-        lockURLConnectionLableTitle.textColor = .gray
-        lockURLConnectionLableTitle.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(lockURLConnectionLableTitle)
+        lockSerialNumberLableTitle = UILabel(frame: .zero)
+        lockSerialNumberLableTitle.text = "Serial number"
+        lockSerialNumberLableTitle.font = UIFont.preferredFont(forTextStyle: .body)
+        lockSerialNumberLableTitle.numberOfLines = 0
+        lockSerialNumberLableTitle.textColor = .gray
+        lockSerialNumberLableTitle.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(lockSerialNumberLableTitle)
         
         lockIdLableText = UILabel(frame: .zero)
         lockIdLableText.font = UIFont.preferredFont(forTextStyle: .body)
@@ -113,19 +102,12 @@ class AdminLockViewCell: UITableViewCell {
         lockDescriptionLableText.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(lockDescriptionLableText)
         
-        lockSecretLableText = UILabel(frame: .zero)
-        lockSecretLableText.font = UIFont.preferredFont(forTextStyle: .body)
-        lockSecretLableText.numberOfLines = 0
-        lockSecretLableText.textColor = .black
-        lockSecretLableText.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(lockSecretLableText)
-        
-        lockURLConnectionLableText = UILabel(frame: .zero)
-        lockURLConnectionLableText.font = UIFont.preferredFont(forTextStyle: .body)
-        lockURLConnectionLableText.numberOfLines = 0
-        lockURLConnectionLableText.textColor = .black
-        lockURLConnectionLableText.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(lockURLConnectionLableText)
+        lockSerialNumberLableText = UILabel(frame: .zero)
+        lockSerialNumberLableText.font = UIFont.preferredFont(forTextStyle: .body)
+        lockSerialNumberLableText.numberOfLines = 0
+        lockSerialNumberLableText.textColor = .black
+        lockSerialNumberLableText.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(lockSerialNumberLableText)
         
         lockIdLableTitle.topAnchor.constraint(equalTo: topImageView.bottomAnchor, constant: 10).isActive = true
         lockIdLableTitle.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
@@ -151,21 +133,13 @@ class AdminLockViewCell: UITableViewCell {
         lockDescriptionLableText.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
         lockDescriptionLableText.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
         
-        lockSecretLableTitle.topAnchor.constraint(equalTo: lockDescriptionLableText.bottomAnchor, constant: 10).isActive = true
-        lockSecretLableTitle.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
-        lockSecretLableTitle.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
-        
-        lockSecretLableText.topAnchor.constraint(equalTo: lockSecretLableTitle.bottomAnchor, constant: 10).isActive = true
-        lockSecretLableText.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
-        lockSecretLableText.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
-        
-        lockURLConnectionLableTitle.topAnchor.constraint(equalTo: lockSecretLableText.bottomAnchor, constant: 10).isActive = true
-        lockURLConnectionLableTitle.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
-        lockURLConnectionLableTitle.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
+        lockSerialNumberLableTitle.topAnchor.constraint(equalTo: lockDescriptionLableText.bottomAnchor, constant: 10).isActive = true
+        lockSerialNumberLableTitle.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
+        lockSerialNumberLableTitle.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
 
-        lockURLConnectionLableText.topAnchor.constraint(equalTo: lockURLConnectionLableTitle.bottomAnchor, constant: 10).isActive = true
-        lockURLConnectionLableText.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
-        lockURLConnectionLableText.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
-        lockURLConnectionLableText.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20).isActive = true
+        lockSerialNumberLableText.topAnchor.constraint(equalTo: lockSerialNumberLableTitle.bottomAnchor, constant: 10).isActive = true
+        lockSerialNumberLableText.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
+        lockSerialNumberLableText.widthAnchor.constraint(equalTo: self.widthAnchor, constant: -20).isActive = true
+        lockSerialNumberLableText.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20).isActive = true
     }
 }

@@ -188,14 +188,9 @@ extension DetectionSceneVC: DetectionScenePresentedDelegate {
             self?.showUserCard?(user)
         }
     }
-}
-
-// MARK: - DetectionSceneSettingsDelegate
-
-extension DetectionSceneVC: DetectionSceneSettingsDelegate {
+    
     func debugMode() {
-        debugView.isHidden.toggle()
-        viewModel.debugModeEnabled = !debugView.isHidden
+        debugView.isHidden = !viewModel.debugModeEnabled
     }
 }
 
