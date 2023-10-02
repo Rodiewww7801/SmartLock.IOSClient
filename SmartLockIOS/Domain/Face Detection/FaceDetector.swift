@@ -15,7 +15,6 @@ import UIKit
 
 protocol FaceDetectorPresenterDelegate: AnyObject { 
     func convertFromMetadataToPreviewRect(rect: CGRect) -> CGRect
-    //func draw(image: CIImage)
 }
 
 protocol FaceDetectorDelegate: AnyObject {

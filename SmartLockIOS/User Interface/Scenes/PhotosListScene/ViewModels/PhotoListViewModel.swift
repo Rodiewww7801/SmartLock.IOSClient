@@ -42,7 +42,8 @@ class PhotoListViewModel {
     }
     
     func loadImages(images: [UIImage], _ completion: @escaping (Bool)->Void) {
-        addUserPhotosCommand.execute(userId: userId, images: images, { result in
+        let compressedImages = images.compactMap { $0.jpegCompress(.high) }
+        addUserPhotosCommand.execute(userId: userId, images: compressedImages, { result in
             switch result {
             case .success(_):
                 print("[UserManagmentViewModel]: messages successfully loaded")
