@@ -11,14 +11,15 @@ protocol SessionManagerProtocol {
     func request(_ requestModel: RequestModel, _ completion: @escaping (Result<Data?,NetworkingError>) -> ())
 }
 
-class SessionManager: SessionManagerProtocol {
-    private var session: URLSession
+class SessionManager: NSObject, SessionManagerProtocol {
+    private var session: URLSession!
     
     static var shared = SessionManager()
     var requestBuilder: RequestBuilder = RequestBuilder()
 
-    init() {
-        session = URLSession(configuration: .default)
+    override init() {
+        super.init()
+        session = URLSession(configuration: .default, delegate: self, delegateQueue: .main)
     }
     
     func request(_ requestModel: RequestModel, _ completion: @escaping (Result<Data?,NetworkingError>) -> ()) {
@@ -64,4 +65,11 @@ class SessionManager: SessionManagerProtocol {
             return .failed(.failed(message: "\(httpResponse.statusCode)"))
         }
     }
+}
+
+extension SessionManager: URLSessionDelegate {
+    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        completionHandler(.useCredential, URLCredential(trust: challenge.protectionSpace.serverTrust!))
+    }
+    
 }
