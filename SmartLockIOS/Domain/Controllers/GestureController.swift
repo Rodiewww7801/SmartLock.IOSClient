@@ -12,8 +12,3 @@ protocol GestureController: AnyObject {
     func pinchGestureHandler(gesture: UIPinchGestureRecognizer)
     func panGestureHandler(gesture: UIPanGestureRecognizer)
 }
-
-extension GestureController {
-    func pinchGestureHandler(gesture: UIPinchGestureRecognizer) {}
-    func panGestureHandler(gesture: UIPanGestureRecognizer) {}
-}

@@ -15,9 +15,7 @@ struct Transform {
     var position: float3 = [0,0,0]
     var rotation: float3 = [0,0,0]
     var scale: Float = 1
-}
-
-extension Transform {
+    
     var transformMatrix: float4x4 {
         let positionMatrix = float4x4(translation: self.position)
         let rotationMatrix = float4x4(rotation: self.rotation)

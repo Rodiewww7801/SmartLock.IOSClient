@@ -16,8 +16,6 @@ class DetectionSceneCoordinator: Coordinator {
     
     private var detectionSettingsViewModel = DetectionSettingsViewModel()
     private var currentLockId: String?
-    //var detectionViewController: DetectionSceneVC?
-   // var pointToCloudViewContorller: PointCloudViewController?
     
     init(router: Router) {
         self.router = router
@@ -30,6 +28,13 @@ class DetectionSceneCoordinator: Coordinator {
     
     override func start() {
         showLockListScene()
+    }
+    
+    private func replaceViewControllerInNavigationStack(from index: Array<UIViewController>.Index, to newVC: UIViewController) {
+        let pointToCloudIndexInStack = index
+        var viewControllers = router.rootController.viewControllers
+        viewControllers[pointToCloudIndexInStack] = newVC
+        router.rootController.setViewControllers(viewControllers, animated: false)
     }
     
     private func showDetectionScene() {
@@ -51,14 +56,11 @@ class DetectionSceneCoordinator: Coordinator {
         self.detectionSettingsViewModel.onDebugActionSwitch = { [weak detectionSceneViewModel] value in
             detectionSceneViewModel?.debugModeEnabled = value
         }
-        //self.detectionViewController = detectionScene
-
-        if router.rootController.viewControllers.contains(where: { $0 is PointCloudViewController }) {
-            var viewControllers = router.rootController.viewControllers
-            viewControllers[viewControllers.endIndex - 2] = detectionScene
-            router.rootController.setViewControllers(viewControllers, animated: false)
+        
+        if let pointToCloudIndexInStack = router.rootController.viewControllers.firstIndex(where: { $0 is PointCloudViewController }) {
+            replaceViewControllerInNavigationStack(from: pointToCloudIndexInStack, to: detectionScene)
         } else {
-            router.push(detectionScene, animated: true)
+            self.router.push(detectionScene, animated: true)
         }
     }
     
@@ -68,9 +70,19 @@ class DetectionSceneCoordinator: Coordinator {
             self?.showDetecetionSceneSettingsViewController()
         }
         
-        var viewControllers = router.rootController.viewControllers
-        viewControllers[viewControllers.endIndex - 2] = depthDataViewController
-        router.rootController.setViewControllers(viewControllers, animated: false)
+        if let detectionSceneIndexInStack = router.rootController.viewControllers.firstIndex(where: { $0 is DetectionSceneVC }) {
+            replaceViewControllerInNavigationStack(from: detectionSceneIndexInStack, to: depthDataViewController)
+        } else {
+            self.router.push(depthDataViewController, animated: true)
+        }
+    }
+    
+    private func pickDetectionScene() {
+        if detectionSettingsViewModel.model.pointToCloudState {
+            self.showPointToCloudScene()
+        } else {
+            self.showDetectionScene()
+        }
     }
     
     private func showAlert() {
@@ -89,12 +101,7 @@ class DetectionSceneCoordinator: Coordinator {
     private func showDetecetionSceneSettingsViewController() {
         let detectionSettingsViewController = DetecetionSettingsViewController(viewModel: self.detectionSettingsViewModel)
         self.detectionSettingsViewModel.onPointToCloudSwitch = { [weak self] value in
-            if value {
-                self?.showPointToCloudScene()
-            } else {
-                self?.showDetectionScene()
-            }
-            
+            self?.pickDetectionScene()
         }
         router.push(detectionSettingsViewController, animated: true)
     }
@@ -107,7 +114,7 @@ class DetectionSceneCoordinator: Coordinator {
         }
         viewController.onLockSelected = { [weak self] lockId in
             self?.currentLockId = lockId
-            self?.showDetectionScene()
+            self?.pickDetectionScene()
         }
         router.push(viewController, animated: true)
     }
@@ -118,5 +125,4 @@ class DetectionSceneCoordinator: Coordinator {
         modalViewController.modalDelegate = presenteViewController
         self.router.present(modalViewController, animated: true)
     }
-    
 }

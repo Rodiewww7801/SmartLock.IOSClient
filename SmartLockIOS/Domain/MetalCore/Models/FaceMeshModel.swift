@@ -9,18 +9,17 @@ import Foundation
 import MetalKit
 
 class FaceMeshModel: Transformable {
-    var transform: Transform = Transform()
     private var baseTransform: float4x4 = .identity
     private var vertices: [vector_float3] = []
-     var modelType: ModelType = ModelType()
     private var facePointsBufferAddress: UnsafeMutableRawPointer!
     private var facePointsBuffer: MTLBuffer!
     
+    var transform: Transform = Transform()
+    var modelType: ModelType = ModelType()
+
     init(device: MTLDevice) {
         facePointsBuffer = device.makeBuffer(length: (MemoryLayout<vector_float3>.stride * 1220), options: [])
         facePointsBuffer.label = "FacePointBuffer"
-        //self.transform.position = [0, 0, -100]
-       // self.transform.rotation = [0, 0, 0]
         self.transform.scale = 10000
         modelType.faceMesh = 1
     }

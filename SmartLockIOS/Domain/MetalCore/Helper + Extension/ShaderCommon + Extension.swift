@@ -18,4 +18,3 @@ extension TextureIndices {
         return Int(self.rawValue)
     }
 }
-
