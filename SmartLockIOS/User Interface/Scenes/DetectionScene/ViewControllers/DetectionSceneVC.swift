@@ -190,7 +190,9 @@ extension DetectionSceneVC: DetectionScenePresentedDelegate {
     }
     
     func debugMode() {
-        debugView.isHidden = !viewModel.debugModeEnabled
+        if debugView != nil {
+            debugView.isHidden = !viewModel.debugModeEnabled
+        }
     }
 }
 

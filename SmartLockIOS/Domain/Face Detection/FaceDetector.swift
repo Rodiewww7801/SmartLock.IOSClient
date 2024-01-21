@@ -37,14 +37,18 @@ class FaceDetector: NSObject {
                                                      qos: .userInitiated,
                                                      attributes: [],
                                                      autoreleaseFrequency: .workItem)
+    private var forTesting: Bool = true // only for developer
     private var currentFrameBuffer: CVImageBuffer?
     private var faceObservationModel: FaceGeometryModel =  FaceGeometryModel()
     var isCapturingPhoto: Bool = false
     
     func processData(captureData: CVImageBuffer, depthData: AVDepthData) {
-        imageProcessingQueue.async { [weak self] in
-            self?.performDetectionRequests(captureData: captureData)
-            self?.processFaceAuthenticity(depthData, imageBuffer: captureData)
+        imageProcessingQueue.sync { [weak self] in
+            guard let self = self else { return }
+            self.performDetectionRequests(captureData: captureData)
+            objc_sync_enter(self) // it supposed to fix a crash that happened in func processFaceAuthenticity sometimes
+            self.processFaceAuthenticity(depthData, imageBuffer: captureData)
+            objc_sync_exit(self)
         }
     }
     
@@ -152,10 +156,12 @@ class FaceDetector: NSObject {
     }
     
     private func processFaceAuthenticity(_ depthData: AVDepthData, imageBuffer: CVImageBuffer) {
+        // it is very primitive "real face checking" func and i don't have time to make it better
         guard let face = getFaceFeatures(imageBuffer) else { return }
         let depthDataMap = depthData.depthDataMap
         
         CVPixelBufferLockBaseAddress(depthDataMap, .readOnly)
+        defer { CVPixelBufferUnlockBaseAddress(depthDataMap, .readOnly) }
         
         // Ensure that the pixel buffer has a valid base address
         guard let baseAddress = CVPixelBufferGetBaseAddress(depthDataMap) else {
@@ -209,9 +215,13 @@ class FaceDetector: NSObject {
         let rightEyeValue = rowDataRightEye.assumingMemoryBound(to: Float16.self)[rightEyeX] * 100.0
         
         CVPixelBufferUnlockBaseAddress(depthDataMap, .readOnly)
-//        //for testing
-//        print("\n\n\n")
-//        print("centerValue: \(centerValue) \nmouthValue: \(mouthValue) \nleftEye: \(leftEyeValue) \nrightEye: \(rightEyeValue)")
+        
+        if forTesting {
+            print("\n---------------------")
+            print("centerValue: \t\(centerValue) \nmouthValue: \t\(mouthValue) \nleftEye: \t\t\(leftEyeValue) \nrightEye: \t\t\(rightEyeValue)")
+            print("---------------------")
+        }
+
         let isReal: Bool = ((centerValue < mouthValue) && (centerValue < leftEyeValue) && centerValue < rightEyeValue)
         
         let faceAuthenticity: FaceAuthenticity = isReal ? .realFace : .fakeFace
@@ -221,7 +231,7 @@ class FaceDetector: NSObject {
     private func getFaceFeatures(_ imageBuffer: CVImageBuffer) -> FaceFeaturePosition? {
         let detectorOptions: [String: Any] = [CIDetectorAccuracy: CIDetectorAccuracyHigh]
         let faceDetector = CIDetector(ofType: CIDetectorTypeFace, context: nil, options: detectorOptions)
-        let features = faceDetector?.features(in: CIImage(cvImageBuffer: imageBuffer))
+        let features = faceDetector?.features(in: CIImage(cvImageBuffer: imageBuffer), options: [CIDetectorImageOrientation: 2])
     
         var faceBounds: CGRect = .zero
         var mouthPosition = CGPoint()
