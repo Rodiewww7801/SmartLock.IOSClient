@@ -8,7 +8,7 @@
 import Foundation
 
 class AdminUpdateUserCommand: AdminUpdateUserCommandProtocol {
-    private var networkingSerivce: NetworkingServiceProotocol
+    private var networkingSerivce: NetworkingServiceProtocol
     
     init() {
         self.networkingSerivce = NetworkingFactory.networkingService()
@@ -17,6 +17,13 @@ class AdminUpdateUserCommand: AdminUpdateUserCommandProtocol {
     func execute(user: User, _ completion: @escaping (Result<Void, Error>) -> Void) {
         let dto = AdminUpdateUserDTO(username: user.username, email: user.email, firstName: user.firstName, lastName: user.lastName, status: user.role.rawValue)
         let requestModel = FaceLockAPIRequestFactory.adminUpdateUser(userId: user.id, dto)
-        networkingSerivce.request(requestModel, completion)
+        networkingSerivce.authRequest(requestModel, { result in
+            switch result {
+            case .success(_):
+                completion(.success(Void()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        })
     }
 }

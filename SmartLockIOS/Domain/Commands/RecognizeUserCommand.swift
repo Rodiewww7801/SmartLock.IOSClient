@@ -8,7 +8,7 @@
 import UIKit
 
 class RecognizeUserCommand: RecognizeUserCommandProtocol {
-    private var networkingSerivce: NetworkingServiceProotocol
+    private var networkingSerivce: NetworkingServiceProtocol
     
     init() {
         self.networkingSerivce = NetworkingFactory.networkingService()

@@ -8,7 +8,7 @@
 import UIKit
 
 class GetUserPhotoByPhotoIdCommand: GetUserPhotoByPhotoIdCommandProtocol {
-    private var networkingSerivce: NetworkingServiceProotocol
+    private var networkingSerivce: NetworkingServiceProtocol
     
     init() {
         self.networkingSerivce = NetworkingFactory.networkingService()
@@ -16,10 +16,10 @@ class GetUserPhotoByPhotoIdCommand: GetUserPhotoByPhotoIdCommandProtocol {
     
     func execute(photoId: String, _ completion: @escaping (Result<UIImage, Error>) -> Void) {
         let requestModel = FaceLockAPIRequestFactory.getUserPhotos(photoId: photoId)
-        networkingSerivce.request(requestModel) { (result: Result<Data,Error>) in
+        networkingSerivce.authRequest(requestModel) { result in
             switch result {
             case .success(let data):
-                if let image = UIImage(data: data) {
+                if let data = data, let image = UIImage(data: data) {
                     completion(.success(image))
                 } else {
                     print("[GetUserPhotoByPhotoIdCommand]: FAILED to parse data to UIImage")

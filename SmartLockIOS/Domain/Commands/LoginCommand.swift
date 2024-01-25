@@ -8,7 +8,7 @@
 import Foundation
 
 class LoginCommand: LoginCommandProtocol {
-    private let networkingSerivce: NetworkingServiceProotocol
+    private let networkingSerivce: NetworkingServiceProtocol
     private let authTokenRepository: AuthTokenRepositoryProtocol
     
     init() {

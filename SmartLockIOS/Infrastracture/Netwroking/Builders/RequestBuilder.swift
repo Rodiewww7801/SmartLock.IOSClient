@@ -8,7 +8,7 @@
 import Foundation
 
 class RequestBuilder {
-    static func buildRequest(_ requestModel: RequestModel) -> URLRequest? {
+    static func buildRequest(_ requestModel: RequestModel) -> URLRequest {
         let url = createUrl(requestModel)
     
         var urlRequest = URLRequest(url: url, timeoutInterval: 60.0)

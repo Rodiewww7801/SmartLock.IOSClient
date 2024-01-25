@@ -8,7 +8,7 @@
 import Foundation
 
 class GetLockByIdCommand: GetLockByIdCommandProtocol {
-    private var networkingSerivce: NetworkingServiceProotocol
+    private var networkingSerivce: NetworkingServiceProtocol
     
     init() {
         self.networkingSerivce = NetworkingFactory.networkingService()
@@ -16,6 +16,6 @@ class GetLockByIdCommand: GetLockByIdCommandProtocol {
     
     func execute(lockId: String, _ completion: @escaping (Result<LockDTO, Error>) -> Void) {
         let requestModel = FaceLockAPIRequestFactory.getLockById(lockId: lockId)
-        networkingSerivce.request(requestModel, completion)
+        networkingSerivce.authRequest(requestModel, completion)
     }
 }

@@ -9,7 +9,7 @@ import Foundation
 
 class LogoutCommand: LogoutCommandProtocol {
     private var authTokenRepository: AuthTokenRepositoryProtocol
-    private var networkingService: NetworkingServiceProotocol
+    private var networkingService: NetworkingServiceProtocol
     
     init() {
         self.authTokenRepository = RepositoryFactory.authTokenRepository()
@@ -23,7 +23,7 @@ class LogoutCommand: LogoutCommandProtocol {
         else {
             return
         }
-        networkingService.request(requestModel) { [weak self] (result: Result<Void, Error>) in
+        networkingService.request(requestModel) { [weak self] result in
             switch result {
             case .success(_):
                 print("[LogoutCommand] SUCCESS perform logout requset")

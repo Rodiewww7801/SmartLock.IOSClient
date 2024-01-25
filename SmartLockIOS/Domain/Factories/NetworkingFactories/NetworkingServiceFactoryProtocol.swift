@@ -8,9 +8,8 @@
 import Foundation
 
 protocol NetworkingFactoryProtocol {
-    static func sessionManager() -> SessionManagerProtocol 
-    static func networkingService() -> NetworkingServiceProotocol
+    static func urlSession() -> URLSession
+    static func networkingService() -> NetworkingServiceProtocol
     static func tokenManager() -> TokenManagerProtocol
-    static func tokenPublisher() -> TokenPublisher
     static func networkingPublisher() -> NetworkingPublisher
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 class DeletePhotoByPhtotoIdCommand: DeletePhotoByPhtotoIdCommandProtocol {
-    private var networkingSerivce: NetworkingServiceProotocol
+    private var networkingSerivce: NetworkingServiceProtocol
     
     init() {
         self.networkingSerivce = NetworkingFactory.networkingService()
@@ -16,6 +16,13 @@ class DeletePhotoByPhtotoIdCommand: DeletePhotoByPhtotoIdCommandProtocol {
     
     func execute(userId: String, photoId: Int, _ completion: @escaping (Result<Void, Error>) -> Void) {
         let requestModel = FaceLockAPIRequestFactory.adminDeleteUserByPhotoId(userId: userId, photoId: photoId)
-        networkingSerivce.request(requestModel, completion)
+        networkingSerivce.authRequest(requestModel, { result in
+            switch result {
+            case .success(_):
+                completion(.success(Void()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        })
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 class GetDoorLockHistoryByDoorLockIdCommand: GetDoorLockHistoryByDoorLockIdCommandProtocol {
-    private var networkingSerivce: NetworkingServiceProotocol
+    private var networkingSerivce: NetworkingServiceProtocol
     
     init() {
         self.networkingSerivce = NetworkingFactory.networkingService()
@@ -16,6 +16,6 @@ class GetDoorLockHistoryByDoorLockIdCommand: GetDoorLockHistoryByDoorLockIdComma
     
     func execute(lockId: String, _ completion: @escaping (Result<GetLockHistoryDTO, Error>) -> Void) {
         let requestModel = FaceLockAPIRequestFactory.getLockHistoryByLockId(lockId: lockId)
-        networkingSerivce.request(requestModel, completion)
+        networkingSerivce.authRequest(requestModel, completion)
     }
 }

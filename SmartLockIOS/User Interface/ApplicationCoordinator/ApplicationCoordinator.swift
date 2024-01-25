@@ -23,7 +23,6 @@ final class ApplicationCoordinator: Coordinator {
         self.authTokenRepository = RepositoryFactory.authTokenRepository()
         self.router = router
         super.init()
-        subscribeOnTokenPublisher()
         subscribeNetworkingPublisher()
     }
     
@@ -93,23 +92,16 @@ final class ApplicationCoordinator: Coordinator {
         self.addChild(coordinator)
         coordinator.start()
     }
-}
-
-extension ApplicationCoordinator: TokenListener {
+    
     func refreshTokenExpired() {
         DispatchQueue.main.async { [weak self] in
             self?.removeAllChildren()
             self?.authenticationScene()
         }
     }
-    
-    private func subscribeOnTokenPublisher() {
-        let tokenPublisher = NetworkingFactory.tokenPublisher()
-        tokenPublisher.subscribeListener(self)
-    }
 }
 
-extension ApplicationCoordinator: NetwrokingListener {
+extension ApplicationCoordinator: NetworkingListener {
     func receivedError(_ error: NetworkingError) {
         DispatchQueue.main.async { [weak self] in
             guard let presentedViewController = self?.router.rootController.topViewController else { return }

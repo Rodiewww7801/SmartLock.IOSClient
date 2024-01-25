@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class RecognizeUserForDoorLockCommand: RecognizeUserForDoorLockCommandProtocol {
-    private var networkingSerivce: NetworkingServiceProotocol
+    private var networkingSerivce: NetworkingServiceProtocol
     
     init() {
         self.networkingSerivce = NetworkingFactory.networkingService()

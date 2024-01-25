@@ -74,7 +74,6 @@
 		F8377C782A893EFC00E18B59 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8377C772A893EFC00E18B59 /* RequestModel.swift */; };
 		F8377C7A2A893F5800E18B59 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8377C792A893F5800E18B59 /* HTTPMethod.swift */; };
 		F8377C7C2A89405200E18B59 /* FaceLockAPIPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8377C7B2A89405200E18B59 /* FaceLockAPIPaths.swift */; };
-		F8377C802A894A0600E18B59 /* ResponseStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8377C7F2A894A0600E18B59 /* ResponseStatus.swift */; };
 		F8377C852A8962CA00E18B59 /* FaceLockAPIRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8377C842A8962CA00E18B59 /* FaceLockAPIRequestFactory.swift */; };
 		F8377C8F2A89686300E18B59 /* AuthenticationSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8377C8E2A89686300E18B59 /* AuthenticationSceneCoordinator.swift */; };
 		F8377C922A896ADE00E18B59 /* ApplicationConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8377C912A896ADE00E18B59 /* ApplicationConfig.swift */; };
@@ -317,7 +316,6 @@
 		F8377C772A893EFC00E18B59 /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		F8377C792A893F5800E18B59 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		F8377C7B2A89405200E18B59 /* FaceLockAPIPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceLockAPIPaths.swift; sourceTree = "<group>"; };
-		F8377C7F2A894A0600E18B59 /* ResponseStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseStatus.swift; sourceTree = "<group>"; };
 		F8377C842A8962CA00E18B59 /* FaceLockAPIRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FaceLockAPIRequestFactory.swift; sourceTree = "<group>"; };
 		F8377C8E2A89686300E18B59 /* AuthenticationSceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationSceneCoordinator.swift; sourceTree = "<group>"; };
 		F8377C912A896ADE00E18B59 /* ApplicationConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationConfig.swift; sourceTree = "<group>"; };
@@ -756,7 +754,6 @@
 			children = (
 				F8377C792A893F5800E18B59 /* HTTPMethod.swift */,
 				F8377C772A893EFC00E18B59 /* RequestModel.swift */,
-				F8377C7F2A894A0600E18B59 /* ResponseStatus.swift */,
 				F8377CCE2A8A9AF300E18B59 /* Token.swift */,
 				F86121712A8D413800822B0D /* NetworkingError.swift */,
 			);
@@ -1904,7 +1901,6 @@
 				F816DFF22A904043003B8446 /* UpdateUserCommand.swift in Sources */,
 				F858DB0A2A97D56E000D57B3 /* LockHistoryViewCell.swift in Sources */,
 				F8E4D47E29D89A1B00B6F0BB /* SceneCoordinator.swift in Sources */,
-				F8377C802A894A0600E18B59 /* ResponseStatus.swift in Sources */,
 				F8EDDDE62A9160280039C16B /* GetUserPhotosInfoCommandProtocol.swift in Sources */,
 				F8EDDDED2A92B3B20039C16B /* UserInfoSceneCoordinator.swift in Sources */,
 				F8872E5B2A3CECEC00B2A0D7 /* RenderModel.swift in Sources */,
