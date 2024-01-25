@@ -8,7 +8,7 @@
 import Foundation
 
 class GetUserAccessesByUserIdCommand: GetUserAccessesByUserIdCommandProtocol {
-    private var networkingSerivce: NetworkingServiceProotocol
+    private var networkingSerivce: NetworkingServiceProtocol
     
     init() {
         self.networkingSerivce = NetworkingFactory.networkingService()
@@ -16,6 +16,6 @@ class GetUserAccessesByUserIdCommand: GetUserAccessesByUserIdCommandProtocol {
     
     func execute(userId: String, _ completion: @escaping (Result<GetUserLockAccessResponseDTO, Error>) -> Void) {
         let requestModel = FaceLockAPIRequestFactory.getUserAccessesByUserId(userId: userId)
-        networkingSerivce.request(requestModel, completion)
+        networkingSerivce.authRequest(requestModel, completion)
     }
 }

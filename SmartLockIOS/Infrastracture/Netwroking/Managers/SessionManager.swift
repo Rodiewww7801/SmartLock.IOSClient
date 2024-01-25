@@ -7,61 +7,60 @@
 
 import Foundation
 
-protocol SessionManagerProtocol {
-    func request(_ requestModel: RequestModel, _ completion: @escaping (Result<Data?,NetworkingError>) -> ())
+protocol HTTPClient {
+    func request(_ requestModel: RequestModel, _ completion: @escaping (Result<(data: Data?, urlResponse: HTTPURLResponse),Error>) -> ())
 }
 
-class SessionManager: SessionManagerProtocol {
-    private var session: URLSession
+extension URLSession: HTTPClient {
+    struct InvalidHTTPResponseError: Error { }
     
-    static var shared = SessionManager()
-    var requestBuilder: RequestBuilder = RequestBuilder()
-
-    init() {
-        session = URLSession(configuration: .default)
-    }
-    
-    func request(_ requestModel: RequestModel, _ completion: @escaping (Result<Data?,NetworkingError>) -> ()) {
-        guard let request = RequestBuilder.buildRequest(requestModel) else { return }
-        session.dataTask(with: request) { [weak self] data, urlResponse, error in
-            guard let self = self else { return }
-            let responseStatus = self.handleResponseStatusCode(urlResponse)
-            switch responseStatus {
-            case .success:
-                if let data = data, let bodyString = String(data: data, encoding: .utf8)  {
-                    print("[SessionManager]: SUCCESS response \(String(describing: urlResponse)), body \(bodyString)")
-                } else {
-                    print("[SessionManager]: SUCCESS response \(String(describing: urlResponse))")
-                }
-                
-                completion(.success(data))
-            case .failed(let networkingError):
-                if let data = data, let bodyString = String(data: data, encoding: .utf8), bodyString.isEmpty == false  {
-                    print("[SessionManager]: FAILURE response \(String(describing: urlResponse)), body \(bodyString)")
-                    completion(.failure(NetworkingError.failed(message: bodyString)))
-                } else {
-                    print("[SessionManager]: FAILURE response \(String(describing: urlResponse))")
-                    completion(.failure(networkingError))
-                }
+    func request(_ requestModel: RequestModel, _ completion: @escaping (Result<(data: Data?, urlResponse: HTTPURLResponse), Error>) -> ()) {
+        let request = RequestBuilder.buildRequest(requestModel)
+        self.dataTask(with: request) { data, urlResponse, error in
+            guard let response = urlResponse as? HTTPURLResponse else {
+                print("[HTTPClient]: FAILURE response \(String(describing: urlResponse))")
+                return completion(.failure(InvalidHTTPResponseError()))
             }
+            if let data = data, let bodyString = String(data: data, encoding: .utf8)  {
+                print("[HTTPClient]: SUCCESS response \(String(describing: urlResponse)), body: \(bodyString)")
+            } else {
+                print("[HTTPClient]: SUCCESS response \(String(describing: urlResponse))")
+            }
+            return completion(.success((data, response)))
         }.resume()
         
-        print("[SessionManager]: request \(request)")
+        print("[HTTPClient]: request \(request)")
+    }
+}
+
+class AuthenticatedHTTPClient: HTTPClient {
+    struct InvalidHTTPResponseError: Error { }
+    
+    let client: HTTPClient
+    var tokenManager: TokenManagerProtocol
+    
+    init(client: HTTPClient, tokenManager: TokenManagerProtocol) {
+        self.client = client
+        self.tokenManager = tokenManager
     }
     
-    private func handleResponseStatusCode(_ urlResponse: URLResponse?) -> ResponseStatus {
-        guard let httpResponse = urlResponse as? HTTPURLResponse else { return  .failed(.failed(message: "Unknown"))}
-        switch httpResponse.statusCode {
-        case 200...299:
-            return .success
-        case 401...403:
-            return .failed(.authenticationError(message: "\(httpResponse.statusCode)"))
-        case 501...599:
-            return .failed(.badRequest(message: "\(httpResponse.statusCode)"))
-        case 600:
-            return .failed(.outdated(message: "\(httpResponse.statusCode)"))
-        default:
-            return .failed(.failed(message: "\(httpResponse.statusCode)"))
+    func request(_ requestModel: RequestModel, _ completion: @escaping (Result<(data: Data?, urlResponse: HTTPURLResponse), Error>) -> ()) {
+        tokenManager.refreshTokenIfNeeded { [weak self] result in
+            guard let self = self else { return }
+            self.addAuthenticationHeader(from: &requestModel.headers)
+            switch result {
+            case .success():
+                self.client.request(requestModel, completion)
+            case .failure(let error):
+                print("[AuthenticatedHTTPClient]: FAILURE send request \(RequestBuilder.buildRequest(requestModel))")
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    private func addAuthenticationHeader(from headers: inout [String:String]?) {
+        if let accessToken = tokenManager.accessToken {
+            headers?.updateValue("Bearer \(accessToken)", forKey: "Authorization")
         }
     }
 }

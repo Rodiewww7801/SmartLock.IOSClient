@@ -8,7 +8,7 @@
 import Foundation
 
 class RegisterCommand: RegisterCommandProtocol {
-    private let networkingSerivce: NetworkingServiceProotocol
+    private let networkingSerivce: NetworkingServiceProtocol
     
     init() {
         self.networkingSerivce = NetworkingFactory.networkingService()
@@ -16,7 +16,7 @@ class RegisterCommand: RegisterCommandProtocol {
     
     func execute(with model: RegisterRequestDTO, _ completion: @escaping (Result<Bool,Error>) -> ()) {
         guard let requestModel = FaceLockAPIRequestFactory.register(with: model) else { return }
-        networkingSerivce.request(requestModel) { (result: Result<Void, Error>) in
+        networkingSerivce.request(requestModel) { result in
             switch result {
             case .success(_):
                 completion(.success(true))

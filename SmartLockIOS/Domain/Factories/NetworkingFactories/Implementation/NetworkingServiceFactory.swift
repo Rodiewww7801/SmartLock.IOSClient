@@ -8,24 +8,24 @@
 import Foundation
 
 struct NetworkingFactory: NetworkingFactoryProtocol {
-    private static var sessionManagerShared: SessionManagerProtocol?
-    private static var networkingServiceShared: NetworkingServiceProotocol?
+    private static var urlSessionShared: URLSession?
+    private static var networkingServiceShared: NetworkingServiceProtocol?
     private static var tokenManagerShared: TokenManagerProtocol?
     
-    static func sessionManager() -> SessionManagerProtocol {
-        if let sessionManagerShared = self.sessionManagerShared {
-            return sessionManagerShared
+    static func urlSession() -> URLSession {
+        if let urlSession = self.urlSessionShared {
+            return urlSession
         }
-        let sessionManager = SessionManager()
-        self.sessionManagerShared = sessionManager
-        return sessionManager
+        let urlSession = URLSession(configuration: .default)
+        self.urlSessionShared = urlSession
+        return urlSession
     }
     
-    static func networkingService() -> NetworkingServiceProotocol {
+    static func networkingService() -> NetworkingServiceProtocol {
         if let networkingService = self.networkingServiceShared {
             return networkingService
         }
-        let networkingService = NetworkingService(sessionManager: sessionManager())
+        let networkingService = NetworkingService(urlSession: urlSession())
         self.networkingServiceShared = networkingService
         return networkingService
     }
@@ -34,13 +34,9 @@ struct NetworkingFactory: NetworkingFactoryProtocol {
         if let tokenManagerShared = self.tokenManagerShared {
             return tokenManagerShared
         }
-        let tokenManager = TokenManager(sessionManager: sessionManager())
+        let tokenManager = TokenManager(urlSession: urlSession())
         self.tokenManagerShared = tokenManager
         return tokenManager
-    }
-    
-    static func tokenPublisher() -> TokenPublisher {
-        return tokenManager() as! TokenPublisher
     }
     
     static func networkingPublisher() -> NetworkingPublisher {

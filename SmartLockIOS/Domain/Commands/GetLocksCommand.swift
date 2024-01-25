@@ -8,7 +8,7 @@
 import Foundation
 
 class GetLocksCommand: GetLocksCommandProtocol {
-    private var networkingSerivce: NetworkingServiceProotocol
+    private var networkingSerivce: NetworkingServiceProtocol
     
     init() {
         self.networkingSerivce = NetworkingFactory.networkingService()

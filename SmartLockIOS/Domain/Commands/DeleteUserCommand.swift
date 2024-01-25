@@ -8,7 +8,7 @@
 import Foundation
 
 class DeleteUserCommand: DeleteUserCommandProtocol {
-    private var networkingSerivce: NetworkingServiceProotocol
+    private var networkingSerivce: NetworkingServiceProtocol
     private var authTokenRepository: AuthTokenRepositoryProtocol
     
     init() {
@@ -18,7 +18,7 @@ class DeleteUserCommand: DeleteUserCommandProtocol {
     
     func execute(_ completion: @escaping (Result<Void, Error>) -> Void) {
         let requestModel = FaceLockAPIRequestFactory.deleteUser()
-        networkingSerivce.request(requestModel) { [weak self] (result: Result<Void,Error>) in
+        networkingSerivce.authRequest(requestModel) { [weak self] result in
             switch result {
             case .success(_):
                 self?.authTokenRepository.removeToken(for: .accessTokenKey)

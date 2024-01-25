@@ -8,7 +8,7 @@
 import Foundation
 
 class UpdateLockCommand: UpdateLockCommandProtocol {
-    private var networkingSerivce: NetworkingServiceProotocol
+    private var networkingSerivce: NetworkingServiceProtocol
     
     init() {
         self.networkingSerivce = NetworkingFactory.networkingService()
@@ -16,6 +16,13 @@ class UpdateLockCommand: UpdateLockCommandProtocol {
     
     func execute(lockId: Int, _ dto: UpdateLockDTO, _ completion: @escaping (Result<Void, Error>) -> Void) {
         let requestModel = FaceLockAPIRequestFactory.updateLock(lockId: lockId, dto)
-        networkingSerivce.request(requestModel, completion)
+        networkingSerivce.authRequest(requestModel, { result in
+            switch result {
+            case .success(_):
+                completion(.success(Void()))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        })
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 class GetLockSecretInfoCommand: GetLockSecretInfoCommandProtocol {
-    private var networkingSerivce: NetworkingServiceProotocol
+    private var networkingSerivce: NetworkingServiceProtocol
     
     init() {
         self.networkingSerivce = NetworkingFactory.networkingService()
@@ -16,6 +16,6 @@ class GetLockSecretInfoCommand: GetLockSecretInfoCommandProtocol {
     
     func execute(lockId: String, _ completion: @escaping (Result<SecretLockInfoDTO, Error>) -> Void) {
         let requestModel = FaceLockAPIRequestFactory.getDoorLockSecretInfo(lockId: lockId)
-        networkingSerivce.request(requestModel, completion)
+        networkingSerivce.authRequest(requestModel, completion)
     }
 }

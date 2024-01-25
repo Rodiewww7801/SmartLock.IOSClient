@@ -7,25 +7,15 @@
 
 import Foundation
 
-protocol TokenPublisher {
-    func subscribeListener(_ object: TokenListener)
-    func removeListener(_ object: TokenListener)
-}
-
-protocol TokenListener: AnyObject {
-    func refreshTokenExpired()
-}
 
 protocol TokenManagerProtocol {
     var accessToken: String? { get }
-    func refreshTokenIfNeeded(_ completion: ((Result<Void,NetworkingError>)->Void)?)
+    func refreshTokenIfNeeded(_ completion: @escaping (Result<Void,NetworkingError>)->Void)
 }
 
 class TokenManager: TokenManagerProtocol {
     private var authTokenRepository: AuthTokenRepositoryProtocol
-    private var sessionManager: SessionManagerProtocol
-    
-    private var listeners: [TokenListener] = [] // todo: need weak reference
+    private var urlSession: URLSession
     
     var accessToken: String? {
         return authTokenRepository.getToken(for: .accessTokenKey)
@@ -35,38 +25,37 @@ class TokenManager: TokenManagerProtocol {
         return authTokenRepository.getToken(for: .refreshTokenKey)
     }
     
-    init(sessionManager: SessionManagerProtocol) {
+    init(urlSession: URLSession) {
         self.authTokenRepository = RepositoryFactory.authTokenRepository()
-        self.sessionManager = NetworkingFactory.sessionManager()
+        self.urlSession = urlSession
     }
     
-    func refreshTokenIfNeeded(_ completion: ((Result<Void,NetworkingError>)->Void)?) {
+    func refreshTokenIfNeeded(_ completion: @escaping (Result<Void,NetworkingError>)->Void) {
         let token = decodeToken()
         if let token = token, Date().timeIntervalSince1970 > token.expirationTime {
             print("[TokenManager] token has expired")
             if let refreshToken = refreshToken, let requestModel = FaceLockAPIRequestFactory.refresh(refreshToken: refreshToken) {
-                sessionManager.request(requestModel) { [weak self] (result: Result<Data?, NetworkingError>) in
+                urlSession.request(requestModel) { [weak self] (result: Result<(data: Data?, urlResponse: HTTPURLResponse), Error>) in
                     switch result {
-                    case .success(let data):
-                        if let data = data, let decodedData = try? JSONDecoder().decode(RefreshResponseDTO.self, from: data) {
+                    case .success(let response):
+                        if let data = response.data, let decodedData = try? JSONDecoder().decode(RefreshResponseDTO.self, from: data) {
                             print("[TokenManager] token has updated")
                             self?.authTokenRepository.setToken(decodedData.accessToken, for: .accessTokenKey)
-                            completion?(.success( () ))
+                            completion(.success(Void()))
                         } else {
                             print("[TokenManager] failde to decode token")
-                            completion?(.failure(NetworkingError.unableToDecode()))
+                            completion(.failure(NetworkingError.unableToDecode()))
                         }
                     case .failure(_):
                         print("[TokenManager] refresh token has expired")
                         self?.authTokenRepository.removeToken(for: .refreshTokenKey)
                         self?.authTokenRepository.removeToken(for: .accessTokenKey)
-                        completion?(.failure(NetworkingError.refreshTokenExpired()))
-                        self?.notifyRefreshTokenExpired()
+                        completion(.failure(NetworkingError.refreshTokenExpired()))
                     }
                 }
             }
         } else {
-            completion?(.success( () ))
+            completion(.success(Void()))
         }
     }
     
@@ -74,21 +63,5 @@ class TokenManager: TokenManagerProtocol {
         let accessToken = authTokenRepository.getToken(for: .accessTokenKey) ?? ""
         let token = JWTDecoder.decodeJWT(accessToken)
         return token
-    }
-}
-
-extension TokenManager: TokenPublisher {
-    func subscribeListener(_ object: TokenListener) {
-        if !listeners.contains(where: { $0 === object }) {
-            listeners.append(object)
-        }
-    }
-    
-    func removeListener(_ object: TokenListener) {
-        listeners.removeAll(where: { $0 === object })
-    }
-    
-    private func notifyRefreshTokenExpired() {
-        listeners.forEach({ $0.refreshTokenExpired() })
     }
 }

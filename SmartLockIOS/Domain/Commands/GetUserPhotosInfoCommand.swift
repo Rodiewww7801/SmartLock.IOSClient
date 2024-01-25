@@ -8,7 +8,7 @@
 import Foundation
 
 class GetUserPhotosInfoCommand: GetUserPhotosInfoCommandProtocol {
-    private var networkingSerivce: NetworkingServiceProotocol
+    private var networkingSerivce: NetworkingServiceProtocol
     
     init() {
         self.networkingSerivce = NetworkingFactory.networkingService()
@@ -16,6 +16,6 @@ class GetUserPhotosInfoCommand: GetUserPhotosInfoCommandProtocol {
     
     func execute(_ completion: @escaping (Result<[PhotoInfoDTO], Error>) -> Void) {
         let requestModel = FaceLockAPIRequestFactory.getUserPhotosInfo()
-        networkingSerivce.request(requestModel, completion)
+        networkingSerivce.authRequest(requestModel, completion)
     }
 }
