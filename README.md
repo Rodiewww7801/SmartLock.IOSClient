@@ -1,3 +1,3 @@
 # FaceDetectionIOS
 ...in progress...
-Face detection app for IOS through the front camera. Using AVFoundation and MetalKit.
+Face detection app for IOS through the front camera. Using AVFoundation and MetalKit. 
